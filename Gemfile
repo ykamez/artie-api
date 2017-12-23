@@ -65,7 +65,7 @@ gem 'ridgepole'
 gem 'config'
 
 # json schema validator.
-gem 'committee', git: 'git@github.com:ota42y/committee.git', branch: 'feature/coerce_recursive'
+gem 'committee'
 gem 'committee-rails'
 
 # web
