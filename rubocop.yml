@@ -1,0 +1,83 @@
+# This is the default configuration file. Enabling and disabling is configured
+# in separate files. This file adds all other parameters apart from Enabled.
+require: rubocop-rspec
+
+# Common configuration.
+AllCops:
+  # TODO: version決める！！
+  # TargetRubyVersion: 2.3
+  TargetRailsVersion: 5.1 # Disable Rails 5.0 cops
+  # Include common Ruby source files.
+  Include:
+    - '**/*.gemspec'
+    - '**/*.podspec'
+    - '**/*.jbuilder'
+    - '**/*.rake'
+    - '**/*.opal'
+    - '**/config.ru'
+    - '**/Gemfile'
+    - '**/Rakefile'
+    - '**/Capfile'
+    - '**/Guardfile'
+    - '**/Podfile'
+    - '**/Thorfile'
+    - '**/Vagrantfile'
+    - '**/Berksfile'
+    - '**/Cheffile'
+    - '**/Vagabondfile'
+  Exclude:
+    - 'vendor/**/*'
+    - 'log/**/*'
+    - 'bin/**/*'
+    - 'db/seeds.rb'
+    - 'db/*schema.rb'
+    - 'db/**/*'
+    - 'doc/**/*'
+    - 'tmp/**/*'
+    - 'workspace/**/*'
+
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+
+Rails:
+  Enabled: true
+
+# The project has a soft limit of 80 chars for line length, but up to 100 chars
+# are allowed in some cases.
+Metrics/LineLength:
+  Max: 100
+
+# Methods should be short. But sometimes it is not possible.
+Metrics/MethodLength:
+  Max: 20
+
+# Do not enforce documentation for all class definitions
+Documentation:
+  Enabled: false
+
+# Japanese text in comments triggers only warnings.
+Style/AsciiComments:
+  Severity: warning
+
+# We will not fix that in the near future
+RSpec/InstanceVariable:
+  Enabled: false
+
+# We allow to use this one for now.
+RSpec/AnyInstance:
+  Enabled: false
+
+# Error in Rubocop's cop! Remove it until it is fixed in the next version of rubocop
+Lint/RedundantWithObject:
+  Enabled: true
+  Exclude:
+    - app/models/concerns/e_logit_wms/download.rb
+    - lib/tasks/e_logit_wms_api.rake
+
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - qa
+    - staging
