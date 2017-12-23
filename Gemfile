@@ -38,6 +38,8 @@ group :development, :test do
 end
 
 group :development do
+  # TODO: migrationファイルからridge poleファイル自動生成のgem入れる
+
   # Update schema comments on models and factories after each migration.
   gem 'annotate'
 
@@ -45,9 +47,9 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-end
+end
 
-group :test do
+group :test do
   gem 'database_rewinder'
   gem 'timecop'
   gem 'webmock'
@@ -68,7 +70,7 @@ gem 'ridgepole'
 gem 'config'
 
 # json schema validator.
-gem 'committee', git: 'git@github.com:ota42y/committee.git', branch: 'feature/coerce_recursive'
+gem 'committee'
 gem 'committee-rails'
 
 # web

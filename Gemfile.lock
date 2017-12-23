@@ -1,12 +1,3 @@
-GIT
-  remote: git@github.com:ota42y/committee.git
-  revision: 9cf440642a44c202b52dbbbdda0e5b121ae5593e
-  branch: feature/coerce_recursive
-  specs:
-    committee (2.0.0.pre8)
-      json_schema (~> 0.14, >= 0.14.3)
-      rack (>= 1.5)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -58,6 +49,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    annotate (2.7.2)
+      activerecord (>= 3.2, < 6.0)
+      rake (>= 10.4, < 13.0)
     arel (8.0.0)
     ast (2.3.0)
     awesome_print (1.8.0)
@@ -77,6 +71,9 @@ GEM
       git_diff_parser
       thor
     coderay (1.1.2)
+    committee (2.0.0)
+      json_schema (~> 0.14, >= 0.14.3)
+      rack (>= 1.5)
     committee-rails (0.2.0)
       actionpack
       activesupport
@@ -343,11 +340,12 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   activerecord-import
   activerecord-refresh_connection
+  annotate
   aws-sdk (~> 2.1)
   aws-sdk-core
   byebug
   checkstyle_filter-git
-  committee!
+  committee
   committee-rails
   config
   database_rewinder
@@ -385,4 +383,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.0
+   1.16.1

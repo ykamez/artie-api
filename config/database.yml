@@ -12,7 +12,7 @@
 default: &default
   adapter: mysql2
   encoding: utf8
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: 5
   username: root
   password:
   host: localhost
@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: coin_now_server_production
-  username: coin_now_server
-  password: <%= ENV['COIN_NOW_SERVER_DATABASE_PASSWORD'] %>
+  username: root
+  password:

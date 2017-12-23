@@ -1,0 +1,20 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "channel_invitations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  t.bigint  "channel_id",      null: false
+  t.bigint  "invite_user_id",  null: false
+  t.bigint  "invited_user_id", null: false
+  t.integer  "status",          null: false
+  t.datetime "created_at",      null: false
+  t.datetime "updated_at",      null: false
+end
+
+# TODO: ここら辺のindex名とかAI？のところ参考にしてそっちに合わせたい
+add_index "channel_invitations", ["channel_id"], name: "index_channel_invitaions_on_channel_id", using: :btree
+add_index "channel_invitations", ["invite_user_id"], name: "index_channel_invitaions_on_invite_user_id", using: :btree
+add_index "channel_invitations", ["invited_user_id"], name: "index_channel_invitaions_on_invited_user_id", using: :btree
+
+# TODO: ここも
+add_foreign_key "channel_invitations", "channels"
+add_foreign_key "channel_invitations", "users", column: "invite_user_id"
+add_foreign_key "channel_invitations", "users", column: "invited_user_id", name: 'invited_user_fkey'
