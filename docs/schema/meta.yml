@@ -1,0 +1,21 @@
+ "$schema": http://json-schema.org/draft-04/hyper-schema
+ description: TODO description
+ id: application
+ links:
+   -
+     href: hogehoge
+     rel: self
+ title: TODO app titele
+ definitions:
+   user_id:
+     description: user_id
+     type: integer
+     example: 42
+   application_token:
+     description: application token for internal api call
+     type: string
+     example: xxxx
+   datetime:
+     description: datetime
+     type: string
+     format: date-time
