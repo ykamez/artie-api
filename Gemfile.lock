@@ -121,6 +121,7 @@ GEM
     env_pull_request (1.0.0)
       natural_number_string
     erubi (1.7.0)
+    erubis (2.7.0)
     factory_bot (4.8.2)
       activesupport (>= 3.0.0)
     factory_bot_rails (4.8.2)
@@ -186,6 +187,9 @@ GEM
     parser (2.4.0.2)
       ast (~> 2.3)
     powerpack (0.1.1)
+    prmd (0.13.0)
+      erubis (~> 2.7)
+      json_schema (~> 0.3, >= 0.3.1)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -356,6 +360,7 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   parallel_tests
+  prmd
   pry
   pry-byebug
   rails (~> 5.1.0)
@@ -378,5 +383,8 @@ DEPENDENCIES
   unicorn
   webmock
 
+RUBY VERSION
+   ruby 2.4.3p205
+
 BUNDLED WITH
-   1.16.0
+   1.16.1

@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+ruby '2.4.3'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.0'
 
@@ -64,9 +66,10 @@ gem 'ridgepole'
 # config
 gem 'config'
 
-# json schema validator.
+# json schema
 gem 'committee'
 gem 'committee-rails'
+gem 'prmd'
 
 # web
 gem 'active_model_serializers', '~> 0.10.0'
