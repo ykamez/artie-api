@@ -1,0 +1,45 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: Message
+description: Message Resource
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  id:
+    description: unique identifier of message
+    type: integer
+    example: 1
+    readOnly: true
+  text:
+    description: message's text
+    type: string
+    example: "Pig Coin is awesome."
+  user_id:
+    description: message's user
+    type: integer
+    example: 1234
+  room_id:
+    description: message's room
+    type: integer
+    example: 12
+
+  message:
+    type: object
+    required:
+      - id
+      - text
+      - user_id
+      - room_id
+    properties:
+      id:
+        $ref: "/schemata/message#/definitions/id"
+      text:
+        $ref: "/schemata/message#/definitions/text"
+      user_id:
+        $ref: "/schemata/message#/definitions/user_id"
+      room_id:
+        $ref: "/schemata/message#/definitions/room_id"
+
+id: schemata/message

@@ -1,0 +1,64 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: post
+description: post apis
+stability: prototype
+strictProperties: true
+type:
+- object
+
+links:
+- title: index
+  description: Show a list of post.
+  href: /v1/posts
+  method: GET
+  rel: show
+  schema:
+    type: object
+    properties: {}
+  targetSchema:
+    type: array
+    items:
+      $ref: /schemata/post#/definitions/post
+
+- title: show
+  description: Show a specific post
+  href: /v1/posts/{id}
+  method: GET
+  rel: show
+  targetSchema:
+    $ref: /schemata/post#/definitions/post
+
+- title: create
+  description: create post
+  href: /v1/posts/
+  method: POST
+  rel: create
+  schema:
+    $ref: /schemata/post#/definitions/post
+  targetSchema:
+    $ref: /schemata/post#/definitions/post
+
+- title: update
+  description: update post
+  href: /v1/posts/{id}
+  method: PATCH
+  rel: update
+  schema:
+    $ref: /schemata/post#/definitions/post
+  targetSchema:
+    $ref: /schemata/post#/definitions/post
+
+- title: delete
+  description: update post
+  href: /v1/posts/{id}
+  method: DELETE
+  rel: empty
+  schema:
+    type: object
+    properties: {}
+  targetSchema:
+    type: object
+    properties: {}
+
+id: schemata/v1_posts

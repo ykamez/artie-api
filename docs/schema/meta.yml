@@ -3,7 +3,7 @@
  id: application
  links:
    -
-     href: hogehoge
+     href: http://coinnow.local
      rel: self
  title: TODO app titele
  definitions:

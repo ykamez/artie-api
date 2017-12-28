@@ -1,0 +1,65 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: user
+description: user apis
+stability: prototype
+strictProperties: true
+type:
+- object
+
+links:
+- title: index
+  description: Show a list of user.
+  href: /v1/users
+  method: GET
+  rel: show
+  # TODO: this schema may be wrong.
+  schema:
+    type: object
+    properties: {}
+  targetSchema:
+    type: array
+    items:
+      $ref: /schemata/user#/definitions/user
+
+- title: show
+  description: Show a specific user
+  href: /v1/users/{id}
+  method: GET
+  rel: show
+  targetSchema:
+    $ref: /schemata/user#/definitions/user
+
+- title: create
+  description: create user
+  href: /v1/users/
+  method: POST
+  rel: create
+  schema:
+    $ref: /schemata/user#/definitions/user
+  targetSchema:
+    $ref: /schemata/user#/definitions/user
+
+- title: update
+  description: update user
+  href: /v1/users/{id}
+  method: PATCH
+  rel: update
+  schema:
+    $ref: /schemata/user#/definitions/user
+  targetSchema:
+    $ref: /schemata/user#/definitions/user
+
+- title: delete
+  description: update user
+  href: /v1/users/{id}
+  method: DELETE
+  rel: empty
+  schema:
+    type: object
+    properties: {}
+  targetSchema:
+    type: object
+    properties: {}
+
+id: schemata/v1_users

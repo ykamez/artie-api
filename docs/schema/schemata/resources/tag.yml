@@ -1,0 +1,30 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: Tag
+description: Tag resource
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  id:
+    description: id
+    example: 1
+    type: integer
+    readOnly: true
+  name:
+    description: a name of tag
+    example: "pigcoin"
+    type: string
+  tag:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        $ref: "/schemata/tag#/definitions/id"
+      name:
+        $ref: "/schemata/tag#/definitions/name"
+
+id: schemata/tag

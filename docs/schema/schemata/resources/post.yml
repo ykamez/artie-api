@@ -1,0 +1,38 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: Post
+description: Post Resource
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  id:
+    description: unique identifier of post
+    type: integer
+    example: 1
+    readOnly: true
+  text:
+    description: post's text
+    type: string
+    example: "Pig Coin is awesome."
+  user_id:
+    description: post's user
+    type: integer
+    example: 1234
+
+  post:
+    type: object
+    required:
+      - id
+      - text
+      - user_id
+    properties:
+      id:
+        $ref: "/schemata/post#/definitions/id"
+      text:
+        $ref: "/schemata/post#/definitions/text"
+      user_id:
+        $ref: "/schemata/post#/definitions/user_id"
+
+id: schemata/post

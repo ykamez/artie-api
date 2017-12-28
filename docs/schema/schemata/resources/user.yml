@@ -1,0 +1,51 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: User
+description: User Resource
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  id:
+    description: unique identifier of user
+    type: integer
+    example: 1
+    readOnly: true
+  name:
+    description: a name of user
+    type: string
+    example: 'kamexx'
+  image_data:
+    description: user's icon
+    type: string
+    exmaple: 's3/aws/assets/hogehoge'
+  email:
+    description: user email address
+    type: string
+    format: email
+  password:
+    description: user password
+    type: string
+    example: 'letmein1234'
+
+  user:
+    type: object
+    required:
+      - id
+      - name
+      - image_data
+      - email
+    properties:
+      id:
+        $ref: "/schemata/user#/definitions/id"
+      name:
+        $ref: "/schemata/user#/definitions/name"
+      image_data:
+        $ref: "/schemata/user#/definitions/image_data"
+      email:
+        $ref: "/schemata/user#/definitions/email"
+      password:
+        $ref: "/schemata/user#/definitions/password"
+
+id: schemata/user
