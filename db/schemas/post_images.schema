@@ -1,0 +1,12 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "post_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  t.bigint  "post_id",        null: false
+  t.string  "image_data", null: false
+  t.datetime "created_at",      null: false
+  t.datetime "updated_at",      null: false
+end
+
+add_index "post_images", ["post_id"], name: "index_post_images_on_post_id", using: :btree
+
+add_foreign_key "post_images", "posts"
