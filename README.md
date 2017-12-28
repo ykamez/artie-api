@@ -34,3 +34,5 @@ We use ridgepole gem so when we change database follow the steps.
     - Run `bundle exec rake ridgepole:export`
 4. Commit `db/schemas` folder and `db/schema.rb`
 5. Create pull request.
+#### notice
+When you generate a new model, you run generation command with `--skip-migration` like `rails g model SomeNewModel --skip-migration`.
