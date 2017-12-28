@@ -25,13 +25,13 @@ group :development, :test do
   gem 'rspec-json_matcher'
   gem 'rspec-rails', '~> 3.5'
 
-  # ci
-  gem 'fincop', require: false
 
   # rubocop pr comment gems
   gem 'checkstyle_filter-git'
   gem 'github_status_notifier'
+  gem 'rubocop'
   gem 'rubocop-checkstyle_formatter'
+  gem 'rubocop-rspec'
   gem 'rubocop-select'
   gem 'saddler'
   gem 'saddler-reporter-github'

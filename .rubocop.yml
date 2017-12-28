@@ -1,0 +1,458 @@
+# Based on fincop
+# https://github.com/FiNCDeveloper/fincop/
+
+require: rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.4
+  TargetRailsVersion: 5.1 # Disable Rails 5.0 cops
+  # Include common Ruby source files.
+  Include:
+    - '**/*.gemspec'
+    - '**/*.podspec'
+    - '**/*.jbuilder'
+    - '**/*.rake'
+    - '**/*.opal'
+    - '**/config.ru'
+    - '**/Gemfile'
+    - '**/Rakefile'
+    - '**/Capfile'
+    - '**/Guardfile'
+    - '**/Podfile'
+    - '**/Thorfile'
+    - '**/Vagrantfile'
+    - '**/Berksfile'
+    - '**/Cheffile'
+    - '**/Vagabondfile'
+  Exclude:
+    - 'vendor/**/*'
+    - 'log/**/*'
+    - 'bin/**/*'
+    - 'db/seeds.rb'
+    - 'db/*schema.rb'
+    - 'db/**/*'
+    - 'doc/**/*'
+    - 'tmp/**/*'
+    - 'workspace/**/*'
+
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+
+#################### Rails ################################
+
+Rails:
+  Enabled: true
+
+# slug とか created_by とか、NOT NULL だが create_table 時に
+# default 値を定義できないカラムは存在する。
+Rails/NotNullColumn:
+  Enabled: false
+
+# method_missing を隠したい場合は respond_to? を使うべき
+Rails/SafeNavigation:
+  ConvertTry: true
+
+# valid? チェックし忘れを防ぎたい
+Rails/SaveBang:
+  Enabled: true
+
+Rails/TimeZone:
+   Enabled: false
+
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - test
+    - production
+    - staging
+
+#################### Layout ################################
+
+# メソッドチェーンの改行は末尾に . を入れる
+Layout/DotPosition:
+  EnforcedStyle: trailing
+
+# 桁揃えが綺麗にならないことが多いので migration は除外
+Layout/ExtraSpacing:
+  Exclude:
+    - "db/migrate/*.rb"
+
+# special_inside_parentheses (default) と比べて
+# * 横に長くなりづらい
+# * メソッド名の長さが変わったときに diff が少ない
+Layout/IndentArray:
+  EnforcedStyle: consistent
+
+# ({ と hash を開始した場合に ( の位置にインデントさせる
+# そもそも {} が必要ない可能性が高いが Style/BracesAroundHashParameters はチェックしないことにしたので
+Layout/IndentHash:
+  EnforcedStyle: consistent
+
+# private/protected は一段深くインデントする
+Layout/IndentationConsistency:
+  EnforcedStyle: rails
+
+# メソッドチェーン感がより感じられるインデントにする
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
+
+#################### Style #################################
+
+# レキシカルスコープの扱いが alias_method の方が自然。
+# https://ernie.io/2014/10/23/in-defense-of-alias/ のように
+# 問題になる場合は自分で緩める。
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+
+# redirect_to xxx and return のイディオムを維持したい
+Style/AndOr:
+  EnforcedStyle: conditionals
+
+# 日本語のコメントを許可する
+Style/AsciiComments:
+  Enabled: false
+
+# do .. end から更にメソッドチェーンすると見づらいので
+# auto-correct せず、自分で修正する
+# spec 内は見た目が綺麗になるので許可
+Style/BlockDelimiters:
+  AutoCorrect: false
+  Exclude:
+    - "spec/**/*"
+
+# option 等、明示的にハッシュにした方が分かりやすい場合もある
+Style/BracesAroundHashParameters:
+  Enabled: false
+
+# scope が違うとか親 module の存在確認が必要とかデメリットはあるが、
+# namespace 付きのクラスはかなり頻繁に作るので簡単に書きたい。
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# Style/CollectionMethods 自体は無効になっているのだが、
+#   https://github.com/bbatsov/rubocop/issues/1084
+#   https://github.com/bbatsov/rubocop/issues/1334
+# Performance/Detect がこの設定値を見るので PreferredMethods だけ変更しておく。
+#
+# デフォルト値から変えたのは
+#   find -> detect
+#     ActiveRecord の find と間違えやすいため
+#   reduce -> inject
+#     detect, reject, select と並べたときに韻を踏んでいるため。
+#     collect -> map を維持しているのは文字数が圧倒的に少ないため。
+Style/CollectionMethods:
+  PreferredMethods:
+    detect: "detect"
+    find: "detect"
+    inject: "inject"
+    reduce: "inject"
+
+# ドキュメントの無い public class を許可する
+Style/Documentation:
+  Enabled: false
+
+# !! のイディオムは積極的に使う
+Style/DoubleNegation:
+  Enabled: false
+
+# case
+# when ios?
+# when android?
+# end
+# のようなものは case の方が網羅の表現力が高い
+Style/EmptyCaseCondition:
+  Enabled: false
+
+# 明示的に else で nil を返すのは分かりやすいので許可する
+Style/EmptyElse:
+  EnforcedStyle: empty
+
+# 空メソッドの場合だけ1行で書かなければいけない理由が無い
+# 「セミコロンは使わない」に寄せた方がルールがシンプル
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+# いずれかに揃えるのならば `sprintf` や `format` より String#% が好きです
+Style/FormatString:
+  EnforcedStyle: percent
+
+# まだ対応するには早い
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# if 文の中に 3 行程度のブロックを書くぐらいは許容した方が現実的
+# NOTE: https://github.com/bbatsov/rubocop/commit/29945958034db13af9e8ff385ec58cb9eb464596
+#       の影響で、if 文の中身が 1 行の場合に警告されるようになっている。
+#       Style/IfUnlessModifier の設定見てくれないかなぁ？ (v0.36.0)
+Style/GuardClause:
+  MinBodyLength: 5
+
+# rake タスクの順序の hash は rocket を許可する
+Style/HashSyntax:
+  Exclude:
+    - "**/*.rake"
+    - "Rakefile"
+
+# 平たくしてしまうと条件のグルーピングが脳内モデルとズレやすい
+Style/IfInsideElse:
+  Enabled: false
+
+# 条件式の方を意識させたい場合には後置の if/unless を使わない方が分かりやすい
+Style/IfUnlessModifier:
+  Enabled: false
+
+# scope 等は複数行でも lambda ではなく ->{} で揃えた方が見た目が綺麗
+Style/Lambda:
+  EnforcedStyle: literal
+
+# end.some_method とチェインするのはダサい
+# Style/BlockDelimiters と相性が悪いけど、頑張ってコードを修正してください
+Style/MethodCalledOnDoEndBlock:
+  Enabled: true
+
+Layout/MultilineMethodCallBraceLayout:
+  EnforcedStyle: symmetrical
+
+# 1_000_000 と区切り文字が 2 個以上必要になる場合のみ _ 区切りを必須にする
+# 10_000_00 は許可しない。(これは例えば 10000 ドルをセント単位にする時に便利だが
+# 頻出しないので foolproof に振る
+Style/NumericLiterals:
+  MinDigits: 7
+  Strict: true
+
+# foo.positive? は foo > 0 に比べて意味が曖昧になる
+# foo.zero? は許可したいけどメソッドごとに指定できないので一括で disable に
+Style/NumericPredicate:
+  Enabled: false
+
+# 正規表現にマッチさせた時の特殊変数の置き換えは Regex.last_match ではなく
+# 名前付きキャプチャを使って参照したいので auto-correct しない
+Style/PerlBackrefs:
+  AutoCorrect: false
+
+# has_ から始まるメソッドは許可する
+Naming/PredicateName:
+  NamePrefixBlacklist:
+    - "is_"
+    - "have_"
+  NamePrefix:
+    - "is_"
+    - "have_"
+
+# Hash#has_key? の方が key? よりも意味が通る
+Style/PreferredHashMethods:
+  EnforcedStyle: verbose
+
+# 受け取り側で multiple assignment しろというのを明示
+Style/RedundantReturn:
+  AllowMultipleReturnValues: true
+
+# 特に model 内において、ローカル変数とメソッド呼び出しの区別をつけた方が分かりやすい場合が多い
+Style/RedundantSelf:
+  Enabled: false
+
+# 無理して使うモンじゃない
+Style/SafeNavigation:
+  Enabled: false
+
+# spec 内は見た目が綺麗になるので許可
+Style/Semicolon:
+  Exclude:
+    - "spec/**/*"
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+# 式展開中でもダブルクォートを使う
+# 普段の文字列リテラルがダブルクォートなので使い分けるのが面倒
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+# String#intern は ruby の内部表現すぎるので String#to_sym を使う
+Style/StringMethods:
+  Enabled: true
+
+# %w() と %i() が見分けづらいので Style/WordArray と合わせて無効に。
+# 書き手に委ねるという意味で、Enabled: false にしています。使っても良い。
+Style/SymbolArray:
+  Enabled: false
+
+# 三項演算子は分かりやすく使いたい。
+# () を外さない方が条件式が何なのか読み取りやすいと感じる。
+Style/TernaryParentheses:
+  EnforcedStyle: require_parentheses_when_complex
+
+# 複数行の場合はケツカンマを入れる(引数)
+# Ruby は関数の引数もカンマを許容しているので
+# * 単行は常にケツカンマ無し
+# * 複数行は常にケツカンマ有り
+# に統一したい。
+# 見た目がアレだが、ES2017 でも関数引数のケツカンマが許容されるので
+# 世界はそちらに向かっている。
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInLiteral:
+  Enabled: false
+
+Naming/VariableNumber:
+  EnforcedStyle: normalcase
+
+# 0 <= foo && foo < 5 のように数直線上に並べるのは
+# コードを読みやすくするテクニック。
+# また、self == other, __FILE__ == $0 はイディオムなので許可。
+Style/YodaCondition:
+  Enabled: false
+
+# %w() と %i() が見分けづらいので Style/SymbolArray と合わせて無効に。
+# 書き手に委ねるという意味で、Enabled: false にしています。使っても良い。
+Style/WordArray:
+  Enabled: false
+
+# 条件式で arr.size > 0 が使われた時に
+#   if !arr.empty?
+#   else
+#   end
+# に修正されるのが嫌。
+# 中身を入れ替えて否定外しても良いんだけど、どちらが例外的な処理なのかが分かりづらくなる。
+Style/ZeroLengthPredicate:
+  Enabled: false
+
+#################### Lint ##################################
+
+# spec 内では
+# expect { subject }.to change { foo }
+# という書き方をよく行うので () を省略したい。
+# { foo } は明らかに change に紐付く。
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "spec/**/*"
+
+# Style/EmptyCaseCondition と同じく網羅の表現力が empty when を認めた方が高いし、
+# 頻出する対象を最初の when で撥ねるのはパフォーマンス向上で頻出する。
+# また、
+#   case foo
+#   when 42
+#     # nop
+#   when 1..100
+#     ...
+#   end
+# と、下の when がキャッチしてしまう場合等に対応していない。
+# See. http://tech.sideci.com/entry/2016/11/01/105900
+Lint/EmptyWhen:
+  Enabled: false
+
+# RuntimeError は「特定の Error を定義できない場合」なので、
+# 定義できるエラーは RuntimeError ではなく StandardError を継承する。
+Lint/InheritException:
+  EnforcedStyle: standard_error
+
+# * 同名のメソッドがある場合にローカル変数に `_` を付ける
+# * 一時変数として `_` を付ける
+# というテクニックは頻出する
+Lint/UnderscorePrefixedVariableName:
+  Enabled: false
+
+# 子クラスで実装させるつもりのメソッドで引っかかるので
+Lint/UnusedMethodArgument:
+  Enabled: false
+
+#################### Metrics ###############################
+
+# 30 まではギリギリ許せる範囲だったけど
+# リリースごとに 3 ずつぐらい下げていきます。20 まで下げたい。
+Metrics/AbcSize:
+  Max: 24
+
+# Gemfile, Guardfile は DSL 的で基本的に複雑にはならないので除外
+# rake, rspec, routes は巨大な block 不可避なので除外
+# TODO: ExcludedMethods の精査
+Metrics/BlockLength:
+  Exclude:
+    - "Rakefile"
+    - "**/*.rake"
+    - "spec/**/*.rb"
+    - "Gemfile"
+    - "Guardfile"
+    - "config/routes.rb"
+    - "config/routes/**/*.rb"
+    - "*.gemspec"
+    - "config/environments/*.rb"
+
+# 6 は強すぎるので緩める
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+# * 警告 120文字
+# * 禁止 160文字
+# のイメージ
+Metrics/LineLength:
+  Max: 160
+  Exclude:
+    - "db/migrate/*.rb"
+
+# 20 行超えるのは migration ファイル以外滅多に無い
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - "db/migrate/*.rb"
+
+Metrics/ParameterLists:
+  Max: 5
+  CountKeywordArgs: true
+
+# 分岐の数。ガード句を多用しているとデフォルト 7 だと厳しい
+Metrics/PerceivedComplexity:
+  Max: 8
+
+#################### Security ##############################
+
+# 毎回 YAML.safe_load(yaml_str, [Date, Time]) するのは面倒で。。
+Security/YAMLLoad:
+  Enabled: false
+
+#################### Rspec ##############################
+# subject はコピペ可搬性よりもそのまま USAGE であって欲しい
+RSpec/DescribedClass:
+  EnforcedStyle: explicit
+
+# it が一つしか無いような context では空行を開ける方が読みづらい
+#   context "when foo is bar" do
+#     let(:foo) { bar }
+#     it { is_expected.to do_something }
+#   end
+RSpec/EmptyLineAfterFinalLet:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Max: 100
+
+# one-liner の should は書きやすいし意味が通りやすいし副作用も無いので撥ねる必要がない。
+# ただ expect 派に対して強制するほどでもないので統一はしない。
+RSpec/ImplicitExpect:
+  Enabled: false
+
+# let を使うのは context 間で条件が違うものが存在する時だけにしたい。
+# before の方が事前条件を整えていることが分かりやすい。
+RSpec/InstanceVariable:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+   Enabled: false
+
+# 変に名前つけて呼ぶ方が分かりづらい。
+# テスト対象メソッドを呼ぶだけの subject 以外を書かないようにする方が効く。
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/NestedGroups:
+   Enabled: false
+
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - qa
+    - staging
