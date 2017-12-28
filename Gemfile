@@ -25,7 +25,6 @@ group :development, :test do
   gem 'rspec-json_matcher'
   gem 'rspec-rails', '~> 3.5'
 
-
   # rubocop pr comment gems
   gem 'checkstyle_filter-git'
   gem 'github_status_notifier'
