@@ -38,8 +38,6 @@ group :development, :test do
 end
 
 group :development do
-  # TODO: migrationファイルからridge poleファイル自動生成のgem入れる
-
   # Update schema comments on models and factories after each migration.
   gem 'annotate'
 
