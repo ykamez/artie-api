@@ -84,3 +84,6 @@ gem 'redis', '~> 3'
 gem 'redis-namespace'
 gem 'shrine'
 gem 'sidekiq', '~> 4'
+
+# devise
+gem 'devise'
