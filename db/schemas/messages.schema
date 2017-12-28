@@ -1,0 +1,15 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  t.bigint  "user_id",    null: false
+  t.bigint  "channel_id", null: false
+  t.string   "text",       null: false
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+end
+
+add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
+add_index "messages", ["channel_id"], name: "index_messages_on_channel_id", using: :btree
+
+add_foreign_key "messages", "users"
+add_foreign_key "messages", "channels"

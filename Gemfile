@@ -25,19 +25,21 @@ group :development, :test do
   gem 'rspec-json_matcher'
   gem 'rspec-rails', '~> 3.5'
 
-  # ci
-  gem 'fincop', require: false
-
   # rubocop pr comment gems
   gem 'checkstyle_filter-git'
   gem 'github_status_notifier'
+  gem 'rubocop'
   gem 'rubocop-checkstyle_formatter'
+  gem 'rubocop-rspec'
   gem 'rubocop-select'
   gem 'saddler'
   gem 'saddler-reporter-github'
 end
 
 group :development do
+  # Update schema comments on models and factories after each migration.
+  gem 'annotate'
+
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -82,3 +84,5 @@ gem 'redis-namespace'
 gem 'shrine'
 gem 'sidekiq', '~> 4'
 
+# devise
+gem 'devise'

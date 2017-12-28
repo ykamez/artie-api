@@ -1,0 +1,10 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+require 'users.schema'
+require 'channels.schema'
+require 'topics.schema'
+require 'messages.schema'
+require 'users_channels.schema'
+require 'channels_topics.schema'
+require 'message_evaluations.schema'
+require 'message_images.schema'

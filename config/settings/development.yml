@@ -1,0 +1,10 @@
+db:
+  default:
+    username: root
+    password: root
+    host: 127.0.0.1
+    port: 3306
+  readonly:
+    username: readonly
+    password: readonly
+    host: 127.0.0.1
