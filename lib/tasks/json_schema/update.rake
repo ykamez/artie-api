@@ -16,6 +16,7 @@ namespace :json_schema do
 
   Prmd::RakeTasks::Doc.new do |t|
     t.files = { 'docs/schema/schema.json' => 'docs/schema/schema.md' }
+    t.options[:doc] = { toc: true }
   end
 
   task update: ['json_schema:combine', 'json_schema:verify', 'json_schema:doc']

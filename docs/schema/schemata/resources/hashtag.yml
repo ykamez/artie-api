@@ -1,7 +1,7 @@
 ---
 "$schema": http://json-schema.org/draft-04/hyper-schema
-title: Tag
-description: Tag resource
+title: Hashtag
+description: Post has many hashtags.
 stability: prototype
 strictProperties: true
 type:
@@ -13,18 +13,18 @@ definitions:
     type: integer
     readOnly: true
   name:
-    description: a name of tag
-    example: "pigcoin"
+    description: hashtag's name
+    example: "pig"
     type: string
-  tag:
+  hashtag:
     type: object
     required:
       - id
       - name
     properties:
       id:
-        $ref: "/schemata/tag#/definitions/id"
+        $ref: "/schemata/hashtag#/definitions/id"
       name:
-        $ref: "/schemata/tag#/definitions/name"
+        $ref: "/schemata/hashtag#/definitions/name"
 
-id: schemata/tag
+id: schemata/hashtag

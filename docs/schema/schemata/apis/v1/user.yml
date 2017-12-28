@@ -36,7 +36,20 @@ links:
   method: POST
   rel: create
   schema:
-    $ref: /schemata/user#/definitions/user
+    type: object
+    required:
+      - display_name
+      - email
+      - password
+    properties:
+      display_name:
+        $ref: "/schemata/user#/definitions/display_name"
+      image_data:
+        $ref: "/schemata/user#/definitions/image_data"
+      email:
+        $ref: "/schemata/user#/definitions/email"
+      password:
+        $ref: "/schemata/user#/definitions/password"
   targetSchema:
     $ref: /schemata/user#/definitions/user
 
@@ -46,7 +59,20 @@ links:
   method: PATCH
   rel: update
   schema:
-    $ref: /schemata/user#/definitions/user
+    type: object
+    required:
+      - display_name
+      - email
+      - password
+    properties:
+      display_name:
+        $ref: "/schemata/user#/definitions/display_name"
+      image_data:
+        $ref: "/schemata/user#/definitions/image_data"
+      email:
+        $ref: "/schemata/user#/definitions/email"
+      password:
+        $ref: "/schemata/user#/definitions/password"
   targetSchema:
     $ref: /schemata/user#/definitions/user
 

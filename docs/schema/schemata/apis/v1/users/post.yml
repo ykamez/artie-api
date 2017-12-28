@@ -15,7 +15,15 @@ links:
   rel: show
   schema:
     type: object
-    properties: {}
+    properties:
+      limit:
+        description: limit
+        example: 10
+        type: integer
+      cursor:
+        anyOf:
+          - $ref: /schemata#/datetime
+          - type: "null"
   targetSchema:
     type: array
     items:

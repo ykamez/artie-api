@@ -7,22 +7,17 @@
     "user_id": {
       "description": "user_id",
       "type": "integer",
-      "example": 42
-    },
-    "application_token": {
-      "description": "application token for internal api call",
-      "type": "string",
-      "example": "xxxx"
+      "example": 1234
     },
     "datetime": {
       "description": "datetime",
       "type": "string",
       "format": "date-time"
     },
-    "v1_messages": {
+    "v1_hashtags": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "message",
-      "description": "message apis",
+      "title": "hashtag",
+      "description": "hashtag apis",
       "stability": "prototype",
       "strictProperties": true,
       "type": [
@@ -31,59 +26,67 @@
       "links": [
         {
           "title": "index",
-          "description": "Show a list of messages in a room.",
-          "href": "/v1/rooms/{room_id}/messages",
+          "description": "Show a list of hashtag.",
+          "href": "/v1/hashtags",
           "method": "GET",
           "rel": "show",
           "schema": {
             "type": "object",
             "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
             }
           },
           "targetSchema": {
             "type": "array",
             "items": {
-              "$ref": "#/definitions/message/definitions/message"
+              "$ref": "#/definitions/hashtag/definitions/hashtag"
             }
           }
         },
         {
           "title": "show",
-          "description": "Show a specific message",
-          "href": "/v1/messages/{id}",
+          "description": "Show a specific hashtag's posts",
+          "href": "/v1/hashtags/{hashtag_id}/posts",
           "method": "GET",
           "rel": "show",
-          "targetSchema": {
-            "$ref": "#/definitions/message/definitions/message"
-          }
-        },
-        {
-          "title": "create",
-          "description": "create message",
-          "href": "/v1/messages/",
-          "method": "POST",
-          "rel": "create",
-          "schema": {
-            "$ref": "#/definitions/message/definitions/message"
-          },
-          "targetSchema": {
-            "$ref": "#/definitions/message/definitions/message"
-          }
-        },
-        {
-          "title": "delete",
-          "description": "update message",
-          "href": "/v1/messages/{id}",
-          "method": "DELETE",
-          "rel": "empty",
           "schema": {
             "type": "object",
             "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
             }
           },
           "targetSchema": {
-            "type": "object",
-            "properties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/post/definitions/post"
             }
           }
         }
@@ -98,6 +101,14 @@
       "type": [
         "object"
       ],
+      "definitions": {
+        "user_id": {
+          "description": "unique identifier of user",
+          "type": "integer",
+          "example": 1234,
+          "readOnly": true
+        }
+      },
       "links": [
         {
           "title": "index",
@@ -108,6 +119,21 @@
           "schema": {
             "type": "object",
             "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
             }
           },
           "targetSchema": {
@@ -123,6 +149,26 @@
           "href": "/v1/posts/{id}",
           "method": "GET",
           "rel": "show",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
           "targetSchema": {
             "$ref": "#/definitions/post/definitions/post"
           }
@@ -134,20 +180,25 @@
           "method": "POST",
           "rel": "create",
           "schema": {
-            "$ref": "#/definitions/post/definitions/post"
-          },
-          "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post"
-          }
-        },
-        {
-          "title": "update",
-          "description": "update post",
-          "href": "/v1/posts/{id}",
-          "method": "PATCH",
-          "rel": "update",
-          "schema": {
-            "$ref": "#/definitions/post/definitions/post"
+            "type": "object",
+            "required": [
+              "text",
+              "user_id"
+            ],
+            "properties": {
+              "text": {
+                "$ref": "#/definitions/post/definitions/text"
+              },
+              "user_id": {
+                "$ref": "#/definitions/v1_posts/definitions/user_id"
+              },
+              "image_data": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/post/definitions/image_data"
+                }
+              }
+            }
           },
           "targetSchema": {
             "$ref": "#/definitions/post/definitions/post"
@@ -167,49 +218,6 @@
           "targetSchema": {
             "type": "object",
             "properties": {
-            }
-          }
-        }
-      ]
-    },
-    "v1_tags": {
-      "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "tag",
-      "description": "tag apis",
-      "stability": "prototype",
-      "strictProperties": true,
-      "type": [
-        "object"
-      ],
-      "links": [
-        {
-          "title": "index",
-          "description": "Show a list of tag.",
-          "href": "/v1/tags",
-          "method": "GET",
-          "rel": "show",
-          "schema": {
-            "type": "object",
-            "properties": {
-            }
-          },
-          "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/tag/definitions/tag"
-            }
-          }
-        },
-        {
-          "title": "show",
-          "description": "Show a specific tag's posts",
-          "href": "/v1/tags/{tag_id}/posts",
-          "method": "GET",
-          "rel": "show",
-          "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/post/definitions/post"
             }
           }
         }
@@ -260,7 +268,26 @@
           "method": "POST",
           "rel": "create",
           "schema": {
-            "$ref": "#/definitions/user/definitions/user"
+            "type": "object",
+            "required": [
+              "display_name",
+              "email",
+              "password"
+            ],
+            "properties": {
+              "display_name": {
+                "$ref": "#/definitions/user/definitions/display_name"
+              },
+              "image_data": {
+                "$ref": "#/definitions/user/definitions/image_data"
+              },
+              "email": {
+                "$ref": "#/definitions/user/definitions/email"
+              },
+              "password": {
+                "$ref": "#/definitions/user/definitions/password"
+              }
+            }
           },
           "targetSchema": {
             "$ref": "#/definitions/user/definitions/user"
@@ -273,7 +300,26 @@
           "method": "PATCH",
           "rel": "update",
           "schema": {
-            "$ref": "#/definitions/user/definitions/user"
+            "type": "object",
+            "required": [
+              "display_name",
+              "email",
+              "password"
+            ],
+            "properties": {
+              "display_name": {
+                "$ref": "#/definitions/user/definitions/display_name"
+              },
+              "image_data": {
+                "$ref": "#/definitions/user/definitions/image_data"
+              },
+              "email": {
+                "$ref": "#/definitions/user/definitions/email"
+              },
+              "password": {
+                "$ref": "#/definitions/user/definitions/password"
+              }
+            }
           },
           "targetSchema": {
             "$ref": "#/definitions/user/definitions/user"
@@ -317,6 +363,21 @@
           "schema": {
             "type": "object",
             "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
             }
           },
           "targetSchema": {
@@ -328,10 +389,10 @@
         }
       ]
     },
-    "message": {
+    "hashtag": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "Message",
-      "description": "Message Resource",
+      "title": "Hashtag",
+      "description": "Post has many hashtags.",
       "stability": "prototype",
       "strictProperties": true,
       "type": [
@@ -339,46 +400,28 @@
       ],
       "definitions": {
         "id": {
-          "description": "unique identifier of message",
-          "type": "integer",
+          "description": "id",
           "example": 1,
+          "type": "integer",
           "readOnly": true
         },
-        "text": {
-          "description": "message's text",
-          "type": "string",
-          "example": "Pig Coin is awesome."
+        "name": {
+          "description": "hashtag's name",
+          "example": "pig",
+          "type": "string"
         },
-        "user_id": {
-          "description": "message's user",
-          "type": "integer",
-          "example": 1234
-        },
-        "room_id": {
-          "description": "message's room",
-          "type": "integer",
-          "example": 12
-        },
-        "message": {
+        "hashtag": {
           "type": "object",
           "required": [
             "id",
-            "text",
-            "user_id",
-            "room_id"
+            "name"
           ],
           "properties": {
             "id": {
-              "$ref": "#/definitions/message/definitions/id"
+              "$ref": "#/definitions/hashtag/definitions/id"
             },
-            "text": {
-              "$ref": "#/definitions/message/definitions/text"
-            },
-            "user_id": {
-              "$ref": "#/definitions/message/definitions/user_id"
-            },
-            "room_id": {
-              "$ref": "#/definitions/message/definitions/room_id"
+            "name": {
+              "$ref": "#/definitions/hashtag/definitions/name"
             }
           }
         }
@@ -405,17 +448,28 @@
           "type": "string",
           "example": "Pig Coin is awesome."
         },
-        "user_id": {
-          "description": "post's user",
+        "image_data": {
+          "description": "images attached to post",
+          "type": "string",
+          "example": "aws:pig_coin.png"
+        },
+        "post_at": {
+          "description": "datetime when this post was posted.",
+          "type": "string",
+          "example": "date-time"
+        },
+        "share": {
+          "description": "post share count",
           "type": "integer",
-          "example": 1234
+          "example": 123
         },
         "post": {
           "type": "object",
           "required": [
             "id",
             "text",
-            "user_id"
+            "user",
+            "post_at"
           ],
           "properties": {
             "id": {
@@ -424,86 +478,66 @@
             "text": {
               "$ref": "#/definitions/post/definitions/text"
             },
-            "user_id": {
-              "$ref": "#/definitions/post/definitions/user_id"
+            "user": {
+              "$ref": "#/definitions/user/definitions/user"
+            },
+            "image_data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/post/definitions/image_data"
+              }
+            },
+            "hashtag": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/hashtag/definitions/hashtag"
+              }
+            },
+            "share": {
+              "$ref": "#/definitions/post/definitions/share"
+            },
+            "post_evaluation": {
+              "$ref": "#/definitions/post_evaluation/definitions/post_evaluation"
+            },
+            "post_at": {
+              "$ref": "#/definitions/post/definitions/post_at"
             }
           }
         }
       }
     },
-    "room": {
+    "post_evaluation": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "Room",
-      "description": "Room Resource",
+      "title": "Post Evaluation",
+      "description": "Post Evaluation Resource",
       "stability": "prototype",
       "strictProperties": true,
       "type": [
         "object"
       ],
       "definitions": {
-        "id": {
-          "description": "unique identifier of room",
+        "like": {
+          "description": "post Evaluation's like counts",
           "type": "integer",
-          "example": 1,
-          "readOnly": true
+          "example": 1248
         },
-        "user_id": {
-          "description": "room's user",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/user/definitions/user"
-          }
+        "dislike": {
+          "description": "post's dislike counts",
+          "type": "integer",
+          "example": 100
         },
-        "room": {
+        "post_evaluation": {
           "type": "object",
           "required": [
-            "id",
-            "user_id"
+            "like",
+            "dislike"
           ],
           "properties": {
-            "id": {
-              "$ref": "#/definitions/room/definitions/id"
+            "like": {
+              "$ref": "#/definitions/post_evaluation/definitions/like"
             },
-            "user_id": {
-              "$ref": "#/definitions/room/definitions/user_id"
-            }
-          }
-        }
-      }
-    },
-    "tag": {
-      "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "Tag",
-      "description": "Tag resource",
-      "stability": "prototype",
-      "strictProperties": true,
-      "type": [
-        "object"
-      ],
-      "definitions": {
-        "id": {
-          "description": "id",
-          "example": 1,
-          "type": "integer",
-          "readOnly": true
-        },
-        "name": {
-          "description": "a name of tag",
-          "example": "pigcoin",
-          "type": "string"
-        },
-        "tag": {
-          "type": "object",
-          "required": [
-            "id",
-            "name"
-          ],
-          "properties": {
-            "id": {
-              "$ref": "#/definitions/tag/definitions/id"
-            },
-            "name": {
-              "$ref": "#/definitions/tag/definitions/name"
+            "dislike": {
+              "$ref": "#/definitions/post_evaluation/definitions/dislike"
             }
           }
         }
@@ -525,8 +559,8 @@
           "example": 1,
           "readOnly": true
         },
-        "name": {
-          "description": "a name of user",
+        "display_name": {
+          "description": "a display_name of user",
           "type": "string",
           "example": "kamexx"
         },
@@ -545,29 +579,38 @@
           "type": "string",
           "example": "letmein1234"
         },
+        "total_like_count": {
+          "description": "user total liked count",
+          "type": "integer",
+          "example": 123
+        },
+        "total_dislike_count": {
+          "description": "user total disliked count",
+          "type": "integer",
+          "example": 123
+        },
         "user": {
           "type": "object",
           "required": [
             "id",
-            "name",
-            "image_data",
-            "email"
+            "display_name",
+            "image_data"
           ],
           "properties": {
             "id": {
               "$ref": "#/definitions/user/definitions/id"
             },
-            "name": {
-              "$ref": "#/definitions/user/definitions/name"
+            "display_name": {
+              "$ref": "#/definitions/user/definitions/display_name"
             },
             "image_data": {
               "$ref": "#/definitions/user/definitions/image_data"
             },
-            "email": {
-              "$ref": "#/definitions/user/definitions/email"
+            "total_like_count": {
+              "$ref": "#/definitions/user/definitions/total_like_count"
             },
-            "password": {
-              "$ref": "#/definitions/user/definitions/password"
+            "total_dislike_count": {
+              "$ref": "#/definitions/user/definitions/total_dislike_count"
             }
           }
         }
@@ -575,14 +618,11 @@
     }
   },
   "properties": {
-    "v1_messages": {
-      "$ref": "#/definitions/v1_messages"
+    "v1_hashtags": {
+      "$ref": "#/definitions/v1_hashtags"
     },
     "v1_posts": {
       "$ref": "#/definitions/v1_posts"
-    },
-    "v1_tags": {
-      "$ref": "#/definitions/v1_tags"
     },
     "v1_users": {
       "$ref": "#/definitions/v1_users"
@@ -590,17 +630,14 @@
     "v1_users_posts": {
       "$ref": "#/definitions/v1_users_posts"
     },
-    "message": {
-      "$ref": "#/definitions/message"
+    "hashtag": {
+      "$ref": "#/definitions/hashtag"
     },
     "post": {
       "$ref": "#/definitions/post"
     },
-    "room": {
-      "$ref": "#/definitions/room"
-    },
-    "tag": {
-      "$ref": "#/definitions/tag"
+    "post_evaluation": {
+      "$ref": "#/definitions/post_evaluation"
     },
     "user": {
       "$ref": "#/definitions/user"

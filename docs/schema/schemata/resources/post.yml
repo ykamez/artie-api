@@ -16,23 +16,46 @@ definitions:
     description: post's text
     type: string
     example: "Pig Coin is awesome."
-  user_id:
-    description: post's user
+  image_data:
+    description: images attached to post
+    type: string
+    example: 'aws:pig_coin.png'
+  post_at:
+    description: datetime when this post was posted.
+    type: string
+    example: date-time
+  share:
+    description: post share count
     type: integer
-    example: 1234
+    example: 123
 
   post:
     type: object
     required:
       - id
       - text
-      - user_id
+      - user
+      - post_at
     properties:
       id:
-        $ref: "/schemata/post#/definitions/id"
+        $ref: /schemata/post#/definitions/id
       text:
-        $ref: "/schemata/post#/definitions/text"
-      user_id:
-        $ref: "/schemata/post#/definitions/user_id"
+        $ref: /schemata/post#/definitions/text
+      user:
+        $ref: /schemata/user#/definitions/user
+      image_data:
+        type: array
+        items:
+          $ref: /schemata/post#/definitions/image_data
+      hashtag:
+        type: array
+        items:
+          $ref: /schemata/hashtag#/definitions/hashtag
+      share:
+        $ref: /schemata/post#/definitions/share
+      post_evaluation:
+        $ref: /schemata/post_evaluation#/definitions/post_evaluation
+      post_at:
+        $ref: /schemata/post#/definitions/post_at
 
 id: schemata/post

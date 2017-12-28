@@ -6,6 +6,12 @@ stability: prototype
 strictProperties: true
 type:
 - object
+definitions:
+  user_id:
+    description: unique identifier of user
+    type: integer
+    example: 1234
+    readOnly: true
 
 links:
 - title: index
@@ -15,7 +21,15 @@ links:
   rel: show
   schema:
     type: object
-    properties: {}
+    properties:
+      limit:
+        description: limit
+        example: 10
+        type: integer
+      cursor:
+        anyOf:
+          - $ref: /schemata#/datetime
+          - type: "null"
   targetSchema:
     type: array
     items:
@@ -26,6 +40,17 @@ links:
   href: /v1/posts/{id}
   method: GET
   rel: show
+  schema:
+    type: object
+    properties:
+      limit:
+        description: limit
+        example: 10
+        type: integer
+      cursor:
+        anyOf:
+          - $ref: /schemata#/datetime
+          - type: "null"
   targetSchema:
     $ref: /schemata/post#/definitions/post
 
@@ -35,19 +60,22 @@ links:
   method: POST
   rel: create
   schema:
-    $ref: /schemata/post#/definitions/post
+    type: object
+    required:
+      - text
+      - user_id
+    properties:
+      text:
+        $ref: /schemata/post#/definitions/text
+      user_id:
+        $ref: /schemata/v1_posts#/definitions/user_id
+      image_data:
+        type: array
+        items:
+          $ref: /schemata/post#/definitions/image_data
   targetSchema:
     $ref: /schemata/post#/definitions/post
 
-- title: update
-  description: update post
-  href: /v1/posts/{id}
-  method: PATCH
-  rel: update
-  schema:
-    $ref: /schemata/post#/definitions/post
-  targetSchema:
-    $ref: /schemata/post#/definitions/post
 
 - title: delete
   description: update post

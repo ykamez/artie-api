@@ -12,8 +12,8 @@ definitions:
     type: integer
     example: 1
     readOnly: true
-  name:
-    description: a name of user
+  display_name:
+    description: a display_name of user
     type: string
     example: 'kamexx'
   image_data:
@@ -28,24 +28,31 @@ definitions:
     description: user password
     type: string
     example: 'letmein1234'
+  total_like_count:
+    description: user total liked count
+    type: integer
+    example: 123
+  total_dislike_count:
+    description: user total disliked count
+    type: integer
+    example: 123
 
   user:
     type: object
     required:
       - id
-      - name
+      - display_name
       - image_data
-      - email
     properties:
       id:
         $ref: "/schemata/user#/definitions/id"
-      name:
-        $ref: "/schemata/user#/definitions/name"
+      display_name:
+        $ref: "/schemata/user#/definitions/display_name"
       image_data:
         $ref: "/schemata/user#/definitions/image_data"
-      email:
-        $ref: "/schemata/user#/definitions/email"
-      password:
-        $ref: "/schemata/user#/definitions/password"
+      total_like_count:
+        $ref: "/schemata/user#/definitions/total_like_count"
+      total_dislike_count:
+        $ref: "/schemata/user#/definitions/total_dislike_count"
 
 id: schemata/user

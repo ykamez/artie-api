@@ -1,0 +1,30 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: Post Evaluation
+description: Post Evaluation Resource
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  like:
+    description: post Evaluation's like counts
+    type: integer
+    example: 1248
+  dislike:
+    description: post's dislike counts
+    type: integer
+    example: 100
+
+  post_evaluation:
+    type: object
+    required:
+      - like
+      - dislike
+    properties:
+      like:
+        $ref: /schemata/post_evaluation#/definitions/like
+      dislike:
+        $ref: /schemata/post_evaluation#/definitions/dislike
+
+id: schemata/post_evaluation
