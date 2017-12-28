@@ -1,0 +1,10 @@
+db:
+  default:
+    username: <%= ENV['COIN_NOW_SERVER_DATABASE_WRITE_USERNAME'] %>
+    password: <%= ENV['COIN_NOW_SERVER_DATABASE_WRITE_PASSWORD'] %>
+    host: <%= ENV['COIN_NOW_SERVER_DATABASE_WRITE_HOST'] %>
+    port: 3306
+  readonly:
+    username: <%= ENV['COIN_NOW_SERVER_DATABASE_READ_USERNAME'] %>
+    password: <%= ENV['COIN_NOW_SERVER_DATABASE_READ_PASSWORD'] %>
+    host: <%= ENV['COIN_NOW_SERVER_DATABASE_READ_HOST'] %>
