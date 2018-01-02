@@ -1,0 +1,53 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: hashtag
+description: hashtag apis
+stability: prototype
+strictProperties: true
+type:
+- object
+
+links:
+- title: index
+  description: Show a list of hashtag.
+  href: /v1/hashtags
+  method: GET
+  rel: show
+  schema:
+    type: object
+    properties:
+      limit:
+        description: limit
+        example: 10
+        type: integer
+      cursor:
+        anyOf:
+          - $ref: /schemata#/datetime
+          - type: "null"
+  targetSchema:
+    type: array
+    items:
+      $ref: /schemata/hashtag#/definitions/hashtag
+
+- title: show
+  description: Show a specific hashtag's posts
+  href: /v1/hashtags/{hashtag_id}/posts
+  method: GET
+  rel: show
+  schema:
+    type: object
+    properties:
+      limit:
+        description: limit
+        example: 10
+        type: integer
+      cursor:
+        anyOf:
+          - $ref: /schemata#/datetime
+          - type: "null"
+  targetSchema:
+    type: array
+    items:
+      $ref: /schemata/post#/definitions/post
+
+id: schemata/v1_hashtags

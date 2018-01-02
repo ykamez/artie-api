@@ -1,0 +1,30 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: Hashtag
+description: Post has many hashtags.
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  id:
+    description: id
+    example: 1
+    type: integer
+    readOnly: true
+  name:
+    description: hashtag's name
+    example: "pig"
+    type: string
+  hashtag:
+    type: object
+    required:
+      - id
+      - name
+    properties:
+      id:
+        $ref: "/schemata/hashtag#/definitions/id"
+      name:
+        $ref: "/schemata/hashtag#/definitions/name"
+
+id: schemata/hashtag

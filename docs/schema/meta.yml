@@ -1,0 +1,17 @@
+ "$schema": http://json-schema.org/draft-04/hyper-schema
+ description: TODO description
+ id: application
+ links:
+   -
+     href: http://coinnow.local
+     rel: self
+ title: TODO app titele
+ definitions:
+   user_id:
+     description: user_id
+     type: integer
+     example: 1234
+   datetime:
+     description: datetime
+     type: string
+     format: date-time

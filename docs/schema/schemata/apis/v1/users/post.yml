@@ -1,0 +1,32 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: post
+description: post apis
+stability: prototype
+strictProperties: true
+type:
+- object
+
+links:
+- title: index
+  description: Show a list of post.
+  href: /v1/users/{user_id}/posts
+  method: GET
+  rel: show
+  schema:
+    type: object
+    properties:
+      limit:
+        description: limit
+        example: 10
+        type: integer
+      cursor:
+        anyOf:
+          - $ref: /schemata#/datetime
+          - type: "null"
+  targetSchema:
+    type: array
+    items:
+      $ref: /schemata/post#/definitions/post
+
+id: schemata/v1_users_posts

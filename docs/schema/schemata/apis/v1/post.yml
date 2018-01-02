@@ -1,0 +1,92 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: post
+description: post apis
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  user_id:
+    description: unique identifier of user
+    type: integer
+    example: 1234
+    readOnly: true
+
+links:
+- title: index
+  description: Show a list of post.
+  href: /v1/posts
+  method: GET
+  rel: show
+  schema:
+    type: object
+    properties:
+      limit:
+        description: limit
+        example: 10
+        type: integer
+      cursor:
+        anyOf:
+          - $ref: /schemata#/datetime
+          - type: "null"
+  targetSchema:
+    type: array
+    items:
+      $ref: /schemata/post#/definitions/post
+
+- title: show
+  description: Show a specific post
+  href: /v1/posts/{id}
+  method: GET
+  rel: show
+  schema:
+    type: object
+    properties:
+      limit:
+        description: limit
+        example: 10
+        type: integer
+      cursor:
+        anyOf:
+          - $ref: /schemata#/datetime
+          - type: "null"
+  targetSchema:
+    $ref: /schemata/post#/definitions/post
+
+- title: create
+  description: create post
+  href: /v1/posts/
+  method: POST
+  rel: create
+  schema:
+    type: object
+    required:
+      - text
+      - user_id
+    properties:
+      text:
+        $ref: /schemata/post#/definitions/text
+      user_id:
+        $ref: /schemata/v1_posts#/definitions/user_id
+      image_data:
+        type: array
+        items:
+          $ref: /schemata/post#/definitions/image_data
+  targetSchema:
+    $ref: /schemata/post#/definitions/post
+
+
+- title: delete
+  description: update post
+  href: /v1/posts/{id}
+  method: DELETE
+  rel: empty
+  schema:
+    type: object
+    properties: {}
+  targetSchema:
+    type: object
+    properties: {}
+
+id: schemata/v1_posts

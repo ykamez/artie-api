@@ -1,0 +1,655 @@
+{
+  "$schema": "http://json-schema.org/draft-04/hyper-schema",
+  "type": [
+    "object"
+  ],
+  "definitions": {
+    "user_id": {
+      "description": "user_id",
+      "type": "integer",
+      "example": 1234
+    },
+    "datetime": {
+      "description": "datetime",
+      "type": "string",
+      "format": "date-time"
+    },
+    "v1_hashtags": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "hashtag",
+      "description": "hashtag apis",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
+        {
+          "title": "index",
+          "description": "Show a list of hashtag.",
+          "href": "/v1/hashtags",
+          "method": "GET",
+          "rel": "show",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "targetSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/hashtag/definitions/hashtag"
+            }
+          }
+        },
+        {
+          "title": "show",
+          "description": "Show a specific hashtag's posts",
+          "href": "/v1/hashtags/{hashtag_id}/posts",
+          "method": "GET",
+          "rel": "show",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "targetSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/post/definitions/post"
+            }
+          }
+        }
+      ]
+    },
+    "v1_posts": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "post",
+      "description": "post apis",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "user_id": {
+          "description": "unique identifier of user",
+          "type": "integer",
+          "example": 1234,
+          "readOnly": true
+        }
+      },
+      "links": [
+        {
+          "title": "index",
+          "description": "Show a list of post.",
+          "href": "/v1/posts",
+          "method": "GET",
+          "rel": "show",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "targetSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/post/definitions/post"
+            }
+          }
+        },
+        {
+          "title": "show",
+          "description": "Show a specific post",
+          "href": "/v1/posts/{id}",
+          "method": "GET",
+          "rel": "show",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/post/definitions/post"
+          }
+        },
+        {
+          "title": "create",
+          "description": "create post",
+          "href": "/v1/posts/",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "type": "object",
+            "required": [
+              "text",
+              "user_id"
+            ],
+            "properties": {
+              "text": {
+                "$ref": "#/definitions/post/definitions/text"
+              },
+              "user_id": {
+                "$ref": "#/definitions/v1_posts/definitions/user_id"
+              },
+              "image_data": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/post/definitions/image_data"
+                }
+              }
+            }
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/post/definitions/post"
+          }
+        },
+        {
+          "title": "delete",
+          "description": "update post",
+          "href": "/v1/posts/{id}",
+          "method": "DELETE",
+          "rel": "empty",
+          "schema": {
+            "type": "object",
+            "properties": {
+            }
+          },
+          "targetSchema": {
+            "type": "object",
+            "properties": {
+            }
+          }
+        }
+      ]
+    },
+    "v1_users": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "user",
+      "description": "user apis",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
+        {
+          "title": "index",
+          "description": "Show a list of user.",
+          "href": "/v1/users",
+          "method": "GET",
+          "rel": "show",
+          "schema": {
+            "type": "object",
+            "properties": {
+            }
+          },
+          "targetSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/user/definitions/user"
+            }
+          }
+        },
+        {
+          "title": "show",
+          "description": "Show a specific user",
+          "href": "/v1/users/{id}",
+          "method": "GET",
+          "rel": "show",
+          "targetSchema": {
+            "$ref": "#/definitions/user/definitions/user"
+          }
+        },
+        {
+          "title": "create",
+          "description": "create user",
+          "href": "/v1/users/",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "type": "object",
+            "required": [
+              "display_name",
+              "email",
+              "password"
+            ],
+            "properties": {
+              "display_name": {
+                "$ref": "#/definitions/user/definitions/display_name"
+              },
+              "image_data": {
+                "$ref": "#/definitions/user/definitions/image_data"
+              },
+              "email": {
+                "$ref": "#/definitions/user/definitions/email"
+              },
+              "password": {
+                "$ref": "#/definitions/user/definitions/password"
+              }
+            }
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/user/definitions/user"
+          }
+        },
+        {
+          "title": "update",
+          "description": "update user",
+          "href": "/v1/users/{id}",
+          "method": "PATCH",
+          "rel": "update",
+          "schema": {
+            "type": "object",
+            "required": [
+              "display_name",
+              "email",
+              "password"
+            ],
+            "properties": {
+              "display_name": {
+                "$ref": "#/definitions/user/definitions/display_name"
+              },
+              "image_data": {
+                "$ref": "#/definitions/user/definitions/image_data"
+              },
+              "email": {
+                "$ref": "#/definitions/user/definitions/email"
+              },
+              "password": {
+                "$ref": "#/definitions/user/definitions/password"
+              }
+            }
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/user/definitions/user"
+          }
+        },
+        {
+          "title": "delete",
+          "description": "update user",
+          "href": "/v1/users/{id}",
+          "method": "DELETE",
+          "rel": "empty",
+          "schema": {
+            "type": "object",
+            "properties": {
+            }
+          },
+          "targetSchema": {
+            "type": "object",
+            "properties": {
+            }
+          }
+        }
+      ]
+    },
+    "v1_users_posts": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "post",
+      "description": "post apis",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
+        {
+          "title": "index",
+          "description": "Show a list of post.",
+          "href": "/v1/users/{user_id}/posts",
+          "method": "GET",
+          "rel": "show",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "targetSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/post/definitions/post"
+            }
+          }
+        }
+      ]
+    },
+    "hashtag": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Hashtag",
+      "description": "Post has many hashtags.",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "id",
+          "example": 1,
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "description": "hashtag's name",
+          "example": "pig",
+          "type": "string"
+        },
+        "hashtag": {
+          "type": "object",
+          "required": [
+            "id",
+            "name"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/hashtag/definitions/id"
+            },
+            "name": {
+              "$ref": "#/definitions/hashtag/definitions/name"
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Post",
+      "description": "Post Resource",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of post",
+          "type": "integer",
+          "example": 1,
+          "readOnly": true
+        },
+        "text": {
+          "description": "post's text",
+          "type": "string",
+          "example": "Pig Coin is awesome."
+        },
+        "image_data": {
+          "description": "images attached to post",
+          "type": "string",
+          "example": "aws:pig_coin.png"
+        },
+        "post_at": {
+          "description": "datetime when this post was posted.",
+          "type": "string",
+          "example": "date-time"
+        },
+        "share": {
+          "description": "post share count",
+          "type": "integer",
+          "example": 123
+        },
+        "post": {
+          "type": "object",
+          "required": [
+            "id",
+            "text",
+            "user",
+            "post_at"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/post/definitions/id"
+            },
+            "text": {
+              "$ref": "#/definitions/post/definitions/text"
+            },
+            "user": {
+              "$ref": "#/definitions/user/definitions/user"
+            },
+            "image_data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/post/definitions/image_data"
+              }
+            },
+            "hashtag": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/hashtag/definitions/hashtag"
+              }
+            },
+            "share": {
+              "$ref": "#/definitions/post/definitions/share"
+            },
+            "post_evaluation": {
+              "$ref": "#/definitions/post_evaluation/definitions/post_evaluation"
+            },
+            "post_at": {
+              "$ref": "#/definitions/post/definitions/post_at"
+            }
+          }
+        }
+      }
+    },
+    "post_evaluation": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Post Evaluation",
+      "description": "Post Evaluation Resource",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "like": {
+          "description": "post Evaluation's like counts",
+          "type": "integer",
+          "example": 1248
+        },
+        "dislike": {
+          "description": "post's dislike counts",
+          "type": "integer",
+          "example": 100
+        },
+        "post_evaluation": {
+          "type": "object",
+          "required": [
+            "like",
+            "dislike"
+          ],
+          "properties": {
+            "like": {
+              "$ref": "#/definitions/post_evaluation/definitions/like"
+            },
+            "dislike": {
+              "$ref": "#/definitions/post_evaluation/definitions/dislike"
+            }
+          }
+        }
+      }
+    },
+    "user": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "User",
+      "description": "User Resource",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of user",
+          "type": "integer",
+          "example": 1,
+          "readOnly": true
+        },
+        "display_name": {
+          "description": "a display_name of user",
+          "type": "string",
+          "example": "kamexx"
+        },
+        "image_data": {
+          "description": "user's icon",
+          "type": "string",
+          "exmaple": "s3/aws/assets/hogehoge"
+        },
+        "email": {
+          "description": "user email address",
+          "type": "string",
+          "format": "email"
+        },
+        "password": {
+          "description": "user password",
+          "type": "string",
+          "example": "letmein1234"
+        },
+        "total_like_count": {
+          "description": "user total liked count",
+          "type": "integer",
+          "example": 123
+        },
+        "total_dislike_count": {
+          "description": "user total disliked count",
+          "type": "integer",
+          "example": 123
+        },
+        "user": {
+          "type": "object",
+          "required": [
+            "id",
+            "display_name",
+            "image_data"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/user/definitions/id"
+            },
+            "display_name": {
+              "$ref": "#/definitions/user/definitions/display_name"
+            },
+            "image_data": {
+              "$ref": "#/definitions/user/definitions/image_data"
+            },
+            "total_like_count": {
+              "$ref": "#/definitions/user/definitions/total_like_count"
+            },
+            "total_dislike_count": {
+              "$ref": "#/definitions/user/definitions/total_dislike_count"
+            }
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "v1_hashtags": {
+      "$ref": "#/definitions/v1_hashtags"
+    },
+    "v1_posts": {
+      "$ref": "#/definitions/v1_posts"
+    },
+    "v1_users": {
+      "$ref": "#/definitions/v1_users"
+    },
+    "v1_users_posts": {
+      "$ref": "#/definitions/v1_users_posts"
+    },
+    "hashtag": {
+      "$ref": "#/definitions/hashtag"
+    },
+    "post": {
+      "$ref": "#/definitions/post"
+    },
+    "post_evaluation": {
+      "$ref": "#/definitions/post_evaluation"
+    },
+    "user": {
+      "$ref": "#/definitions/user"
+    }
+  },
+  "description": "TODO description",
+  "id": "application",
+  "links": [
+    {
+      "href": "http://coinnow.local",
+      "rel": "self"
+    }
+  ],
+  "title": "TODO app titele"
+}
