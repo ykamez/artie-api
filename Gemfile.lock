@@ -97,6 +97,9 @@ GEM
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+    devise_token_auth (0.1.42)
+      devise (> 3.5.2, <= 4.3)
+      rails (< 6)
     diff-lcs (1.3)
     diffy (3.2.0)
     down (4.1.1)
@@ -206,6 +209,7 @@ GEM
       pry (~> 0.10)
     public_suffix (3.0.1)
     rack (2.0.3)
+    rack-cors (1.0.2)
     rack-protection (2.0.0)
       rack
     rack-test (0.8.2)
@@ -364,6 +368,7 @@ DEPENDENCIES
   config
   database_rewinder
   devise
+  devise_token_auth
   factory_bot
   factory_bot_rails
   faraday
@@ -377,6 +382,7 @@ DEPENDENCIES
   prmd
   pry
   pry-byebug
+  rack-cors
   rails (~> 5.1.0)
   raven-transports-fluentd
   redis (~> 3)
