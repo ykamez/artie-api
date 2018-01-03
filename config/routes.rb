@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   }
   namespace :v1, defaults: { format: 'json' } do
     resources :users, only: [:index, :show]
+    resources :hashtags, only: [:index, :show] do
+      resources :posts, only: [:index]
+    end
+    resources :posts, only: [:index, :show, :create, :destroy]
+    resources :post_evaluations, only: [:create, :destroy]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
