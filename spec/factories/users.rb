@@ -37,5 +37,8 @@
 
 FactoryBot.define do
   factory :user do
+    display_name 'bob'
+    email 'hogehoge@example.com'
+    password 'letmein1234'
   end
 end

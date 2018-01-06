@@ -39,4 +39,9 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  # mailer setting
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # TODO: このコードは一時的なものなので、CSRF周りのことがわかったら可能であれば削除する。
+  # http://shindolog.hatenablog.com/entry/2014/09/01/013840 を参考に書いてある。
+  config.action_controller.allow_forgery_protection = false
 end
