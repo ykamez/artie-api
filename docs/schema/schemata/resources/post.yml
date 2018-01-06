@@ -20,7 +20,7 @@ definitions:
     description: images attached to post
     type: string
     example: 'aws:pig_coin.png'
-  post_at:
+  published_at:
     description: datetime when this post was posted.
     type: string
     example: date-time
@@ -35,7 +35,7 @@ definitions:
       - id
       - text
       - user
-      - post_at
+      - published_at
     properties:
       id:
         $ref: /schemata/post#/definitions/id
@@ -55,7 +55,7 @@ definitions:
         $ref: /schemata/post#/definitions/share
       post_evaluation:
         $ref: /schemata/post_evaluation#/definitions/post_evaluation
-      post_at:
-        $ref: /schemata/post#/definitions/post_at
+      published_at:
+        $ref: /schemata/post#/definitions/published_at
 
 id: schemata/post

@@ -132,7 +132,8 @@ HTTP/1.1 200 OK
     "text": "Pig Coin is awesome.",
     "user": {
       "id": 1,
-      "display_name": "kamexx",
+      "fullname": "Bob Marley",
+      "account_name": "bob",
       "image_data": "example",
       "total_like_count": 123,
       "total_dislike_count": 123
@@ -151,7 +152,7 @@ HTTP/1.1 200 OK
       "like": 1248,
       "dislike": 100
     },
-    "post_at": "date-time"
+    "published_at": "date-time"
   }
 ]
 ```
@@ -201,7 +202,8 @@ HTTP/1.1 200 OK
     "text": "Pig Coin is awesome.",
     "user": {
       "id": 1,
-      "display_name": "kamexx",
+      "fullname": "Bob Marley",
+      "account_name": "bob",
       "image_data": "example",
       "total_like_count": 123,
       "total_dislike_count": 123
@@ -220,7 +222,7 @@ HTTP/1.1 200 OK
       "like": 1248,
       "dislike": 100
     },
-    "post_at": "date-time"
+    "published_at": "date-time"
   }
 ]
 ```
@@ -262,7 +264,8 @@ HTTP/1.1 200 OK
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "display_name": "kamexx",
+    "fullname": "Bob Marley",
+    "account_name": "bob",
     "image_data": "example",
     "total_like_count": 123,
     "total_dislike_count": 123
@@ -281,7 +284,7 @@ HTTP/1.1 200 OK
     "like": 1248,
     "dislike": 100
   },
-  "post_at": "date-time"
+  "published_at": "date-time"
 }
 ```
 
@@ -305,6 +308,7 @@ POST /v1/posts/
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
+| **hashtags** | *array* |  | `[{"id":1,"name":"pig"}]` |
 | **image_data** | *array* |  | `["aws:pig_coin.png"]` |
 
 
@@ -317,6 +321,12 @@ $ curl -n -X POST http://coinnow.local/v1/posts/ \
   "user_id": 1234,
   "image_data": [
     "aws:pig_coin.png"
+  ],
+  "hashtags": [
+    {
+      "id": 1,
+      "name": "pig"
+    }
   ]
 }' \
   -H "Content-Type: application/json"
@@ -335,7 +345,8 @@ HTTP/1.1 201 Created
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "display_name": "kamexx",
+    "fullname": "Bob Marley",
+    "account_name": "bob",
     "image_data": "example",
     "total_like_count": 123,
     "total_dislike_count": 123
@@ -354,7 +365,7 @@ HTTP/1.1 201 Created
     "like": 1248,
     "dislike": 100
   },
-  "post_at": "date-time"
+  "published_at": "date-time"
 }
 ```
 
@@ -419,7 +430,8 @@ HTTP/1.1 200 OK
 [
   {
     "id": 1,
-    "display_name": "kamexx",
+    "fullname": "Bob Marley",
+    "account_name": "bob",
     "image_data": "example",
     "total_like_count": 123,
     "total_dislike_count": 123
@@ -452,7 +464,8 @@ HTTP/1.1 200 OK
 ```json
 {
   "id": 1,
-  "display_name": "kamexx",
+  "fullname": "Bob Marley",
+  "account_name": "bob",
   "image_data": "example",
   "total_like_count": 123,
   "total_dislike_count": 123
@@ -471,8 +484,9 @@ POST /v1/users/
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **display_name** | *string* | a display_name of user | `"kamexx"` |
+| **account_name** | *string* | display_name of user | `"bob"` |
 | **email** | *email* | user email address | `"username@example.com"` |
+| **fullname** | *string* | full name of user | `"Bob Marley"` |
 | **password** | *string* | user password | `"letmein1234"` |
 
 
@@ -488,7 +502,8 @@ POST /v1/users/
 ```bash
 $ curl -n -X POST http://coinnow.local/v1/users/ \
   -d '{
-  "display_name": "kamexx",
+  "fullname": "Bob Marley",
+  "account_name": "bob",
   "image_data": "example",
   "email": "username@example.com",
   "password": "letmein1234"
@@ -506,7 +521,8 @@ HTTP/1.1 201 Created
 ```json
 {
   "id": 1,
-  "display_name": "kamexx",
+  "fullname": "Bob Marley",
+  "account_name": "bob",
   "image_data": "example",
   "total_like_count": 123,
   "total_dislike_count": 123
@@ -525,8 +541,9 @@ PATCH /v1/users/{id}
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **display_name** | *string* | a display_name of user | `"kamexx"` |
+| **account_name** | *string* | display_name of user | `"bob"` |
 | **email** | *email* | user email address | `"username@example.com"` |
+| **fullname** | *string* | full name of user | `"Bob Marley"` |
 | **password** | *string* | user password | `"letmein1234"` |
 
 
@@ -542,7 +559,8 @@ PATCH /v1/users/{id}
 ```bash
 $ curl -n -X PATCH http://coinnow.local/v1/users/$ID \
   -d '{
-  "display_name": "kamexx",
+  "fullname": "Bob Marley",
+  "account_name": "bob",
   "image_data": "example",
   "email": "username@example.com",
   "password": "letmein1234"
@@ -560,7 +578,8 @@ HTTP/1.1 200 OK
 ```json
 {
   "id": 1,
-  "display_name": "kamexx",
+  "fullname": "Bob Marley",
+  "account_name": "bob",
   "image_data": "example",
   "total_like_count": 123,
   "total_dislike_count": 123
@@ -638,7 +657,8 @@ HTTP/1.1 200 OK
     "text": "Pig Coin is awesome.",
     "user": {
       "id": 1,
-      "display_name": "kamexx",
+      "fullname": "Bob Marley",
+      "account_name": "bob",
       "image_data": "example",
       "total_like_count": 123,
       "total_dislike_count": 123
@@ -657,7 +677,7 @@ HTTP/1.1 200 OK
       "like": 1248,
       "dislike": 100
     },
-    "post_at": "date-time"
+    "published_at": "date-time"
   }
 ]
 ```

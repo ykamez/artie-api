@@ -1,7 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-  t.string   "display_name",       null: false
+  t.string   "fullname",       null: false
+  t.string   "account_name",       null: false
   t.string   "icon_data",       null: false
   ## Database authenticatable
   t.string :email,              null: false, default: ""
