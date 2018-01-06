@@ -3,7 +3,7 @@ class V1::PostsController < ApplicationController
 
   def index
     posts = Post.all.limit(10)
-    render json: posts
+    render json: posts, each_serializer: ::V1::PostSerializer, include: '**'
   end
 
   def show

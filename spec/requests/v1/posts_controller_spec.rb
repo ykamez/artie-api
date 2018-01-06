@@ -32,7 +32,7 @@ RSpec.describe V1::PostsController, type: :request do
         end
       end
 
-      xcontext 'when post not exists' do
+      context 'when post not exists' do
         let(:params) { {} }
 
         it 'returns 200 response' do

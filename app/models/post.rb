@@ -18,4 +18,9 @@
 #
 
 class Post < ApplicationRecord
+  attr_accessor :user, :post_at
+
+  def user
+    User.find(user_id)
+  end
 end
