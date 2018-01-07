@@ -7,7 +7,6 @@
 #  id                     :integer          not null, primary key
 #  provider               :string(255)      default("email"), not null
 #  uid                    :string(255)      default(""), not null
-#  display_name           :string(255)      not null
 #  image_data             :string(255)      default(""), not null
 #  email                  :string(255)      not null
 #  tokens                 :text(65535)
@@ -24,6 +23,8 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string(255)
+#  fullname               :string(255)      not null
+#  account_name           :string(255)      not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
