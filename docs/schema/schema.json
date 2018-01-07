@@ -213,6 +213,12 @@
                 "items": {
                   "$ref": "#/definitions/post/definitions/image_data"
                 }
+              },
+              "hashtags": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/hashtag/definitions/hashtag"
+                }
               }
             }
           },
@@ -437,13 +443,17 @@
           "schema": {
             "type": "object",
             "required": [
-              "display_name",
+              "fullname",
+              "account_name",
               "email",
               "password"
             ],
             "properties": {
-              "display_name": {
-                "$ref": "#/definitions/user/definitions/display_name"
+              "fullname": {
+                "$ref": "#/definitions/user/definitions/fullname"
+              },
+              "account_name": {
+                "$ref": "#/definitions/user/definitions/account_name"
               },
               "image_data": {
                 "$ref": "#/definitions/user/definitions/image_data"
@@ -469,13 +479,17 @@
           "schema": {
             "type": "object",
             "required": [
-              "display_name",
+              "fullname",
+              "account_name",
               "email",
               "password"
             ],
             "properties": {
-              "display_name": {
-                "$ref": "#/definitions/user/definitions/display_name"
+              "fullname": {
+                "$ref": "#/definitions/user/definitions/fullname"
+              },
+              "account_name": {
+                "$ref": "#/definitions/user/definitions/account_name"
               },
               "image_data": {
                 "$ref": "#/definitions/user/definitions/image_data"
@@ -891,7 +905,7 @@
           "type": "string",
           "example": "aws:pig_coin.png"
         },
-        "post_at": {
+        "published_at": {
           "description": "datetime when this post was posted.",
           "type": "string",
           "example": "date-time"
@@ -907,7 +921,7 @@
             "id",
             "text",
             "user",
-            "post_at"
+            "published_at"
           ],
           "properties": {
             "id": {
@@ -937,8 +951,8 @@
             "post_evaluation": {
               "$ref": "#/definitions/post_evaluation/definitions/post_evaluation"
             },
-            "post_at": {
-              "$ref": "#/definitions/post/definitions/post_at"
+            "published_at": {
+              "$ref": "#/definitions/post/definitions/published_at"
             }
           }
         }
@@ -997,10 +1011,15 @@
           "example": 1,
           "readOnly": true
         },
-        "display_name": {
-          "description": "a display_name of user",
+        "fullname": {
+          "description": "full name of user",
           "type": "string",
-          "example": "kamexx"
+          "example": "Bob Marley"
+        },
+        "account_name": {
+          "description": "display_name of user",
+          "type": "string",
+          "example": "bob"
         },
         "image_data": {
           "description": "user's icon",
@@ -1031,15 +1050,19 @@
           "type": "object",
           "required": [
             "id",
-            "display_name",
+            "fullname",
+            "account_name",
             "image_data"
           ],
           "properties": {
             "id": {
               "$ref": "#/definitions/user/definitions/id"
             },
-            "display_name": {
-              "$ref": "#/definitions/user/definitions/display_name"
+            "fullname": {
+              "$ref": "#/definitions/user/definitions/fullname"
+            },
+            "account_name": {
+              "$ref": "#/definitions/user/definitions/account_name"
             },
             "image_data": {
               "$ref": "#/definitions/user/definitions/image_data"

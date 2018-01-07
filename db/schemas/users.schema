@@ -35,8 +35,8 @@ create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=u
   # t.datetime :locked_at
 
   ## User Info
-  # t.string :name, :null => false
-  t.string :display_name, :null => false
+  t.string   "fullname",       null: false
+  t.string   "account_name",       null: false
   t.string :image_data, :null => false, :default => ""
   t.string :email, :null => false
 
