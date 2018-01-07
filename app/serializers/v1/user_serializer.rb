@@ -1,5 +1,5 @@
 module V1
   class UserSerializer < ActiveModel::Serializer
-    attributes :id, :display_name, :image_data
+    attributes :id, :account_name, :fullname, :image_data
   end
 end
