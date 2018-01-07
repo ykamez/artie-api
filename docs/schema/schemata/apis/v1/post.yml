@@ -73,6 +73,10 @@ links:
         type: array
         items:
           $ref: /schemata/post#/definitions/image_data
+      hashtags:
+        type: array
+        items:
+          $ref: /schemata/hashtag#/definitions/hashtag
   targetSchema:
     $ref: /schemata/post#/definitions/post
 
