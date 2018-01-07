@@ -13,7 +13,7 @@
   - <a href="#resource-v1_posts">post</a>
     - <a href="#link-GET-v1_posts-/v1/posts">GET /v1/posts</a>
     - <a href="#link-GET-v1_posts-/v1/posts/{id}">GET /v1/posts/{id}</a>
-    - <a href="#link-POST-v1_posts-/v1/posts/">POST /v1/posts/</a>
+    - <a href="#link-POST-v1_posts-/v1/posts">POST /v1/posts</a>
     - <a href="#link-DELETE-v1_posts-/v1/posts/{id}">DELETE /v1/posts/{id}</a>
   - <a href="#resource-v1_posts_reaction">reaction</a>
     - <a href="#link-POST-v1_posts_reaction-/v1/posts/{post_id}/like">POST /v1/posts/{post_id}/like</a>
@@ -431,12 +431,12 @@ HTTP/1.1 200 OK
 }
 ```
 
-### <a name="link-POST-v1_posts-/v1/posts/">post create</a>
+### <a name="link-POST-v1_posts-/v1/posts">post create</a>
 
 create post
 
 ```
-POST /v1/posts/
+POST /v1/posts
 ```
 
 #### Required Parameters
@@ -458,7 +458,7 @@ POST /v1/posts/
 #### Curl Example
 
 ```bash
-$ curl -n -X POST http://coinnow.local/v1/posts/ \
+$ curl -n -X POST http://coinnow.local/v1/posts \
   -d '{
   "text": "Pig Coin is awesome.",
   "user_id": 1234,

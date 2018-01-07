@@ -54,7 +54,7 @@ links:
 
 - title: create
   description: create post
-  href: /v1/posts/
+  href: /v1/posts
   method: POST
   rel: create
   schema:
