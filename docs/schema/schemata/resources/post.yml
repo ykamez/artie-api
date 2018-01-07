@@ -24,10 +24,18 @@ definitions:
     description: datetime when this post was posted.
     type: string
     format: date-time
-  share:
-    description: post share count
+  likes_count:
+    description: post likes count
     type: integer
-    example: 123
+    example: 100
+  dislikes_count:
+    description: post dislikes count
+    type: integer
+    example: 50
+  shares_count:
+    description: post shares count
+    type: integer
+    example: 50
 
   post:
     type: object
@@ -36,6 +44,9 @@ definitions:
       - text
       - user
       - published_at
+      - likes_count
+      - dislikes_count
+      - shares_count
     properties:
       id:
         $ref: /schemata/post#/definitions/id
@@ -51,12 +62,17 @@ definitions:
         type: array
         items:
           $ref: /schemata/hashtag#/definitions/hashtag
-      share:
-        $ref: /schemata/post#/definitions/share
       post_evaluation:
         $ref: /schemata/post_evaluation#/definitions/post_evaluation
       published_at:
         $ref: /schemata/post#/definitions/published_at
+      likes_count:
+        $ref: /schemata/post#/definitions/likes_count
+      dislikes_count:
+        $ref: /schemata/post#/definitions/dislikes_count
+      shares_count:
+        $ref: /schemata/post#/definitions/shares_count
+
   post_page:
     type: object
     required:

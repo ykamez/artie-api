@@ -93,3 +93,6 @@ gem 'devise_token_auth'
 
 # クロスドメイン対策
 gem 'rack-cors'
+
+# count like, dislike,etc.
+gem 'counter_culture'

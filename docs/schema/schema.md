@@ -186,12 +186,14 @@ HTTP/1.1 200 OK
           "name": "BTC"
         }
       ],
-      "share": 123,
       "post_evaluation": {
         "like": 1248,
         "dislike": 100
       },
-      "published_at": "2015-01-01T12:00:00Z"
+      "published_at": "2015-01-01T12:00:00Z",
+      "likes_count": 100,
+      "dislikes_count": 50,
+      "shares_count": 50
     }
   ],
   "paging": {
@@ -345,12 +347,14 @@ HTTP/1.1 200 OK
           "name": "BTC"
         }
       ],
-      "share": 123,
       "post_evaluation": {
         "like": 1248,
         "dislike": 100
       },
-      "published_at": "2015-01-01T12:00:00Z"
+      "published_at": "2015-01-01T12:00:00Z",
+      "likes_count": 100,
+      "dislikes_count": 50,
+      "shares_count": 50
     }
   ],
   "paging": {
@@ -415,12 +419,14 @@ HTTP/1.1 200 OK
           "name": "BTC"
         }
       ],
-      "share": 123,
       "post_evaluation": {
         "like": 1248,
         "dislike": 100
       },
-      "published_at": "2015-01-01T12:00:00Z"
+      "published_at": "2015-01-01T12:00:00Z",
+      "likes_count": 100,
+      "dislikes_count": 50,
+      "shares_count": 50
     }
   ],
   "paging": {
@@ -503,12 +509,14 @@ HTTP/1.1 201 Created
       "name": "BTC"
     }
   ],
-  "share": 123,
   "post_evaluation": {
     "like": 1248,
     "dislike": 100
   },
-  "published_at": "2015-01-01T12:00:00Z"
+  "published_at": "2015-01-01T12:00:00Z",
+  "likes_count": 100,
+  "dislikes_count": 50,
+  "shares_count": 50
 }
 ```
 
@@ -589,12 +597,14 @@ HTTP/1.1 201 Created
       "name": "BTC"
     }
   ],
-  "share": 123,
   "post_evaluation": {
     "like": 1248,
     "dislike": 100
   },
-  "published_at": "2015-01-01T12:00:00Z"
+  "published_at": "2015-01-01T12:00:00Z",
+  "likes_count": 100,
+  "dislikes_count": 50,
+  "shares_count": 50
 }
 ```
 
@@ -642,12 +652,14 @@ HTTP/1.1 201 Created
       "name": "BTC"
     }
   ],
-  "share": 123,
   "post_evaluation": {
     "like": 1248,
     "dislike": 100
   },
-  "published_at": "2015-01-01T12:00:00Z"
+  "published_at": "2015-01-01T12:00:00Z",
+  "likes_count": 100,
+  "dislikes_count": 50,
+  "shares_count": 50
 }
 ```
 
@@ -695,12 +707,14 @@ HTTP/1.1 201 Created
       "name": "BTC"
     }
   ],
-  "share": 123,
   "post_evaluation": {
     "like": 1248,
     "dislike": 100
   },
-  "published_at": "2015-01-01T12:00:00Z"
+  "published_at": "2015-01-01T12:00:00Z",
+  "likes_count": 100,
+  "dislikes_count": 50,
+  "shares_count": 50
 }
 ```
 
@@ -756,12 +770,14 @@ HTTP/1.1 200 OK
           "name": "BTC"
         }
       ],
-      "share": 123,
       "post_evaluation": {
         "like": 1248,
         "dislike": 100
       },
-      "published_at": "2015-01-01T12:00:00Z"
+      "published_at": "2015-01-01T12:00:00Z",
+      "likes_count": 100,
+      "dislikes_count": 50,
+      "shares_count": 50
     }
   ],
   "paging": {
@@ -1107,12 +1123,14 @@ HTTP/1.1 200 OK
           "name": "BTC"
         }
       ],
-      "share": 123,
       "post_evaluation": {
         "like": 1248,
         "dislike": 100
       },
-      "published_at": "2015-01-01T12:00:00Z"
+      "published_at": "2015-01-01T12:00:00Z",
+      "likes_count": 100,
+      "dislikes_count": 50,
+      "shares_count": 50
     }
   ],
   "paging": {
@@ -1342,12 +1360,14 @@ HTTP/1.1 200 OK
           "name": "BTC"
         }
       ],
-      "share": 123,
       "post_evaluation": {
         "like": 1248,
         "dislike": 100
       },
-      "published_at": "2015-01-01T12:00:00Z"
+      "published_at": "2015-01-01T12:00:00Z",
+      "likes_count": 100,
+      "dislikes_count": 50,
+      "shares_count": 50
     }
   ],
   "paging": {

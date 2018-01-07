@@ -49,6 +49,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    after_commit_action (1.1.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
     annotate (2.7.2)
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
@@ -86,6 +89,10 @@ GEM
       deep_merge (~> 1.1.1)
       dry-validation (>= 0.10.4)
     connection_pool (2.2.1)
+    counter_culture (1.9.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      after_commit_action (~> 1.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.3)
@@ -366,6 +373,7 @@ DEPENDENCIES
   committee
   committee-rails
   config
+  counter_culture
   database_rewinder
   devise
   devise_token_auth

@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['post_id'], name: 'index_post_evaluations_on_post_id'
+    t.index ['user_id', 'post_id'], name: 'index_post_evaluations_on_user_id_and_post_id', unique: true
     t.index ['user_id'], name: 'index_post_evaluations_on_user_id'
   end
 
@@ -48,6 +49,9 @@ ActiveRecord::Schema.define(version: 0) do
   create_table 'posts', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.bigint 'user_id', null: false
     t.string 'text', null: false
+    t.integer 'likes_count', default: 0, null: false
+    t.integer 'dislikes_count', default: 0, null: false
+    t.integer 'shares_count', default: 0, null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['user_id'], name: 'index_posts_on_user_id'

@@ -1021,10 +1021,20 @@
           "type": "string",
           "format": "date-time"
         },
-        "share": {
-          "description": "post share count",
+        "likes_count": {
+          "description": "post likes count",
           "type": "integer",
-          "example": 123
+          "example": 100
+        },
+        "dislikes_count": {
+          "description": "post dislikes count",
+          "type": "integer",
+          "example": 50
+        },
+        "shares_count": {
+          "description": "post shares count",
+          "type": "integer",
+          "example": 50
         },
         "post": {
           "type": "object",
@@ -1032,7 +1042,10 @@
             "id",
             "text",
             "user",
-            "published_at"
+            "published_at",
+            "likes_count",
+            "dislikes_count",
+            "shares_count"
           ],
           "properties": {
             "id": {
@@ -1056,14 +1069,20 @@
                 "$ref": "#/definitions/hashtag/definitions/hashtag"
               }
             },
-            "share": {
-              "$ref": "#/definitions/post/definitions/share"
-            },
             "post_evaluation": {
               "$ref": "#/definitions/post_evaluation/definitions/post_evaluation"
             },
             "published_at": {
               "$ref": "#/definitions/post/definitions/published_at"
+            },
+            "likes_count": {
+              "$ref": "#/definitions/post/definitions/likes_count"
+            },
+            "dislikes_count": {
+              "$ref": "#/definitions/post/definitions/dislikes_count"
+            },
+            "shares_count": {
+              "$ref": "#/definitions/post/definitions/shares_count"
             }
           }
         },
