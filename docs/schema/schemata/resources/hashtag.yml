@@ -16,6 +16,17 @@ definitions:
     description: hashtag's name
     example: "pig"
     type: string
+  breakdown:
+    type: object
+    required:
+      - hashtag
+      - posts_count
+    properties:
+      hashtag:
+        $ref: /schemata/hashtag#/definitions/hashtag
+      posts_count:
+        type: integer
+        example: 123
   hashtag:
     type: object
     required:

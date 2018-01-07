@@ -89,6 +89,22 @@
               "$ref": "#/definitions/post/definitions/post"
             }
           }
+        },
+        {
+          "title": "search_result",
+          "description": "get a hashtag's search_result",
+          "href": "/v1/hashtags/search_result",
+          "method": "get",
+          "rel": "instances",
+          "schema": {
+            "type": "string"
+          },
+          "targetSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/hashtag/definitions/hashtag"
+            }
+          }
         }
       ]
     },
@@ -223,6 +239,157 @@
         }
       ]
     },
+    "v1_posts_reaction": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "reaction",
+      "description": "reaction apis",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
+        {
+          "title": "like",
+          "description": "like a post",
+          "href": "/v1/posts/{post_id}/like",
+          "method": "post",
+          "rel": "create",
+          "schema": {
+            "type": "null"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/post/definitions/post"
+          }
+        },
+        {
+          "title": "dislike",
+          "description": "dislike a post",
+          "href": "/v1/posts/{post_id}/dislike",
+          "method": "post",
+          "rel": "create",
+          "schema": {
+            "type": "null"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/post/definitions/post"
+          }
+        },
+        {
+          "title": "share",
+          "description": "share a post",
+          "href": "/v1/posts/{post_id}/share",
+          "method": "post",
+          "rel": "create",
+          "schema": {
+            "type": "null"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/post/definitions/post"
+          }
+        }
+      ]
+    },
+    "v1_posts_replies": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "reply",
+      "description": "get reply apis",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
+        {
+          "title": "reply",
+          "description": "get a post's replies",
+          "href": "/v1/posts/{post_id}/replies",
+          "method": "get",
+          "rel": "instancese",
+          "schema": {
+            "type": "null"
+          },
+          "targetSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/post/definitions/post"
+            }
+          }
+        }
+      ]
+    },
+    "v1_posts_search_result": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "search_result",
+      "description": "get search_result apis",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
+        {
+          "title": "search_result",
+          "description": "get a post's search_result",
+          "href": "/v1/posts/search_result",
+          "method": "get",
+          "rel": "instances",
+          "schema": {
+            "description": "search query for posts",
+            "type": "string"
+          },
+          "targetSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/post/definitions/post"
+            }
+          }
+        }
+      ]
+    },
+    "v1_search": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "search",
+      "description": "search apis",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
+        {
+          "title": "search",
+          "description": "Show a list of users and hashtags",
+          "href": "/v1/search",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "type": "null"
+          },
+          "targetSchema": {
+            "type": "object",
+            "required": [
+              "users",
+              "hashtags"
+            ],
+            "properties": {
+              "users": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/user/definitions/user"
+                }
+              },
+              "hashtags": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/hashtag/definitions/hashtag"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "v1_users": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "user",
@@ -344,10 +511,10 @@
         }
       ]
     },
-    "v1_users_posts": {
+    "v1_users_feed": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "post",
-      "description": "post apis",
+      "title": "feed",
+      "description": "user feed apis",
       "stability": "prototype",
       "strictProperties": true,
       "type": [
@@ -356,10 +523,10 @@
       "links": [
         {
           "title": "index",
-          "description": "Show a list of post.",
-          "href": "/v1/users/{user_id}/posts",
+          "description": "Show a user's feed",
+          "href": "/v1/{user_id}/feed",
           "method": "GET",
-          "rel": "show",
+          "rel": "instances",
           "schema": {
             "type": "object",
             "properties": {
@@ -389,6 +556,261 @@
         }
       ]
     },
+    "v1_users_follow_follwers": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "follow and followers",
+      "description": "follow followers apis",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
+        {
+          "title": "a user's following users",
+          "description": "Show a list of a following users",
+          "href": "/v1/{user_id}/users/following",
+          "method": "GET",
+          "rel": "show",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "targetSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/user/definitions/user"
+            }
+          }
+        },
+        {
+          "title": "a user's following users",
+          "description": "Show a list of a followers users",
+          "href": "/v1/{user_id}/users/followers",
+          "method": "GET",
+          "rel": "show",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "targetSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/user/definitions/user"
+            }
+          }
+        }
+      ]
+    },
+    "v1_users_hashtag": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "user hashtag",
+      "description": "user hashtag apis",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
+        {
+          "title": "user's watching hashtags",
+          "description": "Show a list of a user's watching hashtags.",
+          "href": "/v1/{user_id}/hashtags/watching",
+          "method": "GET",
+          "rel": "show",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "targetSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/hashtag/definitions/hashtag"
+            }
+          }
+        }
+      ]
+    },
+    "v1_users_posts": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "post",
+      "description": "post apis",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
+        {
+          "title": "user's posts",
+          "description": "Show a list of a user's posts",
+          "href": "/v1/{user_id}/posts",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "targetSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/post/definitions/post"
+            }
+          }
+        },
+        {
+          "title": "breakdown of user's posts",
+          "description": "Show a breakdown of user's posts",
+          "href": "/v1/{user_id}/posts/hashtag_breakdown",
+          "method": "GET",
+          "rel": "show",
+          "schema": {
+            "type": "null"
+          },
+          "targetSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/hashtag/definitions/breakdown"
+            }
+          }
+        }
+      ]
+    },
+    "v1_users_search_result": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "search_result",
+      "description": "get search_result apis",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
+        {
+          "title": "search_result",
+          "description": "get a user's search_result",
+          "href": "/v1/users/search_result",
+          "method": "get",
+          "rel": "instances",
+          "schema": {
+            "description": "search query for user",
+            "type": "string"
+          },
+          "targetSchema": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/user/definitions/user"
+            }
+          }
+        }
+      ]
+    },
+    "v1_users_user_evaluation": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "user evaluation",
+      "description": "user evaluation apis",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
+        {
+          "title": "user evaluation",
+          "description": "user evaluation",
+          "href": "/v1/{user_id}/user_evaluation",
+          "method": "GET",
+          "rel": "show",
+          "schema": {
+            "type": "null"
+          },
+          "targetSchema": {
+            "type": "object",
+            "required": [
+              "total_count_likes",
+              "total_count_dislikes",
+              "total_count_shares"
+            ],
+            "properties": {
+              "total_count_likes": {
+                "$ref": "#/definitions/post_evaluation/definitions/like"
+              },
+              "total_count_dislikes": {
+                "$ref": "#/definitions/post_evaluation/definitions/dislike"
+              },
+              "total_count_shares": {
+                "type": "integer",
+                "example": 1234
+              }
+            }
+          }
+        }
+      ]
+    },
     "hashtag": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "Hashtag",
@@ -409,6 +831,22 @@
           "description": "hashtag's name",
           "example": "pig",
           "type": "string"
+        },
+        "breakdown": {
+          "type": "object",
+          "required": [
+            "hashtag",
+            "posts_count"
+          ],
+          "properties": {
+            "hashtag": {
+              "$ref": "#/definitions/hashtag/definitions/hashtag"
+            },
+            "posts_count": {
+              "type": "integer",
+              "example": 123
+            }
+          }
         },
         "hashtag": {
           "type": "object",
@@ -624,11 +1062,38 @@
     "v1_posts": {
       "$ref": "#/definitions/v1_posts"
     },
+    "v1_posts_reaction": {
+      "$ref": "#/definitions/v1_posts_reaction"
+    },
+    "v1_posts_replies": {
+      "$ref": "#/definitions/v1_posts_replies"
+    },
+    "v1_posts_search_result": {
+      "$ref": "#/definitions/v1_posts_search_result"
+    },
+    "v1_search": {
+      "$ref": "#/definitions/v1_search"
+    },
     "v1_users": {
       "$ref": "#/definitions/v1_users"
     },
+    "v1_users_feed": {
+      "$ref": "#/definitions/v1_users_feed"
+    },
+    "v1_users_follow_follwers": {
+      "$ref": "#/definitions/v1_users_follow_follwers"
+    },
+    "v1_users_hashtag": {
+      "$ref": "#/definitions/v1_users_hashtag"
+    },
     "v1_users_posts": {
       "$ref": "#/definitions/v1_users_posts"
+    },
+    "v1_users_search_result": {
+      "$ref": "#/definitions/v1_users_search_result"
+    },
+    "v1_users_user_evaluation": {
+      "$ref": "#/definitions/v1_users_user_evaluation"
     },
     "hashtag": {
       "$ref": "#/definitions/hashtag"

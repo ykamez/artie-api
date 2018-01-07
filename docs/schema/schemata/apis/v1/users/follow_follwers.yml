@@ -1,16 +1,16 @@
 ---
 "$schema": http://json-schema.org/draft-04/hyper-schema
-title: hashtag
-description: hashtag apis
+title: follow and followers
+description: follow followers apis
 stability: prototype
 strictProperties: true
 type:
 - object
 
 links:
-- title: index
-  description: Show a list of hashtag.
-  href: /v1/hashtags
+- title: a user's following users
+  description: Show a list of a following users
+  href: /v1/{user_id}/users/following
   method: GET
   rel: show
   schema:
@@ -27,11 +27,10 @@ links:
   targetSchema:
     type: array
     items:
-      $ref: /schemata/hashtag#/definitions/hashtag
-
-- title: show
-  description: Show a specific hashtag's posts
-  href: /v1/hashtags/{hashtag_id}/posts
+      $ref: /schemata/user#/definitions/user
+- title: a user's following users
+  description: Show a list of a followers users
+  href: /v1/{user_id}/users/followers
   method: GET
   rel: show
   schema:
@@ -48,18 +47,6 @@ links:
   targetSchema:
     type: array
     items:
-      $ref: /schemata/post#/definitions/post
+      $ref: /schemata/user#/definitions/user
 
-- title: search_result
-  description: get a hashtag's search_result
-  href: /v1/hashtags/search_result
-  method: get
-  rel: instances
-  schema:
-    type: string
-  targetSchema:
-    type: array
-    items:
-      $ref: /schemata/hashtag#/definitions/hashtag
-
-id: schemata/v1_hashtags
+id: schemata/v1_users_follow_follwers

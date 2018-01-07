@@ -1,0 +1,32 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: user hashtag
+description: user hashtag apis
+stability: prototype
+strictProperties: true
+type:
+- object
+
+links:
+- title: user's watching hashtags
+  description: Show a list of a user's watching hashtags.
+  href: /v1/{user_id}/hashtags/watching
+  method: GET
+  rel: show
+  schema:
+    type: object
+    properties:
+      limit:
+        description: limit
+        example: 10
+        type: integer
+      cursor:
+        anyOf:
+          - $ref: /schemata#/datetime
+          - type: "null"
+  targetSchema:
+    type: array
+    items:
+      $ref: /schemata/hashtag#/definitions/hashtag
+
+id: schemata/v1_users_hashtag

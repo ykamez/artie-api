@@ -1,16 +1,16 @@
 ---
 "$schema": http://json-schema.org/draft-04/hyper-schema
-title: post
-description: post apis
+title: feed
+description: user feed apis
 stability: prototype
 strictProperties: true
 type:
 - object
 
 links:
-- title: user's posts
-  description: Show a list of a user's posts
-  href: /v1/{user_id}/posts
+- title: index
+  description: Show a user's feed
+  href: /v1/{user_id}/feed
   method: GET
   rel: instances
   schema:
@@ -29,16 +29,4 @@ links:
     items:
       $ref: /schemata/post#/definitions/post
 
-- title: breakdown of user's posts
-  description: Show a breakdown of user's posts
-  href: /v1/{user_id}/posts/hashtag_breakdown
-  method: GET
-  rel: show
-  schema:
-    type: "null"
-  targetSchema:
-    type: array
-    items:
-      $ref: /schemata/hashtag#/definitions/breakdown
-
-id: schemata/v1_users_posts
+id: schemata/v1_users_feed
