@@ -31,15 +31,13 @@ links:
           - $ref: /schemata#/datetime
           - type: "null"
   targetSchema:
-    type: array
-    items:
-      $ref: /schemata/post#/definitions/post
+    $ref: /schemata/post#/definitions/post_page
 
-- title: show
-  description: Show a specific post
+- title: 投稿のモーダル表示
+  description: 投稿のモーダル表示用に使う。リプライ情報を追加も合わせて取得する。
   href: /v1/posts/{id}
   method: GET
-  rel: show
+  rel: instancese
   schema:
     type: object
     properties:
@@ -52,7 +50,7 @@ links:
           - $ref: /schemata#/datetime
           - type: "null"
   targetSchema:
-    $ref: /schemata/post#/definitions/post
+    $ref: /schemata/post#/definitions/post_page
 
 - title: create
   description: create post

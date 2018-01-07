@@ -1,0 +1,28 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: paging
+description: Paging Resource
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  cursor:
+    anyOf:
+     - $ref: /schemata#/datetime
+     - type: "null"
+  has_next:
+    type: boolean
+
+  paging:
+    type: object
+    required:
+      - cursor
+      - has_next
+    properties:
+      cursor:
+        $ref: /schemata/paging#/definitions/cursor
+      has_next:
+        $ref: /schemata/paging#/definitions/has_next
+
+id: schemata/paging

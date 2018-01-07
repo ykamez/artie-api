@@ -23,7 +23,7 @@ definitions:
   published_at:
     description: datetime when this post was posted.
     type: string
-    example: date-time
+    format: date-time
   share:
     description: post share count
     type: integer
@@ -57,5 +57,19 @@ definitions:
         $ref: /schemata/post_evaluation#/definitions/post_evaluation
       published_at:
         $ref: /schemata/post#/definitions/published_at
+  post_page:
+    type: object
+    required:
+      - data
+      - paging
+    properties:
+      data:
+        type: array
+        items:
+          $ref: /schemata/post#/definitions/post
+      paging:
+        $ref: /schemata/paging#/definitions/paging
+      message:
+        $ref: /schemata#/mesasge
 
 id: schemata/post

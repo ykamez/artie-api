@@ -1,7 +1,7 @@
 ---
 "$schema": http://json-schema.org/draft-04/hyper-schema
-title: post
-description: post apis
+title: 特定ユーザーの投稿
+description: 特定ユーザーの投稿に関するAPI
 stability: prototype
 strictProperties: true
 type:
@@ -25,11 +25,9 @@ links:
           - $ref: /schemata#/datetime
           - type: "null"
   targetSchema:
-    type: array
-    items:
-      $ref: /schemata/post#/definitions/post
+    $ref: /schemata/post#/definitions/post_page
 
-- title: breakdown of user's posts
+- title: あるユーザーの投稿の内訳
   description: Show a breakdown of user's posts
   href: /v1/{user_id}/posts/hashtag_breakdown
   method: GET
@@ -37,8 +35,13 @@ links:
   schema:
     type: "null"
   targetSchema:
-    type: array
-    items:
-      $ref: /schemata/hashtag#/definitions/breakdown
+    type: object
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        items:
+          $ref: /schemata/hashtag#/definitions/breakdown
 
 id: schemata/v1_users_posts

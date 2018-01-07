@@ -25,8 +25,14 @@ links:
           - $ref: /schemata#/datetime
           - type: "null"
   targetSchema:
-    type: array
-    items:
-      $ref: /schemata/hashtag#/definitions/hashtag
+    type: object
+    required:
+      - data
+    properties:
+      data:
+        type: array
+        items:
+          $ref: /schemata/hashtag#/definitions/hashtag
+
 
 id: schemata/v1_users_hashtag

@@ -18,9 +18,19 @@ links:
     type: object
     properties: {}
   targetSchema:
-    type: array
-    items:
-      $ref: /schemata/user#/definitions/user
+    type: object
+    required:
+      - data
+      - paging
+    properties:
+      data:
+        type: array
+        items:
+          $ref: /schemata/user#/definitions/user
+      paging:
+        $ref: /schemata/paging#/definitions/paging
+      message:
+        $ref: /schemata#/mesasge
 
 - title: show
   description: Show a specific user

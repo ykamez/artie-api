@@ -11,7 +11,7 @@ links:
 - title: like
   description: like a post
   href: /v1/posts/{post_id}/like
-  method: post
+  method: POST
   rel: create
   schema:
     type: "null"
@@ -20,7 +20,7 @@ links:
 - title: dislike
   description: dislike a post
   href: /v1/posts/{post_id}/dislike
-  method: post
+  method: POST
   rel: create
   schema:
     type: "null"
@@ -30,7 +30,7 @@ links:
 - title: share
   description: share a post
   href: /v1/posts/{post_id}/share
-  method: post
+  method: POST
   rel: create
   schema:
     type: "null"

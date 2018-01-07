@@ -14,6 +14,11 @@
       "type": "string",
       "format": "date-time"
     },
+    "mesasge": {
+      "description": "response message",
+      "type": "string",
+      "example": "success!!"
+    },
     "v1_hashtags": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "hashtag",
@@ -51,9 +56,24 @@
             }
           },
           "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/hashtag/definitions/hashtag"
+            "type": "object",
+            "required": [
+              "data",
+              "paging"
+            ],
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/hashtag/definitions/hashtag"
+                }
+              },
+              "paging": {
+                "$ref": "#/definitions/paging/definitions/paging"
+              },
+              "message": {
+                "$ref": "#/definitions/mesasge"
+              }
             }
           }
         },
@@ -84,25 +104,73 @@
             }
           },
           "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/post/definitions/post"
-            }
+            "$ref": "#/definitions/post/definitions/post_page"
           }
         },
         {
           "title": "search_result",
           "description": "get a hashtag's search_result",
           "href": "/v1/hashtags/search_result",
-          "method": "get",
+          "method": "GET",
           "rel": "instances",
           "schema": {
             "type": "string"
           },
           "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/hashtag/definitions/hashtag"
+            "type": "object",
+            "required": [
+              "data",
+              "paging"
+            ],
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/hashtag/definitions/hashtag"
+                }
+              },
+              "paging": {
+                "$ref": "#/definitions/paging/definitions/paging"
+              },
+              "message": {
+                "$ref": "#/definitions/mesasge"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "v1_hashtags_trends": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "トレンド仮想通貨",
+      "description": "トレンド仮想通貨に関するAPI",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
+        {
+          "title": "トレンド仮想通貨",
+          "description": "直近一時間で投稿数が多かった仮想通貨の名前、投稿数、人数を返す。",
+          "href": "/v1/hashtags/trends",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "type": "null"
+          },
+          "targetSchema": {
+            "type": "object",
+            "required": [
+              "data"
+            ],
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/hashtag/definitions/trend"
+                }
+              }
             }
           }
         }
@@ -153,18 +221,15 @@
             }
           },
           "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/post/definitions/post"
-            }
+            "$ref": "#/definitions/post/definitions/post_page"
           }
         },
         {
-          "title": "show",
-          "description": "Show a specific post",
+          "title": "投稿のモーダル表示",
+          "description": "投稿のモーダル表示用に使う。リプライ情報を追加も合わせて取得する。",
           "href": "/v1/posts/{id}",
           "method": "GET",
-          "rel": "show",
+          "rel": "instancese",
           "schema": {
             "type": "object",
             "properties": {
@@ -186,7 +251,7 @@
             }
           },
           "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post"
+            "$ref": "#/definitions/post/definitions/post_page"
           }
         },
         {
@@ -259,7 +324,7 @@
           "title": "like",
           "description": "like a post",
           "href": "/v1/posts/{post_id}/like",
-          "method": "post",
+          "method": "POST",
           "rel": "create",
           "schema": {
             "type": "null"
@@ -272,7 +337,7 @@
           "title": "dislike",
           "description": "dislike a post",
           "href": "/v1/posts/{post_id}/dislike",
-          "method": "post",
+          "method": "POST",
           "rel": "create",
           "schema": {
             "type": "null"
@@ -285,41 +350,13 @@
           "title": "share",
           "description": "share a post",
           "href": "/v1/posts/{post_id}/share",
-          "method": "post",
+          "method": "POST",
           "rel": "create",
           "schema": {
             "type": "null"
           },
           "targetSchema": {
             "$ref": "#/definitions/post/definitions/post"
-          }
-        }
-      ]
-    },
-    "v1_posts_replies": {
-      "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "reply",
-      "description": "get reply apis",
-      "stability": "prototype",
-      "strictProperties": true,
-      "type": [
-        "object"
-      ],
-      "links": [
-        {
-          "title": "reply",
-          "description": "get a post's replies",
-          "href": "/v1/posts/{post_id}/replies",
-          "method": "get",
-          "rel": "instancese",
-          "schema": {
-            "type": "null"
-          },
-          "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/post/definitions/post"
-            }
           }
         }
       ]
@@ -338,17 +375,14 @@
           "title": "search_result",
           "description": "get a post's search_result",
           "href": "/v1/posts/search_result",
-          "method": "get",
+          "method": "GET",
           "rel": "instances",
           "schema": {
             "description": "search query for posts",
             "type": "string"
           },
           "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/post/definitions/post"
-            }
+            "$ref": "#/definitions/post/definitions/post_page"
           }
         }
       ]
@@ -418,9 +452,24 @@
             }
           },
           "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/user/definitions/user"
+            "type": "object",
+            "required": [
+              "data",
+              "paging"
+            ],
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/user/definitions/user"
+                }
+              },
+              "paging": {
+                "$ref": "#/definitions/paging/definitions/paging"
+              },
+              "message": {
+                "$ref": "#/definitions/mesasge"
+              }
             }
           }
         },
@@ -562,10 +611,7 @@
             }
           },
           "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/post/definitions/post"
-            }
+            "$ref": "#/definitions/post/definitions/post_page"
           }
         }
       ]
@@ -607,10 +653,7 @@
             }
           },
           "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/user/definitions/user"
-            }
+            "$ref": "#/definitions/user/definitions/user_page"
           }
         },
         {
@@ -640,10 +683,7 @@
             }
           },
           "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/user/definitions/user"
-            }
+            "$ref": "#/definitions/user/definitions/user_page"
           }
         }
       ]
@@ -685,9 +725,17 @@
             }
           },
           "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/hashtag/definitions/hashtag"
+            "type": "object",
+            "required": [
+              "data"
+            ],
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/hashtag/definitions/hashtag"
+                }
+              }
             }
           }
         }
@@ -695,8 +743,8 @@
     },
     "v1_users_posts": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "post",
-      "description": "post apis",
+      "title": "特定ユーザーの投稿",
+      "description": "特定ユーザーの投稿に関するAPI",
       "stability": "prototype",
       "strictProperties": true,
       "type": [
@@ -730,14 +778,11 @@
             }
           },
           "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/post/definitions/post"
-            }
+            "$ref": "#/definitions/post/definitions/post_page"
           }
         },
         {
-          "title": "breakdown of user's posts",
+          "title": "あるユーザーの投稿の内訳",
           "description": "Show a breakdown of user's posts",
           "href": "/v1/{user_id}/posts/hashtag_breakdown",
           "method": "GET",
@@ -746,9 +791,17 @@
             "type": "null"
           },
           "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/hashtag/definitions/breakdown"
+            "type": "object",
+            "required": [
+              "data"
+            ],
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/hashtag/definitions/breakdown"
+                }
+              }
             }
           }
         }
@@ -768,25 +821,22 @@
           "title": "search_result",
           "description": "get a user's search_result",
           "href": "/v1/users/search_result",
-          "method": "get",
+          "method": "GET",
           "rel": "instances",
           "schema": {
             "description": "search query for user",
             "type": "string"
           },
           "targetSchema": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/user/definitions/user"
-            }
+            "$ref": "#/definitions/user/definitions/user_page"
           }
         }
       ]
     },
     "v1_users_user_evaluation": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "user evaluation",
-      "description": "user evaluation apis",
+      "title": "ユーザー評価",
+      "description": "ユーザー評価に関するAPI",
       "stability": "prototype",
       "strictProperties": true,
       "type": [
@@ -794,9 +844,9 @@
       ],
       "links": [
         {
-          "title": "user evaluation",
-          "description": "user evaluation",
-          "href": "/v1/{user_id}/user_evaluation",
+          "title": "ユーザー評価",
+          "description": "ユーザー評価の内訳を返す",
+          "href": "/v1/users/{user_id}/user_evaluation",
           "method": "GET",
           "rel": "show",
           "schema": {
@@ -843,7 +893,7 @@
         },
         "name": {
           "description": "hashtag's name",
-          "example": "pig",
+          "example": "BTC",
           "type": "string"
         },
         "breakdown": {
@@ -862,6 +912,27 @@
             }
           }
         },
+        "trend": {
+          "type": "object",
+          "required": [
+            "hashtag",
+            "people_count",
+            "count_posts"
+          ],
+          "properties": {
+            "hashtag": {
+              "$ref": "#/definitions/hashtag/definitions/hashtag"
+            },
+            "people_count": {
+              "type": "integer",
+              "example": 350
+            },
+            "posts_count": {
+              "type": "integer",
+              "example": 840
+            }
+          }
+        },
         "hashtag": {
           "type": "object",
           "required": [
@@ -874,6 +945,46 @@
             },
             "name": {
               "$ref": "#/definitions/hashtag/definitions/name"
+            }
+          }
+        }
+      }
+    },
+    "paging": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "paging",
+      "description": "Paging Resource",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "cursor": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/datetime"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "has_next": {
+          "type": "boolean"
+        },
+        "paging": {
+          "type": "object",
+          "required": [
+            "cursor",
+            "has_next"
+          ],
+          "properties": {
+            "cursor": {
+              "$ref": "#/definitions/paging/definitions/cursor"
+            },
+            "has_next": {
+              "$ref": "#/definitions/paging/definitions/has_next"
             }
           }
         }
@@ -908,7 +1019,7 @@
         "published_at": {
           "description": "datetime when this post was posted.",
           "type": "string",
-          "example": "date-time"
+          "format": "date-time"
         },
         "share": {
           "description": "post share count",
@@ -953,6 +1064,27 @@
             },
             "published_at": {
               "$ref": "#/definitions/post/definitions/published_at"
+            }
+          }
+        },
+        "post_page": {
+          "type": "object",
+          "required": [
+            "data",
+            "paging"
+          ],
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/post/definitions/post"
+              }
+            },
+            "paging": {
+              "$ref": "#/definitions/paging/definitions/paging"
+            },
+            "message": {
+              "$ref": "#/definitions/mesasge"
             }
           }
         }
@@ -1074,6 +1206,27 @@
               "$ref": "#/definitions/user/definitions/total_dislike_count"
             }
           }
+        },
+        "user_page": {
+          "type": "object",
+          "required": [
+            "data",
+            "paging"
+          ],
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/user/definitions/user"
+              }
+            },
+            "paging": {
+              "$ref": "#/definitions/paging/definitions/paging"
+            },
+            "message": {
+              "$ref": "#/definitions/mesasge"
+            }
+          }
         }
       }
     }
@@ -1082,14 +1235,14 @@
     "v1_hashtags": {
       "$ref": "#/definitions/v1_hashtags"
     },
+    "v1_hashtags_trends": {
+      "$ref": "#/definitions/v1_hashtags_trends"
+    },
     "v1_posts": {
       "$ref": "#/definitions/v1_posts"
     },
     "v1_posts_reaction": {
       "$ref": "#/definitions/v1_posts_reaction"
-    },
-    "v1_posts_replies": {
-      "$ref": "#/definitions/v1_posts_replies"
     },
     "v1_posts_search_result": {
       "$ref": "#/definitions/v1_posts_search_result"
@@ -1120,6 +1273,9 @@
     },
     "hashtag": {
       "$ref": "#/definitions/hashtag"
+    },
+    "paging": {
+      "$ref": "#/definitions/paging"
     },
     "post": {
       "$ref": "#/definitions/post"

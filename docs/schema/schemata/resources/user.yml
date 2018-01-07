@@ -62,4 +62,19 @@ definitions:
       total_dislike_count:
         $ref: "/schemata/user#/definitions/total_dislike_count"
 
+  user_page:
+      type: object
+      required:
+        - data
+        - paging
+      properties:
+        data:
+          type: array
+          items:
+            $ref: /schemata/user#/definitions/user
+        paging:
+          $ref: /schemata/paging#/definitions/paging
+        message:
+          $ref: /schemata#/mesasge
+
 id: schemata/user

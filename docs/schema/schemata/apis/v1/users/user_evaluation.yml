@@ -1,16 +1,16 @@
 ---
 "$schema": http://json-schema.org/draft-04/hyper-schema
-title: user evaluation
-description: user evaluation apis
+title: ユーザー評価
+description: ユーザー評価に関するAPI
 stability: prototype
 strictProperties: true
 type:
 - object
 
 links:
-- title: user evaluation
-  description: user evaluation
-  href: /v1/{user_id}/user_evaluation
+- title: ユーザー評価
+  description: ユーザー評価の内訳を返す
+  href: /v1/users/{user_id}/user_evaluation
   method: GET
   rel: show
   schema:
