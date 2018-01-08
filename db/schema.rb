@@ -64,6 +64,9 @@ ActiveRecord::Schema.define(version: 0) do
     t.string 'email', null: false
     t.integer 'likes_count', default: 0, null: false
     t.integer 'dislikes_count', default: 0, null: false
+    t.integer 'following_count', default: 0, null: false
+    t.integer 'followers_count', default: 0, null: false
+    t.integer 'evaluation_point', default: 0, null: false
     t.text 'tokens'
     t.string 'encrypted_password', default: '', null: false
     t.string 'reset_password_token'

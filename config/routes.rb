@@ -3,7 +3,11 @@ Rails.application.routes.draw do
     registrations: 'auth/registrations'
   }
   namespace :v1, defaults: { format: 'json' } do
-    resources :users, only: [:index, :show]
+    resources :users, only: [:index, :show] do
+      collection do
+        get :me
+      end
+    end
 
     resources :hashtags, only: [:index, :show] do
       resources :posts, only: [:index]

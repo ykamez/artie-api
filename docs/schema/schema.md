@@ -26,6 +26,7 @@
   - <a href="#resource-v1_users">user</a>
     - <a href="#link-GET-v1_users-/v1/users">GET /v1/users</a>
     - <a href="#link-GET-v1_users-/v1/users/{id}">GET /v1/users/{id}</a>
+    - <a href="#link-GET-v1_users-/v1/users/me">GET /v1/users/me</a>
     - <a href="#link-POST-v1_users-/v1/users/">POST /v1/users/</a>
     - <a href="#link-PATCH-v1_users-/v1/users/{id}">PATCH /v1/users/{id}</a>
     - <a href="#link-DELETE-v1_users-/v1/users/{id}">DELETE /v1/users/{id}</a>
@@ -177,7 +178,8 @@ HTTP/1.1 200 OK
         "total_like_count": 123,
         "total_dislike_count": 123,
         "following_count": 10,
-        "followers_count": 30
+        "followers_count": 30,
+        "evaluation_point": 2.5
       },
       "image_data": [
         "aws:pig_coin.png"
@@ -336,7 +338,8 @@ HTTP/1.1 200 OK
         "total_like_count": 123,
         "total_dislike_count": 123,
         "following_count": 10,
-        "followers_count": 30
+        "followers_count": 30,
+        "evaluation_point": 2.5
       },
       "image_data": [
         "aws:pig_coin.png"
@@ -406,7 +409,8 @@ HTTP/1.1 200 OK
         "total_like_count": 123,
         "total_dislike_count": 123,
         "following_count": 10,
-        "followers_count": 30
+        "followers_count": 30,
+        "evaluation_point": 2.5
       },
       "image_data": [
         "aws:pig_coin.png"
@@ -494,7 +498,8 @@ HTTP/1.1 201 Created
     "total_like_count": 123,
     "total_dislike_count": 123,
     "following_count": 10,
-    "followers_count": 30
+    "followers_count": 30,
+    "evaluation_point": 2.5
   },
   "image_data": [
     "aws:pig_coin.png"
@@ -580,7 +585,8 @@ HTTP/1.1 201 Created
     "total_like_count": 123,
     "total_dislike_count": 123,
     "following_count": 10,
-    "followers_count": 30
+    "followers_count": 30,
+    "evaluation_point": 2.5
   },
   "image_data": [
     "aws:pig_coin.png"
@@ -633,7 +639,8 @@ HTTP/1.1 201 Created
     "total_like_count": 123,
     "total_dislike_count": 123,
     "following_count": 10,
-    "followers_count": 30
+    "followers_count": 30,
+    "evaluation_point": 2.5
   },
   "image_data": [
     "aws:pig_coin.png"
@@ -686,7 +693,8 @@ HTTP/1.1 201 Created
     "total_like_count": 123,
     "total_dislike_count": 123,
     "following_count": 10,
-    "followers_count": 30
+    "followers_count": 30,
+    "evaluation_point": 2.5
   },
   "image_data": [
     "aws:pig_coin.png"
@@ -747,7 +755,8 @@ HTTP/1.1 200 OK
         "total_like_count": 123,
         "total_dislike_count": 123,
         "following_count": 10,
-        "followers_count": 30
+        "followers_count": 30,
+        "evaluation_point": 2.5
       },
       "image_data": [
         "aws:pig_coin.png"
@@ -812,7 +821,8 @@ HTTP/1.1 200 OK
       "total_like_count": 123,
       "total_dislike_count": 123,
       "following_count": 10,
-      "followers_count": 30
+      "followers_count": 30,
+      "evaluation_point": 2.5
     }
   ],
   "hashtags": [
@@ -866,7 +876,8 @@ HTTP/1.1 200 OK
       "total_like_count": 123,
       "total_dislike_count": 123,
       "following_count": 10,
-      "followers_count": 30
+      "followers_count": 30,
+      "evaluation_point": 2.5
     }
   ],
   "paging": {
@@ -877,7 +888,7 @@ HTTP/1.1 200 OK
 }
 ```
 
-### <a name="link-GET-v1_users-/v1/users/{id}">user show</a>
+### <a name="link-GET-v1_users-/v1/users/{id}">user show from other</a>
 
 Show a specific user
 
@@ -908,7 +919,44 @@ HTTP/1.1 200 OK
   "total_like_count": 123,
   "total_dislike_count": 123,
   "following_count": 10,
-  "followers_count": 30
+  "followers_count": 30,
+  "evaluation_point": 2.5
+}
+```
+
+### <a name="link-GET-v1_users-/v1/users/me">user me</a>
+
+Show my user inform
+
+```
+GET /v1/users/me
+```
+
+
+#### Curl Example
+
+```bash
+$ curl -n http://coinnow.local/v1/users/me
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "id": 1,
+  "fullname": "Bob Marley",
+  "account_name": "bob",
+  "image_data": "example",
+  "total_like_count": 123,
+  "total_dislike_count": 123,
+  "following_count": 10,
+  "followers_count": 30,
+  "evaluation_point": 2.5
 }
 ```
 
@@ -967,7 +1015,8 @@ HTTP/1.1 201 Created
   "total_like_count": 123,
   "total_dislike_count": 123,
   "following_count": 10,
-  "followers_count": 30
+  "followers_count": 30,
+  "evaluation_point": 2.5
 }
 ```
 
@@ -1026,7 +1075,8 @@ HTTP/1.1 200 OK
   "total_like_count": 123,
   "total_dislike_count": 123,
   "following_count": 10,
-  "followers_count": 30
+  "followers_count": 30,
+  "evaluation_point": 2.5
 }
 ```
 
@@ -1108,7 +1158,8 @@ HTTP/1.1 200 OK
         "total_like_count": 123,
         "total_dislike_count": 123,
         "following_count": 10,
-        "followers_count": 30
+        "followers_count": 30,
+        "evaluation_point": 2.5
       },
       "image_data": [
         "aws:pig_coin.png"
@@ -1182,7 +1233,8 @@ HTTP/1.1 200 OK
       "total_like_count": 123,
       "total_dislike_count": 123,
       "following_count": 10,
-      "followers_count": 30
+      "followers_count": 30,
+      "evaluation_point": 2.5
     }
   ],
   "paging": {
@@ -1235,7 +1287,8 @@ HTTP/1.1 200 OK
       "total_like_count": 123,
       "total_dislike_count": 123,
       "following_count": 10,
-      "followers_count": 30
+      "followers_count": 30,
+      "evaluation_point": 2.5
     }
   ],
   "paging": {
@@ -1347,7 +1400,8 @@ HTTP/1.1 200 OK
         "total_like_count": 123,
         "total_dislike_count": 123,
         "following_count": 10,
-        "followers_count": 30
+        "followers_count": 30,
+        "evaluation_point": 2.5
       },
       "image_data": [
         "aws:pig_coin.png"
@@ -1448,7 +1502,8 @@ HTTP/1.1 200 OK
       "total_like_count": 123,
       "total_dislike_count": 123,
       "following_count": 10,
-      "followers_count": 30
+      "followers_count": 30,
+      "evaluation_point": 2.5
     }
   ],
   "paging": {

@@ -474,9 +474,19 @@
           }
         },
         {
-          "title": "show",
+          "title": "show from other",
           "description": "Show a specific user",
           "href": "/v1/users/{id}",
+          "method": "GET",
+          "rel": "show",
+          "targetSchema": {
+            "$ref": "#/definitions/user/definitions/user"
+          }
+        },
+        {
+          "title": "me",
+          "description": "Show my user inform",
+          "href": "/v1/users/me",
           "method": "GET",
           "rel": "show",
           "targetSchema": {
@@ -1204,6 +1214,11 @@
           "type": "integer",
           "example": 30
         },
+        "evaluation_point": {
+          "description": "user's evaluation point(this is between 0.0 and 5.0)",
+          "type": "integer",
+          "example": 2.5
+        },
         "user": {
           "type": "object",
           "required": [
@@ -1236,6 +1251,9 @@
             },
             "followers_count": {
               "$ref": "#/definitions/user/definitions/followers_count"
+            },
+            "evaluation_point": {
+              "$ref": "#/definitions/user/definitions/evaluation_point"
             }
           }
         },

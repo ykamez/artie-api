@@ -32,9 +32,17 @@ links:
       message:
         $ref: /schemata#/mesasge
 
-- title: show
+- title: show from other
   description: Show a specific user
   href: /v1/users/{id}
+  method: GET
+  rel: show
+  targetSchema:
+    $ref: /schemata/user#/definitions/user
+
+- title: me
+  description: Show my user inform
+  href: /v1/users/me
   method: GET
   rel: show
   targetSchema:
