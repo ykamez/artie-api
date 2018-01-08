@@ -175,7 +175,9 @@ HTTP/1.1 200 OK
         "account_name": "bob",
         "image_data": "example",
         "total_like_count": 123,
-        "total_dislike_count": 123
+        "total_dislike_count": 123,
+        "following_count": 10,
+        "followers_count": 30
       },
       "image_data": [
         "aws:pig_coin.png"
@@ -186,10 +188,6 @@ HTTP/1.1 200 OK
           "name": "BTC"
         }
       ],
-      "post_evaluation": {
-        "like": 1248,
-        "dislike": 100
-      },
       "published_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
       "dislikes_count": 50,
@@ -336,7 +334,9 @@ HTTP/1.1 200 OK
         "account_name": "bob",
         "image_data": "example",
         "total_like_count": 123,
-        "total_dislike_count": 123
+        "total_dislike_count": 123,
+        "following_count": 10,
+        "followers_count": 30
       },
       "image_data": [
         "aws:pig_coin.png"
@@ -347,10 +347,6 @@ HTTP/1.1 200 OK
           "name": "BTC"
         }
       ],
-      "post_evaluation": {
-        "like": 1248,
-        "dislike": 100
-      },
       "published_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
       "dislikes_count": 50,
@@ -408,7 +404,9 @@ HTTP/1.1 200 OK
         "account_name": "bob",
         "image_data": "example",
         "total_like_count": 123,
-        "total_dislike_count": 123
+        "total_dislike_count": 123,
+        "following_count": 10,
+        "followers_count": 30
       },
       "image_data": [
         "aws:pig_coin.png"
@@ -419,10 +417,6 @@ HTTP/1.1 200 OK
           "name": "BTC"
         }
       ],
-      "post_evaluation": {
-        "like": 1248,
-        "dislike": 100
-      },
       "published_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
       "dislikes_count": 50,
@@ -498,7 +492,9 @@ HTTP/1.1 201 Created
     "account_name": "bob",
     "image_data": "example",
     "total_like_count": 123,
-    "total_dislike_count": 123
+    "total_dislike_count": 123,
+    "following_count": 10,
+    "followers_count": 30
   },
   "image_data": [
     "aws:pig_coin.png"
@@ -509,10 +505,6 @@ HTTP/1.1 201 Created
       "name": "BTC"
     }
   ],
-  "post_evaluation": {
-    "like": 1248,
-    "dislike": 100
-  },
   "published_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
   "dislikes_count": 50,
@@ -586,7 +578,9 @@ HTTP/1.1 201 Created
     "account_name": "bob",
     "image_data": "example",
     "total_like_count": 123,
-    "total_dislike_count": 123
+    "total_dislike_count": 123,
+    "following_count": 10,
+    "followers_count": 30
   },
   "image_data": [
     "aws:pig_coin.png"
@@ -597,10 +591,6 @@ HTTP/1.1 201 Created
       "name": "BTC"
     }
   ],
-  "post_evaluation": {
-    "like": 1248,
-    "dislike": 100
-  },
   "published_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
   "dislikes_count": 50,
@@ -641,7 +631,9 @@ HTTP/1.1 201 Created
     "account_name": "bob",
     "image_data": "example",
     "total_like_count": 123,
-    "total_dislike_count": 123
+    "total_dislike_count": 123,
+    "following_count": 10,
+    "followers_count": 30
   },
   "image_data": [
     "aws:pig_coin.png"
@@ -652,10 +644,6 @@ HTTP/1.1 201 Created
       "name": "BTC"
     }
   ],
-  "post_evaluation": {
-    "like": 1248,
-    "dislike": 100
-  },
   "published_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
   "dislikes_count": 50,
@@ -696,7 +684,9 @@ HTTP/1.1 201 Created
     "account_name": "bob",
     "image_data": "example",
     "total_like_count": 123,
-    "total_dislike_count": 123
+    "total_dislike_count": 123,
+    "following_count": 10,
+    "followers_count": 30
   },
   "image_data": [
     "aws:pig_coin.png"
@@ -707,10 +697,6 @@ HTTP/1.1 201 Created
       "name": "BTC"
     }
   ],
-  "post_evaluation": {
-    "like": 1248,
-    "dislike": 100
-  },
   "published_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
   "dislikes_count": 50,
@@ -759,7 +745,9 @@ HTTP/1.1 200 OK
         "account_name": "bob",
         "image_data": "example",
         "total_like_count": 123,
-        "total_dislike_count": 123
+        "total_dislike_count": 123,
+        "following_count": 10,
+        "followers_count": 30
       },
       "image_data": [
         "aws:pig_coin.png"
@@ -770,10 +758,6 @@ HTTP/1.1 200 OK
           "name": "BTC"
         }
       ],
-      "post_evaluation": {
-        "like": 1248,
-        "dislike": 100
-      },
       "published_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
       "dislikes_count": 50,
@@ -826,7 +810,9 @@ HTTP/1.1 200 OK
       "account_name": "bob",
       "image_data": "example",
       "total_like_count": 123,
-      "total_dislike_count": 123
+      "total_dislike_count": 123,
+      "following_count": 10,
+      "followers_count": 30
     }
   ],
   "hashtags": [
@@ -878,7 +864,9 @@ HTTP/1.1 200 OK
       "account_name": "bob",
       "image_data": "example",
       "total_like_count": 123,
-      "total_dislike_count": 123
+      "total_dislike_count": 123,
+      "following_count": 10,
+      "followers_count": 30
     }
   ],
   "paging": {
@@ -918,7 +906,9 @@ HTTP/1.1 200 OK
   "account_name": "bob",
   "image_data": "example",
   "total_like_count": 123,
-  "total_dislike_count": 123
+  "total_dislike_count": 123,
+  "following_count": 10,
+  "followers_count": 30
 }
 ```
 
@@ -975,7 +965,9 @@ HTTP/1.1 201 Created
   "account_name": "bob",
   "image_data": "example",
   "total_like_count": 123,
-  "total_dislike_count": 123
+  "total_dislike_count": 123,
+  "following_count": 10,
+  "followers_count": 30
 }
 ```
 
@@ -1032,7 +1024,9 @@ HTTP/1.1 200 OK
   "account_name": "bob",
   "image_data": "example",
   "total_like_count": 123,
-  "total_dislike_count": 123
+  "total_dislike_count": 123,
+  "following_count": 10,
+  "followers_count": 30
 }
 ```
 
@@ -1112,7 +1106,9 @@ HTTP/1.1 200 OK
         "account_name": "bob",
         "image_data": "example",
         "total_like_count": 123,
-        "total_dislike_count": 123
+        "total_dislike_count": 123,
+        "following_count": 10,
+        "followers_count": 30
       },
       "image_data": [
         "aws:pig_coin.png"
@@ -1123,10 +1119,6 @@ HTTP/1.1 200 OK
           "name": "BTC"
         }
       ],
-      "post_evaluation": {
-        "like": 1248,
-        "dislike": 100
-      },
       "published_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
       "dislikes_count": 50,
@@ -1188,7 +1180,9 @@ HTTP/1.1 200 OK
       "account_name": "bob",
       "image_data": "example",
       "total_like_count": 123,
-      "total_dislike_count": 123
+      "total_dislike_count": 123,
+      "following_count": 10,
+      "followers_count": 30
     }
   ],
   "paging": {
@@ -1239,7 +1233,9 @@ HTTP/1.1 200 OK
       "account_name": "bob",
       "image_data": "example",
       "total_like_count": 123,
-      "total_dislike_count": 123
+      "total_dislike_count": 123,
+      "following_count": 10,
+      "followers_count": 30
     }
   ],
   "paging": {
@@ -1349,7 +1345,9 @@ HTTP/1.1 200 OK
         "account_name": "bob",
         "image_data": "example",
         "total_like_count": 123,
-        "total_dislike_count": 123
+        "total_dislike_count": 123,
+        "following_count": 10,
+        "followers_count": 30
       },
       "image_data": [
         "aws:pig_coin.png"
@@ -1360,10 +1358,6 @@ HTTP/1.1 200 OK
           "name": "BTC"
         }
       ],
-      "post_evaluation": {
-        "like": 1248,
-        "dislike": 100
-      },
       "published_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
       "dislikes_count": 50,
@@ -1452,7 +1446,9 @@ HTTP/1.1 200 OK
       "account_name": "bob",
       "image_data": "example",
       "total_like_count": 123,
-      "total_dislike_count": 123
+      "total_dislike_count": 123,
+      "following_count": 10,
+      "followers_count": 30
     }
   ],
   "paging": {

@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.string 'uid', default: '', null: false
     t.string 'image_data', default: '', null: false
     t.string 'email', null: false
+    t.integer 'likes_count', default: 0, null: false
+    t.integer 'dislikes_count', default: 0, null: false
     t.text 'tokens'
     t.string 'encrypted_password', default: '', null: false
     t.string 'reset_password_token'

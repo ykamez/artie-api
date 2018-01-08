@@ -62,8 +62,6 @@ definitions:
         type: array
         items:
           $ref: /schemata/hashtag#/definitions/hashtag
-      post_evaluation:
-        $ref: /schemata/post_evaluation#/definitions/post_evaluation
       published_at:
         $ref: /schemata/post#/definitions/published_at
       likes_count:
