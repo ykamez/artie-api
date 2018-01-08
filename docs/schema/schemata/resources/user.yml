@@ -50,7 +50,7 @@ definitions:
     example: 30
   evaluation_point:
     description: user's evaluation point(this is between 0.0 and 5.0)
-    type: integer
+    type: string
     example: 2.5
 
   user:
