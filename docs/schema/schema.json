@@ -257,7 +257,7 @@
         {
           "title": "create",
           "description": "create post",
-          "href": "/v1/posts/",
+          "href": "/v1/posts",
           "method": "POST",
           "rel": "create",
           "schema": {
@@ -474,9 +474,19 @@
           }
         },
         {
-          "title": "show",
+          "title": "show from other",
           "description": "Show a specific user",
           "href": "/v1/users/{id}",
+          "method": "GET",
+          "rel": "show",
+          "targetSchema": {
+            "$ref": "#/definitions/user/definitions/user"
+          }
+        },
+        {
+          "title": "me",
+          "description": "Show my user inform",
+          "href": "/v1/users/me",
           "method": "GET",
           "rel": "show",
           "targetSchema": {
@@ -1021,10 +1031,20 @@
           "type": "string",
           "format": "date-time"
         },
-        "share": {
-          "description": "post share count",
+        "likes_count": {
+          "description": "post likes count",
           "type": "integer",
-          "example": 123
+          "example": 100
+        },
+        "dislikes_count": {
+          "description": "post dislikes count",
+          "type": "integer",
+          "example": 50
+        },
+        "shares_count": {
+          "description": "post shares count",
+          "type": "integer",
+          "example": 50
         },
         "post": {
           "type": "object",
@@ -1032,7 +1052,10 @@
             "id",
             "text",
             "user",
-            "published_at"
+            "published_at",
+            "likes_count",
+            "dislikes_count",
+            "shares_count"
           ],
           "properties": {
             "id": {
@@ -1056,14 +1079,17 @@
                 "$ref": "#/definitions/hashtag/definitions/hashtag"
               }
             },
-            "share": {
-              "$ref": "#/definitions/post/definitions/share"
-            },
-            "post_evaluation": {
-              "$ref": "#/definitions/post_evaluation/definitions/post_evaluation"
-            },
             "published_at": {
               "$ref": "#/definitions/post/definitions/published_at"
+            },
+            "likes_count": {
+              "$ref": "#/definitions/post/definitions/likes_count"
+            },
+            "dislikes_count": {
+              "$ref": "#/definitions/post/definitions/dislikes_count"
+            },
+            "shares_count": {
+              "$ref": "#/definitions/post/definitions/shares_count"
             }
           }
         },
@@ -1178,6 +1204,21 @@
           "type": "integer",
           "example": 123
         },
+        "following_count": {
+          "description": "user following_count",
+          "type": "integer",
+          "example": 10
+        },
+        "followers_count": {
+          "description": "user followers_count",
+          "type": "integer",
+          "example": 30
+        },
+        "evaluation_point": {
+          "description": "user's evaluation point(this is between 0.0 and 5.0)",
+          "type": "string",
+          "example": 2.5
+        },
         "user": {
           "type": "object",
           "required": [
@@ -1204,6 +1245,15 @@
             },
             "total_dislike_count": {
               "$ref": "#/definitions/user/definitions/total_dislike_count"
+            },
+            "following_count": {
+              "$ref": "#/definitions/user/definitions/following_count"
+            },
+            "followers_count": {
+              "$ref": "#/definitions/user/definitions/followers_count"
+            },
+            "evaluation_point": {
+              "$ref": "#/definitions/user/definitions/evaluation_point"
             }
           }
         },

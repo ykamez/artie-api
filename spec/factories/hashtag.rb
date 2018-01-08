@@ -12,7 +12,8 @@
 #  index_hashtags_evaluations_on_name  (name) UNIQUE
 #
 
-class Hashtag < ApplicationRecord
-  has_many :post_hashtags, dependent: :destroy
-  has_many :posts, dependent: :destroy, through: :post_hashtags
+FactoryBot.define do
+  factory :hashtag do
+    name 'BTC'
+  end
 end

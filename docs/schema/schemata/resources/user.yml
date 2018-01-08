@@ -40,6 +40,18 @@ definitions:
     description: user total disliked count
     type: integer
     example: 123
+  following_count:
+    description: user following_count
+    type: integer
+    example: 10
+  followers_count:
+    description: user followers_count
+    type: integer
+    example: 30
+  evaluation_point:
+    description: user's evaluation point(this is between 0.0 and 5.0)
+    type: string
+    example: 2.5
 
   user:
     type: object
@@ -61,6 +73,12 @@ definitions:
         $ref: "/schemata/user#/definitions/total_like_count"
       total_dislike_count:
         $ref: "/schemata/user#/definitions/total_dislike_count"
+      following_count:
+        $ref: "/schemata/user#/definitions/following_count"
+      followers_count:
+        $ref: "/schemata/user#/definitions/followers_count"
+      evaluation_point:
+        $ref: "/schemata/user#/definitions/evaluation_point"
 
   user_page:
       type: object

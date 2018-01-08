@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe V1::PostsController, type: :request do
   describe 'GET /v1/posts' do
-    subject { get url, headers: headers, params: params.to_json }
+    subject { get url, headers: headers, params: params }
 
     let(:headers) do
       {
@@ -15,7 +15,7 @@ RSpec.describe V1::PostsController, type: :request do
 
     context 'with valid request' do
       context 'when post exists' do
-        let(:params) { {} }
+        let(:params) { { cursor: Time.now + 1.hour, limit: 5 } }
         let(:posts) do
           create(:post, user_id: user.id)
         end
@@ -33,7 +33,7 @@ RSpec.describe V1::PostsController, type: :request do
       end
 
       context 'when post not exists' do
-        let(:params) { {} }
+        let(:params) { { cursor: Time.now + 1.hour, limit: 5 } }
 
         it 'returns 200 response' do
           subject
@@ -45,122 +45,53 @@ RSpec.describe V1::PostsController, type: :request do
     end
   end
 
-  # describe 'POST /v1/posts' do
-  #   subject { post url, headers: headers, params: params.to_json }
-  #   let(:headers) do
-  #     {
-  #         'Content-Type': 'application/json',
-  #     }
-  #   end
-  #   let(:url) { '/v1/posts' }
-  #   let(:now) { Time.zone.now }
-  #
-  #   context 'with valid request' do
-  #     let(:params) { glycometabolism_data }
-  #
-  #     context 'post post' do
-  #       let(:glycometabolism_data) { { hba1c: '5.0', measured_at: now } }
-  #
-  #       it 'returns 200 response' do
-  #         subject
-  #         expect(response.status).to eq 200
-  #         assert_schema_conform
-  #       end
-  #     end
-  #
-  #     context 'post user min glycometabolism' do
-  #       let(:glycometabolism_data) { { hba1c: ::User::Glycometabolism::MIN_HBA1C.to_s, measured_at: now } }
-  #
-  #       it 'returns 200 response' do
-  #         subject
-  #         expect(response.status).to eq 200
-  #         assert_schema_conform
-  #       end
-  #     end
-  #
-  #     context 'post user max glycometabolism' do
-  #       let(:glycometabolism_data) { { hba1c: ::User::Glycometabolism::MAX_HBA1C.to_s, measured_at: now } }
-  #
-  #       it 'returns 200 response' do
-  #         subject
-  #         expect(response.status).to eq 200
-  #         assert_schema_conform
-  #       end
-  #     end
-  #
-  #     context 'post user measured_at in the future at other country' do
-  #       let(:now) { Time.now }
-  #       let(:glycometabolism_data) { { hba1c: '0.0', measured_at: now } }
-  #
-  #       it 'returns 200 response' do
-  #         subject
-  #         expect(response.status).to eq 200
-  #         assert_schema_conform
-  #       end
-  #     end
-  #   end
-  #
-  #   context 'with invalid request' do
-  #     context 'both params not exists' do
-  #       let(:params) { { hba1c: 5.0 } }
-  #
-  #       it 'returns 400' do
-  #         subject
-  #         expect(response.status).to eq 400
-  #       end
-  #     end
-  #
-  #     context 'invalid hba1c' do
-  #       let(:params) { glycometabolism_data }
-  #
-  #       context 'minus' do
-  #         let(:glycometabolism_data) { { hba1c: '-5.5', measured_at: now } }
-  #
-  #         it 'returns 400' do
-  #           subject
-  #           expect(response.status).to eq 400
-  #         end
-  #       end
-  #
-  #       context 'over' do
-  #         let(:glycometabolism_data) { { hba1c: '25.5', measured_at: now } }
-  #
-  #         it 'returns 400' do
-  #           subject
-  #           expect(response.status).to eq 400
-  #         end
-  #       end
-  #     end
-  #
-  #     context 'invalid measured_at' do
-  #       let(:params) { glycometabolism_data }
-  #
-  #       context 'forward time' do
-  #         let(:glycometabolism_data) { { hba1c: '5.5', measured_at: now + 3 } }
-  #
-  #         it 'returns 400' do
-  #           subject
-  #           expect(response.status).to eq 400
-  #         end
-  #       end
-  #
-  #       context 'duplicate measured_at' do
-  #         let(:data) { FactoryBot.create(:user_glycometabolism, finc_user_id: user_fid, hba1c: 5.0, measured_at: now) }
-  #         let(:glycometabolism_data) { { hba1c: '8.5', measured_at: now } }
-  #
-  #         before do
-  #           data
-  #         end
-  #
-  #         it 'returns 400' do
-  #           subject
-  #
-  #           expect(response.status).to eq 400
-  #         end
-  #       end
-  #     end
-  #   end
-  # end
+  describe 'POST /v1/posts' do
+    subject { post url, headers: headers, params: params.to_json }
+
+    let(:headers) do
+      {
+        'Content-Type': 'application/json',
+      }
+    end
+    let(:url) { '/v1/posts' }
+    let(:user) { create(:user) }
+    context 'with valid request' do
+      let(:params) { post_data }
+
+      context 'without hashtag nor image' do
+        let(:post_data) { { text: 'Bitcoin is awesome.', user_id: user.id } }
+
+        it 'returns 200 response' do
+          subject
+          expect(response.status).to eq 200
+          assert_schema_conform
+        end
+
+        it 'create a record' do
+          expect { subject }.to change(Post, :count).by(1)
+        end
+      end
+
+      context 'with hashtag, without image' do
+        let(:post_data) { { text: 'Bitcoin is awesome.', user_id: user.id, hashtags: hashtags } }
+        let(:hashtag) { create(:hashtag, id: 1, name: 'BTC') }
+        let(:hashtags) { [{ "id": 1, "name": 'BTC' }] }
+        before do
+          hashtag
+        end
+
+        it 'returns 200 response' do
+          subject
+          expect(response.status).to eq 200
+          assert_schema_conform
+        end
+
+        it 'create a record' do
+          expect { subject }.to change(PostHashtag, :count).by(1)
+        end
+      end
+    end
+  end
 
   # describe 'DELTE /v1/posts/{id}' do
   #   subject { delete url, headers: headers, params: params }

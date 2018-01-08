@@ -10,6 +10,8 @@ end
 
 add_index "post_evaluations", ["user_id"], name: "index_post_evaluations_on_user_id", using: :btree
 add_index "post_evaluations", ["post_id"], name: "index_post_evaluations_on_post_id", using: :btree
+add_index "post_evaluations", ["user_id", "post_id"], unique: true, using: :btree
+
 
 add_foreign_key "post_evaluations", "users"
 add_foreign_key "post_evaluations", "posts"

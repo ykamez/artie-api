@@ -3,6 +3,9 @@
 create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
   t.bigint  "user_id",    null: false
   t.string   "text",       null: false
+  t.integer "likes_count", null: false, default: 0
+  t.integer "dislikes_count", null: false, default: 0
+  t.integer "shares_count", null: false, default: 0
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
 end

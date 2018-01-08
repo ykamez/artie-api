@@ -11,8 +11,9 @@
 #
 # Indexes
 #
-#  index_post_evaluations_on_post_id  (post_id)
-#  index_post_evaluations_on_user_id  (user_id)
+#  index_post_evaluations_on_post_id              (post_id)
+#  index_post_evaluations_on_user_id              (user_id)
+#  index_post_evaluations_on_user_id_and_post_id  (user_id,post_id) UNIQUE
 #
 # Foreign Keys
 #
@@ -21,4 +22,7 @@
 #
 
 class PostEvaluation < ApplicationRecord
+  belongs_to :post
+  enum evaluation_type: { like: 0, dislike: 1 }
+  counter_culture :post, column_name: ->(model) { "#{model.evaluation_type}s_count" }
 end
