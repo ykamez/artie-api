@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
     resources :posts, only: [:index, :show, :create, :destroy] do
       member do
+        get :replies
         post :like, to: 'posts/reactions#add_like'
         post :dislike, to: 'posts/reactions#add_dislike'
         delete :like, to: 'posts/reactions#delete_like'

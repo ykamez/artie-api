@@ -25,4 +25,6 @@ class Post < ApplicationRecord
   has_many :post_hashtags, foreign_key: :post_id, dependent: :destroy
   has_many :hashtags, dependent: :destroy, through: :post_hashtags
   has_many :post_evaluations, dependent: :destroy
+  has_many :post_replies, foreign_key: :reply_by_post_id, dependent: :destroy
+  has_many :post_replies, foreign_key: :reply_to_post_id, dependent: :destroy
 end

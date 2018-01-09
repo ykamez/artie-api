@@ -1,18 +1,26 @@
 class V1::PostsController < ApplicationController
-  before_action :set_post, only: [:show, :destroy]
+  before_action :set_post, only: [:show, :destroy, :replies]
 
   def index
     cursor = params[:cursor] || Time.now
     limit = params[:limit]
     posts = Post.where('created_at < ?', cursor).limit(limit)
-    # FIXME: has_nextかを判断する
-    paging = { cursor: posts.last&.created_at, has_next: true }
-    page = ::V1::PostsPaging.new(data: posts, paging: paging)
+    page = build_page(posts)
     render json: page, serializer: ::V1::PostsPagingSerializer, include: '**'
   end
 
   def show
     render json: @post
+  end
+
+  def replies
+    cursor = params[:cursor] || Time.now
+    limit = params[:limit]
+    reply_ids = PostReply.where(reply_to_post_id: @post.id).where('created_at < ?', cursor).limit(limit).pluck(:reply_by_post_id)
+    # TODO: cursorを適用する。
+    replies = Post.where(id: reply_ids)
+    page = build_page(replies)
+    render json: page, serializer: ::V1::PostsPagingSerializer, include: '**'
   end
 
   def create
@@ -49,5 +57,11 @@ class V1::PostsController < ApplicationController
 
     def hashtag_params
       params[:hashtags]
+    end
+
+    def build_page(data)
+      # FIXME: has_nextかを判断する
+      paging = { cursor: data.last&.created_at, has_next: true }
+      ::V1::PostsPaging.new(data: data, paging: paging)
     end
 end
