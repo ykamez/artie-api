@@ -32,8 +32,6 @@ class V1::Posts::ReactionsController < ApplicationController
     end
 
     def user_id
-      # FIXME: モック用なので、current_userを取得できるようにする.
-      current_user = User.find(1)
       current_user.id
     end
 

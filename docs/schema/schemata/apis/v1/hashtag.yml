@@ -59,6 +59,26 @@ links:
   targetSchema:
     $ref: /schemata/post#/definitions/post_page
 
+- title: watch
+  description: add a hashtag to watchlist
+  href: /v1/hashtags/{hashtag_id}/watch
+  method: POST
+  rel: self
+  schema:
+    type: "null"
+  targetSchema:
+    $ref: /schemata/hashtag#/definitions/user_hashtag
+
+- title: unwatch
+  description: remove a hashtag from watchlist
+  href: /v1/hashtags/{hashtag_id}/watch
+  method: DELETE
+  rel: destroy
+  schema:
+    type: "null"
+  targetSchema:
+    $ref: /schemata/hashtag#/definitions/user_hashtag
+
 - title: search_result
   description: get a hashtag's search_result
   href: /v1/hashtags/search_result

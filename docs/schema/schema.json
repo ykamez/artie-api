@@ -108,6 +108,32 @@
           }
         },
         {
+          "title": "watch",
+          "description": "add a hashtag to watchlist",
+          "href": "/v1/hashtags/{hashtag_id}/watch",
+          "method": "POST",
+          "rel": "self",
+          "schema": {
+            "type": "null"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/hashtag/definitions/user_hashtag"
+          }
+        },
+        {
+          "title": "unwatch",
+          "description": "remove a hashtag from watchlist",
+          "href": "/v1/hashtags/{hashtag_id}/watch",
+          "method": "DELETE",
+          "rel": "destroy",
+          "schema": {
+            "type": "null"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/hashtag/definitions/user_hashtag"
+          }
+        },
+        {
           "title": "search_result",
           "description": "get a hashtag's search_result",
           "href": "/v1/hashtags/search_result",
@@ -729,7 +755,7 @@
         {
           "title": "user's watching hashtags",
           "description": "Show a list of a user's watching hashtags.",
-          "href": "/v1/{user_id}/hashtags/watching",
+          "href": "/v1/users/{user_id}/hashtags/watching",
           "method": "GET",
           "rel": "show",
           "schema": {
@@ -755,7 +781,8 @@
           "targetSchema": {
             "type": "object",
             "required": [
-              "data"
+              "data",
+              "paging"
             ],
             "properties": {
               "data": {
@@ -763,6 +790,9 @@
                 "items": {
                   "$ref": "#/definitions/hashtag/definitions/hashtag"
                 }
+              },
+              "paging": {
+                "$ref": "#/definitions/paging/definitions/paging"
               }
             }
           }
@@ -973,6 +1003,21 @@
             },
             "name": {
               "$ref": "#/definitions/hashtag/definitions/name"
+            }
+          }
+        },
+        "user_hashtag": {
+          "type": "object",
+          "required": [
+            "user_id",
+            "hashtag_id"
+          ],
+          "properties": {
+            "user_id": {
+              "$ref": "#/definitions/user_id"
+            },
+            "hashtag_id": {
+              "$ref": "#/definitions/hashtag/definitions/id"
             }
           }
         }

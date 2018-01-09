@@ -12,8 +12,6 @@ module V1
     end
 
     def me
-      # FIXME: for mock only.
-      current_user = User.find(2)
       render json: current_user, serializer: ::V1::UserSerializer
     end
 

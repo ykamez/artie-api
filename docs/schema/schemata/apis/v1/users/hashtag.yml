@@ -10,7 +10,7 @@ type:
 links:
 - title: user's watching hashtags
   description: Show a list of a user's watching hashtags.
-  href: /v1/{user_id}/hashtags/watching
+  href: /v1/users/{user_id}/hashtags/watching
   method: GET
   rel: show
   schema:
@@ -28,11 +28,14 @@ links:
     type: object
     required:
       - data
+      - paging
     properties:
       data:
         type: array
         items:
           $ref: /schemata/hashtag#/definitions/hashtag
+      paging:
+          $ref: /schemata/paging#/definitions/paging
 
 
 id: schemata/v1_users_hashtag

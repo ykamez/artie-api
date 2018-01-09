@@ -14,5 +14,6 @@
 
 class Hashtag < ApplicationRecord
   has_many :post_hashtags, dependent: :destroy
+  has_many :user_hashtags, dependent: :destroy
   has_many :posts, dependent: :destroy, through: :post_hashtags
 end

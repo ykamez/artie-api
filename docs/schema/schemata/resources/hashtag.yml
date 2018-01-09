@@ -54,4 +54,15 @@ definitions:
       name:
         $ref: "/schemata/hashtag#/definitions/name"
 
+  user_hashtag:
+    type: object
+    required:
+      - user_id
+      - hashtag_id
+    properties:
+      user_id:
+        $ref: "/schemata#/user_id"
+      hashtag_id:
+        $ref: "/schemata/hashtag#/definitions/id"
+
 id: schemata/hashtag

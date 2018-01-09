@@ -66,6 +66,15 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ['user_id'], name: 'index_posts_on_user_id'
   end
 
+  create_table 'user_hashtags', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+    t.bigint 'user_id', null: false
+    t.bigint 'hashtag_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['hashtag_id'], name: 'index_post_hashtags_on_hashtag_id'
+    t.index ['user_id'], name: 'index_post_hashtags_on_user_id'
+  end
+
   create_table 'users', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.string 'provider', default: 'email', null: false
     t.string 'uid', default: '', null: false
@@ -108,4 +117,6 @@ ActiveRecord::Schema.define(version: 0) do
   add_foreign_key 'post_replies', 'posts', column: 'reply_by_post_id', name: 'reply_by_post_id'
   add_foreign_key 'post_replies', 'posts', column: 'reply_to_post_id', name: 'reply_to_post_id'
   add_foreign_key 'posts', 'users'
+  add_foreign_key 'user_hashtags', 'hashtags'
+  add_foreign_key 'user_hashtags', 'users'
 end

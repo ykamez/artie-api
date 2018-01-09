@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :v1 do
+    namespace :users do
+      get 'hashtag/watching'
+    end
+  end
+
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
     registrations: 'auth/registrations'
   }
@@ -7,10 +13,25 @@ Rails.application.routes.draw do
       collection do
         get :me
       end
+      member do
+        scope :hashtags do
+          get :watching, to: 'users/hashtags#watching'
+        end
+      end
+    end
+
+    resources :hashtags do
+      collection do
+        get :trend
+      end
     end
 
     resources :hashtags, only: [:index, :show] do
-      resources :posts, only: [:index]
+      member do
+        post :watch, action: :watch
+        delete :watch, action: :unwatch
+      end
+      resources :posts, only: [:index], to: 'hashtags#show'
     end
 
     resources :posts, only: [:index, :show, :create, :destroy] do

@@ -7,6 +7,8 @@
   - <a href="#resource-v1_hashtags">hashtag</a>
     - <a href="#link-GET-v1_hashtags-/v1/hashtags">GET /v1/hashtags</a>
     - <a href="#link-GET-v1_hashtags-/v1/hashtags/{hashtag_id}/posts">GET /v1/hashtags/{hashtag_id}/posts</a>
+    - <a href="#link-POST-v1_hashtags-/v1/hashtags/{hashtag_id}/watch">POST /v1/hashtags/{hashtag_id}/watch</a>
+    - <a href="#link-DELETE-v1_hashtags-/v1/hashtags/{hashtag_id}/watch">DELETE /v1/hashtags/{hashtag_id}/watch</a>
     - <a href="#link-GET-v1_hashtags-/v1/hashtags/search_result">GET /v1/hashtags/search_result</a>
   - <a href="#resource-v1_hashtags_trends">トレンド仮想通貨</a>
     - <a href="#link-GET-v1_hashtags_trends-/v1/hashtags/trends">GET /v1/hashtags/trends</a>
@@ -37,7 +39,7 @@
     - <a href="#link-GET-v1_users_follow_follwers-/v1/{user_id}/users/following">GET /v1/{user_id}/users/following</a>
     - <a href="#link-GET-v1_users_follow_follwers-/v1/{user_id}/users/followers">GET /v1/{user_id}/users/followers</a>
   - <a href="#resource-v1_users_hashtag">user hashtag</a>
-    - <a href="#link-GET-v1_users_hashtag-/v1/{user_id}/hashtags/watching">GET /v1/{user_id}/hashtags/watching</a>
+    - <a href="#link-GET-v1_users_hashtag-/v1/users/{user_id}/hashtags/watching">GET /v1/users/{user_id}/hashtags/watching</a>
   - <a href="#resource-v1_users_posts">特定ユーザーの投稿</a>
     - <a href="#link-GET-v1_users_posts-/v1/{user_id}/posts">GET /v1/{user_id}/posts</a>
     - <a href="#link-GET-v1_users_posts-/v1/{user_id}/posts/hashtag_breakdown">GET /v1/{user_id}/posts/hashtag_breakdown</a>
@@ -202,6 +204,66 @@ HTTP/1.1 200 OK
     "has_next": true
   },
   "message": "success!!"
+}
+```
+
+### <a name="link-POST-v1_hashtags-/v1/hashtags/{hashtag_id}/watch">hashtag watch</a>
+
+add a hashtag to watchlist
+
+```
+POST /v1/hashtags/{hashtag_id}/watch
+```
+
+
+#### Curl Example
+
+```bash
+$ curl -n -X POST http://coinnow.local/v1/hashtags/$HASHTAG_ID/watch \
+  -H "Content-Type: application/json"
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "user_id": 1234,
+  "hashtag_id": 1
+}
+```
+
+### <a name="link-DELETE-v1_hashtags-/v1/hashtags/{hashtag_id}/watch">hashtag unwatch</a>
+
+remove a hashtag from watchlist
+
+```
+DELETE /v1/hashtags/{hashtag_id}/watch
+```
+
+
+#### Curl Example
+
+```bash
+$ curl -n -X DELETE http://coinnow.local/v1/hashtags/$HASHTAG_ID/watch \
+  -H "Content-Type: application/json"
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "user_id": 1234,
+  "hashtag_id": 1
 }
 ```
 
@@ -1362,12 +1424,12 @@ Stability: `prototype`
 
 user hashtag apis
 
-### <a name="link-GET-v1_users_hashtag-/v1/{user_id}/hashtags/watching">user hashtag user's watching hashtags</a>
+### <a name="link-GET-v1_users_hashtag-/v1/users/{user_id}/hashtags/watching">user hashtag user's watching hashtags</a>
 
 Show a list of a user's watching hashtags.
 
 ```
-GET /v1/{user_id}/hashtags/watching
+GET /v1/users/{user_id}/hashtags/watching
 ```
 
 #### Optional Parameters
@@ -1381,7 +1443,7 @@ GET /v1/{user_id}/hashtags/watching
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/$USER_ID/hashtags/watching
+$ curl -n http://coinnow.local/v1/users/$USER_ID/hashtags/watching
  -G \
   -d limit=10
 ```
@@ -1400,7 +1462,11 @@ HTTP/1.1 200 OK
       "id": 1,
       "name": "BTC"
     }
-  ]
+  ],
+  "paging": {
+    "cursor": null,
+    "has_next": true
+  }
 }
 ```
 

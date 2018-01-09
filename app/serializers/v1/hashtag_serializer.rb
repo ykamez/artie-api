@@ -1,3 +1,3 @@
 class V1::HashtagSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name
 end
