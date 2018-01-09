@@ -225,9 +225,22 @@
           }
         },
         {
-          "title": "投稿のモーダル表示",
-          "description": "投稿のモーダル表示用に使う。リプライ情報を追加も合わせて取得する。",
+          "title": "投稿のモーダル表示(ツイート自身)",
+          "description": "投稿のモーダル表示のツイート単体(リプライも一緒に取れないので別にした)",
           "href": "/v1/posts/{id}",
+          "method": "GET",
+          "rel": "self",
+          "schema": {
+            "type": "null"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/post/definitions/post"
+          }
+        },
+        {
+          "title": "投稿のモーダル表示",
+          "description": "投稿のモーダルのリプライ情報を追加も合わせて取得する。",
+          "href": "/v1/posts/{id}/replies",
           "method": "GET",
           "rel": "instancese",
           "schema": {
@@ -251,7 +264,12 @@
             }
           },
           "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post_page"
+            "type": "object",
+            "properties": {
+              "replies": {
+                "$ref": "#/definitions/post/definitions/post_page"
+              }
+            }
           }
         },
         {

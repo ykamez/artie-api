@@ -13,6 +13,7 @@
   - <a href="#resource-v1_posts">post</a>
     - <a href="#link-GET-v1_posts-/v1/posts">GET /v1/posts</a>
     - <a href="#link-GET-v1_posts-/v1/posts/{id}">GET /v1/posts/{id}</a>
+    - <a href="#link-GET-v1_posts-/v1/posts/{id}/replies">GET /v1/posts/{id}/replies</a>
     - <a href="#link-POST-v1_posts-/v1/posts">POST /v1/posts</a>
     - <a href="#link-DELETE-v1_posts-/v1/posts/{id}">DELETE /v1/posts/{id}</a>
   - <a href="#resource-v1_posts_reaction">reaction</a>
@@ -364,12 +365,65 @@ HTTP/1.1 200 OK
 }
 ```
 
-### <a name="link-GET-v1_posts-/v1/posts/{id}">post 投稿のモーダル表示</a>
+### <a name="link-GET-v1_posts-/v1/posts/{id}">post 投稿のモーダル表示(ツイート自身)</a>
 
-投稿のモーダル表示用に使う。リプライ情報を追加も合わせて取得する。
+投稿のモーダル表示のツイート単体(リプライも一緒に取れないので別にした)
 
 ```
 GET /v1/posts/{id}
+```
+
+
+#### Curl Example
+
+```bash
+$ curl -n http://coinnow.local/v1/posts/$ID
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "id": 1,
+  "text": "Pig Coin is awesome.",
+  "user": {
+    "id": 1,
+    "fullname": "Bob Marley",
+    "account_name": "bob",
+    "image_data": "example",
+    "total_like_count": 123,
+    "total_dislike_count": 123,
+    "following_count": 10,
+    "followers_count": 30,
+    "evaluation_point": 2.5
+  },
+  "image_data": [
+    "aws:pig_coin.png"
+  ],
+  "hashtag": [
+    {
+      "id": 1,
+      "name": "BTC"
+    }
+  ],
+  "published_at": "2015-01-01T12:00:00Z",
+  "likes_count": 100,
+  "dislikes_count": 50,
+  "shares_count": 50
+}
+```
+
+### <a name="link-GET-v1_posts-/v1/posts/{id}/replies">post 投稿のモーダル表示</a>
+
+投稿のモーダルのリプライ情報を追加も合わせて取得する。
+
+```
+GET /v1/posts/{id}/replies
 ```
 
 #### Optional Parameters
@@ -383,7 +437,7 @@ GET /v1/posts/{id}
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/posts/$ID
+$ curl -n http://coinnow.local/v1/posts/$ID/replies
  -G \
   -d limit=10
 ```
@@ -397,41 +451,43 @@ HTTP/1.1 200 OK
 
 ```json
 {
-  "data": [
-    {
-      "id": 1,
-      "text": "Pig Coin is awesome.",
-      "user": {
+  "replies": {
+    "data": [
+      {
         "id": 1,
-        "fullname": "Bob Marley",
-        "account_name": "bob",
-        "image_data": "example",
-        "total_like_count": 123,
-        "total_dislike_count": 123,
-        "following_count": 10,
-        "followers_count": 30,
-        "evaluation_point": 2.5
-      },
-      "image_data": [
-        "aws:pig_coin.png"
-      ],
-      "hashtag": [
-        {
+        "text": "Pig Coin is awesome.",
+        "user": {
           "id": 1,
-          "name": "BTC"
-        }
-      ],
-      "published_at": "2015-01-01T12:00:00Z",
-      "likes_count": 100,
-      "dislikes_count": 50,
-      "shares_count": 50
-    }
-  ],
-  "paging": {
-    "cursor": null,
-    "has_next": true
-  },
-  "message": "success!!"
+          "fullname": "Bob Marley",
+          "account_name": "bob",
+          "image_data": "example",
+          "total_like_count": 123,
+          "total_dislike_count": 123,
+          "following_count": 10,
+          "followers_count": 30,
+          "evaluation_point": 2.5
+        },
+        "image_data": [
+          "aws:pig_coin.png"
+        ],
+        "hashtag": [
+          {
+            "id": 1,
+            "name": "BTC"
+          }
+        ],
+        "published_at": "2015-01-01T12:00:00Z",
+        "likes_count": 100,
+        "dislikes_count": 50,
+        "shares_count": 50
+      }
+    ],
+    "paging": {
+      "cursor": null,
+      "has_next": true
+    },
+    "message": "success!!"
+  }
 }
 ```
 
