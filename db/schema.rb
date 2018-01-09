@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ['post_id'], name: 'index_post_images_on_post_id'
   end
 
+  create_table 'post_replies', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+    t.bigint 'reply_by_post_id', null: false
+    t.bigint 'reply_to_post_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['reply_by_post_id'], name: 'index_post_images_on_reply_by_post_id'
+    t.index ['reply_to_post_id'], name: 'index_post_images_on_reply_to_post_id'
+  end
+
   create_table 'posts', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.bigint 'user_id', null: false
     t.string 'text', null: false
@@ -96,5 +105,7 @@ ActiveRecord::Schema.define(version: 0) do
   add_foreign_key 'post_hashtags', 'hashtags'
   add_foreign_key 'post_hashtags', 'posts'
   add_foreign_key 'post_images', 'posts'
+  add_foreign_key 'post_replies', 'posts', column: 'reply_by_post_id', name: 'reply_by_post_id'
+  add_foreign_key 'post_replies', 'posts', column: 'reply_to_post_id', name: 'reply_to_post_id'
   add_foreign_key 'posts', 'users'
 end

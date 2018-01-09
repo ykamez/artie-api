@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
@@ -13,7 +12,7 @@
 #  dislikes_count         :integer          default(0), not null
 #  following_count        :integer          default(0), not null
 #  followers_count        :integer          default(0), not null
-#  evaluation_point       :integer          default(0), not null
+#  evaluation_point       :decimal(3, 1)    default(0.0), not null
 #  tokens                 :text(65535)
 #  encrypted_password     :string(255)      default(""), not null
 #  reset_password_token   :string(255)
