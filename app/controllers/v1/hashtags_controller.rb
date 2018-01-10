@@ -37,7 +37,7 @@ class V1::HashtagsController < ApplicationController
     end
 
     def hashtag_id
-      params[:hashtag_id]
+      params[:id]
     end
 
     def build_post_page(data)

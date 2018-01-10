@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         get :me
       end
       member do
+        get :feed, to: 'users/feed#feed'
         scope :hashtags do
           get :watching, to: 'users/hashtags#watching'
         end

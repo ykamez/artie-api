@@ -10,7 +10,7 @@ type:
 links:
 - title: a user's following users
   description: Show a list of a following users
-  href: /v1/{user_id}/users/following
+  href: /v1/users/{user_id}/users/following
   method: GET
   rel: show
   schema:

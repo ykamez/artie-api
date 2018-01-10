@@ -34,15 +34,15 @@
     - <a href="#link-PATCH-v1_users-/v1/users/{id}">PATCH /v1/users/{id}</a>
     - <a href="#link-DELETE-v1_users-/v1/users/{id}">DELETE /v1/users/{id}</a>
   - <a href="#resource-v1_users_feed">feed</a>
-    - <a href="#link-GET-v1_users_feed-/v1/{user_id}/feed">GET /v1/{user_id}/feed</a>
+    - <a href="#link-GET-v1_users_feed-/v1/users/{user_id}/feed">GET /v1/users/{user_id}/feed</a>
   - <a href="#resource-v1_users_follow_follwers">follow and followers</a>
-    - <a href="#link-GET-v1_users_follow_follwers-/v1/{user_id}/users/following">GET /v1/{user_id}/users/following</a>
+    - <a href="#link-GET-v1_users_follow_follwers-/v1/users/{user_id}/users/following">GET /v1/users/{user_id}/users/following</a>
     - <a href="#link-GET-v1_users_follow_follwers-/v1/{user_id}/users/followers">GET /v1/{user_id}/users/followers</a>
   - <a href="#resource-v1_users_hashtag">user hashtag</a>
     - <a href="#link-GET-v1_users_hashtag-/v1/users/{user_id}/hashtags/watching">GET /v1/users/{user_id}/hashtags/watching</a>
   - <a href="#resource-v1_users_posts">特定ユーザーの投稿</a>
-    - <a href="#link-GET-v1_users_posts-/v1/{user_id}/posts">GET /v1/{user_id}/posts</a>
-    - <a href="#link-GET-v1_users_posts-/v1/{user_id}/posts/hashtag_breakdown">GET /v1/{user_id}/posts/hashtag_breakdown</a>
+    - <a href="#link-GET-v1_users_posts-/v1/users/{user_id}/posts">GET /v1/users/{user_id}/posts</a>
+    - <a href="#link-GET-v1_users_posts-/v1/users/{user_id}/posts/hashtag_breakdown">GET /v1/users/{user_id}/posts/hashtag_breakdown</a>
   - <a href="#resource-v1_users_search_result">search_result</a>
     - <a href="#link-GET-v1_users_search_result-/v1/users/search_result">GET /v1/users/search_result</a>
   - <a href="#resource-v1_users_user_evaluation">ユーザー評価</a>
@@ -262,8 +262,6 @@ HTTP/1.1 200 OK
 
 ```json
 {
-  "user_id": 1234,
-  "hashtag_id": 1
 }
 ```
 
@@ -1231,12 +1229,12 @@ Stability: `prototype`
 
 user feed apis
 
-### <a name="link-GET-v1_users_feed-/v1/{user_id}/feed">feed index</a>
+### <a name="link-GET-v1_users_feed-/v1/users/{user_id}/feed">feed index</a>
 
 Show a user's feed
 
 ```
-GET /v1/{user_id}/feed
+GET /v1/users/{user_id}/feed
 ```
 
 #### Optional Parameters
@@ -1250,7 +1248,7 @@ GET /v1/{user_id}/feed
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/$USER_ID/feed
+$ curl -n http://coinnow.local/v1/users/$USER_ID/feed
  -G \
   -d limit=10
 ```
@@ -1309,12 +1307,12 @@ Stability: `prototype`
 
 follow followers apis
 
-### <a name="link-GET-v1_users_follow_follwers-/v1/{user_id}/users/following">follow and followers a user's following users</a>
+### <a name="link-GET-v1_users_follow_follwers-/v1/users/{user_id}/users/following">follow and followers a user's following users</a>
 
 Show a list of a following users
 
 ```
-GET /v1/{user_id}/users/following
+GET /v1/users/{user_id}/users/following
 ```
 
 #### Optional Parameters
@@ -1328,7 +1326,7 @@ GET /v1/{user_id}/users/following
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/$USER_ID/users/following
+$ curl -n http://coinnow.local/v1/users/$USER_ID/users/following
  -G \
   -d limit=10
 ```
@@ -1477,12 +1475,12 @@ Stability: `prototype`
 
 特定ユーザーの投稿に関するAPI
 
-### <a name="link-GET-v1_users_posts-/v1/{user_id}/posts">特定ユーザーの投稿 user's posts</a>
+### <a name="link-GET-v1_users_posts-/v1/users/{user_id}/posts">特定ユーザーの投稿 user's posts</a>
 
 Show a list of a user's posts
 
 ```
-GET /v1/{user_id}/posts
+GET /v1/users/{user_id}/posts
 ```
 
 #### Optional Parameters
@@ -1496,7 +1494,7 @@ GET /v1/{user_id}/posts
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/$USER_ID/posts
+$ curl -n http://coinnow.local/v1/users/$USER_ID/posts
  -G \
   -d limit=10
 ```
@@ -1548,19 +1546,19 @@ HTTP/1.1 200 OK
 }
 ```
 
-### <a name="link-GET-v1_users_posts-/v1/{user_id}/posts/hashtag_breakdown">特定ユーザーの投稿 あるユーザーの投稿の内訳</a>
+### <a name="link-GET-v1_users_posts-/v1/users/{user_id}/posts/hashtag_breakdown">特定ユーザーの投稿 あるユーザーの投稿の内訳</a>
 
 Show a breakdown of user's posts
 
 ```
-GET /v1/{user_id}/posts/hashtag_breakdown
+GET /v1/users/{user_id}/posts/hashtag_breakdown
 ```
 
 
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/$USER_ID/posts/hashtag_breakdown
+$ curl -n http://coinnow.local/v1/users/$USER_ID/posts/hashtag_breakdown
 ```
 
 

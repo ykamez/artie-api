@@ -77,7 +77,8 @@ links:
   schema:
     type: "null"
   targetSchema:
-    $ref: /schemata/hashtag#/definitions/user_hashtag
+    type: object
+    properties: {}
 
 - title: search_result
   description: get a hashtag's search_result
