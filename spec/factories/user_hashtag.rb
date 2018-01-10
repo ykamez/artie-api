@@ -13,10 +13,6 @@
 #
 
 FactoryBot.define do
-  factory :hashtag do
-    name 'BTC'
-    sequence :name do |n|
-      "BTC#{n}"
-    end
+  factory :user_hashtag do
   end
 end

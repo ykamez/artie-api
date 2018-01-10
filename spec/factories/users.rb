@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -44,7 +45,9 @@ FactoryBot.define do
   factory :user do
     account_name 'geeks'
     fullname 'Bee Gee '
-    email 'hogehoge@example.com'
+    sequence :email do |n|
+      "person#{n}@example.com"
+    end
     password 'letmein1234'
   end
 end

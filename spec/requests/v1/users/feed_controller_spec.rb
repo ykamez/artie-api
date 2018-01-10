@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe V1::Users::HashtagsController, type: :request do
-  describe 'GET #watching' do
+RSpec.describe V1::Users::FeedController, type: :request do
+  describe 'GET #feed' do
     subject { get url, headers: headers, params: params }
 
     let(:headers) do
@@ -9,17 +9,17 @@ RSpec.describe V1::Users::HashtagsController, type: :request do
         'Content-Type': 'application/json',
       }
     end
-    let(:url) { "/v1/users/#{user.id}/hashtags/watching" }
-    let(:user) { create(:user) }
+    let(:url) { "/v1/users/#{me.id}/feed" }
+    let(:me) { create(:user) }
 
     context 'with valid request' do
       context 'when watching hashtags exists' do
         let(:params) { { cursor: Time.now + 1.hour, limit: 5 } }
-        let(:hashtag) { create(:hashtag) }
-        let(:user_hashtag) { create(:user_hashtag, user_id: user.id, hashtag_id: hashtag.id) }
+        let(:user) { create(:user) }
+        let(:post) { create(:post, user_id: user.id) }
 
         before do
-          user_hashtag
+          post
         end
 
         it 'returns 200 response' do
