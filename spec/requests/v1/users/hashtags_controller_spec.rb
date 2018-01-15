@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe V1::Users::HashtagsController, type: :request do
+RSpec.describe V1::Users::HashTagsController, type: :request do
   describe 'GET #watching' do
     subject { get url, headers: headers, params: params }
 

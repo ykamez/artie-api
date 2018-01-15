@@ -1,0 +1,8 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  t.string   "url",       null: false
+  t.integer "posts_count", null: false, default: 0
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+end

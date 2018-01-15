@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe V1::HashtagsController, type: :request do
+RSpec.describe V1::HashTagsController, type: :request do
   describe 'GET #index' do
     subject { get url, headers: headers, params: params }
 
@@ -57,7 +57,7 @@ RSpec.describe V1::HashtagsController, type: :request do
         end
 
         it 'create a record' do
-          expect { subject }.to change(UserHashtag, :count).by(1)
+          expect { subject }.to change(UserHashTag, :count).by(1)
         end
       end
     end
@@ -90,7 +90,7 @@ RSpec.describe V1::HashtagsController, type: :request do
         end
 
         it 'create a record' do
-          expect { subject }.to change(UserHashtag, :count).by(-1)
+          expect { subject }.to change(UserHashTag, :count).by(-1)
         end
       end
     end

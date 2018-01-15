@@ -1,0 +1,60 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: Article
+description: Article Resource
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  id:
+    description: unique identifier of article
+    type: integer
+    example: 1
+    readOnly: true
+  url:
+    description: article's original url
+    type: string
+    example: "https://github.com/."
+  published_at:
+    description: datetime when this article was articleed.
+    type: string
+    format: date-time
+  posts_count:
+    description: article likes count
+    type: integer
+    example: 100
+
+  article:
+    type: object
+    required:
+      - id
+      - url
+      - published_at
+      - posts_count
+    properties:
+      id:
+        $ref: /schemata/article#/definitions/id
+      url:
+        $ref: /schemata/article#/definitions/url
+      published_at:
+        $ref: /schemata/article#/definitions/published_at
+      posts_count:
+        $ref: /schemata/article#/definitions/posts_count
+
+  article_page:
+    type: object
+    required:
+      - data
+      - paging
+    properties:
+      data:
+        type: array
+        items:
+          $ref: /schemata/article#/definitions/article
+      paging:
+        $ref: /schemata/paging#/definitions/paging
+      message:
+        $ref: /schemata#/mesasge
+
+id: schemata/article

@@ -1,7 +1,7 @@
 ---
 "$schema": http://json-schema.org/draft-04/hyper-schema
 title: post
-description: post apis
+description: 記事につく、コメント。
 stability: prototype
 strictProperties: true
 type:
@@ -14,60 +14,9 @@ definitions:
     readOnly: true
 
 links:
-- title: index
-  description: Show a list of post.
-  href: /v1/posts
-  method: GET
-  rel: show
-  schema:
-    type: object
-    properties:
-      limit:
-        description: limit
-        example: 10
-        type: integer
-      cursor:
-        anyOf:
-          - $ref: /schemata#/datetime
-          - type: "null"
-  targetSchema:
-    $ref: /schemata/post#/definitions/post_page
-
-- title: 投稿のモーダル表示(ツイート自身)
-  description: 投稿のモーダル表示のツイート単体(リプライも一緒に取れないので別にした)
-  href: /v1/posts/{id}
-  method: GET
-  rel: self
-  schema:
-    type: "null"
-  targetSchema:
-    $ref: /schemata/post#/definitions/post
-
-- title: 投稿のモーダル表示
-  description: 投稿のモーダルのリプライ情報を追加も合わせて取得する。
-  href: /v1/posts/{id}/replies
-  method: GET
-  rel: instancese
-  schema:
-    type: object
-    properties:
-      limit:
-        description: limit
-        example: 10
-        type: integer
-      cursor:
-        anyOf:
-          - $ref: /schemata#/datetime
-          - type: "null"
-  targetSchema:
-    type: object
-    properties:
-      replies:
-        $ref: /schemata/post#/definitions/post_page
-
 - title: create
   description: create post
-  href: /v1/posts
+  href: /v1/articles/{id}/posts
   method: POST
   rel: create
   schema:
@@ -80,21 +29,13 @@ links:
         $ref: /schemata/post#/definitions/text
       user_id:
         $ref: /schemata/v1_posts#/definitions/user_id
-      image_data:
-        type: array
-        items:
-          $ref: /schemata/post#/definitions/image_data
-      hashtags:
-        type: array
-        items:
-          $ref: /schemata/hashtag#/definitions/hashtag
   targetSchema:
     $ref: /schemata/post#/definitions/post
 
 
 - title: delete
   description: update post
-  href: /v1/posts/{id}
+  href: /v1/articles/{id}/posts/{post_id}
   method: DELETE
   rel: empty
   schema:

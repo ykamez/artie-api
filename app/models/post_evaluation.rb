@@ -23,6 +23,6 @@
 
 class PostEvaluation < ApplicationRecord
   belongs_to :post
-  enum evaluation_type: { like: 0, dislike: 1 }
+  enum evaluation_type: { like: 0 }
   counter_culture :post, column_name: ->(model) { "#{model.evaluation_type}s_count" }
 end

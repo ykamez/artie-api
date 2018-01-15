@@ -16,11 +16,7 @@ definitions:
     description: post's text
     type: string
     example: "Pig Coin is awesome."
-  image_data:
-    description: images attached to post
-    type: string
-    example: 'aws:pig_coin.png'
-  published_at:
+  post_at:
     description: datetime when this post was posted.
     type: string
     format: date-time
@@ -28,14 +24,6 @@ definitions:
     description: post likes count
     type: integer
     example: 100
-  dislikes_count:
-    description: post dislikes count
-    type: integer
-    example: 50
-  shares_count:
-    description: post shares count
-    type: integer
-    example: 50
 
   post:
     type: object
@@ -43,10 +31,8 @@ definitions:
       - id
       - text
       - user
-      - published_at
+      - post_at
       - likes_count
-      - dislikes_count
-      - shares_count
     properties:
       id:
         $ref: /schemata/post#/definitions/id
@@ -54,22 +40,10 @@ definitions:
         $ref: /schemata/post#/definitions/text
       user:
         $ref: /schemata/user#/definitions/user
-      image_data:
-        type: array
-        items:
-          $ref: /schemata/post#/definitions/image_data
-      hashtag:
-        type: array
-        items:
-          $ref: /schemata/hashtag#/definitions/hashtag
-      published_at:
-        $ref: /schemata/post#/definitions/published_at
+      post_at:
+        $ref: /schemata/post#/definitions/post_at
       likes_count:
         $ref: /schemata/post#/definitions/likes_count
-      dislikes_count:
-        $ref: /schemata/post#/definitions/dislikes_count
-      shares_count:
-        $ref: /schemata/post#/definitions/shares_count
 
   post_page:
     type: object

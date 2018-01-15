@@ -8,8 +8,8 @@ type:
 - object
 
 links:
-- title: user's watching hashtags
-  description: Show a list of a user's watching hashtags.
+- title: user's favorites hashtags
+  description: Show a list of a user's favorites hashtags.
   href: /v1/users/{user_id}/hashtags/watching
   method: GET
   rel: show

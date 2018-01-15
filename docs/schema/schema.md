@@ -1,23 +1,24 @@
 # The table of contents
+  - <a href="#resource-article">Article</a>
   - <a href="#resource-hashtag">Hashtag</a>
   - <a href="#resource-paging">paging</a>
   - <a href="#resource-post">Post</a>
   - <a href="#resource-post_evaluation">Post Evaluation</a>
   - <a href="#resource-user">User</a>
-  - <a href="#resource-v1_hashtags">hashtag</a>
+  - <a href="#resource-v1_articles">article</a>
+    - <a href="#link-GET-v1_articles-/v1/articles">GET /v1/articles</a>
+    - <a href="#link-GET-v1_articles-/v1/articles/{id}">GET /v1/articles/{id}</a>
+    - <a href="#link-GET-v1_articles-/v1/articles/{id}/posts">GET /v1/articles/{id}/posts</a>
+    - <a href="#link-POST-v1_articles-/v1/articles">POST /v1/articles</a>
+    - <a href="#link-DELETE-v1_articles-/v1/articles/{id}">DELETE /v1/articles/{id}</a>
+  - <a href="#resource-v1_hashtags">Hashtag</a>
     - <a href="#link-GET-v1_hashtags-/v1/hashtags">GET /v1/hashtags</a>
     - <a href="#link-GET-v1_hashtags-/v1/hashtags/{hashtag_id}/posts">GET /v1/hashtags/{hashtag_id}/posts</a>
-    - <a href="#link-POST-v1_hashtags-/v1/hashtags/{hashtag_id}/watch">POST /v1/hashtags/{hashtag_id}/watch</a>
-    - <a href="#link-DELETE-v1_hashtags-/v1/hashtags/{hashtag_id}/watch">DELETE /v1/hashtags/{hashtag_id}/watch</a>
-    - <a href="#link-GET-v1_hashtags-/v1/hashtags/search_result">GET /v1/hashtags/search_result</a>
   - <a href="#resource-v1_hashtags_trends">トレンド仮想通貨</a>
     - <a href="#link-GET-v1_hashtags_trends-/v1/hashtags/trends">GET /v1/hashtags/trends</a>
   - <a href="#resource-v1_posts">post</a>
-    - <a href="#link-GET-v1_posts-/v1/posts">GET /v1/posts</a>
-    - <a href="#link-GET-v1_posts-/v1/posts/{id}">GET /v1/posts/{id}</a>
-    - <a href="#link-GET-v1_posts-/v1/posts/{id}/replies">GET /v1/posts/{id}/replies</a>
-    - <a href="#link-POST-v1_posts-/v1/posts">POST /v1/posts</a>
-    - <a href="#link-DELETE-v1_posts-/v1/posts/{id}">DELETE /v1/posts/{id}</a>
+    - <a href="#link-POST-v1_posts-/v1/articles/{id}/posts">POST /v1/articles/{id}/posts</a>
+    - <a href="#link-DELETE-v1_posts-/v1/articles/{id}/posts/{post_id}">DELETE /v1/articles/{id}/posts/{post_id}</a>
   - <a href="#resource-v1_posts_reaction">reaction</a>
     - <a href="#link-POST-v1_posts_reaction-/v1/posts/{post_id}/like">POST /v1/posts/{post_id}/like</a>
     - <a href="#link-POST-v1_posts_reaction-/v1/posts/{post_id}/dislike">POST /v1/posts/{post_id}/dislike</a>
@@ -33,8 +34,6 @@
     - <a href="#link-POST-v1_users-/v1/users/">POST /v1/users/</a>
     - <a href="#link-PATCH-v1_users-/v1/users/{id}">PATCH /v1/users/{id}</a>
     - <a href="#link-DELETE-v1_users-/v1/users/{id}">DELETE /v1/users/{id}</a>
-  - <a href="#resource-v1_users_feed">feed</a>
-    - <a href="#link-GET-v1_users_feed-/v1/users/{user_id}/feed">GET /v1/users/{user_id}/feed</a>
   - <a href="#resource-v1_users_follow_follwers">follow and followers</a>
     - <a href="#link-GET-v1_users_follow_follwers-/v1/users/{user_id}/users/following">GET /v1/users/{user_id}/users/following</a>
     - <a href="#link-GET-v1_users_follow_follwers-/v1/{user_id}/users/followers">GET /v1/{user_id}/users/followers</a>
@@ -42,12 +41,18 @@
     - <a href="#link-GET-v1_users_hashtag-/v1/users/{user_id}/hashtags/watching">GET /v1/users/{user_id}/hashtags/watching</a>
   - <a href="#resource-v1_users_posts">特定ユーザーの投稿</a>
     - <a href="#link-GET-v1_users_posts-/v1/users/{user_id}/posts">GET /v1/users/{user_id}/posts</a>
-    - <a href="#link-GET-v1_users_posts-/v1/users/{user_id}/posts/hashtag_breakdown">GET /v1/users/{user_id}/posts/hashtag_breakdown</a>
   - <a href="#resource-v1_users_search_result">search_result</a>
-    - <a href="#link-GET-v1_users_search_result-/v1/users/search_result">GET /v1/users/search_result</a>
+    - <a href="#link-GET-v1_users_search_result-/v1/users/search">GET /v1/users/search</a>
   - <a href="#resource-v1_users_user_evaluation">ユーザー評価</a>
     - <a href="#link-GET-v1_users_user_evaluation-/v1/users/{user_id}/user_evaluation">GET /v1/users/{user_id}/user_evaluation</a>
  
+## <a name="resource-article">Article</a>
+
+Stability: `prototype`
+
+Article Resource
+
+
 ## <a name="resource-hashtag">Hashtag</a>
 
 Stability: `prototype`
@@ -83,13 +88,230 @@ Stability: `prototype`
 User Resource
 
 
-## <a name="resource-v1_hashtags">hashtag</a>
+## <a name="resource-v1_articles">article</a>
 
 Stability: `prototype`
 
-hashtag apis
+article apis
 
-### <a name="link-GET-v1_hashtags-/v1/hashtags">hashtag index</a>
+### <a name="link-GET-v1_articles-/v1/articles">article index</a>
+
+Show a list of article.
+
+```
+GET /v1/articles
+```
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **cursor** | *string* | datetime |  |
+| **limit** | *integer* | limit | `10` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n http://coinnow.local/v1/articles
+ -G \
+  -d limit=10
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "url": "https://github.com/.",
+      "published_at": "2015-01-01T12:00:00Z",
+      "posts_count": 100
+    }
+  ],
+  "paging": {
+    "cursor": null,
+    "has_next": true
+  },
+  "message": "success!!"
+}
+```
+
+### <a name="link-GET-v1_articles-/v1/articles/{id}">article 記事の詳細表示</a>
+
+記事の詳細
+
+```
+GET /v1/articles/{id}
+```
+
+
+#### Curl Example
+
+```bash
+$ curl -n http://coinnow.local/v1/articles/$ID
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "id": 1,
+  "url": "https://github.com/.",
+  "published_at": "2015-01-01T12:00:00Z",
+  "posts_count": 100
+}
+```
+
+### <a name="link-GET-v1_articles-/v1/articles/{id}/posts">article 記事のコメント表示</a>
+
+投稿のモーダルのリプライ情報を追加も合わせて取得する。
+
+```
+GET /v1/articles/{id}/posts
+```
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **cursor** | *string* | datetime |  |
+| **limit** | *integer* | limit | `10` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n http://coinnow.local/v1/articles/$ID/posts
+ -G \
+  -d limit=10
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "replies": {
+    "data": [
+      {
+        "id": 1,
+        "text": "Pig Coin is awesome.",
+        "user": {
+          "id": 1,
+          "fullname": "Bob Marley",
+          "account_name": "bob",
+          "image_data": "example",
+          "total_like_count": 123,
+          "total_dislike_count": 123,
+          "following_count": 10,
+          "followers_count": 30,
+          "evaluation_point": 2.5
+        },
+        "post_at": "2015-01-01T12:00:00Z",
+        "likes_count": 100
+      }
+    ],
+    "paging": {
+      "cursor": null,
+      "has_next": true
+    },
+    "message": "success!!"
+  }
+}
+```
+
+### <a name="link-POST-v1_articles-/v1/articles">article create</a>
+
+ページの右上からピックするときはこれを叩く。既にピックされていた場合は、getして返すことになる。ピックされた記事にコメントする際は、`post /v1/articles/:id/posts`を叩いてもらう。
+
+```
+POST /v1/articles
+```
+
+#### Required Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **url** | *string* | article's original url | `"https://github.com/."` |
+
+
+
+#### Curl Example
+
+```bash
+$ curl -n -X POST http://coinnow.local/v1/articles \
+  -d '{
+  "url": "https://github.com/."
+}' \
+  -H "Content-Type: application/json"
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 201 Created
+```
+
+```json
+{
+  "id": 1,
+  "url": "https://github.com/.",
+  "published_at": "2015-01-01T12:00:00Z",
+  "posts_count": 100
+}
+```
+
+### <a name="link-DELETE-v1_articles-/v1/articles/{id}">article delete</a>
+
+実装するか判断延期。NewsPicksでは、バグとして残っている模様。
+
+```
+DELETE /v1/articles/{id}
+```
+
+
+#### Curl Example
+
+```bash
+$ curl -n -X DELETE http://coinnow.local/v1/articles/$ID \
+  -d '{
+}' \
+  -H "Content-Type: application/json"
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 202 Accepted
+```
+
+
+
+## <a name="resource-v1_hashtags">Hashtag</a>
+
+Stability: `prototype`
+
+記事のカテゴリーを表すくくりとして使われる予定。
+
+### <a name="link-GET-v1_hashtags-/v1/hashtags">Hashtag index</a>
 
 Show a list of hashtag.
 
@@ -136,7 +358,7 @@ HTTP/1.1 200 OK
 }
 ```
 
-### <a name="link-GET-v1_hashtags-/v1/hashtags/{hashtag_id}/posts">hashtag show</a>
+### <a name="link-GET-v1_hashtags-/v1/hashtags/{hashtag_id}/posts">Hashtag show</a>
 
 Show a specific hashtag's posts
 
@@ -184,115 +406,8 @@ HTTP/1.1 200 OK
         "followers_count": 30,
         "evaluation_point": 2.5
       },
-      "image_data": [
-        "aws:pig_coin.png"
-      ],
-      "hashtag": [
-        {
-          "id": 1,
-          "name": "BTC"
-        }
-      ],
-      "published_at": "2015-01-01T12:00:00Z",
-      "likes_count": 100,
-      "dislikes_count": 50,
-      "shares_count": 50
-    }
-  ],
-  "paging": {
-    "cursor": null,
-    "has_next": true
-  },
-  "message": "success!!"
-}
-```
-
-### <a name="link-POST-v1_hashtags-/v1/hashtags/{hashtag_id}/watch">hashtag watch</a>
-
-add a hashtag to watchlist
-
-```
-POST /v1/hashtags/{hashtag_id}/watch
-```
-
-
-#### Curl Example
-
-```bash
-$ curl -n -X POST http://coinnow.local/v1/hashtags/$HASHTAG_ID/watch \
-  -H "Content-Type: application/json"
-```
-
-
-#### Response Example
-
-```
-HTTP/1.1 200 OK
-```
-
-```json
-{
-  "user_id": 1234,
-  "hashtag_id": 1
-}
-```
-
-### <a name="link-DELETE-v1_hashtags-/v1/hashtags/{hashtag_id}/watch">hashtag unwatch</a>
-
-remove a hashtag from watchlist
-
-```
-DELETE /v1/hashtags/{hashtag_id}/watch
-```
-
-
-#### Curl Example
-
-```bash
-$ curl -n -X DELETE http://coinnow.local/v1/hashtags/$HASHTAG_ID/watch \
-  -H "Content-Type: application/json"
-```
-
-
-#### Response Example
-
-```
-HTTP/1.1 200 OK
-```
-
-```json
-{
-}
-```
-
-### <a name="link-GET-v1_hashtags-/v1/hashtags/search_result">hashtag search_result</a>
-
-get a hashtag's search_result
-
-```
-GET /v1/hashtags/search_result
-```
-
-
-#### Curl Example
-
-```bash
-$ curl -n http://coinnow.local/v1/hashtags/search_result
-```
-
-
-#### Response Example
-
-```
-HTTP/1.1 200 OK
-```
-
-```json
-{
-  "data": [
-    {
-      "id": 1,
-      "name": "BTC"
+      "post_at": "2015-01-01T12:00:00Z",
+      "likes_count": 100
     }
   ],
   "paging": {
@@ -352,211 +467,14 @@ HTTP/1.1 200 OK
 
 Stability: `prototype`
 
-post apis
+記事につく、コメント。
 
-### <a name="link-GET-v1_posts-/v1/posts">post index</a>
-
-Show a list of post.
-
-```
-GET /v1/posts
-```
-
-#### Optional Parameters
-
-| Name | Type | Description | Example |
-| ------- | ------- | ------- | ------- |
-| **cursor** | *string* | datetime |  |
-| **limit** | *integer* | limit | `10` |
-
-
-#### Curl Example
-
-```bash
-$ curl -n http://coinnow.local/v1/posts
- -G \
-  -d limit=10
-```
-
-
-#### Response Example
-
-```
-HTTP/1.1 200 OK
-```
-
-```json
-{
-  "data": [
-    {
-      "id": 1,
-      "text": "Pig Coin is awesome.",
-      "user": {
-        "id": 1,
-        "fullname": "Bob Marley",
-        "account_name": "bob",
-        "image_data": "example",
-        "total_like_count": 123,
-        "total_dislike_count": 123,
-        "following_count": 10,
-        "followers_count": 30,
-        "evaluation_point": 2.5
-      },
-      "image_data": [
-        "aws:pig_coin.png"
-      ],
-      "hashtag": [
-        {
-          "id": 1,
-          "name": "BTC"
-        }
-      ],
-      "published_at": "2015-01-01T12:00:00Z",
-      "likes_count": 100,
-      "dislikes_count": 50,
-      "shares_count": 50
-    }
-  ],
-  "paging": {
-    "cursor": null,
-    "has_next": true
-  },
-  "message": "success!!"
-}
-```
-
-### <a name="link-GET-v1_posts-/v1/posts/{id}">post 投稿のモーダル表示(ツイート自身)</a>
-
-投稿のモーダル表示のツイート単体(リプライも一緒に取れないので別にした)
-
-```
-GET /v1/posts/{id}
-```
-
-
-#### Curl Example
-
-```bash
-$ curl -n http://coinnow.local/v1/posts/$ID
-```
-
-
-#### Response Example
-
-```
-HTTP/1.1 200 OK
-```
-
-```json
-{
-  "id": 1,
-  "text": "Pig Coin is awesome.",
-  "user": {
-    "id": 1,
-    "fullname": "Bob Marley",
-    "account_name": "bob",
-    "image_data": "example",
-    "total_like_count": 123,
-    "total_dislike_count": 123,
-    "following_count": 10,
-    "followers_count": 30,
-    "evaluation_point": 2.5
-  },
-  "image_data": [
-    "aws:pig_coin.png"
-  ],
-  "hashtag": [
-    {
-      "id": 1,
-      "name": "BTC"
-    }
-  ],
-  "published_at": "2015-01-01T12:00:00Z",
-  "likes_count": 100,
-  "dislikes_count": 50,
-  "shares_count": 50
-}
-```
-
-### <a name="link-GET-v1_posts-/v1/posts/{id}/replies">post 投稿のモーダル表示</a>
-
-投稿のモーダルのリプライ情報を追加も合わせて取得する。
-
-```
-GET /v1/posts/{id}/replies
-```
-
-#### Optional Parameters
-
-| Name | Type | Description | Example |
-| ------- | ------- | ------- | ------- |
-| **cursor** | *string* | datetime |  |
-| **limit** | *integer* | limit | `10` |
-
-
-#### Curl Example
-
-```bash
-$ curl -n http://coinnow.local/v1/posts/$ID/replies
- -G \
-  -d limit=10
-```
-
-
-#### Response Example
-
-```
-HTTP/1.1 200 OK
-```
-
-```json
-{
-  "replies": {
-    "data": [
-      {
-        "id": 1,
-        "text": "Pig Coin is awesome.",
-        "user": {
-          "id": 1,
-          "fullname": "Bob Marley",
-          "account_name": "bob",
-          "image_data": "example",
-          "total_like_count": 123,
-          "total_dislike_count": 123,
-          "following_count": 10,
-          "followers_count": 30,
-          "evaluation_point": 2.5
-        },
-        "image_data": [
-          "aws:pig_coin.png"
-        ],
-        "hashtag": [
-          {
-            "id": 1,
-            "name": "BTC"
-          }
-        ],
-        "published_at": "2015-01-01T12:00:00Z",
-        "likes_count": 100,
-        "dislikes_count": 50,
-        "shares_count": 50
-      }
-    ],
-    "paging": {
-      "cursor": null,
-      "has_next": true
-    },
-    "message": "success!!"
-  }
-}
-```
-
-### <a name="link-POST-v1_posts-/v1/posts">post create</a>
+### <a name="link-POST-v1_posts-/v1/articles/{id}/posts">post create</a>
 
 create post
 
 ```
-POST /v1/posts
+POST /v1/articles/{id}/posts
 ```
 
 #### Required Parameters
@@ -567,30 +485,14 @@ POST /v1/posts
 | **user_id** | *integer* | unique identifier of user | `1234` |
 
 
-#### Optional Parameters
-
-| Name | Type | Description | Example |
-| ------- | ------- | ------- | ------- |
-| **hashtags** | *array* |  | `[{"id":1,"name":"BTC"}]` |
-| **image_data** | *array* |  | `["aws:pig_coin.png"]` |
-
 
 #### Curl Example
 
 ```bash
-$ curl -n -X POST http://coinnow.local/v1/posts \
+$ curl -n -X POST http://coinnow.local/v1/articles/$ID/posts \
   -d '{
   "text": "Pig Coin is awesome.",
-  "user_id": 1234,
-  "image_data": [
-    "aws:pig_coin.png"
-  ],
-  "hashtags": [
-    {
-      "id": 1,
-      "name": "BTC"
-    }
-  ]
+  "user_id": 1234
 }' \
   -H "Content-Type: application/json"
 ```
@@ -617,35 +519,24 @@ HTTP/1.1 201 Created
     "followers_count": 30,
     "evaluation_point": 2.5
   },
-  "image_data": [
-    "aws:pig_coin.png"
-  ],
-  "hashtag": [
-    {
-      "id": 1,
-      "name": "BTC"
-    }
-  ],
-  "published_at": "2015-01-01T12:00:00Z",
-  "likes_count": 100,
-  "dislikes_count": 50,
-  "shares_count": 50
+  "post_at": "2015-01-01T12:00:00Z",
+  "likes_count": 100
 }
 ```
 
-### <a name="link-DELETE-v1_posts-/v1/posts/{id}">post delete</a>
+### <a name="link-DELETE-v1_posts-/v1/articles/{id}/posts/{post_id}">post delete</a>
 
 update post
 
 ```
-DELETE /v1/posts/{id}
+DELETE /v1/articles/{id}/posts/{post_id}
 ```
 
 
 #### Curl Example
 
 ```bash
-$ curl -n -X DELETE http://coinnow.local/v1/posts/$ID \
+$ curl -n -X DELETE http://coinnow.local/v1/articles/$ID/posts/$POST_ID \
   -d '{
 }' \
   -H "Content-Type: application/json"
@@ -704,19 +595,8 @@ HTTP/1.1 201 Created
     "followers_count": 30,
     "evaluation_point": 2.5
   },
-  "image_data": [
-    "aws:pig_coin.png"
-  ],
-  "hashtag": [
-    {
-      "id": 1,
-      "name": "BTC"
-    }
-  ],
-  "published_at": "2015-01-01T12:00:00Z",
-  "likes_count": 100,
-  "dislikes_count": 50,
-  "shares_count": 50
+  "post_at": "2015-01-01T12:00:00Z",
+  "likes_count": 100
 }
 ```
 
@@ -758,19 +638,8 @@ HTTP/1.1 201 Created
     "followers_count": 30,
     "evaluation_point": 2.5
   },
-  "image_data": [
-    "aws:pig_coin.png"
-  ],
-  "hashtag": [
-    {
-      "id": 1,
-      "name": "BTC"
-    }
-  ],
-  "published_at": "2015-01-01T12:00:00Z",
-  "likes_count": 100,
-  "dislikes_count": 50,
-  "shares_count": 50
+  "post_at": "2015-01-01T12:00:00Z",
+  "likes_count": 100
 }
 ```
 
@@ -812,19 +681,8 @@ HTTP/1.1 201 Created
     "followers_count": 30,
     "evaluation_point": 2.5
   },
-  "image_data": [
-    "aws:pig_coin.png"
-  ],
-  "hashtag": [
-    {
-      "id": 1,
-      "name": "BTC"
-    }
-  ],
-  "published_at": "2015-01-01T12:00:00Z",
-  "likes_count": 100,
-  "dislikes_count": 50,
-  "shares_count": 50
+  "post_at": "2015-01-01T12:00:00Z",
+  "likes_count": 100
 }
 ```
 
@@ -874,19 +732,8 @@ HTTP/1.1 200 OK
         "followers_count": 30,
         "evaluation_point": 2.5
       },
-      "image_data": [
-        "aws:pig_coin.png"
-      ],
-      "hashtag": [
-        {
-          "id": 1,
-          "name": "BTC"
-        }
-      ],
-      "published_at": "2015-01-01T12:00:00Z",
-      "likes_count": 100,
-      "dislikes_count": 50,
-      "shares_count": 50
+      "post_at": "2015-01-01T12:00:00Z",
+      "likes_count": 100
     }
   ],
   "paging": {
@@ -1223,84 +1070,6 @@ HTTP/1.1 202 Accepted
 
 
 
-## <a name="resource-v1_users_feed">feed</a>
-
-Stability: `prototype`
-
-user feed apis
-
-### <a name="link-GET-v1_users_feed-/v1/users/{user_id}/feed">feed index</a>
-
-Show a user's feed
-
-```
-GET /v1/users/{user_id}/feed
-```
-
-#### Optional Parameters
-
-| Name | Type | Description | Example |
-| ------- | ------- | ------- | ------- |
-| **cursor** | *string* | datetime |  |
-| **limit** | *integer* | limit | `10` |
-
-
-#### Curl Example
-
-```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/feed
- -G \
-  -d limit=10
-```
-
-
-#### Response Example
-
-```
-HTTP/1.1 200 OK
-```
-
-```json
-{
-  "data": [
-    {
-      "id": 1,
-      "text": "Pig Coin is awesome.",
-      "user": {
-        "id": 1,
-        "fullname": "Bob Marley",
-        "account_name": "bob",
-        "image_data": "example",
-        "total_like_count": 123,
-        "total_dislike_count": 123,
-        "following_count": 10,
-        "followers_count": 30,
-        "evaluation_point": 2.5
-      },
-      "image_data": [
-        "aws:pig_coin.png"
-      ],
-      "hashtag": [
-        {
-          "id": 1,
-          "name": "BTC"
-        }
-      ],
-      "published_at": "2015-01-01T12:00:00Z",
-      "likes_count": 100,
-      "dislikes_count": 50,
-      "shares_count": 50
-    }
-  ],
-  "paging": {
-    "cursor": null,
-    "has_next": true
-  },
-  "message": "success!!"
-}
-```
-
-
 ## <a name="resource-v1_users_follow_follwers">follow and followers</a>
 
 Stability: `prototype`
@@ -1422,9 +1191,9 @@ Stability: `prototype`
 
 user hashtag apis
 
-### <a name="link-GET-v1_users_hashtag-/v1/users/{user_id}/hashtags/watching">user hashtag user's watching hashtags</a>
+### <a name="link-GET-v1_users_hashtag-/v1/users/{user_id}/hashtags/watching">user hashtag user's favorites hashtags</a>
 
-Show a list of a user's watching hashtags.
+Show a list of a user's favorites hashtags.
 
 ```
 GET /v1/users/{user_id}/hashtags/watching
@@ -1523,19 +1292,8 @@ HTTP/1.1 200 OK
         "followers_count": 30,
         "evaluation_point": 2.5
       },
-      "image_data": [
-        "aws:pig_coin.png"
-      ],
-      "hashtag": [
-        {
-          "id": 1,
-          "name": "BTC"
-        }
-      ],
-      "published_at": "2015-01-01T12:00:00Z",
-      "likes_count": 100,
-      "dislikes_count": 50,
-      "shares_count": 50
+      "post_at": "2015-01-01T12:00:00Z",
+      "likes_count": 100
     }
   ],
   "paging": {
@@ -1546,42 +1304,6 @@ HTTP/1.1 200 OK
 }
 ```
 
-### <a name="link-GET-v1_users_posts-/v1/users/{user_id}/posts/hashtag_breakdown">特定ユーザーの投稿 あるユーザーの投稿の内訳</a>
-
-Show a breakdown of user's posts
-
-```
-GET /v1/users/{user_id}/posts/hashtag_breakdown
-```
-
-
-#### Curl Example
-
-```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/posts/hashtag_breakdown
-```
-
-
-#### Response Example
-
-```
-HTTP/1.1 200 OK
-```
-
-```json
-{
-  "data": [
-    {
-      "hashtag": {
-        "id": 1,
-        "name": "BTC"
-      },
-      "posts_count": 123
-    }
-  ]
-}
-```
-
 
 ## <a name="resource-v1_users_search_result">search_result</a>
 
@@ -1589,19 +1311,19 @@ Stability: `prototype`
 
 get search_result apis
 
-### <a name="link-GET-v1_users_search_result-/v1/users/search_result">search_result search_result</a>
+### <a name="link-GET-v1_users_search_result-/v1/users/search">search_result search_result</a>
 
-get a user's search_result
+get a user's search
 
 ```
-GET /v1/users/search_result
+GET /v1/users/search
 ```
 
 
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/search_result
+$ curl -n http://coinnow.local/v1/users/search
 ```
 
 
@@ -1665,9 +1387,7 @@ HTTP/1.1 200 OK
 
 ```json
 {
-  "total_count_likes": 1248,
-  "total_count_dislikes": 100,
-  "total_count_shares": 1234
+  "total_count_likes": 1248
 }
 ```
 

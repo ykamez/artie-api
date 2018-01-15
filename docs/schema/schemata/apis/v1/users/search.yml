@@ -9,8 +9,8 @@ type:
 
 links:
 - title: search_result
-  description: get a user's search_result
-  href: /v1/users/search_result
+  description: get a user's search
+  href: /v1/users/search
   method: GET
   rel: instances
   schema:

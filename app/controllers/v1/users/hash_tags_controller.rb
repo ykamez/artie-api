@@ -1,9 +1,9 @@
-class V1::Users::HashtagsController < ApplicationController
+class V1::Users::HashTagsController < ApplicationController
   def watching
-    user_hashtags = UserHashtag.where(user_id: user_id)
-    user_watching_list = Hashtag.where(id: user_hashtags.pluck(:hashtag_id))
+    user_hashtags = UserHashTag.where(user_id: user_id)
+    user_watching_list = HashTag.where(id: user_hashtags.pluck(:hashtag_id))
     page = build_page(user_watching_list)
-    render json: page, serializer: V1::UserHashtagsPagingSerializer
+    render json: page, serializer: V1::UserHashTagsPagingSerializer
   end
 
   private

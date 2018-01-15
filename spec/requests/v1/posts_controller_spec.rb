@@ -87,7 +87,7 @@ RSpec.describe V1::PostsController, type: :request do
         end
 
         it 'create a record' do
-          expect { subject }.to change(PostHashtag, :count).by(1)
+          expect { subject }.to change(ArticleHashtag, :count).by(1)
         end
       end
     end

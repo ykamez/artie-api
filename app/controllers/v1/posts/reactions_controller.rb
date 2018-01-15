@@ -6,18 +6,8 @@ class V1::Posts::ReactionsController < ApplicationController
     render json: {}
   end
 
-  def add_dislike
-    add_reaction('dislike')
-    render json: {}
-  end
-
   def delete_like
     remove_reaction('like')
-    render json: {}
-  end
-
-  def delete_dislike
-    remove_reaction('dislike')
     render json: {}
   end
 

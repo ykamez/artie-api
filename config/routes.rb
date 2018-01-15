@@ -1,47 +1,45 @@
 Rails.application.routes.draw do
-  namespace :v1 do
-    namespace :users do
-      get 'hashtag/watching'
-    end
-  end
-
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
     registrations: 'auth/registrations'
   }
   namespace :v1, defaults: { format: 'json' } do
     resources :users, only: [:index, :show] do
+      resources :posts, only: [:index]
+
       collection do
         get :me
       end
+
       member do
-        get :feed, to: 'users/feed#feed'
-        scope :hashtags do
-          get :watching, to: 'users/hashtags#watching'
-        end
+        get :following
+        get :followers
+        post :follow
+        delete :follow
       end
+
+      scope :following do
+        resources :posts, only: [:index]
+        resources :post_evaluations, only: [:index]
+      end
+
+      resources :posts, only: [:index]
+      resources :post_evaluations, only: [:index]
     end
 
-    resources :hashtags do
-      collection do
-        get :trend
-      end
-    end
-
-    resources :hashtags, only: [:index, :show] do
+    resources :hash_tags, only: [:index, :show] do
       member do
         post :watch, action: :watch
         delete :watch, action: :unwatch
       end
-      resources :posts, only: [:index], to: 'hashtags#show'
+      resources :articles, only: [:index]
     end
 
-    resources :posts, only: [:index, :show, :create, :destroy] do
-      member do
-        get :replies
-        post :like, to: 'posts/reactions#add_like'
-        post :dislike, to: 'posts/reactions#add_dislike'
-        delete :like, to: 'posts/reactions#delete_like'
-        delete :dislike, to: 'posts/reactions#delete_dislike'
+    resources :articles, only: [:index, :create] do
+      resources :posts, only: [:index, :show, :create, :destroy] do
+        member do
+          post :like, to: 'posts/reactions#add_like'
+          delete :like, to: 'posts/reactions#delete_like'
+        end
       end
     end
   end

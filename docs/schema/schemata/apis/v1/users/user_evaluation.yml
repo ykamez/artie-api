@@ -19,16 +19,9 @@ links:
     type: object
     required:
       - total_count_likes
-      - total_count_dislikes
-      - total_count_shares
     properties:
       total_count_likes:
         $ref: /schemata/post_evaluation#/definitions/like
-      total_count_dislikes:
-        $ref: /schemata/post_evaluation#/definitions/dislike
-      total_count_shares:
-        type: integer
-        example: 1234
 
 
 id: schemata/v1_users_user_evaluation
