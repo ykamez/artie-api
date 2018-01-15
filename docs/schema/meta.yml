@@ -15,3 +15,7 @@
      description: datetime
      type: string
      format: date-time
+   mesasge:
+    description: response message
+    type: string
+    example: "success!!"

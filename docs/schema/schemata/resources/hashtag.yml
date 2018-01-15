@@ -14,8 +14,35 @@ definitions:
     readOnly: true
   name:
     description: hashtag's name
-    example: "pig"
+    example: "BTC"
     type: string
+  breakdown:
+    type: object
+    required:
+      - hashtag
+      - posts_count
+    properties:
+      hashtag:
+        $ref: /schemata/hashtag#/definitions/hashtag
+      posts_count:
+        type: integer
+        example: 123
+  trend:
+    type: object
+    required:
+      - hashtag
+      - people_count
+      - count_posts
+    properties:
+      hashtag:
+        $ref: /schemata/hashtag#/definitions/hashtag
+      people_count:
+        type: integer
+        example: 350
+      posts_count:
+        type: integer
+        example: 840
+
   hashtag:
     type: object
     required:
@@ -26,5 +53,16 @@ definitions:
         $ref: "/schemata/hashtag#/definitions/id"
       name:
         $ref: "/schemata/hashtag#/definitions/name"
+
+  user_hashtag:
+    type: object
+    required:
+      - user_id
+      - hashtag_id
+    properties:
+      user_id:
+        $ref: "/schemata#/user_id"
+      hashtag_id:
+        $ref: "/schemata/hashtag#/definitions/id"
 
 id: schemata/hashtag

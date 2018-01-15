@@ -1,0 +1,22 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: search_result
+description: get search_result apis
+stability: prototype
+strictProperties: true
+type:
+- object
+
+links:
+- title: search_result
+  description: get a user's search_result
+  href: /v1/users/search_result
+  method: GET
+  rel: instances
+  schema:
+    description: search query for user
+    type: string
+  targetSchema:
+    $ref: /schemata/user#/definitions/user_page
+
+id: schemata/v1_users_search_result

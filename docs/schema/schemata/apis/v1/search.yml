@@ -1,0 +1,33 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: search
+description: search apis
+stability: prototype
+strictProperties: true
+type:
+- object
+
+links:
+- title: search
+  description: Show a list of users and hashtags
+  href: /v1/search
+  method: GET
+  rel: instances
+  schema:
+    type: "null"
+  targetSchema:
+    type: object
+    required:
+      - users
+      - hashtags
+    properties:
+      users:
+        type: array
+        items:
+          $ref: /schemata/user#/definitions/user
+      hashtags:
+        type: array
+        items:
+          $ref: /schemata/hashtag#/definitions/hashtag
+
+id: schemata/v1_search

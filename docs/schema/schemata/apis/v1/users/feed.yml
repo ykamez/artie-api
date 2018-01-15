@@ -1,0 +1,30 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: feed
+description: user feed apis
+stability: prototype
+strictProperties: true
+type:
+- object
+
+links:
+- title: index
+  description: Show a user's feed
+  href: /v1/users/{user_id}/feed
+  method: GET
+  rel: instances
+  schema:
+    type: object
+    properties:
+      limit:
+        description: limit
+        example: 10
+        type: integer
+      cursor:
+        anyOf:
+          - $ref: /schemata#/datetime
+          - type: "null"
+  targetSchema:
+    $ref: /schemata/post#/definitions/post_page
+
+id: schemata/v1_users_feed

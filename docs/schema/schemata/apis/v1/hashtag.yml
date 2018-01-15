@@ -25,9 +25,20 @@ links:
           - $ref: /schemata#/datetime
           - type: "null"
   targetSchema:
-    type: array
-    items:
-      $ref: /schemata/hashtag#/definitions/hashtag
+    type: object
+    required:
+      - data
+      - paging
+    properties:
+      data:
+        type: array
+        items:
+          $ref: /schemata/hashtag#/definitions/hashtag
+      paging:
+        $ref: /schemata/paging#/definitions/paging
+      message:
+        $ref: /schemata#/mesasge
+
 
 - title: show
   description: Show a specific hashtag's posts
@@ -46,8 +57,49 @@ links:
           - $ref: /schemata#/datetime
           - type: "null"
   targetSchema:
-    type: array
-    items:
-      $ref: /schemata/post#/definitions/post
+    $ref: /schemata/post#/definitions/post_page
+
+- title: watch
+  description: add a hashtag to watchlist
+  href: /v1/hashtags/{hashtag_id}/watch
+  method: POST
+  rel: self
+  schema:
+    type: "null"
+  targetSchema:
+    $ref: /schemata/hashtag#/definitions/user_hashtag
+
+- title: unwatch
+  description: remove a hashtag from watchlist
+  href: /v1/hashtags/{hashtag_id}/watch
+  method: DELETE
+  rel: destroy
+  schema:
+    type: "null"
+  targetSchema:
+    type: object
+    properties: {}
+
+- title: search_result
+  description: get a hashtag's search_result
+  href: /v1/hashtags/search_result
+  method: GET
+  rel: instances
+  schema:
+    type: string
+  targetSchema:
+    type: object
+    required:
+      - data
+      - paging
+    properties:
+      data:
+        type: array
+        items:
+          $ref: /schemata/hashtag#/definitions/hashtag
+      paging:
+        $ref: /schemata/paging#/definitions/paging
+      message:
+        $ref: /schemata#/mesasge
 
 id: schemata/v1_hashtags
