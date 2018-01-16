@@ -1,10 +1,9 @@
 class V1::PostsController < ApplicationController
-  before_action :set_post, only: [:show, :destroy, :replies]
+  before_action :set_post, only: [:show, :destroy]
 
   def index
-    cursor = params[:cursor] || Time.now
-    limit = params[:limit]
-    posts = Post.where('created_at < ?', cursor).limit(limit)
+    article = set_article
+    posts = article.posts.where('created_at < ?', cursor).limit(limit)
     page = build_page(posts)
     render json: page, serializer: ::V1::PostsPagingSerializer, include: '**'
   end
@@ -15,12 +14,12 @@ class V1::PostsController < ApplicationController
 
   def create
     begin
-      post = Post.create!(post_params)
+      article = set_article
+      post = article.posts.create!(text: comment, user_id: current_user.id)
     rescue ActiveRecord::RecordInvalid => e
-      p e
+      e
     end
-
-    render json: post
+    render json: post, serializer: ::V1::PostSerializer
   end
 
   def destroy
@@ -29,6 +28,14 @@ class V1::PostsController < ApplicationController
   end
 
   private
+
+    def cursor
+      params[:cursor] || Time.now
+    end
+
+    def limit
+      params[:limit] || 10
+    end
 
     def set_post
       @post = Post.find(params[:id])
@@ -42,5 +49,13 @@ class V1::PostsController < ApplicationController
       # FIXME: has_nextかを判断する
       paging = { cursor: data.last&.created_at, has_next: true }
       ::V1::PostsPaging.new(data: data, paging: paging)
+    end
+
+    def comment
+      params[:comment]
+    end
+
+    def set_article
+      Article.find(params[:article_id])
     end
 end

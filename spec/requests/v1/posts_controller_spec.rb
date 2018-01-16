@@ -1,49 +1,50 @@
 require 'rails_helper'
 
 RSpec.describe V1::PostsController, type: :request do
-  describe 'GET /v1/posts' do
-    subject { get url, headers: headers, params: params }
-
-    let(:headers) do
-      {
-        'Content-Type': 'application/json',
-      }
-    end
-    let(:url) { '/v1/posts' }
-    let(:now) { Time.zone.now }
-    let(:user) { create(:user) }
-
-    context 'with valid request' do
-      context 'when post exists' do
-        let(:params) { { cursor: Time.now + 1.hour, limit: 5 } }
-        let(:posts) do
-          create(:post, user_id: user.id)
-        end
-
-        before do
-          posts
-        end
-
-        it 'returns 200 response' do
-          subject
-
-          expect(response.status).to eq 200
-          assert_schema_conform
-        end
-      end
-
-      context 'when post not exists' do
-        let(:params) { { cursor: Time.now + 1.hour, limit: 5 } }
-
-        it 'returns 200 response' do
-          subject
-
-          expect(response.status).to eq 200
-          assert_schema_conform
-        end
-      end
-    end
-  end
+  # describe 'GET /v1/posts' do
+  #   subject { get url, headers: headers, params: params }
+  #
+  #   let(:headers) do
+  #     {
+  #       'Content-Type': 'application/json',
+  #     }
+  #   end
+  #   let(:url) { '/v1/posts' }
+  #   let(:now) { Time.zone.now }
+  #   let(:user) { create(:user) }
+  #   let(:article){ create(:article) }
+  #
+  #   context 'with valid request' do
+  #     context 'when post exists' do
+  #       let(:params) { { cursor: Time.now + 1.hour, limit: 5 } }
+  #       let(:posts) do
+  #         create(:post, user_id: user.id, article_id: article.id)
+  #       end
+  #
+  #       before do
+  #         posts
+  #       end
+  #
+  #       it 'returns 200 response' do
+  #         subject
+  #
+  #         expect(response.status).to eq 200
+  #         assert_schema_conform
+  #       end
+  #     end
+  #
+  #     context 'when post not exists' do
+  #       let(:params) { { cursor: Time.now + 1.hour, limit: 5 } }
+  #
+  #       it 'returns 200 response' do
+  #         subject
+  #
+  #         expect(response.status).to eq 200
+  #         assert_schema_conform
+  #       end
+  #     end
+  #   end
+  # end
 
   describe 'POST /v1/posts' do
     subject { post url, headers: headers, params: params.to_json }
@@ -53,13 +54,16 @@ RSpec.describe V1::PostsController, type: :request do
         'Content-Type': 'application/json',
       }
     end
-    let(:url) { '/v1/posts' }
+    let(:url) { "/v1/articles/#{article.id}/posts" }
     let(:user) { create(:user) }
-    context 'with valid request' do
-      let(:params) { post_data }
+    let(:article) { create(:article) }
 
-      context 'without hashtag nor image' do
-        let(:post_data) { { text: 'Bitcoin is awesome.', user_id: user.id } }
+    context 'with valid request' do
+      let(:params) { { comment: 'I agree.' } }
+      context 'with text' do
+        before do
+          user
+        end
 
         it 'returns 200 response' do
           subject
@@ -69,25 +73,6 @@ RSpec.describe V1::PostsController, type: :request do
 
         it 'create a record' do
           expect { subject }.to change(Post, :count).by(1)
-        end
-      end
-
-      context 'with hashtag, without image' do
-        let(:post_data) { { text: 'Bitcoin is awesome.', user_id: user.id, hashtags: hashtags } }
-        let(:hashtag) { create(:hashtag, id: 1, name: 'BTC') }
-        let(:hashtags) { [{ "id": 1, "name": 'BTC' }] }
-        before do
-          hashtag
-        end
-
-        it 'returns 200 response' do
-          subject
-          expect(response.status).to eq 200
-          assert_schema_conform
-        end
-
-        it 'create a record' do
-          expect { subject }.to change(ArticleHashtag, :count).by(1)
         end
       end
     end
