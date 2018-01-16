@@ -1,17 +1,6 @@
 class V1::PostsController < ApplicationController
-  before_action :set_post, only: [:show, :destroy]
+  before_action :set_post, only: [:destroy]
   before_action :set_article, only: [:create]
-
-  def index
-    article = set_article
-    posts = article.posts.where('created_at < ?', cursor).limit(limit)
-    page = build_page(posts)
-    render json: page, serializer: ::V1::PostsPagingSerializer, include: '**'
-  end
-
-  def show
-    render json: @post
-  end
 
   def create
     begin
@@ -24,7 +13,7 @@ class V1::PostsController < ApplicationController
 
   def destroy
     @post.destroy!
-    render json: []
+    render json: {}
   end
 
   private

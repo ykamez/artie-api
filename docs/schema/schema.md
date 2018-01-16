@@ -18,7 +18,7 @@
     - <a href="#link-GET-v1_hashtags_trends-/v1/hashtags/trends">GET /v1/hashtags/trends</a>
   - <a href="#resource-v1_posts">post</a>
     - <a href="#link-POST-v1_posts-/v1/articles/{id}/posts">POST /v1/articles/{id}/posts</a>
-    - <a href="#link-DELETE-v1_posts-/v1/articles/{id}/posts/{post_id}">DELETE /v1/articles/{id}/posts/{post_id}</a>
+    - <a href="#link-DELETE-v1_posts-/v1/posts/{post_id}">DELETE /v1/posts/{post_id}</a>
   - <a href="#resource-v1_posts_reaction">reaction</a>
     - <a href="#link-POST-v1_posts_reaction-/v1/posts/{post_id}/like">POST /v1/posts/{post_id}/like</a>
     - <a href="#link-DELETE-v1_posts_reaction-/v1/posts/{post_id}/like">DELETE /v1/posts/{post_id}/like</a>
@@ -545,19 +545,19 @@ HTTP/1.1 201 Created
 }
 ```
 
-### <a name="link-DELETE-v1_posts-/v1/articles/{id}/posts/{post_id}">post delete</a>
+### <a name="link-DELETE-v1_posts-/v1/posts/{post_id}">post delete</a>
 
 update post
 
 ```
-DELETE /v1/articles/{id}/posts/{post_id}
+DELETE /v1/posts/{post_id}
 ```
 
 
 #### Curl Example
 
 ```bash
-$ curl -n -X DELETE http://coinnow.local/v1/articles/$ID/posts/$POST_ID \
+$ curl -n -X DELETE http://coinnow.local/v1/posts/$POST_ID \
   -d '{
 }' \
   -H "Content-Type: application/json"

@@ -335,7 +335,7 @@
         {
           "title": "delete",
           "description": "update post",
-          "href": "/v1/articles/{id}/posts/{post_id}",
+          "href": "/v1/posts/{post_id}",
           "method": "DELETE",
           "rel": "empty",
           "schema": {
