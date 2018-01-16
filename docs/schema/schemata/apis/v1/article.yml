@@ -66,7 +66,7 @@ links:
         $ref: /schemata/post#/definitions/post_page
 
 - title: create
-  description: ページの右上からピックするときはこれを叩く。既にピックされていた場合は、getして返すことになる。ピックされた記事にコメントする際は、`post /v1/articles/:id/posts`を叩いてもらう。
+  description: ページの右上からピックするときはこれを叩く。既にピックされていた場合は、getして返すことになる。ピックされた記事にコメントする際は、`post /v1/articles/:id/posts`を叩いてもらう。レスポンスで記事を返すべきか、コメントを返すべきか迷いどころ。(TODO)
   href: /v1/articles
   method: POST
   rel: create
@@ -78,7 +78,7 @@ links:
       url:
         $ref: /schemata/article#/definitions/url
   targetSchema:
-    $ref: /schemata/article#/definitions/article
+    $ref: /schemata/post#/definitions/post
 
 
 - title: delete

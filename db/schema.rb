@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer 'posts_count', default: 0, null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.index ['url'], name: 'index_articles_on_url', unique: true
   end
 
   create_table 'hash_tags', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|

@@ -238,7 +238,7 @@ HTTP/1.1 200 OK
 
 ### <a name="link-POST-v1_articles-/v1/articles">article create</a>
 
-ページの右上からピックするときはこれを叩く。既にピックされていた場合は、getして返すことになる。ピックされた記事にコメントする際は、`post /v1/articles/:id/posts`を叩いてもらう。
+ページの右上からピックするときはこれを叩く。既にピックされていた場合は、getして返すことになる。ピックされた記事にコメントする際は、`post /v1/articles/:id/posts`を叩いてもらう。レスポンスで記事を返すべきか、コメントを返すべきか迷いどころ。(TODO)
 
 ```
 POST /v1/articles
@@ -272,9 +272,20 @@ HTTP/1.1 201 Created
 ```json
 {
   "id": 1,
-  "url": "https://github.com/.",
-  "published_at": "2015-01-01T12:00:00Z",
-  "posts_count": 100
+  "text": "Pig Coin is awesome.",
+  "user": {
+    "id": 1,
+    "fullname": "Bob Marley",
+    "account_name": "bob",
+    "image_data": "example",
+    "total_like_count": 123,
+    "total_dislike_count": 123,
+    "following_count": 10,
+    "followers_count": 30,
+    "evaluation_point": 2.5
+  },
+  "post_at": "2015-01-01T12:00:00Z",
+  "likes_count": 100
 }
 ```
 

@@ -117,7 +117,7 @@
         },
         {
           "title": "create",
-          "description": "ページの右上からピックするときはこれを叩く。既にピックされていた場合は、getして返すことになる。ピックされた記事にコメントする際は、`post /v1/articles/:id/posts`を叩いてもらう。",
+          "description": "ページの右上からピックするときはこれを叩く。既にピックされていた場合は、getして返すことになる。ピックされた記事にコメントする際は、`post /v1/articles/:id/posts`を叩いてもらう。レスポンスで記事を返すべきか、コメントを返すべきか迷いどころ。(TODO)",
           "href": "/v1/articles",
           "method": "POST",
           "rel": "create",
@@ -133,7 +133,7 @@
             }
           },
           "targetSchema": {
-            "$ref": "#/definitions/article/definitions/article"
+            "$ref": "#/definitions/post/definitions/post"
           }
         },
         {

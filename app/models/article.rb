@@ -8,6 +8,10 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_articles_on_url  (url) UNIQUE
+#
 
 class Article < ApplicationRecord
   has_many :article_hash_tags, foreign_key: :article_id, dependent: :destroy
