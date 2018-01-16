@@ -1,5 +1,6 @@
 class V1::PostsController < ApplicationController
   before_action :set_post, only: [:show, :destroy]
+  before_action :set_article, only: [:create]
 
   def index
     article = set_article
@@ -14,10 +15,9 @@ class V1::PostsController < ApplicationController
 
   def create
     begin
-      article = set_article
-      post = article.posts.create!(text: comment, user_id: current_user.id, evaluation_point: evaluation_point)
-    rescue ActiveRecord::RecordInvalid => e
-      e
+      post = @article.posts.create!(text: comment, user_id: current_user.id, evaluation_point: evaluation_point)
+    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique => e
+      raise ActionController::BadRequest, e.message
     end
     render json: post, serializer: ::V1::PostSerializer
   end
@@ -60,6 +60,6 @@ class V1::PostsController < ApplicationController
     end
 
     def set_article
-      Article.find(params[:article_id])
+      @article = Article.find(params[:article_id])
     end
 end

@@ -2,8 +2,8 @@ class V1::ArticlesController < ApplicationController
   def create
     begin
       post = V1::MakePostService.new(url, comment, current_user.id, evaluation_point).build!
-    rescue ActiveRecord::RecordInvalid => e
-      e
+    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique => e
+      raise ActionController::BadRequest, e.message
     end
     render json: post, serializer: ::V1::PostSerializer
   end

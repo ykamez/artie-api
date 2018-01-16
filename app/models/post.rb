@@ -28,4 +28,6 @@ class Post < ApplicationRecord
   belongs_to :article
   counter_culture :article
   has_many :post_evaluations, dependent: :destroy
+  validates :text, presence: true
+  validates :evaluation_point, presence: true
 end

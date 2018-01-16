@@ -4,12 +4,20 @@ module V1
       before_action :set_post, only: [:add_like]
 
       def add_like
-        post = add_reaction('like')
+        begin
+          post = add_reaction('like')
+        rescue ActiveRecord::RecordNotUnique => e
+          raise ActionController::BadRequest, e.message
+        end
         render json: post, serializer: V1::PostSerializer
       end
 
       def delete_like
-        post = remove_reaction('like')
+        begin
+          post = remove_reaction('like')
+        rescue ActiveRecord::RecordNotUnique => e
+          raise ActionController::BadRequest, e.message
+        end
         render json: post, serializer: V1::PostSerializer
       end
 
