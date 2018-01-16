@@ -367,24 +367,11 @@
           }
         },
         {
-          "title": "dislike",
-          "description": "dislike a post",
-          "href": "/v1/posts/{post_id}/dislike",
-          "method": "POST",
-          "rel": "create",
-          "schema": {
-            "type": "null"
-          },
-          "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post"
-          }
-        },
-        {
-          "title": "share",
-          "description": "share a post",
-          "href": "/v1/posts/{post_id}/share",
-          "method": "POST",
-          "rel": "create",
+          "title": "cancel like",
+          "description": "remove like",
+          "href": "/v1/posts/{post_id}/like",
+          "method": "DELETE",
+          "rel": "delete",
           "schema": {
             "type": "null"
           },

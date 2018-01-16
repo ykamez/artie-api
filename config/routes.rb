@@ -35,12 +35,14 @@ Rails.application.routes.draw do
     end
 
     resources :articles, only: [:index, :create] do
+      # FIXME: 記事ごとのコメントを取得(articles/1234/posts)するものであり、userごとのコメント取得と被らないようにmoduleを設定している。下の二つのルーティングは同じコントローラーに統合したい。
       resources :posts, only: [:index], module: :articles
-      resources :posts, only: [:create, :destroy] do
-        member do
-          post :like, to: 'posts/reactions#add_like'
-          delete :like, to: 'posts/reactions#delete_like'
-        end
+      resources :posts, only: [:create, :destroy]
+    end
+    resources :posts, only: [] do
+      member do
+        post :like, to: 'posts/reactions#add_like'
+        delete :like, to: 'posts/reactions#delete_like'
       end
     end
   end

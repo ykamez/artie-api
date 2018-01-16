@@ -21,8 +21,7 @@
     - <a href="#link-DELETE-v1_posts-/v1/articles/{id}/posts/{post_id}">DELETE /v1/articles/{id}/posts/{post_id}</a>
   - <a href="#resource-v1_posts_reaction">reaction</a>
     - <a href="#link-POST-v1_posts_reaction-/v1/posts/{post_id}/like">POST /v1/posts/{post_id}/like</a>
-    - <a href="#link-POST-v1_posts_reaction-/v1/posts/{post_id}/dislike">POST /v1/posts/{post_id}/dislike</a>
-    - <a href="#link-POST-v1_posts_reaction-/v1/posts/{post_id}/share">POST /v1/posts/{post_id}/share</a>
+    - <a href="#link-DELETE-v1_posts_reaction-/v1/posts/{post_id}/like">DELETE /v1/posts/{post_id}/like</a>
   - <a href="#resource-v1_posts_search_result">search_result</a>
     - <a href="#link-GET-v1_posts_search_result-/v1/posts/search_result">GET /v1/posts/search_result</a>
   - <a href="#resource-v1_search">search</a>
@@ -611,19 +610,19 @@ HTTP/1.1 201 Created
 }
 ```
 
-### <a name="link-POST-v1_posts_reaction-/v1/posts/{post_id}/dislike">reaction dislike</a>
+### <a name="link-DELETE-v1_posts_reaction-/v1/posts/{post_id}/like">reaction cancel like</a>
 
-dislike a post
+remove like
 
 ```
-POST /v1/posts/{post_id}/dislike
+DELETE /v1/posts/{post_id}/like
 ```
 
 
 #### Curl Example
 
 ```bash
-$ curl -n -X POST http://coinnow.local/v1/posts/$POST_ID/dislike \
+$ curl -n -X DELETE http://coinnow.local/v1/posts/$POST_ID/like \
   -H "Content-Type: application/json"
 ```
 
@@ -631,50 +630,7 @@ $ curl -n -X POST http://coinnow.local/v1/posts/$POST_ID/dislike \
 #### Response Example
 
 ```
-HTTP/1.1 201 Created
-```
-
-```json
-{
-  "id": 1,
-  "text": "Pig Coin is awesome.",
-  "user": {
-    "id": 1,
-    "fullname": "Bob Marley",
-    "account_name": "bob",
-    "image_data": "example",
-    "total_like_count": 123,
-    "total_dislike_count": 123,
-    "following_count": 10,
-    "followers_count": 30,
-    "evaluation_point": 2.5
-  },
-  "post_at": "2015-01-01T12:00:00Z",
-  "likes_count": 100
-}
-```
-
-### <a name="link-POST-v1_posts_reaction-/v1/posts/{post_id}/share">reaction share</a>
-
-share a post
-
-```
-POST /v1/posts/{post_id}/share
-```
-
-
-#### Curl Example
-
-```bash
-$ curl -n -X POST http://coinnow.local/v1/posts/$POST_ID/share \
-  -H "Content-Type: application/json"
-```
-
-
-#### Response Example
-
-```
-HTTP/1.1 201 Created
+HTTP/1.1 200 OK
 ```
 
 ```json
