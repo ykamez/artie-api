@@ -35,7 +35,8 @@ Rails.application.routes.draw do
     end
 
     resources :articles, only: [:index, :create] do
-      resources :posts, only: [:index, :show, :create, :destroy] do
+      resources :posts, only: [:index], module: :articles
+      resources :posts, only: [:create, :destroy] do
         member do
           post :like, to: 'posts/reactions#add_like'
           delete :like, to: 'posts/reactions#delete_like'
