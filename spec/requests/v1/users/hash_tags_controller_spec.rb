@@ -15,7 +15,7 @@ RSpec.describe V1::Users::HashTagsController, type: :request do
     context 'with valid request' do
       context 'when watching hashtags exists' do
         let(:params) { { cursor: Time.now + 1.hour, limit: 5 } }
-        let(:hashtag) { create(:hashtag) }
+        let(:hashtag) { create(:hash_tag) }
         let(:user_hashtag) { create(:user_hashtag, user_id: user.id, hashtag_id: hashtag.id) }
 
         before do
