@@ -54,11 +54,6 @@ group :test do
   gem 'webmock'
 end
 
-# infra
-gem 'newrelic_rpm'
-gem 'raven-transports-fluentd'
-gem 'sentry-raven'
-
 # database
 gem 'activerecord-import'
 gem 'activerecord-refresh_connection'
@@ -75,10 +70,6 @@ gem 'prmd'
 
 # web
 gem 'active_model_serializers', '~> 0.10.0'
-
-# aws
-gem 'aws-sdk', '~> 2.1'
-gem 'aws-sdk-core'
 
 gem 'faraday'
 gem 'faraday_middleware'
