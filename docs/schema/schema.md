@@ -40,6 +40,8 @@
     - <a href="#link-GET-v1_users_hashtag-/v1/users/{user_id}/hashtags/watching">GET /v1/users/{user_id}/hashtags/watching</a>
   - <a href="#resource-v1_users_posts">特定ユーザーの投稿</a>
     - <a href="#link-GET-v1_users_posts-/v1/users/{user_id}/posts">GET /v1/users/{user_id}/posts</a>
+  - <a href="#resource-v1_users_reactions">特定ユーザーのリアクション</a>
+    - <a href="#link-GET-v1_users_reactions-/v1/users/{user_id}/reactions">GET /v1/users/{user_id}/reactions</a>
   - <a href="#resource-v1_users_search_result">search_result</a>
     - <a href="#link-GET-v1_users_search_result-/v1/users/search">GET /v1/users/search</a>
   - <a href="#resource-v1_users_user_evaluation">ユーザー評価</a>
@@ -1231,6 +1233,73 @@ GET /v1/users/{user_id}/posts
 
 ```bash
 $ curl -n http://coinnow.local/v1/users/$USER_ID/posts
+ -G \
+  -d limit=10
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "text": "Pig Coin is awesome.",
+      "user": {
+        "id": 1,
+        "fullname": "Bob Marley",
+        "account_name": "bob",
+        "image_data": "example",
+        "total_like_count": 123,
+        "total_dislike_count": 123,
+        "following_count": 10,
+        "followers_count": 30,
+        "evaluation_point": 2.5
+      },
+      "post_at": "2015-01-01T12:00:00Z",
+      "likes_count": 100
+    }
+  ],
+  "paging": {
+    "cursor": null,
+    "has_next": true
+  },
+  "message": "success!!"
+}
+```
+
+
+## <a name="resource-v1_users_reactions">特定ユーザーのリアクション</a>
+
+Stability: `prototype`
+
+特定ユーザーのリアクション
+
+### <a name="link-GET-v1_users_reactions-/v1/users/{user_id}/reactions">特定ユーザーのリアクション user's reactions</a>
+
+Show a list of a user's reactions
+
+```
+GET /v1/users/{user_id}/reactions
+```
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **cursor** | *string* | datetime |  |
+| **limit** | *integer* | limit | `10` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n http://coinnow.local/v1/users/$USER_ID/reactions
  -G \
   -d limit=10
 ```

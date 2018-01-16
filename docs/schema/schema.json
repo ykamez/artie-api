@@ -775,6 +775,48 @@
         }
       ]
     },
+    "v1_users_reactions": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "特定ユーザーのリアクション",
+      "description": "特定ユーザーのリアクション",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
+        {
+          "title": "user's reactions",
+          "description": "Show a list of a user's reactions",
+          "href": "/v1/users/{user_id}/reactions",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/post/definitions/post_page"
+          }
+        }
+      ]
+    },
     "v1_users_search_result": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "search_result",
@@ -1311,6 +1353,9 @@
     },
     "v1_users_posts": {
       "$ref": "#/definitions/v1_users_posts"
+    },
+    "v1_users_reactions": {
+      "$ref": "#/definitions/v1_users_reactions"
     },
     "v1_users_search_result": {
       "$ref": "#/definitions/v1_users_search_result"
