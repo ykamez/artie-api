@@ -12,10 +12,10 @@ Rails.application.routes.draw do
       end
 
       member do
-        get :following
-        get :followers
-        post :follow
-        delete :follow
+        get :following, to: 'users/relationships#following'
+        get :followers, to: 'users/relationships#followers'
+        post :follow, to: 'users/relationships#follow'
+        delete :follow, to: 'users/relationships#unfollow'
       end
 
       scope :following do

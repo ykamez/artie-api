@@ -34,8 +34,8 @@
     - <a href="#link-PATCH-v1_users-/v1/users/{id}">PATCH /v1/users/{id}</a>
     - <a href="#link-DELETE-v1_users-/v1/users/{id}">DELETE /v1/users/{id}</a>
   - <a href="#resource-v1_users_follow_follwers">follow and followers</a>
-    - <a href="#link-GET-v1_users_follow_follwers-/v1/users/{user_id}/users/following">GET /v1/users/{user_id}/users/following</a>
-    - <a href="#link-GET-v1_users_follow_follwers-/v1/{user_id}/users/followers">GET /v1/{user_id}/users/followers</a>
+    - <a href="#link-GET-v1_users_follow_follwers-/v1/users/{user_id}/following">GET /v1/users/{user_id}/following</a>
+    - <a href="#link-GET-v1_users_follow_follwers-/v1/users/{user_id}/followers">GET /v1/users/{user_id}/followers</a>
   - <a href="#resource-v1_users_hashtag">user hashtag</a>
     - <a href="#link-GET-v1_users_hashtag-/v1/users/{user_id}/hashtags/watching">GET /v1/users/{user_id}/hashtags/watching</a>
   - <a href="#resource-v1_users_posts">特定ユーザーの投稿</a>
@@ -1048,12 +1048,12 @@ Stability: `prototype`
 
 follow followers apis
 
-### <a name="link-GET-v1_users_follow_follwers-/v1/users/{user_id}/users/following">follow and followers a user's following users</a>
+### <a name="link-GET-v1_users_follow_follwers-/v1/users/{user_id}/following">follow and followers a user's following users</a>
 
 Show a list of a following users
 
 ```
-GET /v1/users/{user_id}/users/following
+GET /v1/users/{user_id}/following
 ```
 
 #### Optional Parameters
@@ -1067,7 +1067,7 @@ GET /v1/users/{user_id}/users/following
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/users/following
+$ curl -n http://coinnow.local/v1/users/$USER_ID/following
  -G \
   -d limit=10
 ```
@@ -1101,12 +1101,12 @@ HTTP/1.1 200 OK
 }
 ```
 
-### <a name="link-GET-v1_users_follow_follwers-/v1/{user_id}/users/followers">follow and followers a user's following users</a>
+### <a name="link-GET-v1_users_follow_follwers-/v1/users/{user_id}/followers">follow and followers a user's following users</a>
 
 Show a list of a followers users
 
 ```
-GET /v1/{user_id}/users/followers
+GET /v1/users/{user_id}/followers
 ```
 
 #### Optional Parameters
@@ -1120,7 +1120,7 @@ GET /v1/{user_id}/users/followers
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/$USER_ID/users/followers
+$ curl -n http://coinnow.local/v1/users/$USER_ID/followers
  -G \
   -d limit=10
 ```
