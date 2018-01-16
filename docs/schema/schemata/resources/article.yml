@@ -24,6 +24,10 @@ definitions:
     description: article likes count
     type: integer
     example: 100
+  evaluation_point:
+    description: evaluation
+    type: string
+    example: 2.4
 
   article:
     type: object
@@ -41,6 +45,8 @@ definitions:
         $ref: /schemata/article#/definitions/published_at
       posts_count:
         $ref: /schemata/article#/definitions/posts_count
+      evaluation_point:
+        $ref: /schemata/article#/definitions/evaluation_point
 
   article_page:
     type: object

@@ -12,6 +12,10 @@ definitions:
     type: integer
     example: 1234
     readOnly: true
+  evaluation_point:
+    description: evaluation
+    type: string
+    example: 2.4
 
 links:
 - title: create
@@ -29,6 +33,8 @@ links:
         $ref: /schemata/post#/definitions/text
       user_id:
         $ref: /schemata/v1_posts#/definitions/user_id
+      evaluation_point:
+        $ref: /schemata/v1_posts#/definitions/evaluation_point
   targetSchema:
     $ref: /schemata/post#/definitions/post
 

@@ -36,10 +36,6 @@ definitions:
     description: user total liked count
     type: integer
     example: 123
-  total_dislike_count:
-    description: user total disliked count
-    type: integer
-    example: 123
   following_count:
     description: user following_count
     type: integer
@@ -71,8 +67,6 @@ definitions:
         $ref: "/schemata/user#/definitions/image_data"
       total_like_count:
         $ref: "/schemata/user#/definitions/total_like_count"
-      total_dislike_count:
-        $ref: "/schemata/user#/definitions/total_dislike_count"
       following_count:
         $ref: "/schemata/user#/definitions/following_count"
       followers_count:

@@ -15,7 +15,7 @@ class V1::PostsController < ApplicationController
   def create
     begin
       article = set_article
-      post = article.posts.create!(text: comment, user_id: current_user.id)
+      post = article.posts.create!(text: comment, user_id: current_user.id, evaluation_point: evaluation_point)
     rescue ActiveRecord::RecordInvalid => e
       e
     end
@@ -53,6 +53,10 @@ class V1::PostsController < ApplicationController
 
     def comment
       params[:comment]
+    end
+
+    def evaluation_point
+      (params[:evaluation_point] || '0.0').to_f
     end
 
     def set_article

@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 0) do
   create_table 'articles', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.string 'url', null: false
     t.integer 'posts_count', default: 0, null: false
+    t.decimal 'evaluation_point', precision: 3, scale: 1, default: '0.0', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['url'], name: 'index_articles_on_url', unique: true
@@ -49,11 +50,13 @@ ActiveRecord::Schema.define(version: 0) do
   create_table 'posts', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.bigint 'user_id', null: false
     t.bigint 'article_id', null: false
-    t.string 'text', null: false
+    t.string 'text'
+    t.decimal 'evaluation_point', precision: 3, scale: 1, default: '0.0', null: false
     t.integer 'likes_count', default: 0, null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['article_id'], name: 'index_posts_on_article_id'
+    t.index ['user_id', 'article_id'], name: 'index_posts_on_user_id_and_article_id', unique: true
     t.index ['user_id'], name: 'index_posts_on_user_id'
   end
 
@@ -87,7 +90,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.string 'image_data', default: '', null: false
     t.string 'email', null: false
     t.integer 'likes_count', default: 0, null: false
-    t.integer 'dislikes_count', default: 0, null: false
     t.integer 'following_count', default: 0, null: false
     t.integer 'followers_count', default: 0, null: false
     t.decimal 'evaluation_point', precision: 3, scale: 1, default: '0.0', null: false

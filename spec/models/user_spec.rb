@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -6,14 +7,6 @@
 #  id                     :integer          not null, primary key
 #  provider               :string(255)      default("email"), not null
 #  uid                    :string(255)      default(""), not null
-#  image_data             :string(255)      default(""), not null
-#  email                  :string(255)      not null
-#  likes_count            :integer          default(0), not null
-#  dislikes_count         :integer          default(0), not null
-#  following_count        :integer          default(0), not null
-#  followers_count        :integer          default(0), not null
-#  evaluation_point       :decimal(3, 1)    default(0.0), not null
-#  tokens                 :text(65535)
 #  encrypted_password     :string(255)      default(""), not null
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
@@ -29,6 +22,13 @@
 #  unconfirmed_email      :string(255)
 #  fullname               :string(255)      not null
 #  account_name           :string(255)      not null
+#  image_data             :string(255)      default(""), not null
+#  email                  :string(255)      not null
+#  likes_count            :integer          default(0), not null
+#  following_count        :integer          default(0), not null
+#  followers_count        :integer          default(0), not null
+#  evaluation_point       :decimal(3, 1)    default(0.0), not null
+#  tokens                 :text(65535)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #

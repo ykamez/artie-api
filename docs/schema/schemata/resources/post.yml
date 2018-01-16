@@ -24,6 +24,10 @@ definitions:
     description: post likes count
     type: integer
     example: 100
+  evaluation_point:
+    description: evaluation
+    type: string
+    example: 2.4
 
   post:
     type: object
@@ -33,6 +37,7 @@ definitions:
       - user
       - post_at
       - likes_count
+      - evaluation_point
     properties:
       id:
         $ref: /schemata/post#/definitions/id
@@ -44,6 +49,8 @@ definitions:
         $ref: /schemata/post#/definitions/post_at
       likes_count:
         $ref: /schemata/post#/definitions/likes_count
+      evaluation_point:
+        $ref: /schemata/post#/definitions/evaluation_point
 
   post_page:
     type: object

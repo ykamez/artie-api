@@ -133,7 +133,8 @@ HTTP/1.1 200 OK
       "id": 1,
       "url": "https://github.com/.",
       "published_at": "2015-01-01T12:00:00Z",
-      "posts_count": 100
+      "posts_count": 100,
+      "evaluation_point": 2.4
     }
   ],
   "paging": {
@@ -171,7 +172,8 @@ HTTP/1.1 200 OK
   "id": 1,
   "url": "https://github.com/.",
   "published_at": "2015-01-01T12:00:00Z",
-  "posts_count": 100
+  "posts_count": 100,
+  "evaluation_point": 2.4
 }
 ```
 
@@ -219,13 +221,13 @@ HTTP/1.1 200 OK
           "account_name": "bob",
           "image_data": "example",
           "total_like_count": 123,
-          "total_dislike_count": 123,
           "following_count": 10,
           "followers_count": 30,
           "evaluation_point": 2.5
         },
         "post_at": "2015-01-01T12:00:00Z",
-        "likes_count": 100
+        "likes_count": 100,
+        "evaluation_point": 2.4
       }
     ],
     "paging": {
@@ -280,13 +282,13 @@ HTTP/1.1 201 Created
     "account_name": "bob",
     "image_data": "example",
     "total_like_count": 123,
-    "total_dislike_count": 123,
     "following_count": 10,
     "followers_count": 30,
     "evaluation_point": 2.5
   },
   "post_at": "2015-01-01T12:00:00Z",
-  "likes_count": 100
+  "likes_count": 100,
+  "evaluation_point": 2.4
 }
 ```
 
@@ -413,13 +415,13 @@ HTTP/1.1 200 OK
         "account_name": "bob",
         "image_data": "example",
         "total_like_count": 123,
-        "total_dislike_count": 123,
         "following_count": 10,
         "followers_count": 30,
         "evaluation_point": 2.5
       },
       "post_at": "2015-01-01T12:00:00Z",
-      "likes_count": 100
+      "likes_count": 100,
+      "evaluation_point": 2.4
     }
   ],
   "paging": {
@@ -497,6 +499,12 @@ POST /v1/articles/{id}/posts
 | **user_id** | *integer* | unique identifier of user | `1234` |
 
 
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **evaluation_point** | *string* | evaluation | `2.4` |
+
 
 #### Curl Example
 
@@ -504,7 +512,8 @@ POST /v1/articles/{id}/posts
 $ curl -n -X POST http://coinnow.local/v1/articles/$ID/posts \
   -d '{
   "text": "Pig Coin is awesome.",
-  "user_id": 1234
+  "user_id": 1234,
+  "evaluation_point": 2.4
 }' \
   -H "Content-Type: application/json"
 ```
@@ -526,13 +535,13 @@ HTTP/1.1 201 Created
     "account_name": "bob",
     "image_data": "example",
     "total_like_count": 123,
-    "total_dislike_count": 123,
     "following_count": 10,
     "followers_count": 30,
     "evaluation_point": 2.5
   },
   "post_at": "2015-01-01T12:00:00Z",
-  "likes_count": 100
+  "likes_count": 100,
+  "evaluation_point": 2.4
 }
 ```
 
@@ -602,13 +611,13 @@ HTTP/1.1 201 Created
     "account_name": "bob",
     "image_data": "example",
     "total_like_count": 123,
-    "total_dislike_count": 123,
     "following_count": 10,
     "followers_count": 30,
     "evaluation_point": 2.5
   },
   "post_at": "2015-01-01T12:00:00Z",
-  "likes_count": 100
+  "likes_count": 100,
+  "evaluation_point": 2.4
 }
 ```
 
@@ -645,13 +654,13 @@ HTTP/1.1 200 OK
     "account_name": "bob",
     "image_data": "example",
     "total_like_count": 123,
-    "total_dislike_count": 123,
     "following_count": 10,
     "followers_count": 30,
     "evaluation_point": 2.5
   },
   "post_at": "2015-01-01T12:00:00Z",
-  "likes_count": 100
+  "likes_count": 100,
+  "evaluation_point": 2.4
 }
 ```
 
@@ -696,13 +705,13 @@ HTTP/1.1 200 OK
         "account_name": "bob",
         "image_data": "example",
         "total_like_count": 123,
-        "total_dislike_count": 123,
         "following_count": 10,
         "followers_count": 30,
         "evaluation_point": 2.5
       },
       "post_at": "2015-01-01T12:00:00Z",
-      "likes_count": 100
+      "likes_count": 100,
+      "evaluation_point": 2.4
     }
   ],
   "paging": {
@@ -751,7 +760,6 @@ HTTP/1.1 200 OK
       "account_name": "bob",
       "image_data": "example",
       "total_like_count": 123,
-      "total_dislike_count": 123,
       "following_count": 10,
       "followers_count": 30,
       "evaluation_point": 2.5
@@ -806,7 +814,6 @@ HTTP/1.1 200 OK
       "account_name": "bob",
       "image_data": "example",
       "total_like_count": 123,
-      "total_dislike_count": 123,
       "following_count": 10,
       "followers_count": 30,
       "evaluation_point": 2.5
@@ -849,7 +856,6 @@ HTTP/1.1 200 OK
   "account_name": "bob",
   "image_data": "example",
   "total_like_count": 123,
-  "total_dislike_count": 123,
   "following_count": 10,
   "followers_count": 30,
   "evaluation_point": 2.5
@@ -885,7 +891,6 @@ HTTP/1.1 200 OK
   "account_name": "bob",
   "image_data": "example",
   "total_like_count": 123,
-  "total_dislike_count": 123,
   "following_count": 10,
   "followers_count": 30,
   "evaluation_point": 2.5
@@ -945,7 +950,6 @@ HTTP/1.1 201 Created
   "account_name": "bob",
   "image_data": "example",
   "total_like_count": 123,
-  "total_dislike_count": 123,
   "following_count": 10,
   "followers_count": 30,
   "evaluation_point": 2.5
@@ -1005,7 +1009,6 @@ HTTP/1.1 200 OK
   "account_name": "bob",
   "image_data": "example",
   "total_like_count": 123,
-  "total_dislike_count": 123,
   "following_count": 10,
   "followers_count": 30,
   "evaluation_point": 2.5
@@ -1085,7 +1088,6 @@ HTTP/1.1 200 OK
       "account_name": "bob",
       "image_data": "example",
       "total_like_count": 123,
-      "total_dislike_count": 123,
       "following_count": 10,
       "followers_count": 30,
       "evaluation_point": 2.5
@@ -1139,7 +1141,6 @@ HTTP/1.1 200 OK
       "account_name": "bob",
       "image_data": "example",
       "total_like_count": 123,
-      "total_dislike_count": 123,
       "following_count": 10,
       "followers_count": 30,
       "evaluation_point": 2.5
@@ -1256,13 +1257,13 @@ HTTP/1.1 200 OK
         "account_name": "bob",
         "image_data": "example",
         "total_like_count": 123,
-        "total_dislike_count": 123,
         "following_count": 10,
         "followers_count": 30,
         "evaluation_point": 2.5
       },
       "post_at": "2015-01-01T12:00:00Z",
-      "likes_count": 100
+      "likes_count": 100,
+      "evaluation_point": 2.4
     }
   ],
   "paging": {
@@ -1323,13 +1324,13 @@ HTTP/1.1 200 OK
         "account_name": "bob",
         "image_data": "example",
         "total_like_count": 123,
-        "total_dislike_count": 123,
         "following_count": 10,
         "followers_count": 30,
         "evaluation_point": 2.5
       },
       "post_at": "2015-01-01T12:00:00Z",
-      "likes_count": 100
+      "likes_count": 100,
+      "evaluation_point": 2.4
     }
   ],
   "paging": {
@@ -1378,7 +1379,6 @@ HTTP/1.1 200 OK
       "account_name": "bob",
       "image_data": "example",
       "total_like_count": 123,
-      "total_dislike_count": 123,
       "following_count": 10,
       "followers_count": 30,
       "evaluation_point": 2.5
