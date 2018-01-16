@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe V1::HashTagsController, type: :request do
-  describe 'GET #index' do
+  skip 'GET #index' do
     subject { get url, headers: headers, params: params }
 
     let(:headers) do
@@ -30,7 +30,7 @@ RSpec.describe V1::HashTagsController, type: :request do
     end
   end
 
-  describe 'POST #watch' do
+  skip 'POST #watch' do
     subject { post url, headers: headers }
 
     let(:headers) do
@@ -63,7 +63,7 @@ RSpec.describe V1::HashTagsController, type: :request do
     end
   end
 
-  describe 'DELETE #watch' do
+  skip 'DELETE #watch' do
     subject { delete url, headers: headers }
 
     let(:headers) do
