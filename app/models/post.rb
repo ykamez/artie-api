@@ -23,5 +23,7 @@
 
 class Post < ApplicationRecord
   belongs_to :user
+  belongs_to :article
+  counter_culture :article
   has_many :post_evaluations, dependent: :destroy
 end

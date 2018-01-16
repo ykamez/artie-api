@@ -45,4 +45,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
   # :omniauthable
+  has_many :posts, dependent: :destroy
 end
