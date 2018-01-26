@@ -14,7 +14,7 @@
   - <a href="#resource-v1_hashtags">Hashtag</a>
     - <a href="#link-GET-v1_hashtags-/v1/hashtags">GET /v1/hashtags</a>
     - <a href="#link-GET-v1_hashtags-/v1/hashtags/{hashtag_id}/reviews">GET /v1/hashtags/{hashtag_id}/reviews</a>
-  - <a href="#resource-v1_hashtags_trends">トレンド仮想通貨</a>
+  - <a href="#resource-v1_hashtags_trends">トレンド</a>
     - <a href="#link-GET-v1_hashtags_trends-/v1/hashtags/trends">GET /v1/hashtags/trends</a>
   - <a href="#resource-v1_reviews">review</a>
     - <a href="#link-POST-v1_reviews-/v1/articles/{id}/reviews">POST /v1/articles/{id}/reviews</a>
@@ -433,15 +433,15 @@ HTTP/1.1 200 OK
 ```
 
 
-## <a name="resource-v1_hashtags_trends">トレンド仮想通貨</a>
+## <a name="resource-v1_hashtags_trends">トレンド</a>
 
 Stability: `prototype`
 
-トレンド仮想通貨に関するAPI
+トレンドに関するAPI
 
-### <a name="link-GET-v1_hashtags_trends-/v1/hashtags/trends">トレンド仮想通貨 トレンド仮想通貨</a>
+### <a name="link-GET-v1_hashtags_trends-/v1/hashtags/trends">トレンド トレンド</a>
 
-直近一時間で投稿数が多かった仮想通貨の名前、投稿数、人数を返す。
+直近一時間で投稿数が多かったカテゴリーの名前、投稿数、人数を返す。
 
 ```
 GET /v1/hashtags/trends
@@ -503,7 +503,7 @@ POST /v1/articles/{id}/reviews
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **evaluation_point** | *string* | evaluation | `2.4` |
+| **evaluation_point** | *string* | evaluation rating | `2.4` |
 
 
 #### Curl Example
