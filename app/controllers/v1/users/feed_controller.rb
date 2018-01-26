@@ -2,9 +2,9 @@ class V1::Users::FeedController < ApplicationController
   def feed
     # FIXME:
     followers = User.all
-    posts = Post.where(user: followers)
+    posts = Review.where(user: followers)
     page = build_page(posts)
-    render json: page, serializer: ::V1::PostsPagingSerializer, include: '**'
+    render json: page, serializer: ::V1::ReviewsPagingSerializer, include: '**'
   end
 
   private

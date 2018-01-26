@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe V1::Posts::ReactionsController, type: :request do
-  describe 'POST /v1/posts/:post_id/like' do
+describe V1::Reviews::ReactionsController, type: :request do
+  describe 'POST /v1/reviews/:review_id/like' do
     subject { post url, headers: headers }
 
     let(:headers) do
@@ -10,10 +10,10 @@ describe V1::Posts::ReactionsController, type: :request do
       }
     end
     let(:params){}
-    let(:url) { "/v1/posts/#{post_record.id}/like" }
+    let(:url) { "/v1/reviews/#{review.id}/like" }
     let(:user) { create(:user) }
     let(:article) { create(:article) }
-    let(:post_record) { create(:post, user_id: user.id, article_id: article.id) }
+    let(:review) { create(:review, user_id: user.id, article_id: article.id) }
 
     context 'with valid request' do
       it 'returns 200 response' do
@@ -23,12 +23,12 @@ describe V1::Posts::ReactionsController, type: :request do
       end
 
       it 'create a record' do
-        expect { subject }.to change(PostEvaluation, :count).by(1)
+        expect { subject }.to change(ReviewEvaluation, :count).by(1)
       end
     end
   end
 
-  describe 'DELETE /v1/posts/:post_id/like' do
+  describe 'DELETE /v1/reviews/:review_id/like' do
     subject { delete url, headers: headers }
 
     let(:headers) do
@@ -37,15 +37,15 @@ describe V1::Posts::ReactionsController, type: :request do
       }
     end
     let(:params){}
-    let(:url) { "/v1/posts/#{post_record.id}/like" }
+    let(:url) { "/v1/reviews/#{review.id}/like" }
     let(:user) { create(:user) }
     let(:article) { create(:article) }
-    let(:post_record) { create(:post, user_id: user.id, article_id: article.id) }
-    let(:post_evaluation) { create(:post_evaluation, user_id: user.id, post_id: post_record.id) }
+    let(:review) { create(:review, user_id: user.id, article_id: article.id) }
+    let(:review_evaluation) { create(:review_evaluation, user_id: user.id, review_id: review.id) }
 
     context 'with valid request' do
       before do
-        post_evaluation
+        review_evaluation
       end
       it 'returns 200 response' do
         subject
@@ -54,7 +54,7 @@ describe V1::Posts::ReactionsController, type: :request do
       end
 
       it 'create a record' do
-        expect { subject }.to change(PostEvaluation, :count).by(-1)
+        expect { subject }.to change(ReviewEvaluation, :count).by(-1)
       end
     end
   end

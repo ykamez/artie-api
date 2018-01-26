@@ -1,12 +1,12 @@
 module V1
-  module Users
-    class PostsController < ApplicationController
-      before_action :set_user, only: [:index]
+  module Articles
+    class ReviewsController < ApplicationController
+      before_action :set_article, only: [:index]
 
       def index
-        posts = @user.posts.where('created_at < ?', cursor).limit(limit)
-        page = build_page(posts)
-        render json: page, serializer: ::V1::PostsPagingSerializer, include: '**'
+        reviews = @article.reviews.where('created_at < ?', cursor).limit(limit)
+        page = build_page(reviews)
+        render json: page, serializer: ::V1::ReviewsPagingSerializer, include: '**'
       end
 
       private
@@ -25,8 +25,8 @@ module V1
           ::V1::PostsPaging.new(data: data, paging: paging)
         end
 
-        def set_user
-          @user = User.find(params[:user_id])
+        def set_article
+          @article = Article.find(params[:article_id])
         end
     end
   end

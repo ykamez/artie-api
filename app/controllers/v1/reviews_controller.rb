@@ -1,18 +1,18 @@
-class V1::PostsController < ApplicationController
-  before_action :set_post, only: [:destroy]
+class V1::ReviewsController < ApplicationController
+  before_action :set_review, only: [:destroy]
   before_action :set_article, only: [:create]
 
   def create
     begin
-      post = @article.posts.create!(text: comment, user_id: current_user.id, evaluation_point: evaluation_point)
+      review = @article.reviews.create!(text: comment, user_id: current_user.id, evaluation_point: evaluation_point)
     rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique => e
       raise ActionController::BadRequest, e.message
     end
-    render json: post, serializer: ::V1::PostSerializer
+    render json: review, serializer: ::V1::ReviewSerializer
   end
 
   def destroy
-    @post.destroy!
+    @review.destroy!
     render json: {}
   end
 
@@ -26,12 +26,12 @@ class V1::PostsController < ApplicationController
       params[:limit] || 10
     end
 
-    def set_post
-      @post = Post.find(params[:id])
+    def set_review
+      @review = Review.find(params[:id])
     end
 
-    def post_params
-      params.require(:post).permit(:user_id, :text, :image_data)
+    def review_params
+      params.require(:review).permit(:user_id, :text, :image_data)
     end
 
     def build_page(data)

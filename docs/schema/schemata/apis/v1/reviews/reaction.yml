@@ -9,23 +9,23 @@ type:
 
 links:
 - title: like
-  description: like a post
-  href: /v1/posts/{post_id}/like
+  description: like a review
+  href: /v1/reviews/{review_id}/like
   method: POST
   rel: create
   schema:
     type: "null"
   targetSchema:
-    $ref: /schemata/post#/definitions/post
+    $ref: /schemata/review#/definitions/review
 
 - title: cancel like
   description: remove like
-  href: /v1/posts/{post_id}/like
+  href: /v1/reviews/{review_id}/like
   method: DELETE
   rel: delete
   schema:
     type: "null"
   targetSchema:
-    $ref: /schemata/post#/definitions/post
+    $ref: /schemata/review#/definitions/review
 
-id: schemata/v1_posts_reaction
+id: schemata/v1_reviews_reaction

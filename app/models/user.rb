@@ -44,8 +44,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
   # :omniauthable
-  has_many :posts, dependent: :destroy
-  has_many :post_evaluations, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  has_many :review_evaluations, dependent: :destroy
 
   # follow and follower relationship
   has_many :active_relationships, class_name:  'Relationship',

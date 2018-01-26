@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   }
   namespace :v1, defaults: { format: 'json' } do
     resources :users, only: [:index, :show] do
-      resources :posts, only: [:index], module: :users
+      resources :reviews, only: [:index], module: :users
       resources :reactions, only: [:index], module: :users
 
       collection do
@@ -19,12 +19,12 @@ Rails.application.routes.draw do
       end
 
       scope :following do
-        resources :posts, only: [:index]
-        resources :post_evaluations, only: [:index]
+        resources :reviews, only: [:index]
+        resources :review_evaluations, only: [:index]
       end
 
-      resources :posts, only: [:index]
-      resources :post_evaluations, only: [:index]
+      resources :reviews, only: [:index]
+      resources :review_evaluations, only: [:index]
     end
 
     resources :hash_tags, only: [:index, :show] do
@@ -36,14 +36,14 @@ Rails.application.routes.draw do
     end
 
     resources :articles, only: [:index, :create] do
-      # FIXME: 記事ごとのコメントを取得(articles/1234/posts)するものであり、userごとのコメント取得と被らないようにmoduleを設定している。下の二つのルーティングは同じコントローラーに統合したい。
-      resources :posts, only: [:index], module: :articles
-      resources :posts, only: [:create]
+      # FIXME: 記事ごとのコメントを取得(articles/1234/reviews)するものであり、userごとのコメント取得と被らないようにmoduleを設定している。下の二つのルーティングは同じコントローラーに統合したい。
+      resources :reviews, only: [:index], module: :articles
+      resources :reviews, only: [:create]
     end
-    resources :posts, only: [:destroy] do
+    resources :reviews, only: [:destroy] do
       member do
-        post :like, to: 'posts/reactions#add_like'
-        delete :like, to: 'posts/reactions#delete_like'
+        post :like, to: 'reviews/reactions#add_like'
+        delete :like, to: 'reviews/reactions#delete_like'
       end
     end
   end

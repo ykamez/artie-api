@@ -16,13 +16,13 @@ ActiveRecord::Schema.define(version: 0) do
     t.bigint 'hash_tag_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index ['article_id'], name: 'index_post_hash_tags_on_article_id'
-    t.index ['hash_tag_id'], name: 'index_post_hash_tags_on_hash_tag_id'
+    t.index ['article_id'], name: 'index_article_hash_tags_on_article_id'
+    t.index ['hash_tag_id'], name: 'index_article_hash_tags_on_hash_tag_id'
   end
 
   create_table 'articles', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.string 'url', null: false
-    t.integer 'posts_count', default: 0, null: false
+    t.integer 'reviews_count', default: 0, null: false
     t.decimal 'evaluation_point', precision: 3, scale: 1, default: '0.0', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
@@ -36,30 +36,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ['name'], name: 'index_hash_tags_evaluations_on_name', unique: true
   end
 
-  create_table 'post_evaluations', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
-    t.bigint 'user_id', null: false
-    t.bigint 'post_id', null: false
-    t.integer 'evaluation_type', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['post_id'], name: 'index_post_evaluations_on_post_id'
-    t.index ['user_id', 'post_id'], name: 'index_post_evaluations_on_user_id_and_post_id', unique: true
-    t.index ['user_id'], name: 'index_post_evaluations_on_user_id'
-  end
-
-  create_table 'posts', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
-    t.bigint 'user_id', null: false
-    t.bigint 'article_id', null: false
-    t.string 'text'
-    t.decimal 'evaluation_point', precision: 3, scale: 1, default: '0.0', null: false
-    t.integer 'likes_count', default: 0, null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['article_id'], name: 'index_posts_on_article_id'
-    t.index ['user_id', 'article_id'], name: 'index_posts_on_user_id_and_article_id', unique: true
-    t.index ['user_id'], name: 'index_posts_on_user_id'
-  end
-
   create_table 'relationships', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.integer 'follower_id'
     t.integer 'followed_id'
@@ -70,13 +46,37 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ['follower_id'], name: 'index_relationships_on_follower_id'
   end
 
+  create_table 'review_evaluations', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+    t.bigint 'user_id', null: false
+    t.bigint 'review_id', null: false
+    t.integer 'evaluation_type', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['review_id'], name: 'index_review_evaluations_on_review_id'
+    t.index ['user_id', 'review_id'], name: 'index_review_evaluations_on_user_id_and_review_id', unique: true
+    t.index ['user_id'], name: 'index_review_evaluations_on_user_id'
+  end
+
+  create_table 'reviews', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+    t.bigint 'user_id', null: false
+    t.bigint 'article_id', null: false
+    t.string 'text'
+    t.decimal 'evaluation_point', precision: 3, scale: 1, default: '0.0', null: false
+    t.integer 'likes_count', default: 0, null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['article_id'], name: 'index_reviews_on_article_id'
+    t.index ['user_id', 'article_id'], name: 'index_reviews_on_user_id_and_article_id', unique: true
+    t.index ['user_id'], name: 'index_reviews_on_user_id'
+  end
+
   create_table 'user_hash_tags', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.bigint 'user_id', null: false
     t.bigint 'hash_tag_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index ['hash_tag_id'], name: 'index_post_hash_tags_on_hash_tag_id'
-    t.index ['user_id'], name: 'index_post_hash_tags_on_user_id'
+    t.index ['hash_tag_id'], name: 'index_user_hash_tags_on_hash_tag_id'
+    t.index ['user_id'], name: 'index_user_hash_tags_on_user_id'
   end
 
   create_table 'users', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
@@ -114,10 +114,10 @@ ActiveRecord::Schema.define(version: 0) do
 
   add_foreign_key 'article_hash_tags', 'articles'
   add_foreign_key 'article_hash_tags', 'hash_tags'
-  add_foreign_key 'post_evaluations', 'posts'
-  add_foreign_key 'post_evaluations', 'users'
-  add_foreign_key 'posts', 'articles'
-  add_foreign_key 'posts', 'users'
+  add_foreign_key 'review_evaluations', 'reviews'
+  add_foreign_key 'review_evaluations', 'users'
+  add_foreign_key 'reviews', 'articles'
+  add_foreign_key 'reviews', 'users'
   add_foreign_key 'user_hash_tags', 'hash_tags'
   add_foreign_key 'user_hash_tags', 'users'
 end

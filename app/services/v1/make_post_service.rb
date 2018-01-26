@@ -9,7 +9,7 @@ module V1
     end
 
     def build!
-      @article.posts.create!(text: @comment, user_id: @user_id, evaluation_point: @point)
+      @article.reviews.create!(text: @comment, user_id: @user_id, evaluation_point: @point)
     end
 
     private

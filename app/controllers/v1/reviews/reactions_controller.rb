@@ -1,33 +1,33 @@
 module V1
-  module Posts
+  module Reviews
     class ReactionsController < ApplicationController
-      before_action :set_post, only: [:add_like]
+      before_action :set_review, only: [:add_like]
 
       def add_like
         begin
-          post = add_reaction('like')
+          review = add_reaction('like')
         rescue ActiveRecord::RecordNotUnique => e
           raise ActionController::BadRequest, e.message
         end
-        render json: post, serializer: V1::PostSerializer
+        render json: review, serializer: V1::ReviewSerializer
       end
 
       def delete_like
         begin
-          post = remove_reaction('like')
+          review = remove_reaction('like')
         rescue ActiveRecord::RecordNotUnique => e
           raise ActionController::BadRequest, e.message
         end
-        render json: post, serializer: V1::PostSerializer
+        render json: review, serializer: V1::ReviewSerializer
       end
 
       private
 
-        def set_post
-          @post = Post.find(post_id)
+        def set_review
+          @review = Review.find(review_id)
         end
 
-        def post_id
+        def review_id
           params[:id]
         end
 
@@ -36,14 +36,14 @@ module V1
         end
 
         def add_reaction(type)
-          @post.post_evaluations.create!(user_id: user_id, evaluation_type: type)
-          @post
+          @review.review_evaluations.create!(user_id: user_id, evaluation_type: type)
+          @review
         end
 
         def remove_reaction(type)
-          reaction = PostEvaluation.find_by(user_id: user_id, post_id: post_id, evaluation_type: type)
+          reaction = ReviewEvaluation.find_by(user_id: user_id, review_id: review_id, evaluation_type: type)
           reaction.destroy!
-          Post.find(post_id)
+          Review.find(review_id)
         end
     end
   end

@@ -40,8 +40,8 @@ links:
         $ref: /schemata#/mesasge
 
 - title: show
-  description: Show a specific hashtag's posts
-  href: /v1/hashtags/{hashtag_id}/posts
+  description: Show a specific hashtag's reviews
+  href: /v1/hashtags/{hashtag_id}/reviews
   method: GET
   rel: show
   schema:
@@ -56,6 +56,6 @@ links:
           - $ref: /schemata#/datetime
           - type: "null"
   targetSchema:
-    $ref: /schemata/post#/definitions/post_page
+    $ref: /schemata/review#/definitions/review_page
 
 id: schemata/v1_hashtags

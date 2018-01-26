@@ -83,7 +83,7 @@
         {
           "title": "記事のコメント表示",
           "description": "投稿のモーダルのリプライ情報を追加も合わせて取得する。",
-          "href": "/v1/articles/{id}/posts",
+          "href": "/v1/articles/{id}/reviews",
           "method": "GET",
           "rel": "instancese",
           "schema": {
@@ -110,14 +110,14 @@
             "type": "object",
             "properties": {
               "replies": {
-                "$ref": "#/definitions/post/definitions/post_page"
+                "$ref": "#/definitions/review/definitions/review_page"
               }
             }
           }
         },
         {
           "title": "create",
-          "description": "ページの右上からピックするときはこれを叩く。既にピックされていた場合は、getして返すことになる。ピックされた記事にコメントする際は、`post /v1/articles/:id/posts`を叩いてもらう。レスポンスで記事を返すべきか、コメントを返すべきか迷いどころ。(TODO)",
+          "description": "ページの右上からピックするときはこれを叩く。既にピックされていた場合は、getして返すことになる。ピックされた記事にコメントする際は、`review /v1/articles/:id/reviews`を叩いてもらう。レスポンスで記事を返すべきか、コメントを返すべきか迷いどころ。(TODO)",
           "href": "/v1/articles",
           "method": "POST",
           "rel": "create",
@@ -133,7 +133,7 @@
             }
           },
           "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post"
+            "$ref": "#/definitions/review/definitions/review"
           }
         },
         {
@@ -215,8 +215,8 @@
         },
         {
           "title": "show",
-          "description": "Show a specific hashtag's posts",
-          "href": "/v1/hashtags/{hashtag_id}/posts",
+          "description": "Show a specific hashtag's reviews",
+          "href": "/v1/hashtags/{hashtag_id}/reviews",
           "method": "GET",
           "rel": "show",
           "schema": {
@@ -240,7 +240,7 @@
             }
           },
           "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post_page"
+            "$ref": "#/definitions/review/definitions/review_page"
           }
         }
       ]
@@ -281,9 +281,9 @@
         }
       ]
     },
-    "v1_posts": {
+    "v1_reviews": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "post",
+      "title": "review",
       "description": "記事につく、コメント。",
       "stability": "prototype",
       "strictProperties": true,
@@ -306,8 +306,8 @@
       "links": [
         {
           "title": "create",
-          "description": "create post",
-          "href": "/v1/articles/{id}/posts",
+          "description": "create review",
+          "href": "/v1/articles/{id}/reviews",
           "method": "POST",
           "rel": "create",
           "schema": {
@@ -318,24 +318,24 @@
             ],
             "properties": {
               "text": {
-                "$ref": "#/definitions/post/definitions/text"
+                "$ref": "#/definitions/review/definitions/text"
               },
               "user_id": {
-                "$ref": "#/definitions/v1_posts/definitions/user_id"
+                "$ref": "#/definitions/v1_reviews/definitions/user_id"
               },
               "evaluation_point": {
-                "$ref": "#/definitions/v1_posts/definitions/evaluation_point"
+                "$ref": "#/definitions/v1_reviews/definitions/evaluation_point"
               }
             }
           },
           "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post"
+            "$ref": "#/definitions/review/definitions/review"
           }
         },
         {
           "title": "delete",
-          "description": "update post",
-          "href": "/v1/posts/{post_id}",
+          "description": "update review",
+          "href": "/v1/reviews/{review_id}",
           "method": "DELETE",
           "rel": "empty",
           "schema": {
@@ -351,7 +351,7 @@
         }
       ]
     },
-    "v1_posts_reaction": {
+    "v1_reviews_reaction": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "reaction",
       "description": "reaction apis",
@@ -363,33 +363,33 @@
       "links": [
         {
           "title": "like",
-          "description": "like a post",
-          "href": "/v1/posts/{post_id}/like",
+          "description": "like a review",
+          "href": "/v1/reviews/{review_id}/like",
           "method": "POST",
           "rel": "create",
           "schema": {
             "type": "null"
           },
           "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post"
+            "$ref": "#/definitions/review/definitions/review"
           }
         },
         {
           "title": "cancel like",
           "description": "remove like",
-          "href": "/v1/posts/{post_id}/like",
+          "href": "/v1/reviews/{review_id}/like",
           "method": "DELETE",
           "rel": "delete",
           "schema": {
             "type": "null"
           },
           "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post"
+            "$ref": "#/definitions/review/definitions/review"
           }
         }
       ]
     },
-    "v1_posts_search_result": {
+    "v1_reviews_search_result": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "search_result",
       "description": "get search_result apis",
@@ -401,16 +401,16 @@
       "links": [
         {
           "title": "search_result",
-          "description": "get a post's search_result",
-          "href": "/v1/posts/search_result",
+          "description": "get a review's search_result",
+          "href": "/v1/reviews/search_result",
           "method": "GET",
           "rel": "instances",
           "schema": {
-            "description": "search query for posts",
+            "description": "search query for reviews",
             "type": "string"
           },
           "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post_page"
+            "$ref": "#/definitions/review/definitions/review_page"
           }
         }
       ]
@@ -741,48 +741,6 @@
         }
       ]
     },
-    "v1_users_posts": {
-      "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "特定ユーザーの投稿",
-      "description": "特定ユーザーの投稿に関するAPI",
-      "stability": "prototype",
-      "strictProperties": true,
-      "type": [
-        "object"
-      ],
-      "links": [
-        {
-          "title": "user's posts",
-          "description": "Show a list of a user's posts",
-          "href": "/v1/users/{user_id}/posts",
-          "method": "GET",
-          "rel": "instances",
-          "schema": {
-            "type": "object",
-            "properties": {
-              "limit": {
-                "description": "limit",
-                "example": 10,
-                "type": "integer"
-              },
-              "cursor": {
-                "anyOf": [
-                  {
-                    "$ref": "#/definitions/datetime"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
-              }
-            }
-          },
-          "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post_page"
-          }
-        }
-      ]
-    },
     "v1_users_reactions": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "特定ユーザーのリアクション",
@@ -820,7 +778,49 @@
             }
           },
           "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post_page"
+            "$ref": "#/definitions/review/definitions/review_page"
+          }
+        }
+      ]
+    },
+    "v1_users_reviews": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "特定ユーザーの投稿",
+      "description": "特定ユーザーの投稿に関するAPI",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
+        {
+          "title": "user's reviews",
+          "description": "Show a list of a user's reviews",
+          "href": "/v1/users/{user_id}/reviews",
+          "method": "GET",
+          "rel": "instances",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/review/definitions/review_page"
           }
         }
       ]
@@ -877,7 +877,7 @@
             ],
             "properties": {
               "total_count_likes": {
-                "$ref": "#/definitions/post_evaluation/definitions/like"
+                "$ref": "#/definitions/review_evaluation/definitions/like"
               }
             }
           }
@@ -1099,7 +1099,35 @@
         }
       }
     },
-    "post": {
+    "review_evaluation": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Post Evaluation",
+      "description": "Post Evaluation Resource",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "like": {
+          "description": "review Evaluation's like counts",
+          "type": "integer",
+          "example": 1248
+        },
+        "review_evaluation": {
+          "type": "object",
+          "required": [
+            "like"
+          ],
+          "properties": {
+            "like": {
+              "$ref": "#/definitions/review_evaluation/definitions/like"
+            }
+          }
+        }
+      }
+    },
+    "review": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "Post",
       "description": "Post Resource",
@@ -1110,23 +1138,23 @@
       ],
       "definitions": {
         "id": {
-          "description": "unique identifier of post",
+          "description": "unique identifier of review",
           "type": "integer",
           "example": 1,
           "readOnly": true
         },
         "text": {
-          "description": "post's text",
+          "description": "review's text",
           "type": "string",
           "example": "Pig Coin is awesome."
         },
         "post_at": {
-          "description": "datetime when this post was posted.",
+          "description": "datetime when this review was posted.",
           "type": "string",
           "format": "date-time"
         },
         "likes_count": {
-          "description": "post likes count",
+          "description": "review likes count",
           "type": "integer",
           "example": 100
         },
@@ -1135,7 +1163,7 @@
           "type": "string",
           "example": 2.4
         },
-        "post": {
+        "review": {
           "type": "object",
           "required": [
             "id",
@@ -1147,26 +1175,26 @@
           ],
           "properties": {
             "id": {
-              "$ref": "#/definitions/post/definitions/id"
+              "$ref": "#/definitions/review/definitions/id"
             },
             "text": {
-              "$ref": "#/definitions/post/definitions/text"
+              "$ref": "#/definitions/review/definitions/text"
             },
             "user": {
               "$ref": "#/definitions/user/definitions/user"
             },
             "post_at": {
-              "$ref": "#/definitions/post/definitions/post_at"
+              "$ref": "#/definitions/review/definitions/post_at"
             },
             "likes_count": {
-              "$ref": "#/definitions/post/definitions/likes_count"
+              "$ref": "#/definitions/review/definitions/likes_count"
             },
             "evaluation_point": {
-              "$ref": "#/definitions/post/definitions/evaluation_point"
+              "$ref": "#/definitions/review/definitions/evaluation_point"
             }
           }
         },
-        "post_page": {
+        "review_page": {
           "type": "object",
           "required": [
             "data",
@@ -1176,7 +1204,7 @@
             "data": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/post/definitions/post"
+                "$ref": "#/definitions/review/definitions/review"
               }
             },
             "paging": {
@@ -1184,34 +1212,6 @@
             },
             "message": {
               "$ref": "#/definitions/mesasge"
-            }
-          }
-        }
-      }
-    },
-    "post_evaluation": {
-      "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "Post Evaluation",
-      "description": "Post Evaluation Resource",
-      "stability": "prototype",
-      "strictProperties": true,
-      "type": [
-        "object"
-      ],
-      "definitions": {
-        "like": {
-          "description": "post Evaluation's like counts",
-          "type": "integer",
-          "example": 1248
-        },
-        "post_evaluation": {
-          "type": "object",
-          "required": [
-            "like"
-          ],
-          "properties": {
-            "like": {
-              "$ref": "#/definitions/post_evaluation/definitions/like"
             }
           }
         }
@@ -1347,14 +1347,14 @@
     "v1_hashtags_trends": {
       "$ref": "#/definitions/v1_hashtags_trends"
     },
-    "v1_posts": {
-      "$ref": "#/definitions/v1_posts"
+    "v1_reviews": {
+      "$ref": "#/definitions/v1_reviews"
     },
-    "v1_posts_reaction": {
-      "$ref": "#/definitions/v1_posts_reaction"
+    "v1_reviews_reaction": {
+      "$ref": "#/definitions/v1_reviews_reaction"
     },
-    "v1_posts_search_result": {
-      "$ref": "#/definitions/v1_posts_search_result"
+    "v1_reviews_search_result": {
+      "$ref": "#/definitions/v1_reviews_search_result"
     },
     "v1_search": {
       "$ref": "#/definitions/v1_search"
@@ -1368,11 +1368,11 @@
     "v1_users_hashtag": {
       "$ref": "#/definitions/v1_users_hashtag"
     },
-    "v1_users_posts": {
-      "$ref": "#/definitions/v1_users_posts"
-    },
     "v1_users_reactions": {
       "$ref": "#/definitions/v1_users_reactions"
+    },
+    "v1_users_reviews": {
+      "$ref": "#/definitions/v1_users_reviews"
     },
     "v1_users_search_result": {
       "$ref": "#/definitions/v1_users_search_result"
@@ -1389,11 +1389,11 @@
     "paging": {
       "$ref": "#/definitions/paging"
     },
-    "post": {
-      "$ref": "#/definitions/post"
+    "review_evaluation": {
+      "$ref": "#/definitions/review_evaluation"
     },
-    "post_evaluation": {
-      "$ref": "#/definitions/post_evaluation"
+    "review": {
+      "$ref": "#/definitions/review"
     },
     "user": {
       "$ref": "#/definitions/user"

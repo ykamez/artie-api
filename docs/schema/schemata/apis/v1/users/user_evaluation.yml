@@ -21,7 +21,7 @@ links:
       - total_count_likes
     properties:
       total_count_likes:
-        $ref: /schemata/post_evaluation#/definitions/like
+        $ref: /schemata/review_evaluation#/definitions/like
 
 
 id: schemata/v1_users_user_evaluation

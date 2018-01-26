@@ -4,10 +4,10 @@ module V1
       before_action :set_user, only: [:index]
 
       def index
-        post_evaluations = @user.post_evaluations.where('created_at < ?', cursor).limit(limit)
-        posts = Post.where(id: post_evaluations.pluck(:post_id))
+        review_evaluations = @user.review_evaluations.where('created_at < ?', cursor).limit(limit)
+        posts = Review.where(id: review_evaluations.pluck(:review_id))
         page = build_page(posts)
-        render json: page, serializer: ::V1::PostsPagingSerializer, include: '**'
+        render json: page, serializer: ::V1::ReviewsPagingSerializer, include: '**'
       end
 
       private

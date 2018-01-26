@@ -10,8 +10,8 @@
 #
 # Indexes
 #
-#  index_post_hash_tags_on_article_id   (article_id)
-#  index_post_hash_tags_on_hash_tag_id  (hash_tag_id)
+#  index_article_hash_tags_on_article_id   (article_id)
+#  index_article_hash_tags_on_hash_tag_id  (hash_tag_id)
 #
 # Foreign Keys
 #
@@ -20,6 +20,6 @@
 #
 
 class ArticleHashTag < ApplicationRecord
-  belongs_to :post
+  belongs_to :review
   belongs_to :hash_tag
 end

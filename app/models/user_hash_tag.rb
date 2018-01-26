@@ -10,8 +10,8 @@
 #
 # Indexes
 #
-#  index_post_hash_tags_on_hash_tag_id  (hash_tag_id)
-#  index_post_hash_tags_on_user_id      (user_id)
+#  index_user_hash_tags_on_hash_tag_id  (hash_tag_id)
+#  index_user_hash_tags_on_user_id      (user_id)
 #
 # Foreign Keys
 #

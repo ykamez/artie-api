@@ -8,16 +8,16 @@ type:
 - object
 definitions:
   like:
-    description: post Evaluation's like counts
+    description: review Evaluation's like counts
     type: integer
     example: 1248
 
-  post_evaluation:
+  review_evaluation:
     type: object
     required:
       - like
     properties:
       like:
-        $ref: /schemata/post_evaluation#/definitions/like
+        $ref: /schemata/review_evaluation#/definitions/like
 
-id: schemata/post_evaluation
+id: schemata/review_evaluation

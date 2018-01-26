@@ -45,7 +45,7 @@ links:
 
 - title: 記事のコメント表示
   description: 投稿のモーダルのリプライ情報を追加も合わせて取得する。
-  href: /v1/articles/{id}/posts
+  href: /v1/articles/{id}/reviews
   method: GET
   rel: instancese
   schema:
@@ -63,10 +63,10 @@ links:
     type: object
     properties:
       replies:
-        $ref: /schemata/post#/definitions/post_page
+        $ref: /schemata/review#/definitions/review_page
 
 - title: create
-  description: ページの右上からピックするときはこれを叩く。既にピックされていた場合は、getして返すことになる。ピックされた記事にコメントする際は、`post /v1/articles/:id/posts`を叩いてもらう。レスポンスで記事を返すべきか、コメントを返すべきか迷いどころ。(TODO)
+  description: ページの右上からピックするときはこれを叩く。既にピックされていた場合は、getして返すことになる。ピックされた記事にコメントする際は、`review /v1/articles/:id/reviews`を叩いてもらう。レスポンスで記事を返すべきか、コメントを返すべきか迷いどころ。(TODO)
   href: /v1/articles
   method: POST
   rel: create
@@ -78,7 +78,7 @@ links:
       url:
         $ref: /schemata/article#/definitions/url
   targetSchema:
-    $ref: /schemata/post#/definitions/post
+    $ref: /schemata/review#/definitions/review
 
 
 - title: delete

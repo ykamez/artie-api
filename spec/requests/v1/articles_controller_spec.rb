@@ -26,7 +26,7 @@ RSpec.describe V1::ArticlesController, type: :request do
 
         it 'create a record' do
           expect { subject }.to change(Article, :count).by(1).
-                                  and change(Post, :count).by(1)
+                                  and change(Review, :count).by(1)
         end
       end
 
@@ -47,7 +47,7 @@ RSpec.describe V1::ArticlesController, type: :request do
 
         it 'create a record' do
           expect { subject }.to change(Article, :count).by(0).
-                                  and change(Post, :count).by(1)
+                                  and change(Review, :count).by(1)
         end
       end
     end

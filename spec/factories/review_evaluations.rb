@@ -1,28 +1,28 @@
 # == Schema Information
 #
-# Table name: post_evaluations
+# Table name: review_evaluations
 #
 #  id              :integer          not null, primary key
 #  user_id         :integer          not null
-#  post_id         :integer          not null
+#  review_id       :integer          not null
 #  evaluation_type :integer          not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
 # Indexes
 #
-#  index_post_evaluations_on_post_id              (post_id)
-#  index_post_evaluations_on_user_id              (user_id)
-#  index_post_evaluations_on_user_id_and_post_id  (user_id,post_id) UNIQUE
+#  index_review_evaluations_on_review_id              (review_id)
+#  index_review_evaluations_on_user_id                (user_id)
+#  index_review_evaluations_on_user_id_and_review_id  (user_id,review_id) UNIQUE
 #
 # Foreign Keys
 #
-#  fk_rails_...  (post_id => posts.id)
+#  fk_rails_...  (review_id => reviews.id)
 #  fk_rails_...  (user_id => users.id)
 #
 
 FactoryBot.define do
-  factory :post_evaluation do
+  factory :review_evaluation do
     evaluation_type 0
   end
 end

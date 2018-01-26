@@ -1,6 +1,6 @@
 ---
 "$schema": http://json-schema.org/draft-04/hyper-schema
-title: post
+title: review
 description: 記事につく、コメント。
 stability: prototype
 strictProperties: true
@@ -19,8 +19,8 @@ definitions:
 
 links:
 - title: create
-  description: create post
-  href: /v1/articles/{id}/posts
+  description: create review
+  href: /v1/articles/{id}/reviews
   method: POST
   rel: create
   schema:
@@ -30,18 +30,18 @@ links:
       - user_id
     properties:
       text:
-        $ref: /schemata/post#/definitions/text
+        $ref: /schemata/review#/definitions/text
       user_id:
-        $ref: /schemata/v1_posts#/definitions/user_id
+        $ref: /schemata/v1_reviews#/definitions/user_id
       evaluation_point:
-        $ref: /schemata/v1_posts#/definitions/evaluation_point
+        $ref: /schemata/v1_reviews#/definitions/evaluation_point
   targetSchema:
-    $ref: /schemata/post#/definitions/post
+    $ref: /schemata/review#/definitions/review
 
 
 - title: delete
-  description: update post
-  href: /v1/posts/{post_id}
+  description: update review
+  href: /v1/reviews/{review_id}
   method: DELETE
   rel: empty
   schema:
@@ -51,4 +51,4 @@ links:
     type: object
     properties: {}
 
-id: schemata/v1_posts
+id: schemata/v1_reviews

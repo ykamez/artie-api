@@ -9,9 +9,9 @@ class V1::HashTagsController < ApplicationController
 
   def show
     post_hash_tags = ArticleHashTag.where(hash_tag_id: @hash_tag.id)
-    posts = Post.where(id: post_hash_tags.pluck(:post_id))
+    posts = Review.where(id: post_hash_tags.pluck(:review_id))
     page = build_post_page(posts)
-    render json: page, serializer: ::V1::PostsPagingSerializer, include: '**'
+    render json: page, serializer: ::V1::ReviewsPagingSerializer, include: '**'
   end
 
   def watch

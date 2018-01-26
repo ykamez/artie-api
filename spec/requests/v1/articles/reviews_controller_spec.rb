@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe V1::Articles::PostsController, type: :request do
-  describe 'GET /v1/articles/:id/posts' do
+RSpec.describe V1::Articles::ReviewsController, type: :request do
+  describe 'GET /v1/articles/:id/reviews' do
     subject { get url, headers: headers, params: params.to_json }
 
     let(:headers) do
@@ -9,13 +9,13 @@ RSpec.describe V1::Articles::PostsController, type: :request do
         'Content-Type': 'application/json',
       }
     end
-    let(:url) { "/v1/articles/#{article.id}/posts" }
+    let(:url) { "/v1/articles/#{article.id}/reviews" }
     let(:user) { create(:user) }
     let(:article) { create(:article) }
 
     context 'with valid request' do
       let(:params) { { comment: 'I agree.' } }
-      context 'when post exists' do
+      context 'when review exists' do
         before do
           user
         end

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: posts
+# Table name: reviews
 #
 #  id               :integer          not null, primary key
 #  user_id          :integer          not null
@@ -13,9 +13,9 @@
 #
 # Indexes
 #
-#  index_posts_on_article_id              (article_id)
-#  index_posts_on_user_id                 (user_id)
-#  index_posts_on_user_id_and_article_id  (user_id,article_id) UNIQUE
+#  index_reviews_on_article_id              (article_id)
+#  index_reviews_on_user_id                 (user_id)
+#  index_reviews_on_user_id_and_article_id  (user_id,article_id) UNIQUE
 #
 # Foreign Keys
 #
@@ -23,8 +23,9 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
-require 'rails_helper'
-
-RSpec.describe Post, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+FactoryBot.define do
+  factory :review do
+    text 'Bitcoin is very good.'
+    evaluation_point '0.0'
+  end
 end

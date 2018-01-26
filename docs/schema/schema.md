@@ -2,28 +2,28 @@
   - <a href="#resource-article">Article</a>
   - <a href="#resource-hashtag">Hashtag</a>
   - <a href="#resource-paging">paging</a>
-  - <a href="#resource-post">Post</a>
-  - <a href="#resource-post_evaluation">Post Evaluation</a>
+  - <a href="#resource-review">Post</a>
+  - <a href="#resource-review_evaluation">Post Evaluation</a>
   - <a href="#resource-user">User</a>
   - <a href="#resource-v1_articles">article</a>
     - <a href="#link-GET-v1_articles-/v1/articles">GET /v1/articles</a>
     - <a href="#link-GET-v1_articles-/v1/articles/{id}">GET /v1/articles/{id}</a>
-    - <a href="#link-GET-v1_articles-/v1/articles/{id}/posts">GET /v1/articles/{id}/posts</a>
+    - <a href="#link-GET-v1_articles-/v1/articles/{id}/reviews">GET /v1/articles/{id}/reviews</a>
     - <a href="#link-POST-v1_articles-/v1/articles">POST /v1/articles</a>
     - <a href="#link-DELETE-v1_articles-/v1/articles/{id}">DELETE /v1/articles/{id}</a>
   - <a href="#resource-v1_hashtags">Hashtag</a>
     - <a href="#link-GET-v1_hashtags-/v1/hashtags">GET /v1/hashtags</a>
-    - <a href="#link-GET-v1_hashtags-/v1/hashtags/{hashtag_id}/posts">GET /v1/hashtags/{hashtag_id}/posts</a>
+    - <a href="#link-GET-v1_hashtags-/v1/hashtags/{hashtag_id}/reviews">GET /v1/hashtags/{hashtag_id}/reviews</a>
   - <a href="#resource-v1_hashtags_trends">トレンド仮想通貨</a>
     - <a href="#link-GET-v1_hashtags_trends-/v1/hashtags/trends">GET /v1/hashtags/trends</a>
-  - <a href="#resource-v1_posts">post</a>
-    - <a href="#link-POST-v1_posts-/v1/articles/{id}/posts">POST /v1/articles/{id}/posts</a>
-    - <a href="#link-DELETE-v1_posts-/v1/posts/{post_id}">DELETE /v1/posts/{post_id}</a>
-  - <a href="#resource-v1_posts_reaction">reaction</a>
-    - <a href="#link-POST-v1_posts_reaction-/v1/posts/{post_id}/like">POST /v1/posts/{post_id}/like</a>
-    - <a href="#link-DELETE-v1_posts_reaction-/v1/posts/{post_id}/like">DELETE /v1/posts/{post_id}/like</a>
-  - <a href="#resource-v1_posts_search_result">search_result</a>
-    - <a href="#link-GET-v1_posts_search_result-/v1/posts/search_result">GET /v1/posts/search_result</a>
+  - <a href="#resource-v1_reviews">review</a>
+    - <a href="#link-POST-v1_reviews-/v1/articles/{id}/reviews">POST /v1/articles/{id}/reviews</a>
+    - <a href="#link-DELETE-v1_reviews-/v1/reviews/{review_id}">DELETE /v1/reviews/{review_id}</a>
+  - <a href="#resource-v1_reviews_reaction">reaction</a>
+    - <a href="#link-POST-v1_reviews_reaction-/v1/reviews/{review_id}/like">POST /v1/reviews/{review_id}/like</a>
+    - <a href="#link-DELETE-v1_reviews_reaction-/v1/reviews/{review_id}/like">DELETE /v1/reviews/{review_id}/like</a>
+  - <a href="#resource-v1_reviews_search_result">search_result</a>
+    - <a href="#link-GET-v1_reviews_search_result-/v1/reviews/search_result">GET /v1/reviews/search_result</a>
   - <a href="#resource-v1_search">search</a>
     - <a href="#link-GET-v1_search-/v1/search">GET /v1/search</a>
   - <a href="#resource-v1_users">user</a>
@@ -38,10 +38,10 @@
     - <a href="#link-GET-v1_users_follow_follwers-/v1/users/{user_id}/followers">GET /v1/users/{user_id}/followers</a>
   - <a href="#resource-v1_users_hashtag">user hashtag</a>
     - <a href="#link-GET-v1_users_hashtag-/v1/users/{user_id}/hashtags/watching">GET /v1/users/{user_id}/hashtags/watching</a>
-  - <a href="#resource-v1_users_posts">特定ユーザーの投稿</a>
-    - <a href="#link-GET-v1_users_posts-/v1/users/{user_id}/posts">GET /v1/users/{user_id}/posts</a>
   - <a href="#resource-v1_users_reactions">特定ユーザーのリアクション</a>
     - <a href="#link-GET-v1_users_reactions-/v1/users/{user_id}/reactions">GET /v1/users/{user_id}/reactions</a>
+  - <a href="#resource-v1_users_reviews">特定ユーザーの投稿</a>
+    - <a href="#link-GET-v1_users_reviews-/v1/users/{user_id}/reviews">GET /v1/users/{user_id}/reviews</a>
   - <a href="#resource-v1_users_search_result">search_result</a>
     - <a href="#link-GET-v1_users_search_result-/v1/users/search">GET /v1/users/search</a>
   - <a href="#resource-v1_users_user_evaluation">ユーザー評価</a>
@@ -68,14 +68,14 @@ Stability: `prototype`
 Paging Resource
 
 
-## <a name="resource-post">Post</a>
+## <a name="resource-review">Post</a>
 
 Stability: `prototype`
 
 Post Resource
 
 
-## <a name="resource-post_evaluation">Post Evaluation</a>
+## <a name="resource-review_evaluation">Post Evaluation</a>
 
 Stability: `prototype`
 
@@ -177,12 +177,12 @@ HTTP/1.1 200 OK
 }
 ```
 
-### <a name="link-GET-v1_articles-/v1/articles/{id}/posts">article 記事のコメント表示</a>
+### <a name="link-GET-v1_articles-/v1/articles/{id}/reviews">article 記事のコメント表示</a>
 
 投稿のモーダルのリプライ情報を追加も合わせて取得する。
 
 ```
-GET /v1/articles/{id}/posts
+GET /v1/articles/{id}/reviews
 ```
 
 #### Optional Parameters
@@ -196,7 +196,7 @@ GET /v1/articles/{id}/posts
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/articles/$ID/posts
+$ curl -n http://coinnow.local/v1/articles/$ID/reviews
  -G \
   -d limit=10
 ```
@@ -241,7 +241,7 @@ HTTP/1.1 200 OK
 
 ### <a name="link-POST-v1_articles-/v1/articles">article create</a>
 
-ページの右上からピックするときはこれを叩く。既にピックされていた場合は、getして返すことになる。ピックされた記事にコメントする際は、`post /v1/articles/:id/posts`を叩いてもらう。レスポンスで記事を返すべきか、コメントを返すべきか迷いどころ。(TODO)
+ページの右上からピックするときはこれを叩く。既にピックされていた場合は、getして返すことになる。ピックされた記事にコメントする際は、`review /v1/articles/:id/reviews`を叩いてもらう。レスポンスで記事を返すべきか、コメントを返すべきか迷いどころ。(TODO)
 
 ```
 POST /v1/articles
@@ -372,12 +372,12 @@ HTTP/1.1 200 OK
 }
 ```
 
-### <a name="link-GET-v1_hashtags-/v1/hashtags/{hashtag_id}/posts">Hashtag show</a>
+### <a name="link-GET-v1_hashtags-/v1/hashtags/{hashtag_id}/reviews">Hashtag show</a>
 
-Show a specific hashtag's posts
+Show a specific hashtag's reviews
 
 ```
-GET /v1/hashtags/{hashtag_id}/posts
+GET /v1/hashtags/{hashtag_id}/reviews
 ```
 
 #### Optional Parameters
@@ -391,7 +391,7 @@ GET /v1/hashtags/{hashtag_id}/posts
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/hashtags/$HASHTAG_ID/posts
+$ curl -n http://coinnow.local/v1/hashtags/$HASHTAG_ID/reviews
  -G \
   -d limit=10
 ```
@@ -477,25 +477,25 @@ HTTP/1.1 200 OK
 ```
 
 
-## <a name="resource-v1_posts">post</a>
+## <a name="resource-v1_reviews">review</a>
 
 Stability: `prototype`
 
 記事につく、コメント。
 
-### <a name="link-POST-v1_posts-/v1/articles/{id}/posts">post create</a>
+### <a name="link-POST-v1_reviews-/v1/articles/{id}/reviews">review create</a>
 
-create post
+create review
 
 ```
-POST /v1/articles/{id}/posts
+POST /v1/articles/{id}/reviews
 ```
 
 #### Required Parameters
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **text** | *string* | post's text | `"Pig Coin is awesome."` |
+| **text** | *string* | review's text | `"Pig Coin is awesome."` |
 | **user_id** | *integer* | unique identifier of user | `1234` |
 
 
@@ -509,7 +509,7 @@ POST /v1/articles/{id}/posts
 #### Curl Example
 
 ```bash
-$ curl -n -X POST http://coinnow.local/v1/articles/$ID/posts \
+$ curl -n -X POST http://coinnow.local/v1/articles/$ID/reviews \
   -d '{
   "text": "Pig Coin is awesome.",
   "user_id": 1234,
@@ -545,19 +545,19 @@ HTTP/1.1 201 Created
 }
 ```
 
-### <a name="link-DELETE-v1_posts-/v1/posts/{post_id}">post delete</a>
+### <a name="link-DELETE-v1_reviews-/v1/reviews/{review_id}">review delete</a>
 
-update post
+update review
 
 ```
-DELETE /v1/posts/{post_id}
+DELETE /v1/reviews/{review_id}
 ```
 
 
 #### Curl Example
 
 ```bash
-$ curl -n -X DELETE http://coinnow.local/v1/posts/$POST_ID \
+$ curl -n -X DELETE http://coinnow.local/v1/reviews/$REVIEW_ID \
   -d '{
 }' \
   -H "Content-Type: application/json"
@@ -572,25 +572,25 @@ HTTP/1.1 202 Accepted
 
 
 
-## <a name="resource-v1_posts_reaction">reaction</a>
+## <a name="resource-v1_reviews_reaction">reaction</a>
 
 Stability: `prototype`
 
 reaction apis
 
-### <a name="link-POST-v1_posts_reaction-/v1/posts/{post_id}/like">reaction like</a>
+### <a name="link-POST-v1_reviews_reaction-/v1/reviews/{review_id}/like">reaction like</a>
 
-like a post
+like a review
 
 ```
-POST /v1/posts/{post_id}/like
+POST /v1/reviews/{review_id}/like
 ```
 
 
 #### Curl Example
 
 ```bash
-$ curl -n -X POST http://coinnow.local/v1/posts/$POST_ID/like \
+$ curl -n -X POST http://coinnow.local/v1/reviews/$REVIEW_ID/like \
   -H "Content-Type: application/json"
 ```
 
@@ -621,19 +621,19 @@ HTTP/1.1 201 Created
 }
 ```
 
-### <a name="link-DELETE-v1_posts_reaction-/v1/posts/{post_id}/like">reaction cancel like</a>
+### <a name="link-DELETE-v1_reviews_reaction-/v1/reviews/{review_id}/like">reaction cancel like</a>
 
 remove like
 
 ```
-DELETE /v1/posts/{post_id}/like
+DELETE /v1/reviews/{review_id}/like
 ```
 
 
 #### Curl Example
 
 ```bash
-$ curl -n -X DELETE http://coinnow.local/v1/posts/$POST_ID/like \
+$ curl -n -X DELETE http://coinnow.local/v1/reviews/$REVIEW_ID/like \
   -H "Content-Type: application/json"
 ```
 
@@ -665,25 +665,25 @@ HTTP/1.1 200 OK
 ```
 
 
-## <a name="resource-v1_posts_search_result">search_result</a>
+## <a name="resource-v1_reviews_search_result">search_result</a>
 
 Stability: `prototype`
 
 get search_result apis
 
-### <a name="link-GET-v1_posts_search_result-/v1/posts/search_result">search_result search_result</a>
+### <a name="link-GET-v1_reviews_search_result-/v1/reviews/search_result">search_result search_result</a>
 
-get a post's search_result
+get a review's search_result
 
 ```
-GET /v1/posts/search_result
+GET /v1/reviews/search_result
 ```
 
 
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/posts/search_result
+$ curl -n http://coinnow.local/v1/reviews/search_result
 ```
 
 
@@ -1208,18 +1208,18 @@ HTTP/1.1 200 OK
 ```
 
 
-## <a name="resource-v1_users_posts">特定ユーザーの投稿</a>
+## <a name="resource-v1_users_reactions">特定ユーザーのリアクション</a>
 
 Stability: `prototype`
 
-特定ユーザーの投稿に関するAPI
+特定ユーザーのリアクション
 
-### <a name="link-GET-v1_users_posts-/v1/users/{user_id}/posts">特定ユーザーの投稿 user's posts</a>
+### <a name="link-GET-v1_users_reactions-/v1/users/{user_id}/reactions">特定ユーザーのリアクション user's reactions</a>
 
-Show a list of a user's posts
+Show a list of a user's reactions
 
 ```
-GET /v1/users/{user_id}/posts
+GET /v1/users/{user_id}/reactions
 ```
 
 #### Optional Parameters
@@ -1233,7 +1233,7 @@ GET /v1/users/{user_id}/posts
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/posts
+$ curl -n http://coinnow.local/v1/users/$USER_ID/reactions
  -G \
   -d limit=10
 ```
@@ -1275,18 +1275,18 @@ HTTP/1.1 200 OK
 ```
 
 
-## <a name="resource-v1_users_reactions">特定ユーザーのリアクション</a>
+## <a name="resource-v1_users_reviews">特定ユーザーの投稿</a>
 
 Stability: `prototype`
 
-特定ユーザーのリアクション
+特定ユーザーの投稿に関するAPI
 
-### <a name="link-GET-v1_users_reactions-/v1/users/{user_id}/reactions">特定ユーザーのリアクション user's reactions</a>
+### <a name="link-GET-v1_users_reviews-/v1/users/{user_id}/reviews">特定ユーザーの投稿 user's reviews</a>
 
-Show a list of a user's reactions
+Show a list of a user's reviews
 
 ```
-GET /v1/users/{user_id}/reactions
+GET /v1/users/{user_id}/reviews
 ```
 
 #### Optional Parameters
@@ -1300,7 +1300,7 @@ GET /v1/users/{user_id}/reactions
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/reactions
+$ curl -n http://coinnow.local/v1/users/$USER_ID/reviews
  -G \
   -d limit=10
 ```

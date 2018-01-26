@@ -5,7 +5,7 @@ class V1::ArticlesController < ApplicationController
     rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique => e
       raise ActionController::BadRequest, e.message
     end
-    render json: post, serializer: ::V1::PostSerializer
+    render json: post, serializer: ::V1::ReviewSerializer
   end
 
   private

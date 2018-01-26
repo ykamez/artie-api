@@ -8,20 +8,20 @@ type:
 - object
 definitions:
   id:
-    description: unique identifier of post
+    description: unique identifier of review
     type: integer
     example: 1
     readOnly: true
   text:
-    description: post's text
+    description: review's text
     type: string
     example: "Pig Coin is awesome."
   post_at:
-    description: datetime when this post was posted.
+    description: datetime when this review was posted.
     type: string
     format: date-time
   likes_count:
-    description: post likes count
+    description: review likes count
     type: integer
     example: 100
   evaluation_point:
@@ -29,7 +29,7 @@ definitions:
     type: string
     example: 2.4
 
-  post:
+  review:
     type: object
     required:
       - id
@@ -40,19 +40,19 @@ definitions:
       - evaluation_point
     properties:
       id:
-        $ref: /schemata/post#/definitions/id
+        $ref: /schemata/review#/definitions/id
       text:
-        $ref: /schemata/post#/definitions/text
+        $ref: /schemata/review#/definitions/text
       user:
         $ref: /schemata/user#/definitions/user
       post_at:
-        $ref: /schemata/post#/definitions/post_at
+        $ref: /schemata/review#/definitions/post_at
       likes_count:
-        $ref: /schemata/post#/definitions/likes_count
+        $ref: /schemata/review#/definitions/likes_count
       evaluation_point:
-        $ref: /schemata/post#/definitions/evaluation_point
+        $ref: /schemata/review#/definitions/evaluation_point
 
-  post_page:
+  review_page:
     type: object
     required:
       - data
@@ -61,10 +61,10 @@ definitions:
       data:
         type: array
         items:
-          $ref: /schemata/post#/definitions/post
+          $ref: /schemata/review#/definitions/review
       paging:
         $ref: /schemata/paging#/definitions/paging
       message:
         $ref: /schemata#/mesasge
 
-id: schemata/post
+id: schemata/review

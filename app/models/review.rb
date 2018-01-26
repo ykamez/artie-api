@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: posts
+# Table name: reviews
 #
 #  id               :integer          not null, primary key
 #  user_id          :integer          not null
@@ -13,9 +13,9 @@
 #
 # Indexes
 #
-#  index_posts_on_article_id              (article_id)
-#  index_posts_on_user_id                 (user_id)
-#  index_posts_on_user_id_and_article_id  (user_id,article_id) UNIQUE
+#  index_reviews_on_article_id              (article_id)
+#  index_reviews_on_user_id                 (user_id)
+#  index_reviews_on_user_id_and_article_id  (user_id,article_id) UNIQUE
 #
 # Foreign Keys
 #
@@ -23,9 +23,11 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
-FactoryBot.define do
-  factory :post do
-    text 'Bitcoin is very good.'
-    evaluation_point '0.0'
-  end
+class Review < ApplicationRecord
+  belongs_to :user
+  belongs_to :article
+  counter_culture :article
+  has_many :review_evaluations, dependent: :destroy
+  validates :text, presence: true
+  validates :evaluation_point, presence: true
 end

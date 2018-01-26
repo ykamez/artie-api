@@ -7,8 +7,8 @@ create_table "user_hash_tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT 
   t.datetime "updated_at", null: false
 end
 
-add_index "user_hash_tags", ["user_id"], name: "index_post_hash_tags_on_user_id", using: :btree
-add_index "user_hash_tags", ["hash_tag_id"], name: "index_post_hash_tags_on_hash_tag_id", using: :btree
+add_index "user_hash_tags", ["user_id"], name: "index_user_hash_tags_on_user_id", using: :btree
+add_index "user_hash_tags", ["hash_tag_id"], name: "index_user_hash_tags_on_hash_tag_id", using: :btree
 
 add_foreign_key "user_hash_tags", "users"
 add_foreign_key "user_hash_tags", "hash_tags"

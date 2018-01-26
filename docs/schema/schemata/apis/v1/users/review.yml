@@ -8,9 +8,9 @@ type:
 - object
 
 links:
-- title: user's posts
-  description: Show a list of a user's posts
-  href: /v1/users/{user_id}/posts
+- title: user's reviews
+  description: Show a list of a user's reviews
+  href: /v1/users/{user_id}/reviews
   method: GET
   rel: instances
   schema:
@@ -25,6 +25,6 @@ links:
           - $ref: /schemata#/datetime
           - type: "null"
   targetSchema:
-    $ref: /schemata/post#/definitions/post_page
+    $ref: /schemata/review#/definitions/review_page
 
-id: schemata/v1_users_posts
+id: schemata/v1_users_reviews
