@@ -10,8 +10,7 @@ class V1::Users::FeedController < ApplicationController
   private
 
     def build_page(data)
-      # FIXME: has_nextかを判断する
-      paging = { cursor: data.last&.created_at, has_next: true }
+      paging = { cursor: data.last&.created_at, has_next: has_next?(data, limit) }
       ::V1::PostsPaging.new(data: data, paging: paging)
     end
 end

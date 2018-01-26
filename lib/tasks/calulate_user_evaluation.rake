@@ -1,6 +1,7 @@
 namespace :calulate_user_evaluation do
   # FIXME: 毎回全ての投稿を計算しなおしていたら、負荷が高いため、元の評価と評価数を元に、加重平均を取る形に変更する(案1)
   CALC_INTERVAL = 30.minutes
+
   desc 'Calculate user evaluation point by tweets every 30mins'
   task do: :environment do
     all_posts = Review.all

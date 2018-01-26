@@ -41,14 +41,12 @@ class V1::HashTagsController < ApplicationController
     end
 
     def build_post_page(data)
-      # FIXME: has_nextかを判断する
-      paging = { cursor: data.last&.created_at, has_next: true }
+      paging = { cursor: data.last&.created_at, has_next: has_next?(data, limit) }
       ::V1::PostsPaging.new(data: data, paging: paging)
     end
 
     def build_hash_tag_page(data)
-      # FIXME: has_nextかを判断する
-      paging = { cursor: data.last&.created_at, has_next: true }
+      paging = { cursor: data.last&.created_at, has_next: has_next?(data, limit) }
       ::V1::HashtagsPaging.new(data: data, paging: paging)
     end
 end

@@ -34,12 +34,6 @@ class V1::ReviewsController < ApplicationController
       params.require(:review).permit(:user_id, :text, :image_data)
     end
 
-    def build_page(data)
-      # FIXME: has_nextかを判断する
-      paging = { cursor: data.last&.created_at, has_next: true }
-      ::V1::PostsPaging.new(data: data, paging: paging)
-    end
-
     def comment
       params[:comment]
     end
