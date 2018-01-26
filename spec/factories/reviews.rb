@@ -26,6 +26,6 @@
 FactoryBot.define do
   factory :review do
     text 'Bitcoin is very good.'
-    evaluation_point '0.0'
+    evaluation_point 4.5
   end
 end

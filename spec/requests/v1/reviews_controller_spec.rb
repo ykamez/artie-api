@@ -14,7 +14,7 @@ RSpec.describe V1::ReviewsController, type: :request do
     let(:article) { create(:article) }
 
     context 'with valid request' do
-      let(:params) { { comment: 'I agree.' } }
+      let(:params) { { comment: 'I agree.', evaluation_point: '1.5' } }
       context 'with text' do
         before do
           user

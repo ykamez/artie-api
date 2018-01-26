@@ -24,10 +24,21 @@
 #
 
 class Review < ApplicationRecord
+  MIN_RATING = 1.0
+  MAX_RATING = 5.0
+
   belongs_to :user
   belongs_to :article
   counter_culture :article
+
   has_many :review_evaluations, dependent: :destroy
   validates :text, presence: true
   validates :evaluation_point, presence: true
+
+  validate :rating_validator
+
+  def rating_validator
+    # TODO: 小数点以下の桁数に関するバリデーションを追加。
+    errors.add(:evaluation_point, ' is invalid range.') if evaluation_point < MIN_RATING || evaluation_point > MAX_RATING
+  end
 end

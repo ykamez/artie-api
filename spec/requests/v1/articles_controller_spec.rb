@@ -13,7 +13,7 @@ RSpec.describe V1::ArticlesController, type: :request do
     let(:user) { create(:user) }
     context 'with valid request' do
       context 'when first pick' do
-        let(:params) { { url: 'xxx', comment: 'I agree.' } }
+        let(:params) { { url: 'xxx', comment: 'I agree.', evaluation_point: '1.5' } }
         before do
           user
         end
@@ -31,7 +31,7 @@ RSpec.describe V1::ArticlesController, type: :request do
       end
 
       context 'when not first pick' do
-        let(:params) { { url: 'xxx', comment: 'I agree.' } }
+        let(:params) { { url: 'xxx', comment: 'I agree.', evaluation_point: '1.5' } }
         let(:article) { create(:article, url: 'xxx') }
 
         before do

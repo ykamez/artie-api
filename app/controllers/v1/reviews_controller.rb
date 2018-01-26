@@ -45,7 +45,7 @@ class V1::ReviewsController < ApplicationController
     end
 
     def evaluation_point
-      (params[:evaluation_point] || '0.0').to_f
+      params[:evaluation_point].to_f
     end
 
     def set_article

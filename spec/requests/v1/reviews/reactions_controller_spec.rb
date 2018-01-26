@@ -13,7 +13,7 @@ describe V1::Reviews::ReactionsController, type: :request do
     let(:url) { "/v1/reviews/#{review.id}/like" }
     let(:user) { create(:user) }
     let(:article) { create(:article) }
-    let(:review) { create(:review, user_id: user.id, article_id: article.id) }
+    let(:review) { create(:review, user_id: user.id, article_id: article.id, evaluation_point: '1.5') }
 
     context 'with valid request' do
       it 'returns 200 response' do
