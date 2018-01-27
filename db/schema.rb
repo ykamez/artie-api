@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 0) do
 
   create_table 'articles', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.string 'url', null: false
+    t.string 'image_url', null: false
+    t.string 'title', null: false
     t.integer 'reviews_count', default: 0, null: false
     t.decimal 'evaluation_point', precision: 3, scale: 1, default: '0.0', null: false
     t.datetime 'created_at', null: false
