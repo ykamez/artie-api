@@ -42,8 +42,7 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable
-  # , :omniauthable
+         :confirmable, :omniauthable, omniauth_providers: %i[twitter]
   has_many :reviews, dependent: :destroy
   has_many :review_evaluations, dependent: :destroy
 
