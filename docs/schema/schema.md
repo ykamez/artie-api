@@ -132,6 +132,8 @@ HTTP/1.1 200 OK
     {
       "id": 1,
       "url": "https://github.com/.",
+      "image_url": "https://hogehoge.png",
+      "title": "Github",
       "published_at": "2015-01-01T12:00:00Z",
       "reviews_count": 100,
       "evaluation_point": 2.4
@@ -171,6 +173,8 @@ HTTP/1.1 200 OK
 {
   "id": 1,
   "url": "https://github.com/.",
+  "image_url": "https://hogehoge.png",
+  "title": "Github",
   "published_at": "2015-01-01T12:00:00Z",
   "reviews_count": 100,
   "evaluation_point": 2.4
@@ -217,8 +221,7 @@ HTTP/1.1 200 OK
         "text": "Pig Coin is awesome.",
         "user": {
           "id": 1,
-          "fullname": "Bob Marley",
-          "account_name": "bob",
+          "name": "Bob Tarou",
           "image_data": "example",
           "total_like_count": 123,
           "following_count": 10,
@@ -278,8 +281,7 @@ HTTP/1.1 201 Created
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "fullname": "Bob Marley",
-    "account_name": "bob",
+    "name": "Bob Tarou",
     "image_data": "example",
     "total_like_count": 123,
     "following_count": 10,
@@ -411,8 +413,7 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "fullname": "Bob Marley",
-        "account_name": "bob",
+        "name": "Bob Tarou",
         "image_data": "example",
         "total_like_count": 123,
         "following_count": 10,
@@ -531,8 +532,7 @@ HTTP/1.1 201 Created
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "fullname": "Bob Marley",
-    "account_name": "bob",
+    "name": "Bob Tarou",
     "image_data": "example",
     "total_like_count": 123,
     "following_count": 10,
@@ -607,8 +607,7 @@ HTTP/1.1 201 Created
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "fullname": "Bob Marley",
-    "account_name": "bob",
+    "name": "Bob Tarou",
     "image_data": "example",
     "total_like_count": 123,
     "following_count": 10,
@@ -650,8 +649,7 @@ HTTP/1.1 200 OK
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "fullname": "Bob Marley",
-    "account_name": "bob",
+    "name": "Bob Tarou",
     "image_data": "example",
     "total_like_count": 123,
     "following_count": 10,
@@ -701,8 +699,7 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "fullname": "Bob Marley",
-        "account_name": "bob",
+        "name": "Bob Tarou",
         "image_data": "example",
         "total_like_count": 123,
         "following_count": 10,
@@ -756,8 +753,7 @@ HTTP/1.1 200 OK
   "users": [
     {
       "id": 1,
-      "fullname": "Bob Marley",
-      "account_name": "bob",
+      "name": "Bob Tarou",
       "image_data": "example",
       "total_like_count": 123,
       "following_count": 10,
@@ -810,8 +806,7 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "fullname": "Bob Marley",
-      "account_name": "bob",
+      "name": "Bob Tarou",
       "image_data": "example",
       "total_like_count": 123,
       "following_count": 10,
@@ -852,8 +847,7 @@ HTTP/1.1 200 OK
 ```json
 {
   "id": 1,
-  "fullname": "Bob Marley",
-  "account_name": "bob",
+  "name": "Bob Tarou",
   "image_data": "example",
   "total_like_count": 123,
   "following_count": 10,
@@ -887,8 +881,7 @@ HTTP/1.1 200 OK
 ```json
 {
   "id": 1,
-  "fullname": "Bob Marley",
-  "account_name": "bob",
+  "name": "Bob Tarou",
   "image_data": "example",
   "total_like_count": 123,
   "following_count": 10,
@@ -909,9 +902,8 @@ POST /v1/users/
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **account_name** | *string* | display_name of user | `"bob"` |
 | **email** | *email* | user email address | `"username@example.com"` |
-| **fullname** | *string* | full name of user | `"Bob Marley"` |
+| **name** | *string* | full name of user | `"Bob Tarou"` |
 | **password** | *string* | user password | `"letmein1234"` |
 
 
@@ -927,8 +919,7 @@ POST /v1/users/
 ```bash
 $ curl -n -X POST http://coinnow.local/v1/users/ \
   -d '{
-  "fullname": "Bob Marley",
-  "account_name": "bob",
+  "name": "Bob Tarou",
   "image_data": "example",
   "email": "username@example.com",
   "password": "letmein1234"
@@ -946,8 +937,7 @@ HTTP/1.1 201 Created
 ```json
 {
   "id": 1,
-  "fullname": "Bob Marley",
-  "account_name": "bob",
+  "name": "Bob Tarou",
   "image_data": "example",
   "total_like_count": 123,
   "following_count": 10,
@@ -968,9 +958,8 @@ PATCH /v1/users/{id}
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **account_name** | *string* | display_name of user | `"bob"` |
 | **email** | *email* | user email address | `"username@example.com"` |
-| **fullname** | *string* | full name of user | `"Bob Marley"` |
+| **name** | *string* | full name of user | `"Bob Tarou"` |
 | **password** | *string* | user password | `"letmein1234"` |
 
 
@@ -986,8 +975,7 @@ PATCH /v1/users/{id}
 ```bash
 $ curl -n -X PATCH http://coinnow.local/v1/users/$ID \
   -d '{
-  "fullname": "Bob Marley",
-  "account_name": "bob",
+  "name": "Bob Tarou",
   "image_data": "example",
   "email": "username@example.com",
   "password": "letmein1234"
@@ -1005,8 +993,7 @@ HTTP/1.1 200 OK
 ```json
 {
   "id": 1,
-  "fullname": "Bob Marley",
-  "account_name": "bob",
+  "name": "Bob Tarou",
   "image_data": "example",
   "total_like_count": 123,
   "following_count": 10,
@@ -1084,8 +1071,7 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "fullname": "Bob Marley",
-      "account_name": "bob",
+      "name": "Bob Tarou",
       "image_data": "example",
       "total_like_count": 123,
       "following_count": 10,
@@ -1137,8 +1123,7 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "fullname": "Bob Marley",
-      "account_name": "bob",
+      "name": "Bob Tarou",
       "image_data": "example",
       "total_like_count": 123,
       "following_count": 10,
@@ -1253,8 +1238,7 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "fullname": "Bob Marley",
-        "account_name": "bob",
+        "name": "Bob Tarou",
         "image_data": "example",
         "total_like_count": 123,
         "following_count": 10,
@@ -1320,8 +1304,7 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "fullname": "Bob Marley",
-        "account_name": "bob",
+        "name": "Bob Tarou",
         "image_data": "example",
         "total_like_count": 123,
         "following_count": 10,
@@ -1375,8 +1358,7 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "fullname": "Bob Marley",
-      "account_name": "bob",
+      "name": "Bob Tarou",
       "image_data": "example",
       "total_like_count": 123,
       "following_count": 10,

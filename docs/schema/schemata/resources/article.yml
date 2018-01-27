@@ -16,6 +16,14 @@ definitions:
     description: article's original url
     type: string
     example: "https://github.com/."
+  image_url:
+    description: article's original image url
+    type: string
+    example: "https://hogehoge.png"
+  title:
+    description: article's original title
+    type: string
+    example: "Github"
   published_at:
     description: datetime when this article was articleed.
     type: string
@@ -34,6 +42,8 @@ definitions:
     required:
       - id
       - url
+      - image_url
+      - title
       - published_at
       - reviews_count
     properties:
@@ -41,6 +51,10 @@ definitions:
         $ref: /schemata/article#/definitions/id
       url:
         $ref: /schemata/article#/definitions/url
+      image_url:
+        $ref: /schemata/article#/definitions/image_url
+      title:
+        $ref: /schemata/article#/definitions/title
       published_at:
         $ref: /schemata/article#/definitions/published_at
       reviews_count:
