@@ -42,8 +42,8 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable
-  # :omniauthable
+         :omniauthable, omniauth_providers: %i[twitter]
+
   has_many :reviews, dependent: :destroy
   has_many :review_evaluations, dependent: :destroy
 
@@ -56,6 +56,16 @@ class User < ApplicationRecord
                                    dependent:   :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+
+  def from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email      = auth.info.email || auth.info.nickname + '@arties.jp'
+      user.password   = Devise.friendly_token[0, 20]
+      user.username   = auth.info.nickname
+      # TODO: twitterのユーザー画質を'?type=large'であげられるか調べる必要がある
+      user.image_data = auth.info.image
+    end
+  end
 
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
