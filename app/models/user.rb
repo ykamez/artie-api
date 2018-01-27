@@ -42,8 +42,7 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable
-  # :omniauthable
+         :confirmable, :omniauthable
   has_many :reviews, dependent: :destroy
   has_many :review_evaluations, dependent: :destroy
 
@@ -67,5 +66,17 @@ class User < ApplicationRecord
 
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def self.find_or_create_from_auth(auth)
+    provider = auth[:provider]
+    uid = auth[:uid]
+    nickname = auth[:info][:nickname]
+    image_url = auth[:info][:image]
+
+    self.find_or_create_by!(provider: provider, uid: uid) do |user|
+      user.account_name = nickname
+      user.image_data = image_url
+    end
   end
 end
