@@ -42,7 +42,8 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, :omniauthable
+         :confirmable
+  # , :omniauthable
   has_many :reviews, dependent: :destroy
   has_many :review_evaluations, dependent: :destroy
 
@@ -74,9 +75,24 @@ class User < ApplicationRecord
     nickname = auth[:info][:nickname]
     image_url = auth[:info][:image]
 
-    self.find_or_create_by!(provider: provider, uid: uid) do |user|
-      user.account_name = nickname
-      user.image_data = image_url
+    user = find_by(uid: uid, provider: provider)
+    unless user
+      user = User.create(
+          uid:      uid,
+          account_name: nickname,
+          fullname: nickname,
+          image_data: image_url,
+          provider: provider,
+          email:    User.dummy_email(auth),
+          password: Devise.friendly_token[0, 20]
+      )
     end
+    user
+  end
+
+  private
+
+  def self.dummy_email(auth)
+    "#{auth[:uid]}-#{auth[:provider]}@example.com"
   end
 end

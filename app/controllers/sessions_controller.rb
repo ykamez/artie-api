@@ -1,12 +1,14 @@
 class SessionsController < ApplicationController
   def create
-    user = User.find_or_create_from_auth(request.env['omniauth.auth'])
+    auth = session['dta.omniauth.auth'].with_indifferent_access
+    # FIXME: this may be incorrect.
+    user = User.find_or_create_from_auth(auth)
     session[:user_id] = user.id
-    redirect_to root_path
+    render json: user, serializer: ::V1::UserSerializer
   end
 
   def destroy
     reset_session
-    redirect_to root_path
+    render json: {}
   end
 end

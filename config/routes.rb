@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  # devise_for :users, only: %i[omniauth_callbacks], controllers: {
+  #     omniauth_callbacks: 'users/omniauth_callbacks'
+  # }
+
   get 'auth/:provider/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
