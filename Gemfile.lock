@@ -154,6 +154,7 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hashdiff (0.3.7)
+    hashie (3.5.7)
     i18n (0.9.1)
       concurrent-ruby (~> 1.0)
     inflecto (0.0.2)
@@ -183,8 +184,18 @@ GEM
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     nori (2.6.0)
+    oauth (0.5.4)
     octokit (4.7.0)
       sawyer (~> 0.8.0, >= 0.5.3)
+    omniauth (1.8.1)
+      hashie (>= 3.4.6, < 3.6.0)
+      rack (>= 1.6.2, < 3)
+    omniauth-oauth (1.1.0)
+      oauth
+      omniauth (~> 1.0)
+    omniauth-twitter (1.4.0)
+      omniauth-oauth (~> 1.1)
+      rack
     orm_adapter (0.5.0)
     parallel (1.12.1)
     parallel_tests (2.19.0)
@@ -365,6 +376,8 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   makara
   mysql2
+  omniauth
+  omniauth-twitter
   parallel_tests
   prmd
   pry
