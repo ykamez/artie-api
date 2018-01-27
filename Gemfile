@@ -90,3 +90,6 @@ gem 'rack-cors'
 
 # count like, dislike,etc.
 gem 'counter_culture'
+
+# open graph protocol
+gem 'metainspector'
