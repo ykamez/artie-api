@@ -20,11 +20,11 @@ definitions:
     type: object
     required:
       - hashtag
-      - posts_count
+      - reviews_count
     properties:
       hashtag:
         $ref: /schemata/hashtag#/definitions/hashtag
-      posts_count:
+      reviews_count:
         type: integer
         example: 123
   trend:
@@ -39,7 +39,7 @@ definitions:
       people_count:
         type: integer
         example: 350
-      posts_count:
+      reviews_count:
         type: integer
         example: 840
 

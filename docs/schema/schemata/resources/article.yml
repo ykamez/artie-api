@@ -20,7 +20,7 @@ definitions:
     description: datetime when this article was articleed.
     type: string
     format: date-time
-  posts_count:
+  reviews_count:
     description: article likes count
     type: integer
     example: 100
@@ -35,7 +35,7 @@ definitions:
       - id
       - url
       - published_at
-      - posts_count
+      - reviews_count
     properties:
       id:
         $ref: /schemata/article#/definitions/id
@@ -43,8 +43,8 @@ definitions:
         $ref: /schemata/article#/definitions/url
       published_at:
         $ref: /schemata/article#/definitions/published_at
-      posts_count:
-        $ref: /schemata/article#/definitions/posts_count
+      reviews_count:
+        $ref: /schemata/article#/definitions/reviews_count
       evaluation_point:
         $ref: /schemata/article#/definitions/evaluation_point
 

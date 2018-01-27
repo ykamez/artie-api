@@ -133,7 +133,7 @@ HTTP/1.1 200 OK
       "id": 1,
       "url": "https://github.com/.",
       "published_at": "2015-01-01T12:00:00Z",
-      "posts_count": 100,
+      "reviews_count": 100,
       "evaluation_point": 2.4
     }
   ],
@@ -172,7 +172,7 @@ HTTP/1.1 200 OK
   "id": 1,
   "url": "https://github.com/.",
   "published_at": "2015-01-01T12:00:00Z",
-  "posts_count": 100,
+  "reviews_count": 100,
   "evaluation_point": 2.4
 }
 ```
@@ -470,7 +470,7 @@ HTTP/1.1 200 OK
         "name": "BTC"
       },
       "people_count": 350,
-      "posts_count": 840
+      "reviews_count": 840
     }
   ]
 }

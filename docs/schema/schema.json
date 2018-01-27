@@ -910,7 +910,7 @@
           "type": "string",
           "format": "date-time"
         },
-        "posts_count": {
+        "reviews_count": {
           "description": "article likes count",
           "type": "integer",
           "example": 100
@@ -926,7 +926,7 @@
             "id",
             "url",
             "published_at",
-            "posts_count"
+            "reviews_count"
           ],
           "properties": {
             "id": {
@@ -938,8 +938,8 @@
             "published_at": {
               "$ref": "#/definitions/article/definitions/published_at"
             },
-            "posts_count": {
-              "$ref": "#/definitions/article/definitions/posts_count"
+            "reviews_count": {
+              "$ref": "#/definitions/article/definitions/reviews_count"
             },
             "evaluation_point": {
               "$ref": "#/definitions/article/definitions/evaluation_point"
@@ -994,13 +994,13 @@
           "type": "object",
           "required": [
             "hashtag",
-            "posts_count"
+            "reviews_count"
           ],
           "properties": {
             "hashtag": {
               "$ref": "#/definitions/hashtag/definitions/hashtag"
             },
-            "posts_count": {
+            "reviews_count": {
               "type": "integer",
               "example": 123
             }
@@ -1021,7 +1021,7 @@
               "type": "integer",
               "example": 350
             },
-            "posts_count": {
+            "reviews_count": {
               "type": "integer",
               "example": 840
             }
