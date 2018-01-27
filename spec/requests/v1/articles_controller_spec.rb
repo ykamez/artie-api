@@ -1,6 +1,57 @@
 require 'rails_helper'
 
 RSpec.describe V1::ArticlesController, type: :request do
+  describe 'GET /v1/articles/:id' do
+    subject { get url, headers: headers }
+
+    let(:headers) do
+      {
+        'Content-Type': 'application/json',
+      }
+    end
+    let(:url) { "/v1/articles/#{article.id}" }
+    let(:user) { create(:user) }
+    let(:article) { create(:article) }
+
+    context 'with valid request' do
+      before do
+        user
+      end
+
+      it 'returns 200 response' do
+        subject
+        expect(response.status).to eq 200
+        assert_schema_conform
+      end
+    end
+  end
+
+  describe 'GET /v1/articles' do
+    subject { get url, headers: headers }
+
+    let(:headers) do
+      {
+        'Content-Type': 'application/json',
+      }
+    end
+    let(:url) { '/v1/articles' }
+    let(:user) { create(:user) }
+    let(:article) { create(:article) }
+    let(:review) { create(:review, user_id: user.id, article_id: article.id, evaluation_point: '1.5') }
+
+    context 'with valid request' do
+      before do
+        review
+      end
+
+      it 'returns 200 response' do
+        subject
+        expect(response.status).to eq 200
+        assert_schema_conform
+      end
+    end
+  end
+
   describe 'POST /v1/articles' do
     subject { post url, headers: headers, params: params.to_json }
 

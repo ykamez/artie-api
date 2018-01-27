@@ -11,6 +11,6 @@ class V1::Users::FeedController < ApplicationController
 
     def build_page(data)
       paging = { cursor: data.last&.created_at, has_next: has_next?(data, limit) }
-      ::V1::PostsPaging.new(data: data, paging: paging)
+      ::V1::ReviewsPaging.new(data: data, paging: paging)
     end
 end

@@ -42,7 +42,7 @@ class V1::HashTagsController < ApplicationController
 
     def build_post_page(data)
       paging = { cursor: data.last&.created_at, has_next: has_next?(data, limit) }
-      ::V1::PostsPaging.new(data: data, paging: paging)
+      ::V1::ReviewsPaging.new(data: data, paging: paging)
     end
 
     def build_hash_tag_page(data)

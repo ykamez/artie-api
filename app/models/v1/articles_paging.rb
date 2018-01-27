@@ -1,4 +1,4 @@
-class V1::PostsPaging
+class V1::ArticlesPaging
   include ActiveModel::Model
   include ActiveModel::Serialization
 

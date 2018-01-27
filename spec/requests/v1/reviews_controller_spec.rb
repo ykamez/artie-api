@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe V1::ReviewsController, type: :request do
-  describe 'POST /v1/reviews' do
+  describe 'POST /v1/articles/:article_id/reviews' do
     subject { post url, headers: headers, params: params.to_json }
 
     let(:headers) do

@@ -12,12 +12,13 @@ RSpec.describe V1::Articles::ReviewsController, type: :request do
     let(:url) { "/v1/articles/#{article.id}/reviews" }
     let(:user) { create(:user) }
     let(:article) { create(:article) }
+    let(:review) { create(:review, user_id: user.id, article_id: article.id) }
 
     context 'with valid request' do
       let(:params) { { comment: 'I agree.' } }
       context 'when review exists' do
         before do
-          user
+          review
         end
 
         it 'returns 200 response' do
