@@ -12,14 +12,10 @@ definitions:
     type: integer
     example: 1
     readOnly: true
-  fullname:
+  name:
     description: full name of user
     type: string
-    example: 'Bob Marley'
-  account_name:
-    description: display_name of user
-    type: string
-    example: 'bob'
+    example: 'Bob Tarou'
   image_data:
     description: user's icon
     type: string
@@ -53,16 +49,13 @@ definitions:
     type: object
     required:
       - id
-      - fullname
-      - account_name
+      - name
       - image_data
     properties:
       id:
         $ref: "/schemata/user#/definitions/id"
-      fullname:
-        $ref: "/schemata/user#/definitions/fullname"
-      account_name:
-        $ref: "/schemata/user#/definitions/account_name"
+      name:
+        $ref: "/schemata/user#/definitions/name"
       image_data:
         $ref: "/schemata/user#/definitions/image_data"
       total_like_count:

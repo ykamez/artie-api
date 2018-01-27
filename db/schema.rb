@@ -98,7 +98,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime 'confirmation_sent_at'
     t.string 'unconfirmed_email'
     t.string 'fullname', null: false
-    t.string 'account_name', null: false
     t.string 'image_data', default: '', null: false
     t.string 'email', null: false
     t.integer 'likes_count', default: 0, null: false
