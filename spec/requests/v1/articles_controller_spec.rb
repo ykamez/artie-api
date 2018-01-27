@@ -62,6 +62,17 @@ RSpec.describe V1::ArticlesController, type: :request do
     end
     let(:url) { '/v1/articles' }
     let(:user) { create(:user) }
+
+    let(:meta_inspector_double) { double('Meta Inspector') }
+    let(:images) { double('Meta Inspector respnse images') }
+
+    before do
+      allow(MetaInspector).to receive(:new).and_return(meta_inspector_double)
+      allow(meta_inspector_double).to receive(:title).and_return('hogehoge')
+      allow(meta_inspector_double).to receive(:images).and_return(images)
+      allow(images).to receive(:best).and_return('fugafuga')
+    end
+
     context 'with valid request' do
       context 'when first pick' do
         let(:params) { { url: 'xxx', comment: 'I agree.', evaluation_point: '1.5' } }

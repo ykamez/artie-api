@@ -19,7 +19,7 @@ module V1
       end
 
       def set_article
-        find_article || Article.create!(url: @original_url)
+        find_article || Article.create_article!(@original_url)
       end
   end
 end
