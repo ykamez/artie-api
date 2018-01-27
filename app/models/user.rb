@@ -75,23 +75,25 @@ class User < ApplicationRecord
     image_url = auth[:info][:image]
 
     user = find_by(uid: uid, provider: provider)
-    unless user
-      user = User.create(
-          uid:      uid,
-          account_name: nickname,
-          fullname: nickname,
-          image_data: image_url,
-          provider: provider,
-          email:    User.dummy_email(auth),
-          password: Devise.friendly_token[0, 20]
-      )
-    end
+    user ||= User.create!(
+      uid:      uid,
+      account_name: nickname,
+      fullname: nickname,
+      image_data: image_url,
+      provider: provider,
+      email:    User.dummy_email(auth),
+      password: Devise.friendly_token[0, 20],
+    )
     user
+  end
+
+  def send_on_create_confirmation_instructions
+    # TODO: Fix it.
   end
 
   private
 
-  def self.dummy_email(auth)
-    "#{auth[:uid]}-#{auth[:provider]}@example.com"
-  end
+    def self.dummy_email(auth)
+      "#{auth[:uid]}-#{auth[:provider]}@example.com"
+    end
 end

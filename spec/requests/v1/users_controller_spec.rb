@@ -7,6 +7,7 @@ RSpec.describe V1::UsersController, type: :request do
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'access-token': user.tokens.first.to_s,
       }
     end
     let(:url) { '/v1/users/me' }
