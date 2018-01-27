@@ -5,14 +5,6 @@
 #  id                     :integer          not null, primary key
 #  provider               :string(255)      default("email"), not null
 #  uid                    :string(255)      default(""), not null
-#  image_data             :string(255)      default(""), not null
-#  email                  :string(255)      not null
-#  likes_count            :integer          default(0), not null
-#  dislikes_count         :integer          default(0), not null
-#  following_count        :integer          default(0), not null
-#  followers_count        :integer          default(0), not null
-#  evaluation_point       :decimal(3, 1)    default(0.0), not null
-#  tokens                 :text(65535)
 #  encrypted_password     :string(255)      default(""), not null
 #  reset_password_token   :string(255)
 #  reset_password_sent_at :datetime
@@ -28,6 +20,13 @@
 #  unconfirmed_email      :string(255)
 #  fullname               :string(255)      not null
 #  account_name           :string(255)      not null
+#  image_data             :string(255)      default(""), not null
+#  email                  :string(255)      not null
+#  likes_count            :integer          default(0), not null
+#  following_count        :integer          default(0), not null
+#  followers_count        :integer          default(0), not null
+#  evaluation_point       :decimal(3, 1)    default(0.0), not null
+#  tokens                 :text(65535)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -45,4 +44,28 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
   # :omniauthable
+  has_many :reviews, dependent: :destroy
+  has_many :review_evaluations, dependent: :destroy
+
+  # follow and follower relationship
+  has_many :active_relationships, class_name:  'Relationship',
+                                  foreign_key: 'follower_id',
+                                  dependent:   :destroy
+  has_many :passive_relationships, class_name:  'Relationship',
+                                   foreign_key: 'followed_id',
+                                   dependent:   :destroy
+  has_many :following, through: :active_relationships,  source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
+
+  def follow(other_user)
+    active_relationships.create(followed_id: other_user.id)
+  end
+
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  def following?(other_user)
+    following.include?(other_user)
+  end
 end

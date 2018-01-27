@@ -1,0 +1,96 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: article
+description: article apis
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  user_id:
+    description: unique identifier of user
+    type: integer
+    example: 1234
+    readOnly: true
+
+links:
+- title: index
+  description: Show a list of article.
+  href: /v1/articles
+  method: GET
+  rel: show
+  schema:
+    type: object
+    properties:
+      limit:
+        description: limit
+        example: 10
+        type: integer
+      cursor:
+        anyOf:
+          - $ref: /schemata#/datetime
+          - type: "null"
+  targetSchema:
+    $ref: /schemata/article#/definitions/article_page
+
+- title: 記事の詳細表示
+  description: 記事の詳細
+  href: /v1/articles/{id}
+  method: GET
+  rel: self
+  schema:
+    type: "null"
+  targetSchema:
+    $ref: /schemata/article#/definitions/article
+
+- title: 記事のコメント表示
+  description: 投稿のモーダルのリプライ情報を追加も合わせて取得する。
+  href: /v1/articles/{id}/reviews
+  method: GET
+  rel: instancese
+  schema:
+    type: object
+    properties:
+      limit:
+        description: limit
+        example: 10
+        type: integer
+      cursor:
+        anyOf:
+          - $ref: /schemata#/datetime
+          - type: "null"
+  targetSchema:
+    type: object
+    properties:
+      replies:
+        $ref: /schemata/review#/definitions/review_page
+
+- title: create
+  description: ページの右上からピックするときはこれを叩く。既にピックされていた場合は、getして返すことになる。ピックされた記事にコメントする際は、`review /v1/articles/:id/reviews`を叩いてもらう。レスポンスで記事を返すべきか、コメントを返すべきか迷いどころ。(TODO)
+  href: /v1/articles
+  method: POST
+  rel: create
+  schema:
+    type: object
+    required:
+      - url
+    properties:
+      url:
+        $ref: /schemata/article#/definitions/url
+  targetSchema:
+    $ref: /schemata/review#/definitions/review
+
+
+- title: delete
+  description: 実装するか判断延期。NewsPicksでは、バグとして残っている模様。
+  href: /v1/articles/{id}
+  method: DELETE
+  rel: empty
+  schema:
+    type: object
+    properties: {}
+  targetSchema:
+    type: object
+    properties: {}
+
+id: schemata/v1_articles

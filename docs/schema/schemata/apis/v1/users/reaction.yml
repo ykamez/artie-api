@@ -1,0 +1,30 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: 特定ユーザーのリアクション
+description: 特定ユーザーのリアクション
+stability: prototype
+strictProperties: true
+type:
+- object
+
+links:
+- title: user's reactions
+  description: Show a list of a user's reactions
+  href: /v1/users/{user_id}/reactions
+  method: GET
+  rel: instances
+  schema:
+    type: object
+    properties:
+      limit:
+        description: limit
+        example: 10
+        type: integer
+      cursor:
+        anyOf:
+          - $ref: /schemata#/datetime
+          - type: "null"
+  targetSchema:
+    $ref: /schemata/review#/definitions/review_page
+
+id: schemata/v1_users_reactions

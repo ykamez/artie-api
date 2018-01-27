@@ -8,23 +8,16 @@ type:
 - object
 definitions:
   like:
-    description: post Evaluation's like counts
+    description: review Evaluation's like counts
     type: integer
     example: 1248
-  dislike:
-    description: post's dislike counts
-    type: integer
-    example: 100
 
-  post_evaluation:
+  review_evaluation:
     type: object
     required:
       - like
-      - dislike
     properties:
       like:
-        $ref: /schemata/post_evaluation#/definitions/like
-      dislike:
-        $ref: /schemata/post_evaluation#/definitions/dislike
+        $ref: /schemata/review_evaluation#/definitions/like
 
-id: schemata/post_evaluation
+id: schemata/review_evaluation

@@ -1,0 +1,30 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: 特定ユーザーの投稿
+description: 特定ユーザーの投稿に関するAPI
+stability: prototype
+strictProperties: true
+type:
+- object
+
+links:
+- title: user's reviews
+  description: Show a list of a user's reviews
+  href: /v1/users/{user_id}/reviews
+  method: GET
+  rel: instances
+  schema:
+    type: object
+    properties:
+      limit:
+        description: limit
+        example: 10
+        type: integer
+      cursor:
+        anyOf:
+          - $ref: /schemata#/datetime
+          - type: "null"
+  targetSchema:
+    $ref: /schemata/review#/definitions/review_page
+
+id: schemata/v1_users_reviews

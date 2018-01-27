@@ -1,15 +1,15 @@
 ---
 "$schema": http://json-schema.org/draft-04/hyper-schema
-title: トレンド仮想通貨
-description: トレンド仮想通貨に関するAPI
+title: トレンド
+description: トレンドに関するAPI
 stability: prototype
 strictProperties: true
 type:
 - object
 
 links:
-- title: トレンド仮想通貨
-  description: 直近一時間で投稿数が多かった仮想通貨の名前、投稿数、人数を返す。
+- title: トレンド
+  description: 直近一時間で投稿数が多かったカテゴリーの名前、投稿数、人数を返す。
   href: /v1/hashtags/trends
   method: GET
   rel: instances

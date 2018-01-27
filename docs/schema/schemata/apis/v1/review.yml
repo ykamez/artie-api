@@ -1,0 +1,54 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: review
+description: 記事につく、コメント。
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  user_id:
+    description: unique identifier of user
+    type: integer
+    example: 1234
+    readOnly: true
+  evaluation_point:
+    description: evaluation rating
+    type: string
+    example: 2.4
+
+links:
+- title: create
+  description: create review
+  href: /v1/articles/{id}/reviews
+  method: POST
+  rel: create
+  schema:
+    type: object
+    required:
+      - text
+      - user_id
+    properties:
+      text:
+        $ref: /schemata/review#/definitions/text
+      user_id:
+        $ref: /schemata/v1_reviews#/definitions/user_id
+      evaluation_point:
+        $ref: /schemata/v1_reviews#/definitions/evaluation_point
+  targetSchema:
+    $ref: /schemata/review#/definitions/review
+
+
+- title: delete
+  description: update review
+  href: /v1/reviews/{review_id}
+  method: DELETE
+  rel: empty
+  schema:
+    type: object
+    properties: {}
+  targetSchema:
+    type: object
+    properties: {}
+
+id: schemata/v1_reviews

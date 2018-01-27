@@ -1,0 +1,70 @@
+---
+"$schema": http://json-schema.org/draft-04/hyper-schema
+title: Post
+description: Post Resource
+stability: prototype
+strictProperties: true
+type:
+- object
+definitions:
+  id:
+    description: unique identifier of review
+    type: integer
+    example: 1
+    readOnly: true
+  text:
+    description: review's text
+    type: string
+    example: "Pig Coin is awesome."
+  post_at:
+    description: datetime when this review was posted.
+    type: string
+    format: date-time
+  likes_count:
+    description: review likes count
+    type: integer
+    example: 100
+  evaluation_point:
+    description: evaluation
+    type: string
+    example: 2.4
+
+  review:
+    type: object
+    required:
+      - id
+      - text
+      - user
+      - post_at
+      - likes_count
+      - evaluation_point
+    properties:
+      id:
+        $ref: /schemata/review#/definitions/id
+      text:
+        $ref: /schemata/review#/definitions/text
+      user:
+        $ref: /schemata/user#/definitions/user
+      post_at:
+        $ref: /schemata/review#/definitions/post_at
+      likes_count:
+        $ref: /schemata/review#/definitions/likes_count
+      evaluation_point:
+        $ref: /schemata/review#/definitions/evaluation_point
+
+  review_page:
+    type: object
+    required:
+      - data
+      - paging
+    properties:
+      data:
+        type: array
+        items:
+          $ref: /schemata/review#/definitions/review
+      paging:
+        $ref: /schemata/paging#/definitions/paging
+      message:
+        $ref: /schemata#/mesasge
+
+id: schemata/review

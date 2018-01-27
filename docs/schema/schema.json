@@ -19,10 +19,146 @@
       "type": "string",
       "example": "success!!"
     },
+    "v1_articles": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "article",
+      "description": "article apis",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "user_id": {
+          "description": "unique identifier of user",
+          "type": "integer",
+          "example": 1234,
+          "readOnly": true
+        }
+      },
+      "links": [
+        {
+          "title": "index",
+          "description": "Show a list of article.",
+          "href": "/v1/articles",
+          "method": "GET",
+          "rel": "show",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/article/definitions/article_page"
+          }
+        },
+        {
+          "title": "記事の詳細表示",
+          "description": "記事の詳細",
+          "href": "/v1/articles/{id}",
+          "method": "GET",
+          "rel": "self",
+          "schema": {
+            "type": "null"
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/article/definitions/article"
+          }
+        },
+        {
+          "title": "記事のコメント表示",
+          "description": "投稿のモーダルのリプライ情報を追加も合わせて取得する。",
+          "href": "/v1/articles/{id}/reviews",
+          "method": "GET",
+          "rel": "instancese",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "targetSchema": {
+            "type": "object",
+            "properties": {
+              "replies": {
+                "$ref": "#/definitions/review/definitions/review_page"
+              }
+            }
+          }
+        },
+        {
+          "title": "create",
+          "description": "ページの右上からピックするときはこれを叩く。既にピックされていた場合は、getして返すことになる。ピックされた記事にコメントする際は、`review /v1/articles/:id/reviews`を叩いてもらう。レスポンスで記事を返すべきか、コメントを返すべきか迷いどころ。(TODO)",
+          "href": "/v1/articles",
+          "method": "POST",
+          "rel": "create",
+          "schema": {
+            "type": "object",
+            "required": [
+              "url"
+            ],
+            "properties": {
+              "url": {
+                "$ref": "#/definitions/article/definitions/url"
+              }
+            }
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/review/definitions/review"
+          }
+        },
+        {
+          "title": "delete",
+          "description": "実装するか判断延期。NewsPicksでは、バグとして残っている模様。",
+          "href": "/v1/articles/{id}",
+          "method": "DELETE",
+          "rel": "empty",
+          "schema": {
+            "type": "object",
+            "properties": {
+            }
+          },
+          "targetSchema": {
+            "type": "object",
+            "properties": {
+            }
+          }
+        }
+      ]
+    },
     "v1_hashtags": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "hashtag",
-      "description": "hashtag apis",
+      "title": "Hashtag",
+      "description": "記事のカテゴリーを表すくくりとして使われる予定。",
       "stability": "prototype",
       "strictProperties": true,
       "type": [
@@ -79,8 +215,8 @@
         },
         {
           "title": "show",
-          "description": "Show a specific hashtag's posts",
-          "href": "/v1/hashtags/{hashtag_id}/posts",
+          "description": "Show a specific hashtag's reviews",
+          "href": "/v1/hashtags/{hashtag_id}/reviews",
           "method": "GET",
           "rel": "show",
           "schema": {
@@ -104,74 +240,15 @@
             }
           },
           "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post_page"
-          }
-        },
-        {
-          "title": "watch",
-          "description": "add a hashtag to watchlist",
-          "href": "/v1/hashtags/{hashtag_id}/watch",
-          "method": "POST",
-          "rel": "self",
-          "schema": {
-            "type": "null"
-          },
-          "targetSchema": {
-            "$ref": "#/definitions/hashtag/definitions/user_hashtag"
-          }
-        },
-        {
-          "title": "unwatch",
-          "description": "remove a hashtag from watchlist",
-          "href": "/v1/hashtags/{hashtag_id}/watch",
-          "method": "DELETE",
-          "rel": "destroy",
-          "schema": {
-            "type": "null"
-          },
-          "targetSchema": {
-            "type": "object",
-            "properties": {
-            }
-          }
-        },
-        {
-          "title": "search_result",
-          "description": "get a hashtag's search_result",
-          "href": "/v1/hashtags/search_result",
-          "method": "GET",
-          "rel": "instances",
-          "schema": {
-            "type": "string"
-          },
-          "targetSchema": {
-            "type": "object",
-            "required": [
-              "data",
-              "paging"
-            ],
-            "properties": {
-              "data": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/hashtag/definitions/hashtag"
-                }
-              },
-              "paging": {
-                "$ref": "#/definitions/paging/definitions/paging"
-              },
-              "message": {
-                "$ref": "#/definitions/mesasge"
-              }
-            }
+            "$ref": "#/definitions/review/definitions/review_page"
           }
         }
       ]
     },
     "v1_hashtags_trends": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "トレンド仮想通貨",
-      "description": "トレンド仮想通貨に関するAPI",
+      "title": "トレンド",
+      "description": "トレンドに関するAPI",
       "stability": "prototype",
       "strictProperties": true,
       "type": [
@@ -179,8 +256,8 @@
       ],
       "links": [
         {
-          "title": "トレンド仮想通貨",
-          "description": "直近一時間で投稿数が多かった仮想通貨の名前、投稿数、人数を返す。",
+          "title": "トレンド",
+          "description": "直近一時間で投稿数が多かったカテゴリーの名前、投稿数、人数を返す。",
           "href": "/v1/hashtags/trends",
           "method": "GET",
           "rel": "instances",
@@ -204,10 +281,10 @@
         }
       ]
     },
-    "v1_posts": {
+    "v1_reviews": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "post",
-      "description": "post apis",
+      "title": "review",
+      "description": "記事につく、コメント。",
       "stability": "prototype",
       "strictProperties": true,
       "type": [
@@ -219,91 +296,18 @@
           "type": "integer",
           "example": 1234,
           "readOnly": true
+        },
+        "evaluation_point": {
+          "description": "evaluation rating",
+          "type": "string",
+          "example": 2.4
         }
       },
       "links": [
         {
-          "title": "index",
-          "description": "Show a list of post.",
-          "href": "/v1/posts",
-          "method": "GET",
-          "rel": "show",
-          "schema": {
-            "type": "object",
-            "properties": {
-              "limit": {
-                "description": "limit",
-                "example": 10,
-                "type": "integer"
-              },
-              "cursor": {
-                "anyOf": [
-                  {
-                    "$ref": "#/definitions/datetime"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
-              }
-            }
-          },
-          "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post_page"
-          }
-        },
-        {
-          "title": "投稿のモーダル表示(ツイート自身)",
-          "description": "投稿のモーダル表示のツイート単体(リプライも一緒に取れないので別にした)",
-          "href": "/v1/posts/{id}",
-          "method": "GET",
-          "rel": "self",
-          "schema": {
-            "type": "null"
-          },
-          "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post"
-          }
-        },
-        {
-          "title": "投稿のモーダル表示",
-          "description": "投稿のモーダルのリプライ情報を追加も合わせて取得する。",
-          "href": "/v1/posts/{id}/replies",
-          "method": "GET",
-          "rel": "instancese",
-          "schema": {
-            "type": "object",
-            "properties": {
-              "limit": {
-                "description": "limit",
-                "example": 10,
-                "type": "integer"
-              },
-              "cursor": {
-                "anyOf": [
-                  {
-                    "$ref": "#/definitions/datetime"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
-              }
-            }
-          },
-          "targetSchema": {
-            "type": "object",
-            "properties": {
-              "replies": {
-                "$ref": "#/definitions/post/definitions/post_page"
-              }
-            }
-          }
-        },
-        {
           "title": "create",
-          "description": "create post",
-          "href": "/v1/posts",
+          "description": "create review",
+          "href": "/v1/articles/{id}/reviews",
           "method": "POST",
           "rel": "create",
           "schema": {
@@ -314,33 +318,24 @@
             ],
             "properties": {
               "text": {
-                "$ref": "#/definitions/post/definitions/text"
+                "$ref": "#/definitions/review/definitions/text"
               },
               "user_id": {
-                "$ref": "#/definitions/v1_posts/definitions/user_id"
+                "$ref": "#/definitions/v1_reviews/definitions/user_id"
               },
-              "image_data": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/post/definitions/image_data"
-                }
-              },
-              "hashtags": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/hashtag/definitions/hashtag"
-                }
+              "evaluation_point": {
+                "$ref": "#/definitions/v1_reviews/definitions/evaluation_point"
               }
             }
           },
           "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post"
+            "$ref": "#/definitions/review/definitions/review"
           }
         },
         {
           "title": "delete",
-          "description": "update post",
-          "href": "/v1/posts/{id}",
+          "description": "update review",
+          "href": "/v1/reviews/{review_id}",
           "method": "DELETE",
           "rel": "empty",
           "schema": {
@@ -356,7 +351,7 @@
         }
       ]
     },
-    "v1_posts_reaction": {
+    "v1_reviews_reaction": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "reaction",
       "description": "reaction apis",
@@ -368,46 +363,33 @@
       "links": [
         {
           "title": "like",
-          "description": "like a post",
-          "href": "/v1/posts/{post_id}/like",
+          "description": "like a review",
+          "href": "/v1/reviews/{review_id}/like",
           "method": "POST",
           "rel": "create",
           "schema": {
             "type": "null"
           },
           "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post"
+            "$ref": "#/definitions/review/definitions/review"
           }
         },
         {
-          "title": "dislike",
-          "description": "dislike a post",
-          "href": "/v1/posts/{post_id}/dislike",
-          "method": "POST",
-          "rel": "create",
+          "title": "cancel like",
+          "description": "remove like",
+          "href": "/v1/reviews/{review_id}/like",
+          "method": "DELETE",
+          "rel": "delete",
           "schema": {
             "type": "null"
           },
           "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post"
-          }
-        },
-        {
-          "title": "share",
-          "description": "share a post",
-          "href": "/v1/posts/{post_id}/share",
-          "method": "POST",
-          "rel": "create",
-          "schema": {
-            "type": "null"
-          },
-          "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post"
+            "$ref": "#/definitions/review/definitions/review"
           }
         }
       ]
     },
-    "v1_posts_search_result": {
+    "v1_reviews_search_result": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "search_result",
       "description": "get search_result apis",
@@ -419,16 +401,16 @@
       "links": [
         {
           "title": "search_result",
-          "description": "get a post's search_result",
-          "href": "/v1/posts/search_result",
+          "description": "get a review's search_result",
+          "href": "/v1/reviews/search_result",
           "method": "GET",
           "rel": "instances",
           "schema": {
-            "description": "search query for posts",
+            "description": "search query for reviews",
             "type": "string"
           },
           "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post_page"
+            "$ref": "#/definitions/review/definitions/review_page"
           }
         }
       ]
@@ -630,48 +612,6 @@
         }
       ]
     },
-    "v1_users_feed": {
-      "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "feed",
-      "description": "user feed apis",
-      "stability": "prototype",
-      "strictProperties": true,
-      "type": [
-        "object"
-      ],
-      "links": [
-        {
-          "title": "index",
-          "description": "Show a user's feed",
-          "href": "/v1/users/{user_id}/feed",
-          "method": "GET",
-          "rel": "instances",
-          "schema": {
-            "type": "object",
-            "properties": {
-              "limit": {
-                "description": "limit",
-                "example": 10,
-                "type": "integer"
-              },
-              "cursor": {
-                "anyOf": [
-                  {
-                    "$ref": "#/definitions/datetime"
-                  },
-                  {
-                    "type": "null"
-                  }
-                ]
-              }
-            }
-          },
-          "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post_page"
-          }
-        }
-      ]
-    },
     "v1_users_follow_follwers": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "follow and followers",
@@ -685,7 +625,7 @@
         {
           "title": "a user's following users",
           "description": "Show a list of a following users",
-          "href": "/v1/users/{user_id}/users/following",
+          "href": "/v1/users/{user_id}/following",
           "method": "GET",
           "rel": "show",
           "schema": {
@@ -715,7 +655,7 @@
         {
           "title": "a user's following users",
           "description": "Show a list of a followers users",
-          "href": "/v1/{user_id}/users/followers",
+          "href": "/v1/users/{user_id}/followers",
           "method": "GET",
           "rel": "show",
           "schema": {
@@ -755,8 +695,8 @@
       ],
       "links": [
         {
-          "title": "user's watching hashtags",
-          "description": "Show a list of a user's watching hashtags.",
+          "title": "user's favorites hashtags",
+          "description": "Show a list of a user's favorites hashtags.",
           "href": "/v1/users/{user_id}/hashtags/watching",
           "method": "GET",
           "rel": "show",
@@ -801,10 +741,10 @@
         }
       ]
     },
-    "v1_users_posts": {
+    "v1_users_reactions": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "特定ユーザーの投稿",
-      "description": "特定ユーザーの投稿に関するAPI",
+      "title": "特定ユーザーのリアクション",
+      "description": "特定ユーザーのリアクション",
       "stability": "prototype",
       "strictProperties": true,
       "type": [
@@ -812,9 +752,9 @@
       ],
       "links": [
         {
-          "title": "user's posts",
-          "description": "Show a list of a user's posts",
-          "href": "/v1/users/{user_id}/posts",
+          "title": "user's reactions",
+          "description": "Show a list of a user's reactions",
+          "href": "/v1/users/{user_id}/reactions",
           "method": "GET",
           "rel": "instances",
           "schema": {
@@ -838,31 +778,49 @@
             }
           },
           "targetSchema": {
-            "$ref": "#/definitions/post/definitions/post_page"
+            "$ref": "#/definitions/review/definitions/review_page"
           }
-        },
+        }
+      ]
+    },
+    "v1_users_reviews": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "特定ユーザーの投稿",
+      "description": "特定ユーザーの投稿に関するAPI",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "links": [
         {
-          "title": "あるユーザーの投稿の内訳",
-          "description": "Show a breakdown of user's posts",
-          "href": "/v1/users/{user_id}/posts/hashtag_breakdown",
+          "title": "user's reviews",
+          "description": "Show a list of a user's reviews",
+          "href": "/v1/users/{user_id}/reviews",
           "method": "GET",
-          "rel": "show",
+          "rel": "instances",
           "schema": {
-            "type": "null"
-          },
-          "targetSchema": {
             "type": "object",
-            "required": [
-              "data"
-            ],
             "properties": {
-              "data": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/hashtag/definitions/breakdown"
-                }
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               }
             }
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/review/definitions/review_page"
           }
         }
       ]
@@ -879,8 +837,8 @@
       "links": [
         {
           "title": "search_result",
-          "description": "get a user's search_result",
-          "href": "/v1/users/search_result",
+          "description": "get a user's search",
+          "href": "/v1/users/search",
           "method": "GET",
           "rel": "instances",
           "schema": {
@@ -915,25 +873,101 @@
           "targetSchema": {
             "type": "object",
             "required": [
-              "total_count_likes",
-              "total_count_dislikes",
-              "total_count_shares"
+              "total_count_likes"
             ],
             "properties": {
               "total_count_likes": {
-                "$ref": "#/definitions/post_evaluation/definitions/like"
-              },
-              "total_count_dislikes": {
-                "$ref": "#/definitions/post_evaluation/definitions/dislike"
-              },
-              "total_count_shares": {
-                "type": "integer",
-                "example": 1234
+                "$ref": "#/definitions/review_evaluation/definitions/like"
               }
             }
           }
         }
       ]
+    },
+    "article": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Article",
+      "description": "Article Resource",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of article",
+          "type": "integer",
+          "example": 1,
+          "readOnly": true
+        },
+        "url": {
+          "description": "article's original url",
+          "type": "string",
+          "example": "https://github.com/."
+        },
+        "published_at": {
+          "description": "datetime when this article was articleed.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "reviews_count": {
+          "description": "article likes count",
+          "type": "integer",
+          "example": 100
+        },
+        "evaluation_point": {
+          "description": "evaluation",
+          "type": "string",
+          "example": 2.4
+        },
+        "article": {
+          "type": "object",
+          "required": [
+            "id",
+            "url",
+            "published_at",
+            "reviews_count"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/article/definitions/id"
+            },
+            "url": {
+              "$ref": "#/definitions/article/definitions/url"
+            },
+            "published_at": {
+              "$ref": "#/definitions/article/definitions/published_at"
+            },
+            "reviews_count": {
+              "$ref": "#/definitions/article/definitions/reviews_count"
+            },
+            "evaluation_point": {
+              "$ref": "#/definitions/article/definitions/evaluation_point"
+            }
+          }
+        },
+        "article_page": {
+          "type": "object",
+          "required": [
+            "data",
+            "paging"
+          ],
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/article/definitions/article"
+              }
+            },
+            "paging": {
+              "$ref": "#/definitions/paging/definitions/paging"
+            },
+            "message": {
+              "$ref": "#/definitions/mesasge"
+            }
+          }
+        }
+      }
     },
     "hashtag": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
@@ -960,13 +994,13 @@
           "type": "object",
           "required": [
             "hashtag",
-            "posts_count"
+            "reviews_count"
           ],
           "properties": {
             "hashtag": {
               "$ref": "#/definitions/hashtag/definitions/hashtag"
             },
-            "posts_count": {
+            "reviews_count": {
               "type": "integer",
               "example": 123
             }
@@ -987,7 +1021,7 @@
               "type": "integer",
               "example": 350
             },
-            "posts_count": {
+            "reviews_count": {
               "type": "integer",
               "example": 840
             }
@@ -1065,123 +1099,7 @@
         }
       }
     },
-    "post": {
-      "$schema": "http://json-schema.org/draft-04/hyper-schema",
-      "title": "Post",
-      "description": "Post Resource",
-      "stability": "prototype",
-      "strictProperties": true,
-      "type": [
-        "object"
-      ],
-      "definitions": {
-        "id": {
-          "description": "unique identifier of post",
-          "type": "integer",
-          "example": 1,
-          "readOnly": true
-        },
-        "text": {
-          "description": "post's text",
-          "type": "string",
-          "example": "Pig Coin is awesome."
-        },
-        "image_data": {
-          "description": "images attached to post",
-          "type": "string",
-          "example": "aws:pig_coin.png"
-        },
-        "published_at": {
-          "description": "datetime when this post was posted.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "likes_count": {
-          "description": "post likes count",
-          "type": "integer",
-          "example": 100
-        },
-        "dislikes_count": {
-          "description": "post dislikes count",
-          "type": "integer",
-          "example": 50
-        },
-        "shares_count": {
-          "description": "post shares count",
-          "type": "integer",
-          "example": 50
-        },
-        "post": {
-          "type": "object",
-          "required": [
-            "id",
-            "text",
-            "user",
-            "published_at",
-            "likes_count",
-            "dislikes_count",
-            "shares_count"
-          ],
-          "properties": {
-            "id": {
-              "$ref": "#/definitions/post/definitions/id"
-            },
-            "text": {
-              "$ref": "#/definitions/post/definitions/text"
-            },
-            "user": {
-              "$ref": "#/definitions/user/definitions/user"
-            },
-            "image_data": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/post/definitions/image_data"
-              }
-            },
-            "hashtag": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/hashtag/definitions/hashtag"
-              }
-            },
-            "published_at": {
-              "$ref": "#/definitions/post/definitions/published_at"
-            },
-            "likes_count": {
-              "$ref": "#/definitions/post/definitions/likes_count"
-            },
-            "dislikes_count": {
-              "$ref": "#/definitions/post/definitions/dislikes_count"
-            },
-            "shares_count": {
-              "$ref": "#/definitions/post/definitions/shares_count"
-            }
-          }
-        },
-        "post_page": {
-          "type": "object",
-          "required": [
-            "data",
-            "paging"
-          ],
-          "properties": {
-            "data": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/post/definitions/post"
-              }
-            },
-            "paging": {
-              "$ref": "#/definitions/paging/definitions/paging"
-            },
-            "message": {
-              "$ref": "#/definitions/mesasge"
-            }
-          }
-        }
-      }
-    },
-    "post_evaluation": {
+    "review_evaluation": {
       "$schema": "http://json-schema.org/draft-04/hyper-schema",
       "title": "Post Evaluation",
       "description": "Post Evaluation Resource",
@@ -1192,27 +1110,108 @@
       ],
       "definitions": {
         "like": {
-          "description": "post Evaluation's like counts",
+          "description": "review Evaluation's like counts",
           "type": "integer",
           "example": 1248
         },
-        "dislike": {
-          "description": "post's dislike counts",
-          "type": "integer",
-          "example": 100
-        },
-        "post_evaluation": {
+        "review_evaluation": {
           "type": "object",
           "required": [
-            "like",
-            "dislike"
+            "like"
           ],
           "properties": {
             "like": {
-              "$ref": "#/definitions/post_evaluation/definitions/like"
+              "$ref": "#/definitions/review_evaluation/definitions/like"
+            }
+          }
+        }
+      }
+    },
+    "review": {
+      "$schema": "http://json-schema.org/draft-04/hyper-schema",
+      "title": "Post",
+      "description": "Post Resource",
+      "stability": "prototype",
+      "strictProperties": true,
+      "type": [
+        "object"
+      ],
+      "definitions": {
+        "id": {
+          "description": "unique identifier of review",
+          "type": "integer",
+          "example": 1,
+          "readOnly": true
+        },
+        "text": {
+          "description": "review's text",
+          "type": "string",
+          "example": "Pig Coin is awesome."
+        },
+        "post_at": {
+          "description": "datetime when this review was posted.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "likes_count": {
+          "description": "review likes count",
+          "type": "integer",
+          "example": 100
+        },
+        "evaluation_point": {
+          "description": "evaluation",
+          "type": "string",
+          "example": 2.4
+        },
+        "review": {
+          "type": "object",
+          "required": [
+            "id",
+            "text",
+            "user",
+            "post_at",
+            "likes_count",
+            "evaluation_point"
+          ],
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/review/definitions/id"
             },
-            "dislike": {
-              "$ref": "#/definitions/post_evaluation/definitions/dislike"
+            "text": {
+              "$ref": "#/definitions/review/definitions/text"
+            },
+            "user": {
+              "$ref": "#/definitions/user/definitions/user"
+            },
+            "post_at": {
+              "$ref": "#/definitions/review/definitions/post_at"
+            },
+            "likes_count": {
+              "$ref": "#/definitions/review/definitions/likes_count"
+            },
+            "evaluation_point": {
+              "$ref": "#/definitions/review/definitions/evaluation_point"
+            }
+          }
+        },
+        "review_page": {
+          "type": "object",
+          "required": [
+            "data",
+            "paging"
+          ],
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/review/definitions/review"
+              }
+            },
+            "paging": {
+              "$ref": "#/definitions/paging/definitions/paging"
+            },
+            "message": {
+              "$ref": "#/definitions/mesasge"
             }
           }
         }
@@ -1264,11 +1263,6 @@
           "type": "integer",
           "example": 123
         },
-        "total_dislike_count": {
-          "description": "user total disliked count",
-          "type": "integer",
-          "example": 123
-        },
         "following_count": {
           "description": "user following_count",
           "type": "integer",
@@ -1308,9 +1302,6 @@
             "total_like_count": {
               "$ref": "#/definitions/user/definitions/total_like_count"
             },
-            "total_dislike_count": {
-              "$ref": "#/definitions/user/definitions/total_dislike_count"
-            },
             "following_count": {
               "$ref": "#/definitions/user/definitions/following_count"
             },
@@ -1347,20 +1338,23 @@
     }
   },
   "properties": {
+    "v1_articles": {
+      "$ref": "#/definitions/v1_articles"
+    },
     "v1_hashtags": {
       "$ref": "#/definitions/v1_hashtags"
     },
     "v1_hashtags_trends": {
       "$ref": "#/definitions/v1_hashtags_trends"
     },
-    "v1_posts": {
-      "$ref": "#/definitions/v1_posts"
+    "v1_reviews": {
+      "$ref": "#/definitions/v1_reviews"
     },
-    "v1_posts_reaction": {
-      "$ref": "#/definitions/v1_posts_reaction"
+    "v1_reviews_reaction": {
+      "$ref": "#/definitions/v1_reviews_reaction"
     },
-    "v1_posts_search_result": {
-      "$ref": "#/definitions/v1_posts_search_result"
+    "v1_reviews_search_result": {
+      "$ref": "#/definitions/v1_reviews_search_result"
     },
     "v1_search": {
       "$ref": "#/definitions/v1_search"
@@ -1368,17 +1362,17 @@
     "v1_users": {
       "$ref": "#/definitions/v1_users"
     },
-    "v1_users_feed": {
-      "$ref": "#/definitions/v1_users_feed"
-    },
     "v1_users_follow_follwers": {
       "$ref": "#/definitions/v1_users_follow_follwers"
     },
     "v1_users_hashtag": {
       "$ref": "#/definitions/v1_users_hashtag"
     },
-    "v1_users_posts": {
-      "$ref": "#/definitions/v1_users_posts"
+    "v1_users_reactions": {
+      "$ref": "#/definitions/v1_users_reactions"
+    },
+    "v1_users_reviews": {
+      "$ref": "#/definitions/v1_users_reviews"
     },
     "v1_users_search_result": {
       "$ref": "#/definitions/v1_users_search_result"
@@ -1386,17 +1380,20 @@
     "v1_users_user_evaluation": {
       "$ref": "#/definitions/v1_users_user_evaluation"
     },
+    "article": {
+      "$ref": "#/definitions/article"
+    },
     "hashtag": {
       "$ref": "#/definitions/hashtag"
     },
     "paging": {
       "$ref": "#/definitions/paging"
     },
-    "post": {
-      "$ref": "#/definitions/post"
+    "review_evaluation": {
+      "$ref": "#/definitions/review_evaluation"
     },
-    "post_evaluation": {
-      "$ref": "#/definitions/post_evaluation"
+    "review": {
+      "$ref": "#/definitions/review"
     },
     "user": {
       "$ref": "#/definitions/user"

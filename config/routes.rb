@@ -1,47 +1,49 @@
 Rails.application.routes.draw do
-  namespace :v1 do
-    namespace :users do
-      get 'hashtag/watching'
-    end
-  end
-
   mount_devise_token_auth_for 'User', at: 'auth', controllers: {
     registrations: 'auth/registrations'
   }
   namespace :v1, defaults: { format: 'json' } do
     resources :users, only: [:index, :show] do
+      resources :reviews, only: [:index], module: :users
+      resources :reactions, only: [:index], module: :users
+
       collection do
         get :me
       end
+
       member do
-        get :feed, to: 'users/feed#feed'
-        scope :hashtags do
-          get :watching, to: 'users/hashtags#watching'
-        end
+        get :following, to: 'users/relationships#following'
+        get :followers, to: 'users/relationships#followers'
+        post :follow, to: 'users/relationships#follow'
+        delete :follow, to: 'users/relationships#unfollow'
       end
+
+      scope :following do
+        resources :reviews, only: [:index]
+        resources :review_evaluations, only: [:index]
+      end
+
+      resources :reviews, only: [:index]
+      resources :review_evaluations, only: [:index]
     end
 
-    resources :hashtags do
-      collection do
-        get :trend
-      end
-    end
-
-    resources :hashtags, only: [:index, :show] do
+    resources :hash_tags, only: [:index, :show] do
       member do
         post :watch, action: :watch
         delete :watch, action: :unwatch
       end
-      resources :posts, only: [:index], to: 'hashtags#show'
+      resources :articles, only: [:index]
     end
 
-    resources :posts, only: [:index, :show, :create, :destroy] do
+    resources :articles, only: [:show, :index, :create] do
+      # FIXME: 記事ごとのコメントを取得(articles/1234/reviews)するものであり、userごとのコメント取得と被らないようにmoduleを設定している。下の二つのルーティングは同じコントローラーに統合したい。
+      resources :reviews, only: [:index], module: :articles
+      resources :reviews, only: [:create]
+    end
+    resources :reviews, only: [:destroy] do
       member do
-        get :replies
-        post :like, to: 'posts/reactions#add_like'
-        post :dislike, to: 'posts/reactions#add_dislike'
-        delete :like, to: 'posts/reactions#delete_like'
-        delete :dislike, to: 'posts/reactions#delete_dislike'
+        post :like, to: 'reviews/reactions#add_like'
+        delete :like, to: 'reviews/reactions#delete_like'
       end
     end
   end

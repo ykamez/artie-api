@@ -2,16 +2,15 @@ class V1::Users::FeedController < ApplicationController
   def feed
     # FIXME:
     followers = User.all
-    posts = Post.where(user: followers)
+    posts = Review.where(user: followers)
     page = build_page(posts)
-    render json: page, serializer: ::V1::PostsPagingSerializer, include: '**'
+    render json: page, serializer: ::V1::ReviewsPagingSerializer, include: '**'
   end
 
   private
 
     def build_page(data)
-      # FIXME: has_nextかを判断する
-      paging = { cursor: data.last&.created_at, has_next: true }
-      ::V1::PostsPaging.new(data: data, paging: paging)
+      paging = { cursor: data.last&.created_at, has_next: has_next?(data, limit) }
+      ::V1::ReviewsPaging.new(data: data, paging: paging)
     end
 end
