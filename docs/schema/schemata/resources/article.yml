@@ -34,7 +34,7 @@ definitions:
     example: 100
   average_rating:
     description: evaluation
-    type: string
+    type: integer
     example: 2.4
   categories:
     type: array
