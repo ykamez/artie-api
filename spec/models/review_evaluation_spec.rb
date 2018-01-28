@@ -11,8 +11,7 @@
 #
 # Indexes
 #
-#  index_review_evaluations_on_review_id              (review_id)
-#  index_review_evaluations_on_user_id                (user_id)
+#  fk_rails_96eaf66f6c                                (review_id)
 #  index_review_evaluations_on_user_id_and_review_id  (user_id,review_id) UNIQUE
 #
 # Foreign Keys

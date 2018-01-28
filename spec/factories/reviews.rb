@@ -13,8 +13,7 @@
 #
 # Indexes
 #
-#  index_reviews_on_article_id              (article_id)
-#  index_reviews_on_user_id                 (user_id)
+#  fk_rails_bdbf711db8                      (article_id)
 #  index_reviews_on_user_id_and_article_id  (user_id,article_id) UNIQUE
 #
 # Foreign Keys
