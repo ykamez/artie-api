@@ -22,6 +22,13 @@ class Article < ApplicationRecord
   has_many :reviews, dependent: :destroy
   validates :url, presence: true
 
+  def update_average_rating!
+    reviews
+    sum = reviews.inject(0) {|sum, n| sum + BigDecimal("#{n.evaluation_point.to_f}") }
+    avg_rating = (sum / reviews.size).to_f
+    update!(evaluation_point: avg_rating)
+  end
+
   class << self
     def create_article!(url)
       page = MetaInspector.new(url)

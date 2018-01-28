@@ -6,6 +6,7 @@ class V1::ReviewsController < ApplicationController
   def create
     begin
       review = @article.reviews.create!(text: comment, user_id: current_user.id, evaluation_point: evaluation_point)
+      @article.update_average_rating!
     rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique => e
       raise ActionController::BadRequest, e.message
     end
