@@ -58,6 +58,9 @@ RSpec.describe V1::ArticlesController, type: :request do
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'Uid': @uid,
+        'Access-Token': @token,
+        'Client': @client
       }
     end
     let(:url) { '/v1/articles' }
@@ -67,6 +70,10 @@ RSpec.describe V1::ArticlesController, type: :request do
     let(:images) { double('Meta Inspector respnse images') }
 
     before do
+      @auth_headers = user.create_new_auth_token
+      @token = @auth_headers['access-token']
+      @uid = @auth_headers['uid']
+      @client = @auth_headers['client']
       allow(MetaInspector).to receive(:new).and_return(meta_inspector_double)
       allow(meta_inspector_double).to receive(:title).and_return('hogehoge')
       allow(meta_inspector_double).to receive(:images).and_return(images)

@@ -2,6 +2,7 @@ module V1
   module Reviews
     class ReactionsController < ApplicationController
       before_action :set_review, only: [:add_like]
+      before_action :authenticate_user!, only: [:add_like, :delete_like]
 
       def add_like
         begin
