@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  include ::Concerns::ErrorHandling
   include DeviseTokenAuth::Concerns::SetUserByToken
   include Concerns::Paging
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -20,7 +21,7 @@ class ApplicationController < ActionController::API
     @user = User.find_by(uid: uid)
     # 認証に失敗したらエラー
     unless @user && @user.valid_token?(token, client)
-      raise BadRequest
+      raise ActionController::BadRequest, e.message
     end
   end
 

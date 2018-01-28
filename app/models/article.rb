@@ -24,7 +24,7 @@ class Article < ApplicationRecord
 
   def update_average_rating!
     reviews
-    sum = reviews.inject(0) {|sum, n| sum + BigDecimal("#{n.evaluation_point.to_f}") }
+    sum = reviews.inject(0) { |sum, n| sum + BigDecimal(n.evaluation_point.to_f.to_s) }
     avg_rating = (sum / reviews.size).to_f
     update!(evaluation_point: avg_rating)
   end
@@ -34,7 +34,7 @@ class Article < ApplicationRecord
       page = MetaInspector.new(url)
       create!(title: page.title, image_url: page.images.best, url: url)
     rescue StandardError => e
-      raise BadRequest
+      raise ActionController::BadRequest, e.message
     end
   end
 end
