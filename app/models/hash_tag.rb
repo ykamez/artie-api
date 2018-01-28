@@ -14,6 +14,6 @@
 
 class HashTag < ApplicationRecord
   has_many :article_hash_tags, dependent: :destroy
-  has_many :user_hash_tags, dependent: :destroy
   has_many :articles, dependent: :destroy, through: :article_hash_tags
+  has_many :user_hash_tags, dependent: :destroy
 end

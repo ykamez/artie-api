@@ -36,6 +36,10 @@ definitions:
     description: evaluation
     type: string
     example: 2.4
+  categories:
+    type: array
+    items:
+      $ref: /schemata/hashtag#/definitions/hashtag
 
   article:
     type: object
@@ -46,6 +50,7 @@ definitions:
       - title
       - published_at
       - reviews_count
+      - categories
     properties:
       id:
         $ref: /schemata/article#/definitions/id
@@ -61,6 +66,8 @@ definitions:
         $ref: /schemata/article#/definitions/reviews_count
       evaluation_point:
         $ref: /schemata/article#/definitions/evaluation_point
+      categories:
+        $ref: /schemata/article#/definitions/categories
 
   article_page:
     type: object

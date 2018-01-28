@@ -17,8 +17,8 @@
 #
 
 class Article < ApplicationRecord
-  has_many :article_hash_tags, foreign_key: :article_id, dependent: :destroy
-  has_many :hash_tags, dependent: :destroy, through: :ArticleHashTag
+  has_many :article_hash_tags, dependent: :destroy
+  has_many :hash_tags, dependent: :destroy, through: :article_hash_tags
   has_many :reviews, dependent: :destroy
   validates :url, presence: true
 

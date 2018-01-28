@@ -922,6 +922,12 @@
           "type": "string",
           "example": 2.4
         },
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hashtag/definitions/hashtag"
+          }
+        },
         "article": {
           "type": "object",
           "required": [
@@ -930,7 +936,8 @@
             "image_url",
             "title",
             "published_at",
-            "reviews_count"
+            "reviews_count",
+            "categories"
           ],
           "properties": {
             "id": {
@@ -953,6 +960,9 @@
             },
             "evaluation_point": {
               "$ref": "#/definitions/article/definitions/evaluation_point"
+            },
+            "categories": {
+              "$ref": "#/definitions/article/definitions/categories"
             }
           }
         },

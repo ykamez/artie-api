@@ -136,7 +136,13 @@ HTTP/1.1 200 OK
       "title": "Github",
       "published_at": "2015-01-01T12:00:00Z",
       "reviews_count": 100,
-      "evaluation_point": 2.4
+      "evaluation_point": 2.4,
+      "categories": [
+        {
+          "id": 1,
+          "name": "BTC"
+        }
+      ]
     }
   ],
   "paging": {
@@ -177,7 +183,13 @@ HTTP/1.1 200 OK
   "title": "Github",
   "published_at": "2015-01-01T12:00:00Z",
   "reviews_count": 100,
-  "evaluation_point": 2.4
+  "evaluation_point": 2.4,
+  "categories": [
+    {
+      "id": 1,
+      "name": "BTC"
+    }
+  ]
 }
 ```
 
