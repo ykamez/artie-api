@@ -34,6 +34,21 @@
           "type": "integer",
           "example": 1234,
           "readOnly": true
+        },
+        "url": {
+          "description": "article's url",
+          "type": "string",
+          "example": "xxx"
+        },
+        "text": {
+          "description": "article's review's text",
+          "type": "string",
+          "example": "nice"
+        },
+        "rating": {
+          "description": "unique identifier of user",
+          "type": "string",
+          "example": "2.5"
         }
       },
       "links": [
@@ -124,11 +139,18 @@
           "schema": {
             "type": "object",
             "required": [
-              "url"
+              "url",
+              "rating"
             ],
             "properties": {
               "url": {
-                "$ref": "#/definitions/article/definitions/url"
+                "$ref": "#/definitions/v1_articles/definitions/url"
+              },
+              "text": {
+                "$ref": "#/definitions/v1_articles/definitions/text"
+              },
+              "rating": {
+                "$ref": "#/definitions/v1_articles/definitions/rating"
               }
             }
           },
@@ -313,15 +335,11 @@
           "schema": {
             "type": "object",
             "required": [
-              "text",
-              "user_id"
+              "text"
             ],
             "properties": {
               "text": {
                 "$ref": "#/definitions/review/definitions/text"
-              },
-              "user_id": {
-                "$ref": "#/definitions/v1_reviews/definitions/user_id"
               },
               "evaluation_point": {
                 "$ref": "#/definitions/v1_reviews/definitions/evaluation_point"
@@ -530,16 +548,16 @@
           "schema": {
             "type": "object",
             "required": [
-              "name",
+              "fullname",
               "email",
               "password"
             ],
             "properties": {
-              "name": {
-                "$ref": "#/definitions/user/definitions/name"
+              "fullname": {
+                "$ref": "#/definitions/user/definitions/fullname"
               },
-              "image_data": {
-                "$ref": "#/definitions/user/definitions/image_data"
+              "image_url": {
+                "$ref": "#/definitions/user/definitions/image_url"
               },
               "email": {
                 "$ref": "#/definitions/user/definitions/email"
@@ -562,16 +580,16 @@
           "schema": {
             "type": "object",
             "required": [
-              "name",
+              "fullname",
               "email",
               "password"
             ],
             "properties": {
-              "name": {
-                "$ref": "#/definitions/user/definitions/name"
+              "fullname": {
+                "$ref": "#/definitions/user/definitions/fullname"
               },
-              "image_data": {
-                "$ref": "#/definitions/user/definitions/image_data"
+              "image_url": {
+                "$ref": "#/definitions/user/definitions/image_url"
               },
               "email": {
                 "$ref": "#/definitions/user/definitions/email"
@@ -917,7 +935,7 @@
           "type": "integer",
           "example": 100
         },
-        "evaluation_point": {
+        "average_rating": {
           "description": "evaluation",
           "type": "string",
           "example": 2.4
@@ -958,8 +976,8 @@
             "reviews_count": {
               "$ref": "#/definitions/article/definitions/reviews_count"
             },
-            "evaluation_point": {
-              "$ref": "#/definitions/article/definitions/evaluation_point"
+            "average_rating": {
+              "$ref": "#/definitions/article/definitions/average_rating"
             },
             "categories": {
               "$ref": "#/definitions/article/definitions/categories"
@@ -1183,6 +1201,11 @@
           "type": "string",
           "example": 2.4
         },
+        "is_liked": {
+          "description": "is_liked",
+          "type": "boolean",
+          "example": false
+        },
         "review": {
           "type": "object",
           "required": [
@@ -1191,7 +1214,8 @@
             "user",
             "posted_at",
             "likes_count",
-            "rating"
+            "rating",
+            "is_liked"
           ],
           "properties": {
             "id": {
@@ -1211,6 +1235,9 @@
             },
             "rating": {
               "$ref": "#/definitions/review/definitions/rating"
+            },
+            "is_liked": {
+              "$ref": "#/definitions/review/definitions/is_liked"
             }
           }
         },
@@ -1253,12 +1280,12 @@
           "example": 1,
           "readOnly": true
         },
-        "name": {
-          "description": "full name of user",
+        "fullname": {
+          "description": "full fullname of user",
           "type": "string",
           "example": "Bob Tarou"
         },
-        "image_data": {
+        "image_url": {
           "description": "user's icon",
           "type": "string",
           "exmaple": "s3/aws/assets/hogehoge"
@@ -1273,13 +1300,13 @@
           "type": "string",
           "example": "letmein1234"
         },
-        "total_like_count": {
+        "total_likes_count": {
           "description": "user total liked count",
           "type": "integer",
           "example": 123
         },
-        "following_count": {
-          "description": "user following_count",
+        "followings_count": {
+          "description": "user followings_count",
           "type": "integer",
           "example": 10
         },
@@ -1297,24 +1324,24 @@
           "type": "object",
           "required": [
             "id",
-            "name",
-            "image_data"
+            "fullname",
+            "image_url"
           ],
           "properties": {
             "id": {
               "$ref": "#/definitions/user/definitions/id"
             },
-            "name": {
-              "$ref": "#/definitions/user/definitions/name"
+            "fullname": {
+              "$ref": "#/definitions/user/definitions/fullname"
             },
-            "image_data": {
-              "$ref": "#/definitions/user/definitions/image_data"
+            "image_url": {
+              "$ref": "#/definitions/user/definitions/image_url"
             },
-            "total_like_count": {
-              "$ref": "#/definitions/user/definitions/total_like_count"
+            "total_likes_count": {
+              "$ref": "#/definitions/user/definitions/total_likes_count"
             },
-            "following_count": {
-              "$ref": "#/definitions/user/definitions/following_count"
+            "followings_count": {
+              "$ref": "#/definitions/user/definitions/followings_count"
             },
             "followers_count": {
               "$ref": "#/definitions/user/definitions/followers_count"

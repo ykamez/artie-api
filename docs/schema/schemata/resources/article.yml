@@ -32,7 +32,7 @@ definitions:
     description: article likes count
     type: integer
     example: 100
-  evaluation_point:
+  average_rating:
     description: evaluation
     type: string
     example: 2.4
@@ -64,8 +64,8 @@ definitions:
         $ref: /schemata/article#/definitions/published_at
       reviews_count:
         $ref: /schemata/article#/definitions/reviews_count
-      evaluation_point:
-        $ref: /schemata/article#/definitions/evaluation_point
+      average_rating:
+        $ref: /schemata/article#/definitions/average_rating
       categories:
         $ref: /schemata/article#/definitions/categories
 

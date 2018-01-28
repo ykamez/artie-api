@@ -56,14 +56,14 @@ links:
   schema:
     type: object
     required:
-      - name
+      - fullname
       - email
       - password
     properties:
-      name:
-        $ref: "/schemata/user#/definitions/name"
-      image_data:
-        $ref: "/schemata/user#/definitions/image_data"
+      fullname:
+        $ref: "/schemata/user#/definitions/fullname"
+      image_url:
+        $ref: "/schemata/user#/definitions/image_url"
       email:
         $ref: "/schemata/user#/definitions/email"
       password:
@@ -79,14 +79,14 @@ links:
   schema:
     type: object
     required:
-      - name
+      - fullname
       - email
       - password
     properties:
-      name:
-        $ref: "/schemata/user#/definitions/name"
-      image_data:
-        $ref: "/schemata/user#/definitions/image_data"
+      fullname:
+        $ref: "/schemata/user#/definitions/fullname"
+      image_url:
+        $ref: "/schemata/user#/definitions/image_url"
       email:
         $ref: "/schemata/user#/definitions/email"
       password:
