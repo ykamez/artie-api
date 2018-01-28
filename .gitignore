@@ -22,3 +22,8 @@
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
+
+/secret.yaml
+/config/settings.yml
+cloud_sql_proxy
+artie-3ba5ef8535e0.json
