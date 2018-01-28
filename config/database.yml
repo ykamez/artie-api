@@ -28,3 +28,10 @@ development:
 test:
   <<: *default
   database: artie_test
+
+production:
+  <<: *default
+  database: artie_production
+  username: artie
+  password: <%= ENV['ARTIE_DATABASE_PASSWORD'] %>
+  socket: /cloudsql/artie-server:asia-northeast1:artie-database
