@@ -28,9 +28,9 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
     #  @resource.skip_confirmation!
     # end
 
-    binding.pry
-
     # ここについて調べる。
+
+    @resource.skip_confirmation!
     sign_in(:user, @resource, store: false, bypass: false)
 
     if @resource.save!
@@ -75,7 +75,6 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
       image_url = auth[:info][:image]
       user.assign_attributes({
         uid:      uid,
-        account_name: nickname,
         fullname: nickname,
         image_data: image_url,
         provider: provider,
