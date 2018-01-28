@@ -1,0 +1,7 @@
+runtime: ruby
+env: flex
+entrypoint: bundle exec rackup -p 8080 -E production config.ru
+beta_settings:
+  cloud_sql_instances: artie-server:asia-northeast1:artie-database
+includes:
+- secret.yaml
