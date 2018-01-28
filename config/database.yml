@@ -32,6 +32,6 @@ test:
 production:
   <<: *default
   database: artie_production
-  username: artie
-  password: <%= ENV['ARTIE_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['ARTIE_DATABASE_ROOT_PASSWORD'] %>
   socket: /cloudsql/artie-server:asia-northeast1:artie-database
