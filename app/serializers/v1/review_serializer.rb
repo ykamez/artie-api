@@ -1,8 +1,12 @@
 class V1::ReviewSerializer < ActiveModel::Serializer
-  attributes :id, :text, :post_at, :user, :likes_count, :evaluation_point
+  attributes :id, :text, :posted_at, :user, :likes_count, :rating
   has_one :user, serializer: ::V1::UserSerializer
 
-  def post_at
+  def posted_at
     object.created_at
+  end
+
+  def rating
+    object.evaluation_point
   end
 end

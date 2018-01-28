@@ -225,9 +225,9 @@ HTTP/1.1 200 OK
           "followers_count": 30,
           "evaluation_point": 2.5
         },
-        "post_at": "2015-01-01T12:00:00Z",
+        "posted_at": "2015-01-01T12:00:00Z",
         "likes_count": 100,
-        "evaluation_point": 2.4
+        "rating": 2.4
       }
     ],
     "paging": {
@@ -286,9 +286,9 @@ HTTP/1.1 201 Created
     "followers_count": 30,
     "evaluation_point": 2.5
   },
-  "post_at": "2015-01-01T12:00:00Z",
+  "posted_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
-  "evaluation_point": 2.4
+  "rating": 2.4
 }
 ```
 
@@ -419,9 +419,9 @@ HTTP/1.1 200 OK
         "followers_count": 30,
         "evaluation_point": 2.5
       },
-      "post_at": "2015-01-01T12:00:00Z",
+      "posted_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
-      "evaluation_point": 2.4
+      "rating": 2.4
     }
   ],
   "paging": {
@@ -539,9 +539,9 @@ HTTP/1.1 201 Created
     "followers_count": 30,
     "evaluation_point": 2.5
   },
-  "post_at": "2015-01-01T12:00:00Z",
+  "posted_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
-  "evaluation_point": 2.4
+  "rating": 2.4
 }
 ```
 
@@ -615,9 +615,9 @@ HTTP/1.1 201 Created
     "followers_count": 30,
     "evaluation_point": 2.5
   },
-  "post_at": "2015-01-01T12:00:00Z",
+  "posted_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
-  "evaluation_point": 2.4
+  "rating": 2.4
 }
 ```
 
@@ -658,9 +658,9 @@ HTTP/1.1 200 OK
     "followers_count": 30,
     "evaluation_point": 2.5
   },
-  "post_at": "2015-01-01T12:00:00Z",
+  "posted_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
-  "evaluation_point": 2.4
+  "rating": 2.4
 }
 ```
 
@@ -709,9 +709,9 @@ HTTP/1.1 200 OK
         "followers_count": 30,
         "evaluation_point": 2.5
       },
-      "post_at": "2015-01-01T12:00:00Z",
+      "posted_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
-      "evaluation_point": 2.4
+      "rating": 2.4
     }
   ],
   "paging": {
@@ -1261,9 +1261,9 @@ HTTP/1.1 200 OK
         "followers_count": 30,
         "evaluation_point": 2.5
       },
-      "post_at": "2015-01-01T12:00:00Z",
+      "posted_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
-      "evaluation_point": 2.4
+      "rating": 2.4
     }
   ],
   "paging": {
@@ -1328,9 +1328,9 @@ HTTP/1.1 200 OK
         "followers_count": 30,
         "evaluation_point": 2.5
       },
-      "post_at": "2015-01-01T12:00:00Z",
+      "posted_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
-      "evaluation_point": 2.4
+      "rating": 2.4
     }
   ],
   "paging": {
