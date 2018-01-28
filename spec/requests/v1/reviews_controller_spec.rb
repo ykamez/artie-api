@@ -7,12 +7,20 @@ RSpec.describe V1::ReviewsController, type: :request do
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'Uid': @uid,
+        'Access-Token': @token,
+        'Client': @client
       }
     end
     let(:url) { "/v1/articles/#{article.id}/reviews" }
     let(:user) { create(:user) }
     let(:article) { create(:article) }
-
+    before do
+      @auth_headers = user.create_new_auth_token
+      @token = @auth_headers['access-token']
+      @uid = @auth_headers['uid']
+      @client = @auth_headers['client']
+    end
     context 'with valid request' do
       let(:params) { { comment: 'I agree.', evaluation_point: '1.5' } }
       context 'with text' do
@@ -39,6 +47,9 @@ RSpec.describe V1::ReviewsController, type: :request do
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'Uid': @uid,
+        'Access-Token': @token,
+        'Client': @client
       }
     end
     let(:url) { "/v1/reviews/#{review.id}" }
@@ -48,7 +59,12 @@ RSpec.describe V1::ReviewsController, type: :request do
     let(:review) { create(:review, user_id: user.id, article_id: article.id) }
 
     let(:params) { {} }
-
+    before do
+      @auth_headers = user.create_new_auth_token
+      @token = @auth_headers['access-token']
+      @uid = @auth_headers['uid']
+      @client = @auth_headers['client']
+    end
     context 'with valid request' do
       before do
         review

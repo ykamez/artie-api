@@ -7,6 +7,9 @@ describe V1::Reviews::ReactionsController, type: :request do
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'Uid': @uid,
+        'Access-Token': @token,
+        'Client': @client
       }
     end
     let(:params){}
@@ -14,6 +17,13 @@ describe V1::Reviews::ReactionsController, type: :request do
     let(:user) { create(:user) }
     let(:article) { create(:article) }
     let(:review) { create(:review, user_id: user.id, article_id: article.id, evaluation_point: '1.5') }
+
+    before do
+      @auth_headers = user.create_new_auth_token
+      @token = @auth_headers['access-token']
+      @uid = @auth_headers['uid']
+      @client = @auth_headers['client']
+    end
 
     context 'with valid request' do
       it 'returns 200 response' do
@@ -34,6 +44,9 @@ describe V1::Reviews::ReactionsController, type: :request do
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'Uid': @uid,
+        'Access-Token': @token,
+        'Client': @client
       }
     end
     let(:params){}
@@ -42,6 +55,13 @@ describe V1::Reviews::ReactionsController, type: :request do
     let(:article) { create(:article) }
     let(:review) { create(:review, user_id: user.id, article_id: article.id) }
     let(:review_evaluation) { create(:review_evaluation, user_id: user.id, review_id: review.id) }
+
+    before do
+      @auth_headers = user.create_new_auth_token
+      @token = @auth_headers['access-token']
+      @uid = @auth_headers['uid']
+      @client = @auth_headers['client']
+    end
 
     context 'with valid request' do
       before do

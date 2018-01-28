@@ -1,4 +1,6 @@
 class V1::ArticlesController < ApplicationController
+  before_action :authenticate_user!, only: [:create]
+
   def show
     @article = Article.find(params[:id])
     render json: @article, serializer: ::V1::ArticleSerializer
