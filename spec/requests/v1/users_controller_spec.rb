@@ -8,11 +8,19 @@ RSpec.describe V1::UsersController, type: :request do
       {
         'Content-Type': 'application/json',
         'access-token': user.tokens.first.to_s,
+        'Uid': @uid,
+        'Access-Token': @token,
+        'Client': @client
       }
     end
     let(:url) { '/v1/users/me' }
     let(:user) { create(:user) }
-
+    before do
+      @auth_headers = user.create_new_auth_token
+      @token = @auth_headers['access-token']
+      @uid = @auth_headers['uid']
+      @client = @auth_headers['client']
+    end
     context 'with valid request' do
       context 'when watching hashtags exists' do
         before do

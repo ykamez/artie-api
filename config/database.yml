@@ -23,8 +23,8 @@ default: &default
 
 development:
   <<: *default
-  database: coin_now_server_development
+  database: artie_development
 
 test:
   <<: *default
-  database: coin_now_server_test
+  database: artie_test

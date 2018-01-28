@@ -21,7 +21,6 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string(255)
 #  fullname               :string(255)      not null
-#  account_name           :string(255)      not null
 #  image_data             :string(255)      default(""), not null
 #  email                  :string(255)      not null
 #  likes_count            :integer          default(0), not null
@@ -42,7 +41,6 @@
 
 FactoryBot.define do
   factory :user do
-    account_name 'geeks'
     fullname 'Bee Gee '
     sequence :email do |n|
       "person#{n}@example.com"

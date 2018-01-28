@@ -114,7 +114,7 @@ GET /v1/articles
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/articles
+$ curl -n http://artie.local/v1/articles
  -G \
   -d limit=10
 ```
@@ -132,6 +132,8 @@ HTTP/1.1 200 OK
     {
       "id": 1,
       "url": "https://github.com/.",
+      "image_url": "https://hogehoge.png",
+      "title": "Github",
       "published_at": "2015-01-01T12:00:00Z",
       "reviews_count": 100,
       "evaluation_point": 2.4
@@ -157,7 +159,7 @@ GET /v1/articles/{id}
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/articles/$ID
+$ curl -n http://artie.local/v1/articles/$ID
 ```
 
 
@@ -171,6 +173,8 @@ HTTP/1.1 200 OK
 {
   "id": 1,
   "url": "https://github.com/.",
+  "image_url": "https://hogehoge.png",
+  "title": "Github",
   "published_at": "2015-01-01T12:00:00Z",
   "reviews_count": 100,
   "evaluation_point": 2.4
@@ -196,7 +200,7 @@ GET /v1/articles/{id}/reviews
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/articles/$ID/reviews
+$ curl -n http://artie.local/v1/articles/$ID/reviews
  -G \
   -d limit=10
 ```
@@ -217,17 +221,16 @@ HTTP/1.1 200 OK
         "text": "Pig Coin is awesome.",
         "user": {
           "id": 1,
-          "fullname": "Bob Marley",
-          "account_name": "bob",
+          "name": "Bob Tarou",
           "image_data": "example",
           "total_like_count": 123,
           "following_count": 10,
           "followers_count": 30,
           "evaluation_point": 2.5
         },
-        "post_at": "2015-01-01T12:00:00Z",
+        "posted_at": "2015-01-01T12:00:00Z",
         "likes_count": 100,
-        "evaluation_point": 2.4
+        "rating": 2.4
       }
     ],
     "paging": {
@@ -258,7 +261,7 @@ POST /v1/articles
 #### Curl Example
 
 ```bash
-$ curl -n -X POST http://coinnow.local/v1/articles \
+$ curl -n -X POST http://artie.local/v1/articles \
   -d '{
   "url": "https://github.com/."
 }' \
@@ -278,17 +281,16 @@ HTTP/1.1 201 Created
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "fullname": "Bob Marley",
-    "account_name": "bob",
+    "name": "Bob Tarou",
     "image_data": "example",
     "total_like_count": 123,
     "following_count": 10,
     "followers_count": 30,
     "evaluation_point": 2.5
   },
-  "post_at": "2015-01-01T12:00:00Z",
+  "posted_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
-  "evaluation_point": 2.4
+  "rating": 2.4
 }
 ```
 
@@ -304,7 +306,7 @@ DELETE /v1/articles/{id}
 #### Curl Example
 
 ```bash
-$ curl -n -X DELETE http://coinnow.local/v1/articles/$ID \
+$ curl -n -X DELETE http://artie.local/v1/articles/$ID \
   -d '{
 }' \
   -H "Content-Type: application/json"
@@ -344,7 +346,7 @@ GET /v1/hashtags
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/hashtags
+$ curl -n http://artie.local/v1/hashtags
  -G \
   -d limit=10
 ```
@@ -391,7 +393,7 @@ GET /v1/hashtags/{hashtag_id}/reviews
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/hashtags/$HASHTAG_ID/reviews
+$ curl -n http://artie.local/v1/hashtags/$HASHTAG_ID/reviews
  -G \
   -d limit=10
 ```
@@ -411,17 +413,16 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "fullname": "Bob Marley",
-        "account_name": "bob",
+        "name": "Bob Tarou",
         "image_data": "example",
         "total_like_count": 123,
         "following_count": 10,
         "followers_count": 30,
         "evaluation_point": 2.5
       },
-      "post_at": "2015-01-01T12:00:00Z",
+      "posted_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
-      "evaluation_point": 2.4
+      "rating": 2.4
     }
   ],
   "paging": {
@@ -451,7 +452,7 @@ GET /v1/hashtags/trends
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/hashtags/trends
+$ curl -n http://artie.local/v1/hashtags/trends
 ```
 
 
@@ -509,7 +510,7 @@ POST /v1/articles/{id}/reviews
 #### Curl Example
 
 ```bash
-$ curl -n -X POST http://coinnow.local/v1/articles/$ID/reviews \
+$ curl -n -X POST http://artie.local/v1/articles/$ID/reviews \
   -d '{
   "text": "Pig Coin is awesome.",
   "user_id": 1234,
@@ -531,17 +532,16 @@ HTTP/1.1 201 Created
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "fullname": "Bob Marley",
-    "account_name": "bob",
+    "name": "Bob Tarou",
     "image_data": "example",
     "total_like_count": 123,
     "following_count": 10,
     "followers_count": 30,
     "evaluation_point": 2.5
   },
-  "post_at": "2015-01-01T12:00:00Z",
+  "posted_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
-  "evaluation_point": 2.4
+  "rating": 2.4
 }
 ```
 
@@ -557,7 +557,7 @@ DELETE /v1/reviews/{review_id}
 #### Curl Example
 
 ```bash
-$ curl -n -X DELETE http://coinnow.local/v1/reviews/$REVIEW_ID \
+$ curl -n -X DELETE http://artie.local/v1/reviews/$REVIEW_ID \
   -d '{
 }' \
   -H "Content-Type: application/json"
@@ -590,7 +590,7 @@ POST /v1/reviews/{review_id}/like
 #### Curl Example
 
 ```bash
-$ curl -n -X POST http://coinnow.local/v1/reviews/$REVIEW_ID/like \
+$ curl -n -X POST http://artie.local/v1/reviews/$REVIEW_ID/like \
   -H "Content-Type: application/json"
 ```
 
@@ -607,17 +607,16 @@ HTTP/1.1 201 Created
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "fullname": "Bob Marley",
-    "account_name": "bob",
+    "name": "Bob Tarou",
     "image_data": "example",
     "total_like_count": 123,
     "following_count": 10,
     "followers_count": 30,
     "evaluation_point": 2.5
   },
-  "post_at": "2015-01-01T12:00:00Z",
+  "posted_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
-  "evaluation_point": 2.4
+  "rating": 2.4
 }
 ```
 
@@ -633,7 +632,7 @@ DELETE /v1/reviews/{review_id}/like
 #### Curl Example
 
 ```bash
-$ curl -n -X DELETE http://coinnow.local/v1/reviews/$REVIEW_ID/like \
+$ curl -n -X DELETE http://artie.local/v1/reviews/$REVIEW_ID/like \
   -H "Content-Type: application/json"
 ```
 
@@ -650,17 +649,16 @@ HTTP/1.1 200 OK
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "fullname": "Bob Marley",
-    "account_name": "bob",
+    "name": "Bob Tarou",
     "image_data": "example",
     "total_like_count": 123,
     "following_count": 10,
     "followers_count": 30,
     "evaluation_point": 2.5
   },
-  "post_at": "2015-01-01T12:00:00Z",
+  "posted_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
-  "evaluation_point": 2.4
+  "rating": 2.4
 }
 ```
 
@@ -683,7 +681,7 @@ GET /v1/reviews/search_result
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/reviews/search_result
+$ curl -n http://artie.local/v1/reviews/search_result
 ```
 
 
@@ -701,17 +699,16 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "fullname": "Bob Marley",
-        "account_name": "bob",
+        "name": "Bob Tarou",
         "image_data": "example",
         "total_like_count": 123,
         "following_count": 10,
         "followers_count": 30,
         "evaluation_point": 2.5
       },
-      "post_at": "2015-01-01T12:00:00Z",
+      "posted_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
-      "evaluation_point": 2.4
+      "rating": 2.4
     }
   ],
   "paging": {
@@ -741,7 +738,7 @@ GET /v1/search
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/search
+$ curl -n http://artie.local/v1/search
 ```
 
 
@@ -756,8 +753,7 @@ HTTP/1.1 200 OK
   "users": [
     {
       "id": 1,
-      "fullname": "Bob Marley",
-      "account_name": "bob",
+      "name": "Bob Tarou",
       "image_data": "example",
       "total_like_count": 123,
       "following_count": 10,
@@ -793,7 +789,7 @@ GET /v1/users
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users
+$ curl -n http://artie.local/v1/users
  -G \
   -d 
 ```
@@ -810,8 +806,7 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "fullname": "Bob Marley",
-      "account_name": "bob",
+      "name": "Bob Tarou",
       "image_data": "example",
       "total_like_count": 123,
       "following_count": 10,
@@ -839,7 +834,7 @@ GET /v1/users/{id}
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$ID
+$ curl -n http://artie.local/v1/users/$ID
 ```
 
 
@@ -852,8 +847,7 @@ HTTP/1.1 200 OK
 ```json
 {
   "id": 1,
-  "fullname": "Bob Marley",
-  "account_name": "bob",
+  "name": "Bob Tarou",
   "image_data": "example",
   "total_like_count": 123,
   "following_count": 10,
@@ -874,7 +868,7 @@ GET /v1/users/me
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/me
+$ curl -n http://artie.local/v1/users/me
 ```
 
 
@@ -887,8 +881,7 @@ HTTP/1.1 200 OK
 ```json
 {
   "id": 1,
-  "fullname": "Bob Marley",
-  "account_name": "bob",
+  "name": "Bob Tarou",
   "image_data": "example",
   "total_like_count": 123,
   "following_count": 10,
@@ -909,9 +902,8 @@ POST /v1/users/
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **account_name** | *string* | display_name of user | `"bob"` |
 | **email** | *email* | user email address | `"username@example.com"` |
-| **fullname** | *string* | full name of user | `"Bob Marley"` |
+| **name** | *string* | full name of user | `"Bob Tarou"` |
 | **password** | *string* | user password | `"letmein1234"` |
 
 
@@ -925,10 +917,9 @@ POST /v1/users/
 #### Curl Example
 
 ```bash
-$ curl -n -X POST http://coinnow.local/v1/users/ \
+$ curl -n -X POST http://artie.local/v1/users/ \
   -d '{
-  "fullname": "Bob Marley",
-  "account_name": "bob",
+  "name": "Bob Tarou",
   "image_data": "example",
   "email": "username@example.com",
   "password": "letmein1234"
@@ -946,8 +937,7 @@ HTTP/1.1 201 Created
 ```json
 {
   "id": 1,
-  "fullname": "Bob Marley",
-  "account_name": "bob",
+  "name": "Bob Tarou",
   "image_data": "example",
   "total_like_count": 123,
   "following_count": 10,
@@ -968,9 +958,8 @@ PATCH /v1/users/{id}
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **account_name** | *string* | display_name of user | `"bob"` |
 | **email** | *email* | user email address | `"username@example.com"` |
-| **fullname** | *string* | full name of user | `"Bob Marley"` |
+| **name** | *string* | full name of user | `"Bob Tarou"` |
 | **password** | *string* | user password | `"letmein1234"` |
 
 
@@ -984,10 +973,9 @@ PATCH /v1/users/{id}
 #### Curl Example
 
 ```bash
-$ curl -n -X PATCH http://coinnow.local/v1/users/$ID \
+$ curl -n -X PATCH http://artie.local/v1/users/$ID \
   -d '{
-  "fullname": "Bob Marley",
-  "account_name": "bob",
+  "name": "Bob Tarou",
   "image_data": "example",
   "email": "username@example.com",
   "password": "letmein1234"
@@ -1005,8 +993,7 @@ HTTP/1.1 200 OK
 ```json
 {
   "id": 1,
-  "fullname": "Bob Marley",
-  "account_name": "bob",
+  "name": "Bob Tarou",
   "image_data": "example",
   "total_like_count": 123,
   "following_count": 10,
@@ -1027,7 +1014,7 @@ DELETE /v1/users/{id}
 #### Curl Example
 
 ```bash
-$ curl -n -X DELETE http://coinnow.local/v1/users/$ID \
+$ curl -n -X DELETE http://artie.local/v1/users/$ID \
   -d '{
 }' \
   -H "Content-Type: application/json"
@@ -1067,7 +1054,7 @@ GET /v1/users/{user_id}/following
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/following
+$ curl -n http://artie.local/v1/users/$USER_ID/following
  -G \
   -d limit=10
 ```
@@ -1084,8 +1071,7 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "fullname": "Bob Marley",
-      "account_name": "bob",
+      "name": "Bob Tarou",
       "image_data": "example",
       "total_like_count": 123,
       "following_count": 10,
@@ -1120,7 +1106,7 @@ GET /v1/users/{user_id}/followers
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/followers
+$ curl -n http://artie.local/v1/users/$USER_ID/followers
  -G \
   -d limit=10
 ```
@@ -1137,8 +1123,7 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "fullname": "Bob Marley",
-      "account_name": "bob",
+      "name": "Bob Tarou",
       "image_data": "example",
       "total_like_count": 123,
       "following_count": 10,
@@ -1180,7 +1165,7 @@ GET /v1/users/{user_id}/hashtags/watching
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/hashtags/watching
+$ curl -n http://artie.local/v1/users/$USER_ID/hashtags/watching
  -G \
   -d limit=10
 ```
@@ -1233,7 +1218,7 @@ GET /v1/users/{user_id}/reactions
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/reactions
+$ curl -n http://artie.local/v1/users/$USER_ID/reactions
  -G \
   -d limit=10
 ```
@@ -1253,17 +1238,16 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "fullname": "Bob Marley",
-        "account_name": "bob",
+        "name": "Bob Tarou",
         "image_data": "example",
         "total_like_count": 123,
         "following_count": 10,
         "followers_count": 30,
         "evaluation_point": 2.5
       },
-      "post_at": "2015-01-01T12:00:00Z",
+      "posted_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
-      "evaluation_point": 2.4
+      "rating": 2.4
     }
   ],
   "paging": {
@@ -1300,7 +1284,7 @@ GET /v1/users/{user_id}/reviews
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/reviews
+$ curl -n http://artie.local/v1/users/$USER_ID/reviews
  -G \
   -d limit=10
 ```
@@ -1320,17 +1304,16 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "fullname": "Bob Marley",
-        "account_name": "bob",
+        "name": "Bob Tarou",
         "image_data": "example",
         "total_like_count": 123,
         "following_count": 10,
         "followers_count": 30,
         "evaluation_point": 2.5
       },
-      "post_at": "2015-01-01T12:00:00Z",
+      "posted_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
-      "evaluation_point": 2.4
+      "rating": 2.4
     }
   ],
   "paging": {
@@ -1360,7 +1343,7 @@ GET /v1/users/search
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/search
+$ curl -n http://artie.local/v1/users/search
 ```
 
 
@@ -1375,8 +1358,7 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "fullname": "Bob Marley",
-      "account_name": "bob",
+      "name": "Bob Tarou",
       "image_data": "example",
       "total_like_count": 123,
       "following_count": 10,
@@ -1411,7 +1393,7 @@ GET /v1/users/{user_id}/user_evaluation
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/user_evaluation
+$ curl -n http://artie.local/v1/users/$USER_ID/user_evaluation
 ```
 
 

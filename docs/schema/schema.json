@@ -530,17 +530,13 @@
           "schema": {
             "type": "object",
             "required": [
-              "fullname",
-              "account_name",
+              "name",
               "email",
               "password"
             ],
             "properties": {
-              "fullname": {
-                "$ref": "#/definitions/user/definitions/fullname"
-              },
-              "account_name": {
-                "$ref": "#/definitions/user/definitions/account_name"
+              "name": {
+                "$ref": "#/definitions/user/definitions/name"
               },
               "image_data": {
                 "$ref": "#/definitions/user/definitions/image_data"
@@ -566,17 +562,13 @@
           "schema": {
             "type": "object",
             "required": [
-              "fullname",
-              "account_name",
+              "name",
               "email",
               "password"
             ],
             "properties": {
-              "fullname": {
-                "$ref": "#/definitions/user/definitions/fullname"
-              },
-              "account_name": {
-                "$ref": "#/definitions/user/definitions/account_name"
+              "name": {
+                "$ref": "#/definitions/user/definitions/name"
               },
               "image_data": {
                 "$ref": "#/definitions/user/definitions/image_data"
@@ -905,6 +897,16 @@
           "type": "string",
           "example": "https://github.com/."
         },
+        "image_url": {
+          "description": "article's original image url",
+          "type": "string",
+          "example": "https://hogehoge.png"
+        },
+        "title": {
+          "description": "article's original title",
+          "type": "string",
+          "example": "Github"
+        },
         "published_at": {
           "description": "datetime when this article was articleed.",
           "type": "string",
@@ -925,6 +927,8 @@
           "required": [
             "id",
             "url",
+            "image_url",
+            "title",
             "published_at",
             "reviews_count"
           ],
@@ -934,6 +938,12 @@
             },
             "url": {
               "$ref": "#/definitions/article/definitions/url"
+            },
+            "image_url": {
+              "$ref": "#/definitions/article/definitions/image_url"
+            },
+            "title": {
+              "$ref": "#/definitions/article/definitions/title"
             },
             "published_at": {
               "$ref": "#/definitions/article/definitions/published_at"
@@ -1148,7 +1158,7 @@
           "type": "string",
           "example": "Pig Coin is awesome."
         },
-        "post_at": {
+        "posted_at": {
           "description": "datetime when this review was posted.",
           "type": "string",
           "format": "date-time"
@@ -1158,7 +1168,7 @@
           "type": "integer",
           "example": 100
         },
-        "evaluation_point": {
+        "rating": {
           "description": "evaluation",
           "type": "string",
           "example": 2.4
@@ -1169,9 +1179,9 @@
             "id",
             "text",
             "user",
-            "post_at",
+            "posted_at",
             "likes_count",
-            "evaluation_point"
+            "rating"
           ],
           "properties": {
             "id": {
@@ -1183,14 +1193,14 @@
             "user": {
               "$ref": "#/definitions/user/definitions/user"
             },
-            "post_at": {
-              "$ref": "#/definitions/review/definitions/post_at"
+            "posted_at": {
+              "$ref": "#/definitions/review/definitions/posted_at"
             },
             "likes_count": {
               "$ref": "#/definitions/review/definitions/likes_count"
             },
-            "evaluation_point": {
-              "$ref": "#/definitions/review/definitions/evaluation_point"
+            "rating": {
+              "$ref": "#/definitions/review/definitions/rating"
             }
           }
         },
@@ -1233,15 +1243,10 @@
           "example": 1,
           "readOnly": true
         },
-        "fullname": {
+        "name": {
           "description": "full name of user",
           "type": "string",
-          "example": "Bob Marley"
-        },
-        "account_name": {
-          "description": "display_name of user",
-          "type": "string",
-          "example": "bob"
+          "example": "Bob Tarou"
         },
         "image_data": {
           "description": "user's icon",
@@ -1282,19 +1287,15 @@
           "type": "object",
           "required": [
             "id",
-            "fullname",
-            "account_name",
+            "name",
             "image_data"
           ],
           "properties": {
             "id": {
               "$ref": "#/definitions/user/definitions/id"
             },
-            "fullname": {
-              "$ref": "#/definitions/user/definitions/fullname"
-            },
-            "account_name": {
-              "$ref": "#/definitions/user/definitions/account_name"
+            "name": {
+              "$ref": "#/definitions/user/definitions/name"
             },
             "image_data": {
               "$ref": "#/definitions/user/definitions/image_data"
@@ -1403,7 +1404,7 @@
   "id": "application",
   "links": [
     {
-      "href": "http://coinnow.local",
+      "href": "http://artie.local",
       "rel": "self"
     }
   ],

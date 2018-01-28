@@ -1,6 +1,7 @@
 class V1::ReviewsController < ApplicationController
   before_action :set_review, only: [:destroy]
   before_action :set_article, only: [:create]
+  before_action :authenticate_user!, only: [:create]
 
   def create
     begin

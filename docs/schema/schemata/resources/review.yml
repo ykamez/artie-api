@@ -16,7 +16,7 @@ definitions:
     description: review's text
     type: string
     example: "Pig Coin is awesome."
-  post_at:
+  posted_at:
     description: datetime when this review was posted.
     type: string
     format: date-time
@@ -24,7 +24,7 @@ definitions:
     description: review likes count
     type: integer
     example: 100
-  evaluation_point:
+  rating:
     description: evaluation
     type: string
     example: 2.4
@@ -35,9 +35,9 @@ definitions:
       - id
       - text
       - user
-      - post_at
+      - posted_at
       - likes_count
-      - evaluation_point
+      - rating
     properties:
       id:
         $ref: /schemata/review#/definitions/id
@@ -45,12 +45,12 @@ definitions:
         $ref: /schemata/review#/definitions/text
       user:
         $ref: /schemata/user#/definitions/user
-      post_at:
-        $ref: /schemata/review#/definitions/post_at
+      posted_at:
+        $ref: /schemata/review#/definitions/posted_at
       likes_count:
         $ref: /schemata/review#/definitions/likes_count
-      evaluation_point:
-        $ref: /schemata/review#/definitions/evaluation_point
+      rating:
+        $ref: /schemata/review#/definitions/rating
 
   review_page:
     type: object
