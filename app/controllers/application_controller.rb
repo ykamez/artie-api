@@ -8,10 +8,12 @@ class ApplicationController < ActionController::API
   # before_action :authenticate_user!
 
   private
-
+  # 参考: https://qiita.com/travelist/items/ec0b08a9a19cbe9ec78b
     def current_user
-      return unless session[:user_id]
-      @current_user ||= User.find(session[:user_id])
+      uid = request.headers['Uid']
+      token = request.headers['Access-Token']
+      client = request.headers['Client']
+      User.find_by_uid(uid)
     end
 
     def logged_in?
