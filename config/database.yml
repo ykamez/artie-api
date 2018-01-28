@@ -9,22 +9,25 @@
 # And be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.7/en/old-client.html
 #
-base: &base
+
+default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: <%= Settings.db.default.username %>
-  password: <%= Settings.db.default.password %>
-
-default: &default
-  <<: *base
-  host: <%= Settings.db.default.host %>
-  port: <%= Settings.db.default.port %>
 
 development:
   <<: *default
+  username: root
+  password:
   database: artie_development
 
 test:
   <<: *default
   database: artie_test
+
+production:
+  <<: *default
+  database: artie_production
+  username: artie
+  password: <%= ENV['ARTIE_DATABASE_PASSWORD'] %>
+  socket: /cloudsql/artie-server:asia-northeast1:artie-database
