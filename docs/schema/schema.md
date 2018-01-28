@@ -114,7 +114,7 @@ GET /v1/articles
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/articles
+$ curl -n http://artie.local/v1/articles
  -G \
   -d limit=10
 ```
@@ -159,7 +159,7 @@ GET /v1/articles/{id}
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/articles/$ID
+$ curl -n http://artie.local/v1/articles/$ID
 ```
 
 
@@ -200,7 +200,7 @@ GET /v1/articles/{id}/reviews
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/articles/$ID/reviews
+$ curl -n http://artie.local/v1/articles/$ID/reviews
  -G \
   -d limit=10
 ```
@@ -261,7 +261,7 @@ POST /v1/articles
 #### Curl Example
 
 ```bash
-$ curl -n -X POST http://coinnow.local/v1/articles \
+$ curl -n -X POST http://artie.local/v1/articles \
   -d '{
   "url": "https://github.com/."
 }' \
@@ -306,7 +306,7 @@ DELETE /v1/articles/{id}
 #### Curl Example
 
 ```bash
-$ curl -n -X DELETE http://coinnow.local/v1/articles/$ID \
+$ curl -n -X DELETE http://artie.local/v1/articles/$ID \
   -d '{
 }' \
   -H "Content-Type: application/json"
@@ -346,7 +346,7 @@ GET /v1/hashtags
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/hashtags
+$ curl -n http://artie.local/v1/hashtags
  -G \
   -d limit=10
 ```
@@ -393,7 +393,7 @@ GET /v1/hashtags/{hashtag_id}/reviews
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/hashtags/$HASHTAG_ID/reviews
+$ curl -n http://artie.local/v1/hashtags/$HASHTAG_ID/reviews
  -G \
   -d limit=10
 ```
@@ -452,7 +452,7 @@ GET /v1/hashtags/trends
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/hashtags/trends
+$ curl -n http://artie.local/v1/hashtags/trends
 ```
 
 
@@ -510,7 +510,7 @@ POST /v1/articles/{id}/reviews
 #### Curl Example
 
 ```bash
-$ curl -n -X POST http://coinnow.local/v1/articles/$ID/reviews \
+$ curl -n -X POST http://artie.local/v1/articles/$ID/reviews \
   -d '{
   "text": "Pig Coin is awesome.",
   "user_id": 1234,
@@ -557,7 +557,7 @@ DELETE /v1/reviews/{review_id}
 #### Curl Example
 
 ```bash
-$ curl -n -X DELETE http://coinnow.local/v1/reviews/$REVIEW_ID \
+$ curl -n -X DELETE http://artie.local/v1/reviews/$REVIEW_ID \
   -d '{
 }' \
   -H "Content-Type: application/json"
@@ -590,7 +590,7 @@ POST /v1/reviews/{review_id}/like
 #### Curl Example
 
 ```bash
-$ curl -n -X POST http://coinnow.local/v1/reviews/$REVIEW_ID/like \
+$ curl -n -X POST http://artie.local/v1/reviews/$REVIEW_ID/like \
   -H "Content-Type: application/json"
 ```
 
@@ -632,7 +632,7 @@ DELETE /v1/reviews/{review_id}/like
 #### Curl Example
 
 ```bash
-$ curl -n -X DELETE http://coinnow.local/v1/reviews/$REVIEW_ID/like \
+$ curl -n -X DELETE http://artie.local/v1/reviews/$REVIEW_ID/like \
   -H "Content-Type: application/json"
 ```
 
@@ -681,7 +681,7 @@ GET /v1/reviews/search_result
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/reviews/search_result
+$ curl -n http://artie.local/v1/reviews/search_result
 ```
 
 
@@ -738,7 +738,7 @@ GET /v1/search
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/search
+$ curl -n http://artie.local/v1/search
 ```
 
 
@@ -789,7 +789,7 @@ GET /v1/users
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users
+$ curl -n http://artie.local/v1/users
  -G \
   -d 
 ```
@@ -834,7 +834,7 @@ GET /v1/users/{id}
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$ID
+$ curl -n http://artie.local/v1/users/$ID
 ```
 
 
@@ -868,7 +868,7 @@ GET /v1/users/me
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/me
+$ curl -n http://artie.local/v1/users/me
 ```
 
 
@@ -917,7 +917,7 @@ POST /v1/users/
 #### Curl Example
 
 ```bash
-$ curl -n -X POST http://coinnow.local/v1/users/ \
+$ curl -n -X POST http://artie.local/v1/users/ \
   -d '{
   "name": "Bob Tarou",
   "image_data": "example",
@@ -973,7 +973,7 @@ PATCH /v1/users/{id}
 #### Curl Example
 
 ```bash
-$ curl -n -X PATCH http://coinnow.local/v1/users/$ID \
+$ curl -n -X PATCH http://artie.local/v1/users/$ID \
   -d '{
   "name": "Bob Tarou",
   "image_data": "example",
@@ -1014,7 +1014,7 @@ DELETE /v1/users/{id}
 #### Curl Example
 
 ```bash
-$ curl -n -X DELETE http://coinnow.local/v1/users/$ID \
+$ curl -n -X DELETE http://artie.local/v1/users/$ID \
   -d '{
 }' \
   -H "Content-Type: application/json"
@@ -1054,7 +1054,7 @@ GET /v1/users/{user_id}/following
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/following
+$ curl -n http://artie.local/v1/users/$USER_ID/following
  -G \
   -d limit=10
 ```
@@ -1106,7 +1106,7 @@ GET /v1/users/{user_id}/followers
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/followers
+$ curl -n http://artie.local/v1/users/$USER_ID/followers
  -G \
   -d limit=10
 ```
@@ -1165,7 +1165,7 @@ GET /v1/users/{user_id}/hashtags/watching
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/hashtags/watching
+$ curl -n http://artie.local/v1/users/$USER_ID/hashtags/watching
  -G \
   -d limit=10
 ```
@@ -1218,7 +1218,7 @@ GET /v1/users/{user_id}/reactions
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/reactions
+$ curl -n http://artie.local/v1/users/$USER_ID/reactions
  -G \
   -d limit=10
 ```
@@ -1284,7 +1284,7 @@ GET /v1/users/{user_id}/reviews
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/reviews
+$ curl -n http://artie.local/v1/users/$USER_ID/reviews
  -G \
   -d limit=10
 ```
@@ -1343,7 +1343,7 @@ GET /v1/users/search
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/search
+$ curl -n http://artie.local/v1/users/search
 ```
 
 
@@ -1393,7 +1393,7 @@ GET /v1/users/{user_id}/user_evaluation
 #### Curl Example
 
 ```bash
-$ curl -n http://coinnow.local/v1/users/$USER_ID/user_evaluation
+$ curl -n http://artie.local/v1/users/$USER_ID/user_evaluation
 ```
 
 
