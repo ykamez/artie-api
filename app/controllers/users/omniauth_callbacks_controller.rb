@@ -28,8 +28,6 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
     #  @resource.skip_confirmation!
     # end
 
-    # ここについて調べる。
-
     @resource.skip_confirmation!
     sign_in(:user, @resource, store: false, bypass: false)
 
@@ -58,7 +56,6 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
       end
 
       # sync user info with provider, update/generate auth token
-      # this cause error.
       assign_provider_attrs(@resource, auth_hash.with_indifferent_access)
 
       # assign any additional (whitelisted) attributes
