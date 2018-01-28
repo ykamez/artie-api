@@ -51,7 +51,7 @@ end
 group :test do
   gem 'database_rewinder'
   gem 'timecop'
-  gem 'webmock'
+  # gem 'webmock'
 end
 
 # database
