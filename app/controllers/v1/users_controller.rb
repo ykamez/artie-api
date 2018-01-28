@@ -12,6 +12,7 @@ module V1
     end
 
     def me
+      user = User.find(current_user.id)
       render json: current_user, serializer: ::V1::UserSerializer
     end
 

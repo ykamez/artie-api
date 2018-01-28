@@ -36,6 +36,7 @@ create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=u
 
   ## User Info
   t.string   "fullname",       null: false
+
   t.string :image_data, :null => false, :default => ""
   t.string :email, :null => false
   t.integer "likes_count", null: false, default: 0

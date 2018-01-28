@@ -41,8 +41,7 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable
-  # :omniauthable
+         :confirmable, :omniauthable, omniauth_providers: %i[twitter]
   has_many :reviews, dependent: :destroy
   has_many :review_evaluations, dependent: :destroy
 
@@ -67,4 +66,34 @@ class User < ApplicationRecord
   def following?(other_user)
     following.include?(other_user)
   end
+
+  # def self.find_or_create_from_auth(auth)
+  #   provider = auth[:provider]
+  #   uid = auth[:uid]
+  #   nickname = auth[:info][:nickname]
+  #   image_url = auth[:info][:image]
+  #
+  #   user = find_by(uid: uid, provider: provider)
+  #   # TODO: Fix the way to set tokens.
+  #   user ||= User.create!(
+  #     uid:      uid,
+  #     account_name: nickname,
+  #     fullname: nickname,
+  #     image_data: image_url,
+  #     provider: provider,
+  #     email:    User.dummy_email(auth),
+  #     password: Devise.friendly_token[0, 20],
+  #   )
+  #   user
+  # end
+
+  def send_on_create_confirmation_instructions
+    # TODO: Fix it.
+  end
+
+  private
+
+    def self.dummy_email(auth)
+      "#{auth[:uid]}-#{auth[:provider]}@example.com"
+    end
 end
