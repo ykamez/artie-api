@@ -4,7 +4,7 @@ module V1
       before_action :set_article, only: [:index]
 
       def index
-        reviews = @article.reviews.where('created_at < ?', cursor).limit(limit)
+        reviews = @article.reviews.where('created_at < ?', cursor).where.not(text: nil).limit(limit)
         page = build_page(reviews)
         render json: page, serializer: ::V1::ReviewsPagingSerializer, include: '**'
       end

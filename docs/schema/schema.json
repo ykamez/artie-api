@@ -1158,7 +1158,7 @@
           "type": "string",
           "example": "Pig Coin is awesome."
         },
-        "post_at": {
+        "posted_at": {
           "description": "datetime when this review was posted.",
           "type": "string",
           "format": "date-time"
@@ -1168,7 +1168,7 @@
           "type": "integer",
           "example": 100
         },
-        "evaluation_point": {
+        "rating": {
           "description": "evaluation",
           "type": "string",
           "example": 2.4
@@ -1179,9 +1179,9 @@
             "id",
             "text",
             "user",
-            "post_at",
+            "posted_at",
             "likes_count",
-            "evaluation_point"
+            "rating"
           ],
           "properties": {
             "id": {
@@ -1193,14 +1193,14 @@
             "user": {
               "$ref": "#/definitions/user/definitions/user"
             },
-            "post_at": {
-              "$ref": "#/definitions/review/definitions/post_at"
+            "posted_at": {
+              "$ref": "#/definitions/review/definitions/posted_at"
             },
             "likes_count": {
               "$ref": "#/definitions/review/definitions/likes_count"
             },
-            "evaluation_point": {
-              "$ref": "#/definitions/review/definitions/evaluation_point"
+            "rating": {
+              "$ref": "#/definitions/review/definitions/rating"
             }
           }
         },
