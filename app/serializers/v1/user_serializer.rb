@@ -1,6 +1,6 @@
 module V1
   class UserSerializer < ActiveModel::Serializer
-    attributes :id, :fullname, :image_url, :total_likes_count, :followings_count, :followers_count, :evaluation_point
+    attributes :id, :full_name, :image_url, :total_likes_count, :followings_count, :followers_count, :evaluation_point
 
     def total_likes_count
       object.likes_count
@@ -12,6 +12,10 @@ module V1
 
     def image_url
       object.image_data
+    end
+
+    def full_name
+      object.fullname
     end
   end
 end

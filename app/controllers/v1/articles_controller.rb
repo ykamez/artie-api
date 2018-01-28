@@ -41,10 +41,10 @@ class V1::ArticlesController < ApplicationController
     end
 
     def comment
-      params[:comment]
+      params[:text]
     end
 
     def evaluation_point
-      (params[:evaluation_point] || '0.0').to_f
+      (params[:rating] || '0.0').to_f
     end
 end
