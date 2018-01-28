@@ -36,11 +36,11 @@ class V1::ReviewsController < ApplicationController
     end
 
     def comment
-      params[:comment]
+      params[:text]
     end
 
     def evaluation_point
-      params[:evaluation_point].to_f
+      params[:rating].to_f
     end
 
     def set_article

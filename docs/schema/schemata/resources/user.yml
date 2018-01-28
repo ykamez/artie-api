@@ -12,8 +12,8 @@ definitions:
     type: integer
     example: 1
     readOnly: true
-  fullname:
-    description: full fullname of user
+  full_name:
+    description: full full_name of user
     type: string
     example: 'Bob Tarou'
   image_url:
@@ -49,13 +49,13 @@ definitions:
     type: object
     required:
       - id
-      - fullname
+      - full_name
       - image_url
     properties:
       id:
         $ref: "/schemata/user#/definitions/id"
-      fullname:
-        $ref: "/schemata/user#/definitions/fullname"
+      full_name:
+        $ref: "/schemata/user#/definitions/full_name"
       image_url:
         $ref: "/schemata/user#/definitions/image_url"
       total_likes_count:

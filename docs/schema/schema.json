@@ -548,13 +548,13 @@
           "schema": {
             "type": "object",
             "required": [
-              "fullname",
+              "full_name",
               "email",
               "password"
             ],
             "properties": {
-              "fullname": {
-                "$ref": "#/definitions/user/definitions/fullname"
+              "full_name": {
+                "$ref": "#/definitions/user/definitions/full_name"
               },
               "image_url": {
                 "$ref": "#/definitions/user/definitions/image_url"
@@ -580,13 +580,13 @@
           "schema": {
             "type": "object",
             "required": [
-              "fullname",
+              "full_name",
               "email",
               "password"
             ],
             "properties": {
-              "fullname": {
-                "$ref": "#/definitions/user/definitions/fullname"
+              "full_name": {
+                "$ref": "#/definitions/user/definitions/full_name"
               },
               "image_url": {
                 "$ref": "#/definitions/user/definitions/image_url"
@@ -936,9 +936,9 @@
           "example": 100
         },
         "average_rating": {
-          "description": "evaluation",
+          "description": "average_rating",
           "type": "string",
-          "example": 2.4
+          "example": "5.0"
         },
         "categories": {
           "type": "array",
@@ -1280,8 +1280,8 @@
           "example": 1,
           "readOnly": true
         },
-        "fullname": {
-          "description": "full fullname of user",
+        "full_name": {
+          "description": "full full_name of user",
           "type": "string",
           "example": "Bob Tarou"
         },
@@ -1324,15 +1324,15 @@
           "type": "object",
           "required": [
             "id",
-            "fullname",
+            "full_name",
             "image_url"
           ],
           "properties": {
             "id": {
               "$ref": "#/definitions/user/definitions/id"
             },
-            "fullname": {
-              "$ref": "#/definitions/user/definitions/fullname"
+            "full_name": {
+              "$ref": "#/definitions/user/definitions/full_name"
             },
             "image_url": {
               "$ref": "#/definitions/user/definitions/image_url"

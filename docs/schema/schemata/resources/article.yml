@@ -33,9 +33,9 @@ definitions:
     type: integer
     example: 100
   average_rating:
-    description: evaluation
+    description: average_rating
     type: string
-    example: 2.4
+    example: '5.0'
   categories:
     type: array
     items:

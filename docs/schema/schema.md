@@ -136,7 +136,7 @@ HTTP/1.1 200 OK
       "title": "Github",
       "published_at": "2015-01-01T12:00:00Z",
       "reviews_count": 100,
-      "average_rating": 2.4,
+      "average_rating": "5.0",
       "categories": [
         {
           "id": 1,
@@ -183,7 +183,7 @@ HTTP/1.1 200 OK
   "title": "Github",
   "published_at": "2015-01-01T12:00:00Z",
   "reviews_count": 100,
-  "average_rating": 2.4,
+  "average_rating": "5.0",
   "categories": [
     {
       "id": 1,
@@ -233,7 +233,7 @@ HTTP/1.1 200 OK
         "text": "Pig Coin is awesome.",
         "user": {
           "id": 1,
-          "fullname": "Bob Tarou",
+          "full_name": "Bob Tarou",
           "image_url": "example",
           "total_likes_count": 123,
           "followings_count": 10,
@@ -303,7 +303,7 @@ HTTP/1.1 201 Created
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "fullname": "Bob Tarou",
+    "full_name": "Bob Tarou",
     "image_url": "example",
     "total_likes_count": 123,
     "followings_count": 10,
@@ -436,7 +436,7 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "fullname": "Bob Tarou",
+        "full_name": "Bob Tarou",
         "image_url": "example",
         "total_likes_count": 123,
         "followings_count": 10,
@@ -554,7 +554,7 @@ HTTP/1.1 201 Created
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "fullname": "Bob Tarou",
+    "full_name": "Bob Tarou",
     "image_url": "example",
     "total_likes_count": 123,
     "followings_count": 10,
@@ -630,7 +630,7 @@ HTTP/1.1 201 Created
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "fullname": "Bob Tarou",
+    "full_name": "Bob Tarou",
     "image_url": "example",
     "total_likes_count": 123,
     "followings_count": 10,
@@ -673,7 +673,7 @@ HTTP/1.1 200 OK
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "fullname": "Bob Tarou",
+    "full_name": "Bob Tarou",
     "image_url": "example",
     "total_likes_count": 123,
     "followings_count": 10,
@@ -724,7 +724,7 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "fullname": "Bob Tarou",
+        "full_name": "Bob Tarou",
         "image_url": "example",
         "total_likes_count": 123,
         "followings_count": 10,
@@ -779,7 +779,7 @@ HTTP/1.1 200 OK
   "users": [
     {
       "id": 1,
-      "fullname": "Bob Tarou",
+      "full_name": "Bob Tarou",
       "image_url": "example",
       "total_likes_count": 123,
       "followings_count": 10,
@@ -832,7 +832,7 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "fullname": "Bob Tarou",
+      "full_name": "Bob Tarou",
       "image_url": "example",
       "total_likes_count": 123,
       "followings_count": 10,
@@ -873,7 +873,7 @@ HTTP/1.1 200 OK
 ```json
 {
   "id": 1,
-  "fullname": "Bob Tarou",
+  "full_name": "Bob Tarou",
   "image_url": "example",
   "total_likes_count": 123,
   "followings_count": 10,
@@ -907,7 +907,7 @@ HTTP/1.1 200 OK
 ```json
 {
   "id": 1,
-  "fullname": "Bob Tarou",
+  "full_name": "Bob Tarou",
   "image_url": "example",
   "total_likes_count": 123,
   "followings_count": 10,
@@ -929,7 +929,7 @@ POST /v1/users/
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **email** | *email* | user email address | `"username@example.com"` |
-| **fullname** | *string* | full fullname of user | `"Bob Tarou"` |
+| **full_name** | *string* | full full_name of user | `"Bob Tarou"` |
 | **password** | *string* | user password | `"letmein1234"` |
 
 
@@ -945,7 +945,7 @@ POST /v1/users/
 ```bash
 $ curl -n -X POST http://artie.local/v1/users/ \
   -d '{
-  "fullname": "Bob Tarou",
+  "full_name": "Bob Tarou",
   "image_url": "example",
   "email": "username@example.com",
   "password": "letmein1234"
@@ -963,7 +963,7 @@ HTTP/1.1 201 Created
 ```json
 {
   "id": 1,
-  "fullname": "Bob Tarou",
+  "full_name": "Bob Tarou",
   "image_url": "example",
   "total_likes_count": 123,
   "followings_count": 10,
@@ -985,7 +985,7 @@ PATCH /v1/users/{id}
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **email** | *email* | user email address | `"username@example.com"` |
-| **fullname** | *string* | full fullname of user | `"Bob Tarou"` |
+| **full_name** | *string* | full full_name of user | `"Bob Tarou"` |
 | **password** | *string* | user password | `"letmein1234"` |
 
 
@@ -1001,7 +1001,7 @@ PATCH /v1/users/{id}
 ```bash
 $ curl -n -X PATCH http://artie.local/v1/users/$ID \
   -d '{
-  "fullname": "Bob Tarou",
+  "full_name": "Bob Tarou",
   "image_url": "example",
   "email": "username@example.com",
   "password": "letmein1234"
@@ -1019,7 +1019,7 @@ HTTP/1.1 200 OK
 ```json
 {
   "id": 1,
-  "fullname": "Bob Tarou",
+  "full_name": "Bob Tarou",
   "image_url": "example",
   "total_likes_count": 123,
   "followings_count": 10,
@@ -1097,7 +1097,7 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "fullname": "Bob Tarou",
+      "full_name": "Bob Tarou",
       "image_url": "example",
       "total_likes_count": 123,
       "followings_count": 10,
@@ -1149,7 +1149,7 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "fullname": "Bob Tarou",
+      "full_name": "Bob Tarou",
       "image_url": "example",
       "total_likes_count": 123,
       "followings_count": 10,
@@ -1264,7 +1264,7 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "fullname": "Bob Tarou",
+        "full_name": "Bob Tarou",
         "image_url": "example",
         "total_likes_count": 123,
         "followings_count": 10,
@@ -1331,7 +1331,7 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "fullname": "Bob Tarou",
+        "full_name": "Bob Tarou",
         "image_url": "example",
         "total_likes_count": 123,
         "followings_count": 10,
@@ -1386,7 +1386,7 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "fullname": "Bob Tarou",
+      "full_name": "Bob Tarou",
       "image_url": "example",
       "total_likes_count": 123,
       "followings_count": 10,
