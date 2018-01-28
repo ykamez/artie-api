@@ -3,7 +3,7 @@
  id: application
  links:
    -
-     href: http://coinnow.local
+     href: http://artie.local
      rel: self
  title: TODO app titele
  definitions:
