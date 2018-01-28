@@ -27,3 +27,4 @@ config/environments/*.local.yml
 /config/settings.yml
 cloud_sql_proxy
 artie-3ba5ef8535e0.json
+public/assets
