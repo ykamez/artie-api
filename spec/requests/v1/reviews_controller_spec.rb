@@ -22,7 +22,7 @@ RSpec.describe V1::ReviewsController, type: :request do
       @client = @auth_headers['client']
     end
     context 'with valid request' do
-      let(:params) { { comment: 'I agree.', evaluation_point: '1.5' } }
+      let(:params) { { text: 'I agree.', rating: '1.5' } }
       context 'with text' do
         before do
           user

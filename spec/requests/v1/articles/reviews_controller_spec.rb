@@ -23,7 +23,7 @@ RSpec.describe V1::Articles::ReviewsController, type: :request do
       @client = @auth_headers['client']
     end
     context 'with valid request' do
-      let(:params) { { comment: 'I agree.' } }
+      let(:params) { { text: 'I agree.' } }
       context 'when review exists' do
         before do
           review

@@ -11,8 +11,7 @@ class V1::ReviewSerializer < ActiveModel::Serializer
   end
 
   def is_liked
-    # FIXME:
-    # object.review_evaluations.where(user_id: @current_user.id).present?
-    false
+    current_user = scope
+    object.review_evaluations.where(user_id: current_user.id).present?
   end
 end
