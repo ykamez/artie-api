@@ -12,11 +12,11 @@ definitions:
     type: integer
     example: 1
     readOnly: true
-  name:
-    description: full name of user
+  fullname:
+    description: full fullname of user
     type: string
     example: 'Bob Tarou'
-  image_data:
+  image_url:
     description: user's icon
     type: string
     exmaple: 's3/aws/assets/hogehoge'
@@ -28,12 +28,12 @@ definitions:
     description: user password
     type: string
     example: 'letmein1234'
-  total_like_count:
+  total_likes_count:
     description: user total liked count
     type: integer
     example: 123
-  following_count:
-    description: user following_count
+  followings_count:
+    description: user followings_count
     type: integer
     example: 10
   followers_count:
@@ -49,19 +49,19 @@ definitions:
     type: object
     required:
       - id
-      - name
-      - image_data
+      - fullname
+      - image_url
     properties:
       id:
         $ref: "/schemata/user#/definitions/id"
-      name:
-        $ref: "/schemata/user#/definitions/name"
-      image_data:
-        $ref: "/schemata/user#/definitions/image_data"
-      total_like_count:
-        $ref: "/schemata/user#/definitions/total_like_count"
-      following_count:
-        $ref: "/schemata/user#/definitions/following_count"
+      fullname:
+        $ref: "/schemata/user#/definitions/fullname"
+      image_url:
+        $ref: "/schemata/user#/definitions/image_url"
+      total_likes_count:
+        $ref: "/schemata/user#/definitions/total_likes_count"
+      followings_count:
+        $ref: "/schemata/user#/definitions/followings_count"
       followers_count:
         $ref: "/schemata/user#/definitions/followers_count"
       evaluation_point:

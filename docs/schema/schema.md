@@ -136,7 +136,13 @@ HTTP/1.1 200 OK
       "title": "Github",
       "published_at": "2015-01-01T12:00:00Z",
       "reviews_count": 100,
-      "evaluation_point": 2.4
+      "average_rating": 2.4,
+      "categories": [
+        {
+          "id": 1,
+          "name": "BTC"
+        }
+      ]
     }
   ],
   "paging": {
@@ -177,7 +183,13 @@ HTTP/1.1 200 OK
   "title": "Github",
   "published_at": "2015-01-01T12:00:00Z",
   "reviews_count": 100,
-  "evaluation_point": 2.4
+  "average_rating": 2.4,
+  "categories": [
+    {
+      "id": 1,
+      "name": "BTC"
+    }
+  ]
 }
 ```
 
@@ -221,16 +233,17 @@ HTTP/1.1 200 OK
         "text": "Pig Coin is awesome.",
         "user": {
           "id": 1,
-          "name": "Bob Tarou",
-          "image_data": "example",
-          "total_like_count": 123,
-          "following_count": 10,
+          "fullname": "Bob Tarou",
+          "image_url": "example",
+          "total_likes_count": 123,
+          "followings_count": 10,
           "followers_count": 30,
           "evaluation_point": 2.5
         },
         "posted_at": "2015-01-01T12:00:00Z",
         "likes_count": 100,
-        "rating": 2.4
+        "rating": 2.4,
+        "is_liked": false
       }
     ],
     "paging": {
@@ -254,8 +267,15 @@ POST /v1/articles
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **url** | *string* | article's original url | `"https://github.com/."` |
+| **rating** | *string* | unique identifier of user | `"2.5"` |
+| **url** | *string* | article's url | `"xxx"` |
 
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **text** | *string* | article's review's text | `"nice"` |
 
 
 #### Curl Example
@@ -263,7 +283,9 @@ POST /v1/articles
 ```bash
 $ curl -n -X POST http://artie.local/v1/articles \
   -d '{
-  "url": "https://github.com/."
+  "url": "xxx",
+  "text": "nice",
+  "rating": "2.5"
 }' \
   -H "Content-Type: application/json"
 ```
@@ -281,16 +303,17 @@ HTTP/1.1 201 Created
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "name": "Bob Tarou",
-    "image_data": "example",
-    "total_like_count": 123,
-    "following_count": 10,
+    "fullname": "Bob Tarou",
+    "image_url": "example",
+    "total_likes_count": 123,
+    "followings_count": 10,
     "followers_count": 30,
     "evaluation_point": 2.5
   },
   "posted_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
-  "rating": 2.4
+  "rating": 2.4,
+  "is_liked": false
 }
 ```
 
@@ -413,16 +436,17 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "name": "Bob Tarou",
-        "image_data": "example",
-        "total_like_count": 123,
-        "following_count": 10,
+        "fullname": "Bob Tarou",
+        "image_url": "example",
+        "total_likes_count": 123,
+        "followings_count": 10,
         "followers_count": 30,
         "evaluation_point": 2.5
       },
       "posted_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
-      "rating": 2.4
+      "rating": 2.4,
+      "is_liked": false
     }
   ],
   "paging": {
@@ -497,7 +521,6 @@ POST /v1/articles/{id}/reviews
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **text** | *string* | review's text | `"Pig Coin is awesome."` |
-| **user_id** | *integer* | unique identifier of user | `1234` |
 
 
 #### Optional Parameters
@@ -513,7 +536,6 @@ POST /v1/articles/{id}/reviews
 $ curl -n -X POST http://artie.local/v1/articles/$ID/reviews \
   -d '{
   "text": "Pig Coin is awesome.",
-  "user_id": 1234,
   "evaluation_point": 2.4
 }' \
   -H "Content-Type: application/json"
@@ -532,16 +554,17 @@ HTTP/1.1 201 Created
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "name": "Bob Tarou",
-    "image_data": "example",
-    "total_like_count": 123,
-    "following_count": 10,
+    "fullname": "Bob Tarou",
+    "image_url": "example",
+    "total_likes_count": 123,
+    "followings_count": 10,
     "followers_count": 30,
     "evaluation_point": 2.5
   },
   "posted_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
-  "rating": 2.4
+  "rating": 2.4,
+  "is_liked": false
 }
 ```
 
@@ -607,16 +630,17 @@ HTTP/1.1 201 Created
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "name": "Bob Tarou",
-    "image_data": "example",
-    "total_like_count": 123,
-    "following_count": 10,
+    "fullname": "Bob Tarou",
+    "image_url": "example",
+    "total_likes_count": 123,
+    "followings_count": 10,
     "followers_count": 30,
     "evaluation_point": 2.5
   },
   "posted_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
-  "rating": 2.4
+  "rating": 2.4,
+  "is_liked": false
 }
 ```
 
@@ -649,16 +673,17 @@ HTTP/1.1 200 OK
   "text": "Pig Coin is awesome.",
   "user": {
     "id": 1,
-    "name": "Bob Tarou",
-    "image_data": "example",
-    "total_like_count": 123,
-    "following_count": 10,
+    "fullname": "Bob Tarou",
+    "image_url": "example",
+    "total_likes_count": 123,
+    "followings_count": 10,
     "followers_count": 30,
     "evaluation_point": 2.5
   },
   "posted_at": "2015-01-01T12:00:00Z",
   "likes_count": 100,
-  "rating": 2.4
+  "rating": 2.4,
+  "is_liked": false
 }
 ```
 
@@ -699,16 +724,17 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "name": "Bob Tarou",
-        "image_data": "example",
-        "total_like_count": 123,
-        "following_count": 10,
+        "fullname": "Bob Tarou",
+        "image_url": "example",
+        "total_likes_count": 123,
+        "followings_count": 10,
         "followers_count": 30,
         "evaluation_point": 2.5
       },
       "posted_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
-      "rating": 2.4
+      "rating": 2.4,
+      "is_liked": false
     }
   ],
   "paging": {
@@ -753,10 +779,10 @@ HTTP/1.1 200 OK
   "users": [
     {
       "id": 1,
-      "name": "Bob Tarou",
-      "image_data": "example",
-      "total_like_count": 123,
-      "following_count": 10,
+      "fullname": "Bob Tarou",
+      "image_url": "example",
+      "total_likes_count": 123,
+      "followings_count": 10,
       "followers_count": 30,
       "evaluation_point": 2.5
     }
@@ -806,10 +832,10 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "name": "Bob Tarou",
-      "image_data": "example",
-      "total_like_count": 123,
-      "following_count": 10,
+      "fullname": "Bob Tarou",
+      "image_url": "example",
+      "total_likes_count": 123,
+      "followings_count": 10,
       "followers_count": 30,
       "evaluation_point": 2.5
     }
@@ -847,10 +873,10 @@ HTTP/1.1 200 OK
 ```json
 {
   "id": 1,
-  "name": "Bob Tarou",
-  "image_data": "example",
-  "total_like_count": 123,
-  "following_count": 10,
+  "fullname": "Bob Tarou",
+  "image_url": "example",
+  "total_likes_count": 123,
+  "followings_count": 10,
   "followers_count": 30,
   "evaluation_point": 2.5
 }
@@ -881,10 +907,10 @@ HTTP/1.1 200 OK
 ```json
 {
   "id": 1,
-  "name": "Bob Tarou",
-  "image_data": "example",
-  "total_like_count": 123,
-  "following_count": 10,
+  "fullname": "Bob Tarou",
+  "image_url": "example",
+  "total_likes_count": 123,
+  "followings_count": 10,
   "followers_count": 30,
   "evaluation_point": 2.5
 }
@@ -903,7 +929,7 @@ POST /v1/users/
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **email** | *email* | user email address | `"username@example.com"` |
-| **name** | *string* | full name of user | `"Bob Tarou"` |
+| **fullname** | *string* | full fullname of user | `"Bob Tarou"` |
 | **password** | *string* | user password | `"letmein1234"` |
 
 
@@ -911,7 +937,7 @@ POST /v1/users/
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **image_data** | *string* | user's icon | `"example"` |
+| **image_url** | *string* | user's icon | `"example"` |
 
 
 #### Curl Example
@@ -919,8 +945,8 @@ POST /v1/users/
 ```bash
 $ curl -n -X POST http://artie.local/v1/users/ \
   -d '{
-  "name": "Bob Tarou",
-  "image_data": "example",
+  "fullname": "Bob Tarou",
+  "image_url": "example",
   "email": "username@example.com",
   "password": "letmein1234"
 }' \
@@ -937,10 +963,10 @@ HTTP/1.1 201 Created
 ```json
 {
   "id": 1,
-  "name": "Bob Tarou",
-  "image_data": "example",
-  "total_like_count": 123,
-  "following_count": 10,
+  "fullname": "Bob Tarou",
+  "image_url": "example",
+  "total_likes_count": 123,
+  "followings_count": 10,
   "followers_count": 30,
   "evaluation_point": 2.5
 }
@@ -959,7 +985,7 @@ PATCH /v1/users/{id}
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
 | **email** | *email* | user email address | `"username@example.com"` |
-| **name** | *string* | full name of user | `"Bob Tarou"` |
+| **fullname** | *string* | full fullname of user | `"Bob Tarou"` |
 | **password** | *string* | user password | `"letmein1234"` |
 
 
@@ -967,7 +993,7 @@ PATCH /v1/users/{id}
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **image_data** | *string* | user's icon | `"example"` |
+| **image_url** | *string* | user's icon | `"example"` |
 
 
 #### Curl Example
@@ -975,8 +1001,8 @@ PATCH /v1/users/{id}
 ```bash
 $ curl -n -X PATCH http://artie.local/v1/users/$ID \
   -d '{
-  "name": "Bob Tarou",
-  "image_data": "example",
+  "fullname": "Bob Tarou",
+  "image_url": "example",
   "email": "username@example.com",
   "password": "letmein1234"
 }' \
@@ -993,10 +1019,10 @@ HTTP/1.1 200 OK
 ```json
 {
   "id": 1,
-  "name": "Bob Tarou",
-  "image_data": "example",
-  "total_like_count": 123,
-  "following_count": 10,
+  "fullname": "Bob Tarou",
+  "image_url": "example",
+  "total_likes_count": 123,
+  "followings_count": 10,
   "followers_count": 30,
   "evaluation_point": 2.5
 }
@@ -1071,10 +1097,10 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "name": "Bob Tarou",
-      "image_data": "example",
-      "total_like_count": 123,
-      "following_count": 10,
+      "fullname": "Bob Tarou",
+      "image_url": "example",
+      "total_likes_count": 123,
+      "followings_count": 10,
       "followers_count": 30,
       "evaluation_point": 2.5
     }
@@ -1123,10 +1149,10 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "name": "Bob Tarou",
-      "image_data": "example",
-      "total_like_count": 123,
-      "following_count": 10,
+      "fullname": "Bob Tarou",
+      "image_url": "example",
+      "total_likes_count": 123,
+      "followings_count": 10,
       "followers_count": 30,
       "evaluation_point": 2.5
     }
@@ -1238,16 +1264,17 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "name": "Bob Tarou",
-        "image_data": "example",
-        "total_like_count": 123,
-        "following_count": 10,
+        "fullname": "Bob Tarou",
+        "image_url": "example",
+        "total_likes_count": 123,
+        "followings_count": 10,
         "followers_count": 30,
         "evaluation_point": 2.5
       },
       "posted_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
-      "rating": 2.4
+      "rating": 2.4,
+      "is_liked": false
     }
   ],
   "paging": {
@@ -1304,16 +1331,17 @@ HTTP/1.1 200 OK
       "text": "Pig Coin is awesome.",
       "user": {
         "id": 1,
-        "name": "Bob Tarou",
-        "image_data": "example",
-        "total_like_count": 123,
-        "following_count": 10,
+        "fullname": "Bob Tarou",
+        "image_url": "example",
+        "total_likes_count": 123,
+        "followings_count": 10,
         "followers_count": 30,
         "evaluation_point": 2.5
       },
       "posted_at": "2015-01-01T12:00:00Z",
       "likes_count": 100,
-      "rating": 2.4
+      "rating": 2.4,
+      "is_liked": false
     }
   ],
   "paging": {
@@ -1358,10 +1386,10 @@ HTTP/1.1 200 OK
   "data": [
     {
       "id": 1,
-      "name": "Bob Tarou",
-      "image_data": "example",
-      "total_like_count": 123,
-      "following_count": 10,
+      "fullname": "Bob Tarou",
+      "image_url": "example",
+      "total_likes_count": 123,
+      "followings_count": 10,
       "followers_count": 30,
       "evaluation_point": 2.5
     }

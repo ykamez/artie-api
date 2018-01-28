@@ -27,12 +27,9 @@ links:
     type: object
     required:
       - text
-      - user_id
     properties:
       text:
         $ref: /schemata/review#/definitions/text
-      user_id:
-        $ref: /schemata/v1_reviews#/definitions/user_id
       evaluation_point:
         $ref: /schemata/v1_reviews#/definitions/evaluation_point
   targetSchema:

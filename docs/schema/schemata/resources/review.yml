@@ -28,6 +28,10 @@ definitions:
     description: evaluation
     type: string
     example: 2.4
+  is_liked:
+    description: is_liked
+    type: boolean
+    example: false
 
   review:
     type: object
@@ -38,6 +42,7 @@ definitions:
       - posted_at
       - likes_count
       - rating
+      - is_liked
     properties:
       id:
         $ref: /schemata/review#/definitions/id
@@ -51,6 +56,8 @@ definitions:
         $ref: /schemata/review#/definitions/likes_count
       rating:
         $ref: /schemata/review#/definitions/rating
+      is_liked:
+        $ref: /schemata/review#/definitions/is_liked
 
   review_page:
     type: object

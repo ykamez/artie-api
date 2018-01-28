@@ -20,6 +20,6 @@
 #
 
 class ArticleHashTag < ApplicationRecord
-  belongs_to :review
+  belongs_to :article
   belongs_to :hash_tag
 end

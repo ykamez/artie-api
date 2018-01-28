@@ -12,6 +12,18 @@ definitions:
     type: integer
     example: 1234
     readOnly: true
+  url:
+    description: article's url
+    type: string
+    example: "xxx"
+  text:
+    description: article's review's text
+    type: string
+    example: "nice"
+  rating:
+    description: unique identifier of user
+    type: string
+    example: '2.5'
 
 links:
 - title: index
@@ -74,9 +86,14 @@ links:
     type: object
     required:
       - url
+      - rating
     properties:
       url:
-        $ref: /schemata/article#/definitions/url
+        $ref: /schemata/v1_articles#/definitions/url
+      text:
+        $ref: /schemata/v1_articles#/definitions/text
+      rating:
+        $ref: /schemata/v1_articles#/definitions/rating
   targetSchema:
     $ref: /schemata/review#/definitions/review
 

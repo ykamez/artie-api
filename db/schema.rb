@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_180_128_121_222) do
+ActiveRecord::Schema.define(version: 20_180_128_144_431) do
+  create_table 'article_hash_tags', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+    t.bigint 'article_id', null: false
+    t.bigint 'hash_tag_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['article_id'], name: 'index_article_hash_tags_on_article_id'
+    t.index ['hash_tag_id'], name: 'index_article_hash_tags_on_hash_tag_id'
+  end
+
   create_table 'articles', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.string 'url', null: false
     t.string 'image_url', null: false
@@ -20,6 +29,13 @@ ActiveRecord::Schema.define(version: 20_180_128_121_222) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['url'], name: 'index_articles_on_url', unique: true
+  end
+
+  create_table 'hash_tags', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+    t.string 'name', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['name'], name: 'index_hash_tags_evaluations_on_name', unique: true
   end
 
   create_table 'relationships', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
@@ -84,6 +100,8 @@ ActiveRecord::Schema.define(version: 20_180_128_121_222) do
     t.index ['uid', 'provider'], name: 'index_users_on_uid_and_provider', unique: true
   end
 
+  add_foreign_key 'article_hash_tags', 'articles'
+  add_foreign_key 'article_hash_tags', 'hash_tags'
   add_foreign_key 'review_evaluations', 'reviews'
   add_foreign_key 'review_evaluations', 'users'
   add_foreign_key 'reviews', 'articles'

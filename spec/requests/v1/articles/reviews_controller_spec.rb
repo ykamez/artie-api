@@ -7,13 +7,21 @@ RSpec.describe V1::Articles::ReviewsController, type: :request do
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'Uid': @uid,
+        'Access-Token': @token,
+        'Client': @client
       }
     end
     let(:url) { "/v1/articles/#{article.id}/reviews" }
     let(:user) { create(:user) }
     let(:article) { create(:article) }
     let(:review) { create(:review, user_id: user.id, article_id: article.id) }
-
+    before do
+      @auth_headers = user.create_new_auth_token
+      @token = @auth_headers['access-token']
+      @uid = @auth_headers['uid']
+      @client = @auth_headers['client']
+    end
     context 'with valid request' do
       let(:params) { { comment: 'I agree.' } }
       context 'when review exists' do
