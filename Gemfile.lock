@@ -85,7 +85,6 @@ GEM
       activesupport (>= 3.0)
       deep_merge (~> 1.1.1)
       dry-validation (>= 0.10.4)
-    connection_pool (2.2.1)
     counter_culture (1.9.0)
       activerecord (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -107,7 +106,6 @@ GEM
     diffy (3.2.0)
     domain_name (0.5.20170404)
       unf (>= 0.0.5, < 1.0.0)
-    down (4.1.1)
     dry-configurable (0.7.0)
       concurrent-ruby (~> 1.0)
     dry-container (0.6.0)
@@ -306,8 +304,6 @@ GEM
     public_suffix (3.0.1)
     rack (2.0.3)
     rack-cors (1.0.2)
-    rack-protection (2.0.0)
-      rack
     rack-test (0.8.2)
       rack (>= 1.0, < 3)
     rails (5.1.4)
@@ -403,13 +399,6 @@ GEM
     sawyer (0.8.1)
       addressable (>= 2.3.5, < 2.6)
       faraday (~> 0.8, < 1.0)
-    shrine (2.8.0)
-      down (~> 4.1)
-    sidekiq (4.2.10)
-      concurrent-ruby (~> 1.0)
-      connection_pool (~> 2.2, >= 2.2.0)
-      rack-protection (>= 1.5.0)
-      redis (~> 3.2, >= 3.2.1)
     signet (0.8.1)
       addressable (~> 2.3)
       faraday (~> 0.9)
@@ -499,8 +488,6 @@ DEPENDENCIES
   rubocop-select
   saddler
   saddler-reporter-github
-  shrine
-  sidekiq (~> 4)
   spring
   spring-watcher-listen (~> 2.0.0)
   timecop
