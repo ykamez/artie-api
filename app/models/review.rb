@@ -36,6 +36,10 @@ class Review < ApplicationRecord
 
   validate :rating_validator
 
+  after_save do
+    article.update_average_rating!
+  end
+
   def rating_validator
     # TODO: 小数点以下の桁数に関するバリデーションを追加。
     errors.add(:evaluation_point, ' is invalid range.') if evaluation_point < MIN_RATING || evaluation_point > MAX_RATING
