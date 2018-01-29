@@ -75,15 +75,13 @@ gem 'faraday'
 gem 'faraday_middleware'
 gem 'redis', '~> 3'
 gem 'redis-namespace'
-gem 'shrine'
-gem 'sidekiq', '~> 4'
 
 # devise
 gem 'devise'
 gem 'devise_token_auth'
 gem 'omniauth'
-gem 'omniauth-twitter'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 # クロスドメイン対策
 gem 'rack-cors'
@@ -95,4 +93,4 @@ gem 'counter_culture'
 gem 'metainspector'
 
 # Added at 2018-01-28 19:24:43 +0900 by yogoken:
-gem "appengine", "~> 0.4.5"
+gem 'appengine', '~> 0.4.5'
