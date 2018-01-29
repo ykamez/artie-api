@@ -35,7 +35,11 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
       # update_token_authをつけることでレスポンスヘッダーに認証情報を付与できる。
       update_auth_header
       yield @resource if block_given?
-      render json: @resource, status: :ok
+
+      @data = @resource
+      html = File.open("app/views/devise_token_auth/omniauth_external_window.html.erb").read
+      template = ERB.new(html).result(binding)
+      render html: template.html_safe
     else
       render json: { message: 'failed to login' }, status: 500
     end
