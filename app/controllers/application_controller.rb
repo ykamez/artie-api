@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  force_ssl if: :ssl_configured?
   include ::Concerns::ErrorHandling
   include DeviseTokenAuth::Concerns::SetUserByToken
   include Concerns::Paging
@@ -27,9 +28,13 @@ class ApplicationController < ActionController::API
 
   private
 
-    # https://github.com/lynndylanhurley/devise_token_auth/issues/440
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:fullname, :image_data, :email, :password])
-      devise_parameter_sanitizer.permit(:account_update, keys: [:fullname, :image_data, :email, :password])
-    end
+  # https://github.com/lynndylanhurley/devise_token_auth/issues/440
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:fullname, :image_data, :email, :password])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:fullname, :image_data, :email, :password])
+  end
+
+  def ssl_configured?
+    Rails.env.production?
+  end
 end
