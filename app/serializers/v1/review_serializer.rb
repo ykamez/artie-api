@@ -12,6 +12,10 @@ class V1::ReviewSerializer < ActiveModel::Serializer
 
   def is_liked
     current_user = scope
-    object.review_evaluations.where(user_id: current_user.id).present?
+    if current_user
+      object.review_evaluations.where(user_id: current_user.id).present?
+    else
+      false
+    end
   end
 end
