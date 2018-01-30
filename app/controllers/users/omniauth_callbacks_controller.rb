@@ -36,6 +36,13 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
       update_auth_header
       yield @resource if block_given?
       @data = {
+        id: @resource.id,
+        full_name: @resource.fullname,
+        image_url: @resource.image_data,
+        total_likes_count: @resource.likes_count,
+        followings_count: @resource.followings_count,
+        followers_count: @resource.followers_count,
+        evaluation_point: @resource.evaluation_point,
         access_token: headers['access-token'],
         client: headers['client'],
         uid: headers['uid']
