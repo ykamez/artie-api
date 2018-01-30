@@ -15,8 +15,8 @@ describe V1::Reviews::ReactionsController, type: :request do
     let(:params){}
     let(:url) { "/v1/reviews/#{review.id}/like" }
     let(:user) { create(:user) }
+    let(:other_user) { create(:user) }
     let(:article) { create(:article) }
-    let(:review) { create(:review, user_id: user.id, article_id: article.id, evaluation_point: '1.5') }
 
     before do
       @auth_headers = user.create_new_auth_token
@@ -26,6 +26,8 @@ describe V1::Reviews::ReactionsController, type: :request do
     end
 
     context 'with valid request' do
+      let(:review) { create(:review, user_id: other_user.id, article_id: article.id, evaluation_point: '1.5') }
+
       it 'returns 200 response' do
         subject
         expect(response.status).to eq 200
@@ -34,6 +36,20 @@ describe V1::Reviews::ReactionsController, type: :request do
 
       it 'create a record' do
         expect { subject }.to change(ReviewEvaluation, :count).by(1)
+      end
+    end
+
+    context 'with invalid request' do
+      let(:review) { create(:review, user_id: user.id, article_id: article.id, evaluation_point: '1.5') }
+
+      it 'returns 400 response' do
+        subject
+        expect(response.status).to eq 400
+        assert_schema_conform
+      end
+
+      it 'not create a record' do
+        expect { subject }.to change(ReviewEvaluation, :count).by(0)
       end
     end
   end
@@ -52,8 +68,9 @@ describe V1::Reviews::ReactionsController, type: :request do
     let(:params){}
     let(:url) { "/v1/reviews/#{review.id}/like" }
     let(:user) { create(:user) }
+    let(:other_user) { create(:user) }
     let(:article) { create(:article) }
-    let(:review) { create(:review, user_id: user.id, article_id: article.id) }
+    let(:review) { create(:review, user_id: other_user.id, article_id: article.id) }
     let(:review_evaluation) { create(:review_evaluation, user_id: user.id, review_id: review.id) }
 
     before do

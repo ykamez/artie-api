@@ -12,6 +12,10 @@ module Concerns
         end
       end
 
+      rescue_from ActiveRecord::RecordInvalid do |e|
+        render status: 400, json: { errors: [{ message: e.message }] }
+      end
+
       rescue_from ActionController::BadRequest do |e|
         render status: 400, json: { errors: [{ message: e.message }] }
       end
