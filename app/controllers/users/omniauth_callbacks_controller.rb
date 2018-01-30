@@ -83,7 +83,7 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
       provider = auth[:provider]
       uid = auth[:uid]
       name = auth[:info][:name]
-      image_url = auth[:info][:image]
+      image_url = auth[:info][:image].to_s.sub('normal', 'bigger')
       user.assign_attributes({
         uid:      uid,
         fullname: name,
