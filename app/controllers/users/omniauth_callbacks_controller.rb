@@ -1,11 +1,11 @@
 class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksController
   # 　全体的にhttps://qiita.com/AQeNku/items/94485432184257799106を参考に実装中。
 
-  def twitter
-    auth = request.env['omniauth.auth']
-    user = User.find_or_create_from_auth(auth)
-    render json: user, serializer: ::V1::UserSerializer
-  end
+  # def twitter
+  #   auth = request.env['omniauth.auth']
+  #   user = User.find_or_create_from_auth(auth)
+  #   render json: user, serializer: ::V1::UserSerializer
+  # end
 
   # https://stackoverflow.com/questions/37225478/the-action-redirect-callbacks-could-not-be-found-for-usersomniauthcallbacksc
 
@@ -35,8 +35,11 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
       # update_token_authをつけることでレスポンスヘッダーに認証情報を付与できる。
       update_auth_header
       yield @resource if block_given?
-
-      @data = V1::UserSerializer.new(@resource)
+      @data = {
+        access_token: headers['access-token'],
+        client: headers['client'],
+        uid: headers['uid']
+      }
       html = File.open('app/views/devise_token_auth/omniauth_external_window.html.erb').read
       template = ERB.new(html).result(binding)
       render html: template.html_safe
@@ -72,11 +75,11 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
     def assign_provider_attrs(user, auth)
       provider = auth[:provider]
       uid = auth[:uid]
-      nickname = auth[:info][:nickname]
+      name = auth[:info][:name]
       image_url = auth[:info][:image]
       user.assign_attributes({
         uid:      uid,
-        fullname: nickname,
+        fullname: name,
         image_data: image_url,
         provider: provider,
         email:    User.dummy_email(auth),
