@@ -69,15 +69,20 @@ RSpec.describe V1::ArticlesController, type: :request do
     let(:meta_inspector_double) { double('Meta Inspector') }
     let(:images) { double('Meta Inspector respnse images') }
 
+    page_meta_info =
+      {
+        'og:title'            => 'An OG title',
+        'og:url'              => 'http://example.com/meta-tags',
+        'og:image'            => 'http://example.com/rock.jpg',
+      }
+
     before do
       @auth_headers = user.create_new_auth_token
       @token = @auth_headers['access-token']
       @uid = @auth_headers['uid']
       @client = @auth_headers['client']
       allow(MetaInspector).to receive(:new).and_return(meta_inspector_double)
-      allow(meta_inspector_double).to receive(:title).and_return('hogehoge')
-      allow(meta_inspector_double).to receive(:images).and_return(images)
-      allow(images).to receive(:best).and_return('fugafuga')
+      allow(meta_inspector_double).to receive(:meta).and_return(page_meta_info)
     end
 
     context 'with valid request' do
@@ -100,9 +105,8 @@ RSpec.describe V1::ArticlesController, type: :request do
       end
 
       context 'when not first pick' do
-        let(:params) { { url: 'xxx', text: 'I agree.', rating: '1.5' } }
-        let(:article) { create(:article, url: 'xxx') }
-
+        let(:params) { { url: 'http://example.com/meta-tags', text: 'I agree.', rating: '1.5' } }
+        let(:article) { create(:article, url: 'http://example.com/meta-tags') }
         before do
           user
           article

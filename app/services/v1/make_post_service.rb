@@ -14,12 +14,8 @@ module V1
 
     private
 
-      def find_article
-        Article.find_by(url: @original_url)
-      end
-
       def set_article
-        find_article || Article.create_article!(@original_url)
+        Article.find_or_create_article!(@original_url)
       end
   end
 end
