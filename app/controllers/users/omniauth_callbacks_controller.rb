@@ -40,7 +40,7 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
         full_name: @resource.fullname,
         image_url: @resource.image_data,
         total_likes_count: @resource.likes_count,
-        followings_count: @resource.followings_count,
+        followings_count: @resource.following_count,
         followers_count: @resource.followers_count,
         evaluation_point: @resource.evaluation_point,
         access_token: headers['access-token'],
