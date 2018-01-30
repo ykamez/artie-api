@@ -40,7 +40,6 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
         client: headers['client'],
         uid: headers['uid']
       }
-
       html = File.open('app/views/devise_token_auth/omniauth_external_window.html.erb').read
       template = ERB.new(html).result(binding)
       render html: template.html_safe
