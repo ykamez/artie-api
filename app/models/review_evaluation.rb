@@ -24,4 +24,9 @@ class ReviewEvaluation < ApplicationRecord
   belongs_to :review
   enum evaluation_type: { like: 0 }
   counter_culture :review, column_name: ->(model) { "#{model.evaluation_type}s_count" }
+  validate :self_evaluation_validator
+
+  def self_evaluation_validator
+    errors.add(:review_id, 'is yours.') if review.user_id == user_id
+  end
 end

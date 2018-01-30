@@ -15,8 +15,9 @@ describe V1::Users::ReactionsController, type: :request do
     let(:params){}
     let(:url) { "/v1/users/#{user.id}/reactions" }
     let(:user) { create(:user) }
+    let(:other_user) { create(:user) }
     let(:article) { create(:article) }
-    let(:review) { create(:review, user_id: user.id, article_id: article.id) }
+    let(:review) { create(:review, user_id: other_user.id, article_id: article.id) }
     let(:review_evaluation) { create(:review_evaluation, user_id: user.id, review_id: review.id) }
     before do
       @auth_headers = user.create_new_auth_token
