@@ -36,8 +36,8 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
       update_auth_header
       yield @resource if block_given?
 
-      @data = @resource
-      html = File.open("app/views/devise_token_auth/omniauth_external_window.html.erb").read
+      @data = V1::UserSerializer.new(@resource)
+      html = File.open('app/views/devise_token_auth/omniauth_external_window.html.erb').read
       template = ERB.new(html).result(binding)
       render html: template.html_safe
     else
