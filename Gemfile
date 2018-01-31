@@ -95,4 +95,4 @@ gem 'metainspector'
 # Added at 2018-01-28 19:24:43 +0900 by yogoken:
 gem 'appengine', '~> 0.4.5'
 
-gem 'dotenv'
+gem 'dotenv-rails'
