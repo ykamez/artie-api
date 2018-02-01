@@ -92,3 +92,6 @@ gem 'metainspector'
 gem 'appengine', '~> 0.4.5'
 
 gem 'dotenv-rails'
+
+# Admin
+gem 'rails_admin', '~> 1.2'
