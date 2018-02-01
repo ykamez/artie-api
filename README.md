@@ -16,25 +16,5 @@ v2.4.3
     4. Set api key in settings.yml.
 3. Run `bundle install  [--path vendor/bundle]`
 4. Run `rake db:create`
-5. Run `bundle exec rake ridgepole:apply`
+5. Run `bundle exec rake db:migrate`
 6. Run `./bin/rails s`
-7. Enjoy!
-
-
-## Important point
-
-### Database
-We don't user don't use `db:migrate` in this project.   
-We use ridgepole gem so when we change database follow the steps.
-
-1. Apply latest database schema
-    - Run `bundle exec rake ridgepole:apply`
-2. Change database
-    - use mysql client tool (eg. mysql CLI or Sequel Pro, etc...)
-3. Output database schema
-    - Don't change other column, we use your schema as correct schema.
-    - Run `bundle exec rake ridgepole:export`
-4. Commit `db/schemas` folder and `db/schema.rb`
-5. Create pull request.
-#### notice
-When you generate a new model, you run generation command with `--skip-migration` like `rails g model SomeNewModel --skip-migration`.

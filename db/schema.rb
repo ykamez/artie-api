@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_180_128_144_431) do
+ActiveRecord::Schema.define(version: 20_180_201_003_059) do
   create_table 'article_hash_tags', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.bigint 'article_id', null: false
     t.bigint 'hash_tag_id', null: false
@@ -68,6 +68,22 @@ ActiveRecord::Schema.define(version: 20_180_128_144_431) do
     t.index ['user_id', 'article_id'], name: 'index_reviews_on_user_id_and_article_id', unique: true
   end
 
+  create_table 'user_hash_tags', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+    t.bigint 'user_id', null: false
+    t.bigint 'hash_tag_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['hash_tag_id'], name: 'index_user_hash_tags_on_hash_tag_id'
+    t.index ['user_id'], name: 'index_user_hash_tags_on_user_id'
+  end
+
+  create_table 'user_hashtags', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+    t.bigint 'user_id', null: false
+    t.bigint 'hash_tag_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+  end
+
   create_table 'users', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.string 'provider', default: 'email', null: false
     t.string 'uid', default: '', null: false
@@ -106,4 +122,6 @@ ActiveRecord::Schema.define(version: 20_180_128_144_431) do
   add_foreign_key 'review_evaluations', 'users'
   add_foreign_key 'reviews', 'articles'
   add_foreign_key 'reviews', 'users'
+  add_foreign_key 'user_hash_tags', 'hash_tags'
+  add_foreign_key 'user_hash_tags', 'users'
 end

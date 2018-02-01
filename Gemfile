@@ -51,14 +51,11 @@ end
 group :test do
   gem 'database_rewinder'
   gem 'timecop'
-  # gem 'webmock'
 end
 
 # database
 gem 'activerecord-import'
 gem 'activerecord-refresh_connection'
-gem 'makara'
-gem 'ridgepole'
 
 # config
 gem 'config'
