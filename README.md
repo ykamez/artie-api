@@ -12,8 +12,7 @@ v2.4.3
     2. Configure DB settings and mailer settings on config/settings/development.local.yml
         - write your mysql root password
         - DB user's password must not be blank.
-    3. 'cp config/settings.yml config/settings.local.yml'
-    4. Set api key in settings.yml.
+    3. add `.env` file and write devise and twitter key.
 3. Run `bundle install  [--path vendor/bundle]`
 4. Run `rake db:create`
 5. Run `bundle exec rake db:migrate`
