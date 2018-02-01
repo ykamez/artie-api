@@ -77,7 +77,6 @@ gem 'redis-namespace'
 gem 'devise'
 gem 'devise_token_auth'
 gem 'omniauth'
-gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 
 # クロスドメイン対策
