@@ -41,7 +41,7 @@ class V1::ArticlesController < ApplicationController
     end
 
     def comment
-      params[:text]
+      params[:text] || ''
     end
 
     def evaluation_point

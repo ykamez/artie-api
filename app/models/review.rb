@@ -31,7 +31,6 @@ class Review < ApplicationRecord
   counter_culture :article
 
   has_many :review_evaluations, dependent: :destroy
-  validates :text, presence: true
   validates :evaluation_point, presence: true
 
   validate :rating_validator
