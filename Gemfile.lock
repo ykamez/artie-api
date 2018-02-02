@@ -349,6 +349,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails-i18n (5.0.4)
+      i18n (~> 0.7)
+      railties (~> 5.0)
     rails_admin (1.2.0)
       builder (~> 3.1)
       coffee-rails (~> 4.0)
@@ -526,6 +529,7 @@ DEPENDENCIES
   pry-byebug
   rack-cors
   rails (~> 5.1.0)
+  rails-i18n
   rails_admin (~> 1.2)
   redis (~> 3)
   redis-namespace
