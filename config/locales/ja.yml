@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      article: 記事
+      review: レビュー
+    attributes:
+      article:
+        url: URL
+        title: タイトル
+      review:
+        evaluation_point: オススメ度
+        text: コメント

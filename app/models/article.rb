@@ -36,8 +36,8 @@ class Article < ApplicationRecord
       title = page.meta['og:title'] || ''
       image_url = page.meta['og:image'] || ''
       find_by(url: original_url) || create!(title: title, image_url: image_url, url: original_url)
-    rescue MetaInspector::RequestError => e
-      raise ActionController::BadRequest, e.message
+    rescue MetaInspector::RequestError, MetaInspector::ParserError
+      raise ActionController::BadRequest, '正しいURLを入力してください。'
     end
   end
 end

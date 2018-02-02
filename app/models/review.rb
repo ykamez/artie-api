@@ -31,7 +31,6 @@ class Review < ApplicationRecord
   counter_culture :article
 
   has_many :review_evaluations, dependent: :destroy
-  validates :text, presence: true
   validates :evaluation_point, presence: true
 
   validate :rating_validator
@@ -42,6 +41,6 @@ class Review < ApplicationRecord
 
   def rating_validator
     # TODO: 小数点以下の桁数に関するバリデーションを追加。
-    errors.add(:evaluation_point, ' is invalid range.') if evaluation_point < MIN_RATING || evaluation_point > MAX_RATING
+    errors.add(:evaluation_point, ' を入力してください。') if evaluation_point < MIN_RATING || evaluation_point > MAX_RATING
   end
 end

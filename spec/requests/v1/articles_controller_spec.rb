@@ -87,20 +87,40 @@ RSpec.describe V1::ArticlesController, type: :request do
 
     context 'with valid request' do
       context 'when first pick' do
-        let(:params) { { url: 'xxx', text: 'I agree.', rating: '1.5' } }
-        before do
-          user
+        context 'with comment' do
+          let(:params) { { url: 'xxx', text: 'I agree.', rating: '1.5' } }
+          before do
+            user
+          end
+
+          it 'returns 200 response' do
+            subject
+            expect(response.status).to eq 200
+            assert_schema_conform
+          end
+
+          it 'create a record' do
+            expect { subject }.to change(Article, :count).by(1).
+                                    and change(Review, :count).by(1)
+          end
         end
 
-        it 'returns 200 response' do
-          subject
-          expect(response.status).to eq 200
-          assert_schema_conform
-        end
+        context 'without comment' do
+          let(:params) { { url: 'xxx', rating: '1.5' } }
+          before do
+            user
+          end
 
-        it 'create a record' do
-          expect { subject }.to change(Article, :count).by(1).
-                                  and change(Review, :count).by(1)
+          it 'returns 200 response' do
+            subject
+            expect(response.status).to eq 200
+            assert_schema_conform
+          end
+
+          it 'create a record' do
+            expect { subject }.to change(Article, :count).by(1).
+                                    and change(Review, :count).by(1)
+          end
         end
       end
 
