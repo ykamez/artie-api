@@ -7,7 +7,7 @@ class V1::ArticlesController < ApplicationController
   end
 
   def index
-    articles = Article.where('created_at < ?', cursor).limit(limit)
+    articles = Article.order(created_at: :desc).where('created_at < ?', cursor).limit(limit)
     page = build_page(articles)
     render json: page, serializer: ::V1::ArticlesPagingSerializer, include: '**'
   end
