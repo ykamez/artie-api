@@ -91,10 +91,6 @@ class User < ApplicationRecord
     # TODO: Fix it.
   end
 
-  def admin?
-    username.in? ENV['ADMIN_USERS'].split(/\s*,\s*/)
-  end
-
   private
 
     def self.dummy_email(auth)
