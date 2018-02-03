@@ -15,7 +15,9 @@ class V1::ArticlesController < ApplicationController
   def create
     begin
       post = V1::MakePostService.new(url, comment, current_user.id, evaluation_point).build!
-    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique => e
+    rescue ActiveRecord::RecordNotUnique => e
+      raise ActionController::BadRequest, 'レビューは一度しかできません。'
+    rescue ActiveRecord::RecordInvalid => e
       raise ActionController::BadRequest, e.message
     end
     render json: post, serializer: ::V1::ReviewSerializer
@@ -45,6 +47,6 @@ class V1::ArticlesController < ApplicationController
     end
 
     def evaluation_point
-      (params[:rating] || '0.0').to_f
+      params[:rating].to_f
     end
 end

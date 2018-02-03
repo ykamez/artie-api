@@ -31,9 +31,9 @@ class Review < ApplicationRecord
   counter_culture :article
 
   has_many :review_evaluations, dependent: :destroy
-  validates :evaluation_point, presence: true
-
   validate :rating_validator
+  validates :evaluation_point, presence: true
+  validates :user_id, uniqueness: { scope: :article_id }
 
   after_save do
     article.update_average_rating!

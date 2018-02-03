@@ -6,7 +6,9 @@ class V1::ReviewsController < ApplicationController
   def create
     begin
       review = @article.reviews.create!(text: comment, user_id: current_user.id, evaluation_point: evaluation_point)
-    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique => e
+    rescue ActiveRecord::RecordNotUnique => e
+      raise ActionController::BadRequest, 'レビューは一度しかできません。'
+    rescue ActiveRecord::RecordInvalid => e
       raise ActionController::BadRequest, e.message
     end
     render json: review, serializer: ::V1::ReviewSerializer
