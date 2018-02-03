@@ -1,5 +1,8 @@
 ja:
   activerecord:
+    errors:
+      messages:
+        record_invalid: "%{errors}"
     models:
       user: ユーザー
       article: 記事

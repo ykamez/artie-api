@@ -29,18 +29,17 @@ class Review < ApplicationRecord
   belongs_to :user
   belongs_to :article
   counter_culture :article
-
   has_many :review_evaluations, dependent: :destroy
   validate :rating_validator
-  validates :evaluation_point, presence: true
-  validates :user_id, uniqueness: { scope: :article_id }
 
   after_save do
     article.update_average_rating!
   end
 
   def rating_validator
-    # TODO: 小数点以下の桁数に関するバリデーションを追加。
-    errors.add(:evaluation_point, ' を入力してください。') if evaluation_point < MIN_RATING || evaluation_point > MAX_RATING
+    if evaluation_point.blank? || evaluation_point < MIN_RATING || evaluation_point > MAX_RATING
+      raise ActiveRecord::RecordNotUnique if Review.find_by(user_id: user_id, article_id: article_id).present?
+      errors[:base] << 'オススメ度を正しく入力してください。'
+    end
   end
 end
