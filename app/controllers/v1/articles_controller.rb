@@ -15,7 +15,7 @@ class V1::ArticlesController < ApplicationController
   def create
     begin
       post = V1::MakePostService.new(url, comment, current_user.id, evaluation_point).build!
-    rescue ActiveRecord::RecordNotUnique => e
+    rescue ActiveRecord::RecordNotUnique
       raise ActionController::BadRequest, 'レビューは一度しかできません。'
     rescue ActiveRecord::RecordInvalid => e
       raise ActionController::BadRequest, e.message
@@ -43,7 +43,9 @@ class V1::ArticlesController < ApplicationController
     end
 
     def comment
-      params[:text] || ''
+      comment = params[:text]
+      return nil if comment.blank?
+      comment
     end
 
     def evaluation_point
