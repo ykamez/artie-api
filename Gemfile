@@ -10,7 +10,6 @@ ruby '2.4.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.0'
 gem 'rails-i18n'
-
 gem 'mysql2'
 gem 'unicorn'
 
@@ -93,3 +92,7 @@ gem 'metainspector'
 gem 'appengine', '~> 0.4.5'
 
 gem 'dotenv-rails'
+
+gem 'erb2haml', '~> 0.1'
+gem 'haml-rails', '~> 1.0'
+gem 'sass-rails', '~> 5.0'

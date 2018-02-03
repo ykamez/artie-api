@@ -2,6 +2,12 @@ Rails.application.routes.draw do
   # devise_for :users, only: %i[omniauth_callbacks], controllers: {
   #   omniauth_callbacks: 'users/omniauth_callbacks'
   # }
+  scope path: 'tomozipkamechan' do
+    namespace :admin, path: '/' do
+      root 'dashboard#index'
+      resources :articles, only: %i[show update]
+    end
+  end
   mount_devise_token_auth_for 'User', at: 'auth', controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }, defaults: { format: :json }
 
   namespace :v1, defaults: { format: 'json' } do
