@@ -92,7 +92,7 @@ class User < ApplicationRecord
   end
 
   def admin?
-    username.in? ENV['ADMIN_USERS'].split(/\s*,\s*/)
+    fullname.in? ENV['ADMIN_USERS'].split(/\s*,\s*/)
   end
 
   private
