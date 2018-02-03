@@ -1,0 +1,19 @@
+.w500
+  .dashboard
+    .dashboard_lists
+      .dashboard_list
+        %span 記事数
+        %b= @articles_count
+      .dashboard_list
+        %span ユーザー数
+        %b= @users_count
+      .dashboard_list
+        %span レビュー数
+        %b= @reviews_count
+      .dashboard_list
+        %span ライク数
+        %b= @likes_count
+    -# %ul
+    -#   - @articles.each do |article|
+    -#     %li= link_to article.name, admin_article_path(article)
+    -# = paginate @articles

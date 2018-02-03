@@ -1,0 +1,124 @@
+body {
+  color: #444448;
+  font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+header {
+  height: 70px;
+  min-width: 300px;
+  padding: 0 10px;
+
+  img {
+    height: 40px;
+    padding: 15px 0;
+  }
+}
+
+main {
+  min-width: 320px;
+}
+
+footer {
+  min-width: 320px;
+
+  p {
+    padding: 60px 0 100px;
+    text-align: center;
+  }
+}
+
+h1, h2, h3, h4, h5, ul, li, p, dl {
+  margin: 0;
+  padding: 0;
+}
+
+dt {
+  clear: both;
+  float: left;
+}
+
+dd {
+  margin-left: auto;
+  text-align: right;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+label {
+  color: #848488;
+  display: inline-block;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+input, button, textarea, select {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input[type='text'] {
+  border: 1px solid #dddde1;
+  border-radius: 3px;
+  font-size: 15px;
+  height: 44px;
+  padding: 0 15px;
+}
+
+input[type='text']:focus, textarea:focus {
+  border: 1px solid $red;
+}
+
+input[type='submit']:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+textarea {
+  border: 1px solid #dddde1;
+  border-radius: 3px;
+  font-size: 15px;
+  height: 100px;
+  padding: 10px 15px;
+  resize: none;
+}
+
+:placeholder-shown {
+  color: #ddd;
+}
+
+::-webkit-input-placeholder {
+  color: #ddd;
+}
+
+:-moz-placeholder {
+  color: #ddd; opacity: 1;
+}
+
+::-moz-placeholder {
+  color: #ddd; opacity: 1;
+}
+
+:-ms-input-placeholder {
+  color: #ddd;
+}

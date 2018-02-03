@@ -43,4 +43,8 @@ class Review < ApplicationRecord
     # TODO: 小数点以下の桁数に関するバリデーションを追加。
     errors.add(:evaluation_point, ' を入力してください。') if evaluation_point < MIN_RATING || evaluation_point > MAX_RATING
   end
+
+  def self.sum_likes
+    all.map(&:likes_count).inject(:+)
+  end
 end
