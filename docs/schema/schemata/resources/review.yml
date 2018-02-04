@@ -14,7 +14,7 @@ definitions:
     readOnly: true
   text:
     description: review's text
-    type: string
+    type: ['string', 'null']
     example: "Pig Coin is awesome."
   posted_at:
     description: datetime when this review was posted.

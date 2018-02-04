@@ -520,7 +520,7 @@ POST /v1/articles/{id}/reviews
 
 | Name | Type | Description | Example |
 | ------- | ------- | ------- | ------- |
-| **text** | *string* | review's text | `"Pig Coin is awesome."` |
+| **text** | *nullable string* | review's text | `"Pig Coin is awesome."` |
 
 
 #### Optional Parameters
