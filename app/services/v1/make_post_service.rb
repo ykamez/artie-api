@@ -4,12 +4,14 @@ module V1
       @original_url = url
       @comment = comment
       @point = evaluation_point
-      @article = set_article
       @user_id = user_id
     end
 
     def build!
-      @article.reviews.create!(text: @comment, user_id: @user_id, evaluation_point: @point)
+      ActiveRecord::Base.transaction do
+        @article = set_article
+        @article.reviews.create!(text: @comment, user_id: @user_id, evaluation_point: @point)
+      end
     end
 
     private

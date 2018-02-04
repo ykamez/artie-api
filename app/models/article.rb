@@ -33,8 +33,8 @@ class Article < ApplicationRecord
     def find_or_create_article!(url)
       page = MetaInspector.new(url)
       original_url = page.meta['og:url'] || url
-      title = page.meta['og:title'] || ''
-      image_url = page.meta['og:image'] || ''
+      title = page.meta['og:title']
+      image_url = page.meta['og:image']
       find_by(url: original_url) || create!(title: title, image_url: image_url, url: original_url)
     rescue MetaInspector::RequestError, MetaInspector::ParserError
       raise ActionController::BadRequest, '正しいURLを入力してください。'

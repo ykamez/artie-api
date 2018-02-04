@@ -144,5 +144,64 @@ RSpec.describe V1::ArticlesController, type: :request do
         end
       end
     end
+    context 'with invalid request' do
+      context 'when first pick' do
+        context 'with comment' do
+          let(:params) { { url: 'xxx', text: 'I agree.' } }
+          before do
+            user
+          end
+
+          it 'returns 400 response' do
+            subject
+            expect(response.status).to eq 400
+            assert_schema_conform
+          end
+
+          it 'create a record' do
+            expect { subject }.to change(Article, :count).by(0).
+                                    and change(Review, :count).by(0)
+          end
+        end
+
+        context 'without comment' do
+          let(:params) { { url: 'xxx' } }
+          before do
+            user
+          end
+
+          it 'returns 400 response' do
+            subject
+            expect(response.status).to eq 400
+            assert_schema_conform
+          end
+
+          it 'create a record' do
+            expect { subject }.to change(Article, :count).by(0).
+                                    and change(Review, :count).by(0)
+          end
+        end
+      end
+
+      context 'when not first pick' do
+        let(:params) { { url: 'http://example.com/meta-tags', text: 'I agree.' } }
+        let(:article) { create(:article, url: 'http://example.com/meta-tags') }
+        before do
+          user
+          article
+        end
+
+        it 'returns 400 response' do
+          subject
+          expect(response.status).to eq 400
+          assert_schema_conform
+        end
+
+        it 'create a record' do
+          expect { subject }.to change(Article, :count).by(0).
+                                  and change(Review, :count).by(0)
+        end
+      end
+    end
   end
 end

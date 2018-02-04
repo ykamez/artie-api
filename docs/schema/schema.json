@@ -1183,7 +1183,10 @@
         },
         "text": {
           "description": "review's text",
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "example": "Pig Coin is awesome."
         },
         "posted_at": {
