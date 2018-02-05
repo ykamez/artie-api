@@ -7,6 +7,7 @@
   - <a href="#resource-user">User</a>
   - <a href="#resource-v1_articles">article</a>
     - <a href="#link-GET-v1_articles-/v1/articles">GET /v1/articles</a>
+    - <a href="#link-GET-v1_articles-/v1/articles/trend">GET /v1/articles/trend</a>
     - <a href="#link-GET-v1_articles-/v1/articles/{id}">GET /v1/articles/{id}</a>
     - <a href="#link-GET-v1_articles-/v1/articles/{id}/reviews">GET /v1/articles/{id}/reviews</a>
     - <a href="#link-POST-v1_articles-/v1/articles">POST /v1/articles</a>
@@ -115,6 +116,64 @@ GET /v1/articles
 
 ```bash
 $ curl -n http://artie.local/v1/articles
+ -G \
+  -d limit=10
+```
+
+
+#### Response Example
+
+```
+HTTP/1.1 200 OK
+```
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "url": "https://github.com/.",
+      "image_url": "https://hogehoge.png",
+      "title": "Github",
+      "published_at": "2015-01-01T12:00:00Z",
+      "reviews_count": 100,
+      "average_rating": "5.0",
+      "categories": [
+        {
+          "id": 1,
+          "name": "BTC"
+        }
+      ]
+    }
+  ],
+  "paging": {
+    "cursor": null,
+    "has_next": true
+  },
+  "message": "success!!"
+}
+```
+
+### <a name="link-GET-v1_articles-/v1/articles/trend">article trend</a>
+
+Show a list of trend article.
+
+```
+GET /v1/articles/trend
+```
+
+#### Optional Parameters
+
+| Name | Type | Description | Example |
+| ------- | ------- | ------- | ------- |
+| **cursor** | *string* | datetime |  |
+| **limit** | *integer* | limit | `10` |
+
+
+#### Curl Example
+
+```bash
+$ curl -n http://artie.local/v1/articles/trend
  -G \
   -d limit=10
 ```

@@ -83,6 +83,36 @@
           }
         },
         {
+          "title": "trend",
+          "description": "Show a list of trend article.",
+          "href": "/v1/articles/trend",
+          "method": "GET",
+          "rel": "show",
+          "schema": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "description": "limit",
+                "example": 10,
+                "type": "integer"
+              },
+              "cursor": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/datetime"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "targetSchema": {
+            "$ref": "#/definitions/article/definitions/article_page"
+          }
+        },
+        {
           "title": "記事の詳細表示",
           "description": "記事の詳細",
           "href": "/v1/articles/{id}",
@@ -1111,6 +1141,9 @@
           "anyOf": [
             {
               "$ref": "#/definitions/datetime"
+            },
+            {
+              "type": "integer"
             },
             {
               "type": "null"

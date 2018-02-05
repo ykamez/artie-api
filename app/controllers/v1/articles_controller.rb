@@ -12,6 +12,20 @@ class V1::ArticlesController < ApplicationController
     render json: page, serializer: ::V1::ArticlesPagingSerializer, include: '**'
   end
 
+  def trend
+    count_cursor = params[:cursor]
+    from = 1.week.ago
+    to = Time.now
+    articles = if count_cursor
+                 Article.where(created_at: from..to).order(reviews_count: :desc).where('reviews_count < ?', count_cursor).limit(limit)
+               else
+                 Article.where(created_at: from..to).order(reviews_count: :desc).limit(limit)
+               end
+    paging = { cursor: articles.last&.reviews_count, has_next: has_next?(articles, limit) }
+    page = ::V1::ArticlesPaging.new(data: articles, paging: paging)
+    render json: page, serializer: ::V1::ArticlesPagingSerializer, include: '**'
+  end
+
   def create
     begin
       post = V1::MakePostService.new(url, comment, current_user.id, evaluation_point).build!
