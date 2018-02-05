@@ -45,6 +45,25 @@ links:
   targetSchema:
     $ref: /schemata/article#/definitions/article_page
 
+- title: trend
+  description: Show a list of trend article.
+  href: /v1/articles/trend
+  method: GET
+  rel: show
+  schema:
+    type: object
+    properties:
+      limit:
+        description: limit
+        example: 10
+        type: integer
+      cursor:
+        anyOf:
+          - $ref: /schemata#/datetime
+          - type: "null"
+  targetSchema:
+    $ref: /schemata/article#/definitions/article_page
+
 - title: 記事の詳細表示
   description: 記事の詳細
   href: /v1/articles/{id}

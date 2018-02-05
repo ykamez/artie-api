@@ -45,6 +45,9 @@ Rails.application.routes.draw do
 
     resources :articles, only: [:show, :index, :create] do
       # FIXME: 記事ごとのコメントを取得(articles/1234/reviews)するものであり、userごとのコメント取得と被らないようにmoduleを設定している。下の二つのルーティングは同じコントローラーに統合したい。
+      collection do
+        get :trend
+      end
       resources :reviews, only: [:index], module: :articles
       resources :reviews, only: [:create]
     end
