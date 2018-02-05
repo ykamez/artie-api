@@ -102,6 +102,9 @@
                     "$ref": "#/definitions/datetime"
                   },
                   {
+                    "type": "integer"
+                  },
+                  {
                     "type": "null"
                   }
                 ]

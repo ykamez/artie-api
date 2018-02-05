@@ -60,6 +60,7 @@ links:
       cursor:
         anyOf:
           - $ref: /schemata#/datetime
+          - type: "integer"
           - type: "null"
   targetSchema:
     $ref: /schemata/article#/definitions/article_page
