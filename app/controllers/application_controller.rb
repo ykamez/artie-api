@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
   include Concerns::Paging
   before_action :configure_permitted_parameters, if: :devise_controller?
-  # before_action :authenticate_client!
+  before_action :authenticate_client!
 
   # 継承先を変更したタイミングで消したやつ
   # protect_from_forgery with: :exception
@@ -35,17 +35,17 @@ class ApplicationController < ActionController::API
 
   private
 
-  # https://github.com/lynndylanhurley/devise_token_auth/issues/440
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:fullname, :image_data, :email, :password])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:fullname, :image_data, :email, :password])
-  end
+    # https://github.com/lynndylanhurley/devise_token_auth/issues/440
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:fullname, :image_data, :email, :password])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:fullname, :image_data, :email, :password])
+    end
 
-  def ssl_configured?
-    Rails.env.production?
-  end
+    def ssl_configured?
+      Rails.env.production?
+    end
 
-  def x_application_token
-    request.headers['X-Application-Token'] || request.headers['x-application-token']
-  end
+    def x_application_token
+      request.headers['X-Application-Token'] || request.headers['x-application-token']
+    end
 end

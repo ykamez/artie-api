@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe V1::Reviews::ReactionsController, type: :request do
+  APPLICATION_TOKEN = Settings.client.application_token
   describe 'POST /v1/reviews/:review_id/like' do
     subject { post url, headers: headers }
 
@@ -9,7 +10,8 @@ describe V1::Reviews::ReactionsController, type: :request do
         'Content-Type': 'application/json',
         'Uid': @uid,
         'Access-Token': @token,
-        'Client': @client
+        'Client': @client,
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:params){}
@@ -62,7 +64,8 @@ describe V1::Reviews::ReactionsController, type: :request do
         'Content-Type': 'application/json',
         'Uid': @uid,
         'Access-Token': @token,
-        'Client': @client
+        'Client': @client,
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:params){}

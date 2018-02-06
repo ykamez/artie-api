@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe V1::Users::ReactionsController, type: :request do
+  APPLICATION_TOKEN = Settings.client.application_token
   describe 'GET /v1/users/:user_id/reactions' do
     subject { get url, headers: headers }
 
@@ -9,7 +10,8 @@ describe V1::Users::ReactionsController, type: :request do
         'Content-Type': 'application/json',
         'Uid': @uid,
         'Access-Token': @token,
-        'Client': @client
+        'Client': @client,
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:params){}

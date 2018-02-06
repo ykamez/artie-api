@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe V1::Users::ReviewsController, type: :request do
+  APPLICATION_TOKEN = Settings.client.application_token
   describe 'GET /v1/users/:id/reviews' do
     subject { get url, headers: headers, params: params.to_json }
 
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:url) { "/v1/users/#{user.id}/reviews" }

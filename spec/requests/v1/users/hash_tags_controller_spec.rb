@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe V1::Users::HashTagsController, type: :request do
+  APPLICATION_TOKEN = Settings.client.application_token
   skip 'GET #watching' do
     subject { get url, headers: headers, params: params }
 
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:url) { "/v1/users/#{user.id}/hashtags/watching" }

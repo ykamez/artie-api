@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe V1::ArticlesController, type: :request do
+  APPLICATION_TOKEN = Settings.client.application_token
   describe 'GET /v1/articles/:id' do
     subject { get url, headers: headers }
 
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:url) { "/v1/articles/#{article.id}" }
@@ -32,6 +34,7 @@ RSpec.describe V1::ArticlesController, type: :request do
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:url) { '/v1/articles' }
@@ -58,6 +61,7 @@ RSpec.describe V1::ArticlesController, type: :request do
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:url) { '/v1/articles/trend' }
@@ -86,7 +90,8 @@ RSpec.describe V1::ArticlesController, type: :request do
         'Content-Type': 'application/json',
         'Uid': @uid,
         'Access-Token': @token,
-        'Client': @client
+        'Client': @client,
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:url) { '/v1/articles' }

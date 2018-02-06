@@ -10,4 +10,4 @@ db:
     host: <%= ENV['ARTIE_DATABASE_READ_HOST'] %>
 
 client:
-  application_token: xxx
+  application_token: <%= ENV['ARTIE_APPLICATION_TOKEN'] %>
