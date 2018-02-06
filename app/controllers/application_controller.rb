@@ -4,6 +4,7 @@ class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
   include Concerns::Paging
   before_action :configure_permitted_parameters, if: :devise_controller?
+  # before_action :authenticate_client!
 
   # 継承先を変更したタイミングで消したやつ
   # protect_from_forgery with: :exception
@@ -26,6 +27,12 @@ class ApplicationController < ActionController::API
     end
   end
 
+  def authenticate_client!
+    if x_application_token != Settings.client.application_token
+      raise ActionController::BadRequest, e.message
+    end
+  end
+
   private
 
   # https://github.com/lynndylanhurley/devise_token_auth/issues/440
@@ -36,5 +43,9 @@ class ApplicationController < ActionController::API
 
   def ssl_configured?
     Rails.env.production?
+  end
+
+  def x_application_token
+    request.headers['X-Application-Token'] || request.headers['x-application-token']
   end
 end
