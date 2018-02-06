@@ -28,7 +28,6 @@
   - <a href="#resource-v1_search">search</a>
     - <a href="#link-GET-v1_search-/v1/search">GET /v1/search</a>
   - <a href="#resource-v1_users">user</a>
-    - <a href="#link-GET-v1_users-/v1/users">GET /v1/users</a>
     - <a href="#link-GET-v1_users-/v1/users/{id}">GET /v1/users/{id}</a>
     - <a href="#link-GET-v1_users-/v1/users/me">GET /v1/users/me</a>
     - <a href="#link-POST-v1_users-/v1/users/">POST /v1/users/</a>
@@ -861,51 +860,6 @@ HTTP/1.1 200 OK
 Stability: `prototype`
 
 user apis
-
-### <a name="link-GET-v1_users-/v1/users">user index</a>
-
-Show a list of user.
-
-```
-GET /v1/users
-```
-
-
-#### Curl Example
-
-```bash
-$ curl -n http://artie.local/v1/users
- -G \
-  -d 
-```
-
-
-#### Response Example
-
-```
-HTTP/1.1 200 OK
-```
-
-```json
-{
-  "data": [
-    {
-      "id": 1,
-      "full_name": "Bob Tarou",
-      "image_url": "example",
-      "total_likes_count": 123,
-      "followings_count": 10,
-      "followers_count": 30,
-      "evaluation_point": 2.5
-    }
-  ],
-  "paging": {
-    "cursor": null,
-    "has_next": true
-  },
-  "message": "success!!"
-}
-```
 
 ### <a name="link-GET-v1_users-/v1/users/{id}">user show from other</a>
 
