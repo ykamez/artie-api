@@ -29,7 +29,7 @@ class ApplicationController < ActionController::API
 
   def authenticate_client!
     if x_application_token != Settings.client.application_token
-      raise ActionController::BadRequest, e.message
+      raise ActionController::BadRequest
     end
   end
 
@@ -46,6 +46,6 @@ class ApplicationController < ActionController::API
     end
 
     def x_application_token
-      request.headers['X-Application-Token'] || request.headers['x-application-token']
+      request.headers['X-Application-Token']
     end
 end
