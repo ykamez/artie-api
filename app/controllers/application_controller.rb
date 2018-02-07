@@ -4,7 +4,7 @@ class ApplicationController < ActionController::API
   include DeviseTokenAuth::Concerns::SetUserByToken
   include Concerns::Paging
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :authenticate_client!
+  before_action :authenticate_client!, if: :use_before_action?
 
   # 継承先を変更したタイミングで消したやつ
   # protect_from_forgery with: :exception
@@ -47,5 +47,9 @@ class ApplicationController < ActionController::API
 
     def x_application_token
       request.headers['X-Application-Token']
+    end
+
+    def use_before_action?
+      true
     end
 end
