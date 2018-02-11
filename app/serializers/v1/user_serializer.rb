@@ -11,7 +11,13 @@ module V1
     end
 
     def image_url
-      object.image_data
+      if object.image_data.blank?
+        ''
+      elsif object.image_data.file.nil?
+        object.image_data
+      else
+        object.image_data.url
+      end
     end
 
     def full_name
