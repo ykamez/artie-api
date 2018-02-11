@@ -37,6 +37,11 @@ class V1::ArticlesController < ApplicationController
     render json: post, serializer: ::V1::ReviewSerializer
   end
 
+  def destroy
+    Article.destroy(params[:id])
+    redirect_to admin_root_url
+  end
+
   private
 
     def cursor

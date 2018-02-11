@@ -13,7 +13,9 @@
       .dashboard_list
         %span ライク数
         %b= @likes_count
-    -# %ul
-    -#   - @articles.each do |article|
-    -#     %li= link_to article.name, admin_article_path(article)
-    -# = paginate @articles
+%tbody
+  - @articles.each do |article|
+    %tr
+      %ld= article.title
+      %ld=button_to '削除', v1_article_path(article.id), method: :delete
+      %br
