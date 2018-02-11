@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe V1::UsersController, type: :request do
+  APPLICATION_TOKEN = Settings.client.application_token
   describe 'GET #me' do
     subject { get url, headers: headers }
 
@@ -10,7 +11,8 @@ RSpec.describe V1::UsersController, type: :request do
         'access-token': user.tokens.first.to_s,
         'Uid': @uid,
         'Access-Token': @token,
-        'Client': @client
+        'Client': @client,
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:url) { '/v1/users/me' }

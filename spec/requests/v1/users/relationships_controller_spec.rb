@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe V1::Users::RelationshipsController, type: :request do
+  APPLICATION_TOKEN = Settings.client.application_token
   describe 'GET /v1/users/:user_id/following' do
     subject { get url, headers: headers }
 
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:params){}
@@ -36,6 +38,7 @@ RSpec.describe V1::Users::RelationshipsController, type: :request do
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:params){}

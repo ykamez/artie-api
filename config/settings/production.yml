@@ -8,3 +8,6 @@ db:
     username: <%= ENV['ARTIE_DATABASE_READ_USERNAME'] %>
     password: <%= ENV['ARTIE_DATABASE_READ_PASSWORD'] %>
     host: <%= ENV['ARTIE_DATABASE_READ_HOST'] %>
+
+client:
+  application_token: <%= ENV['ARTIE_APPLICATION_TOKEN'] %>

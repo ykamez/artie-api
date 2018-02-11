@@ -8,30 +8,6 @@ type:
 - object
 
 links:
-- title: index
-  description: Show a list of user.
-  href: /v1/users
-  method: GET
-  rel: show
-  # TODO: this schema may be wrong.
-  schema:
-    type: object
-    properties: {}
-  targetSchema:
-    type: object
-    required:
-      - data
-      - paging
-    properties:
-      data:
-        type: array
-        items:
-          $ref: /schemata/user#/definitions/user
-      paging:
-        $ref: /schemata/paging#/definitions/paging
-      message:
-        $ref: /schemata#/mesasge
-
 - title: show from other
   description: Show a specific user
   href: /v1/users/{id}

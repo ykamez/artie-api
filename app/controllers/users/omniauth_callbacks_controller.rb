@@ -69,4 +69,8 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
         password: Devise.friendly_token[0, 20]
       })
     end
+
+    def use_before_action?
+      false
+    end
 end

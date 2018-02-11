@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe V1::HashTagsController, type: :request do
-  skip 'GET #index' do
-    subject { get url, headers: headers, params: params }
+  APPLICATION_TOKEN = Settings.client.application_token
 
+  skip 'GET #index' do
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:url) { '/v1/hashtags/' }
@@ -31,11 +32,10 @@ RSpec.describe V1::HashTagsController, type: :request do
   end
 
   skip 'POST #watch' do
-    subject { post url, headers: headers }
-
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:url) { "/v1/hashtags/#{hashtag.id}/watch" }
@@ -69,6 +69,7 @@ RSpec.describe V1::HashTagsController, type: :request do
     let(:headers) do
       {
         'Content-Type': 'application/json',
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:url) { "/v1/hashtags/#{hashtag.id}/watch" }

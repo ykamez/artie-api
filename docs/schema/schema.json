@@ -520,39 +520,6 @@
       ],
       "links": [
         {
-          "title": "index",
-          "description": "Show a list of user.",
-          "href": "/v1/users",
-          "method": "GET",
-          "rel": "show",
-          "schema": {
-            "type": "object",
-            "properties": {
-            }
-          },
-          "targetSchema": {
-            "type": "object",
-            "required": [
-              "data",
-              "paging"
-            ],
-            "properties": {
-              "data": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/user/definitions/user"
-                }
-              },
-              "paging": {
-                "$ref": "#/definitions/paging/definitions/paging"
-              },
-              "message": {
-                "$ref": "#/definitions/mesasge"
-              }
-            }
-          }
-        },
-        {
           "title": "show from other",
           "description": "Show a specific user",
           "href": "/v1/users/{id}",

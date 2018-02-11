@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth', controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }, defaults: { format: :json }
 
   namespace :v1, defaults: { format: 'json' } do
-    resources :users, only: [:index, :show] do
+    resources :users do
       resources :reviews, only: [:index], module: :users
       resources :reactions, only: [:index], module: :users
 

@@ -8,3 +8,6 @@ db:
     username: readonly
     password: readonly
     host: 127.0.0.1
+
+client:
+  application_token: test_application_token

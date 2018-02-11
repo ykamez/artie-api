@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe V1::Articles::ReviewsController, type: :request do
+  APPLICATION_TOKEN = Settings.client.application_token
   describe 'GET /v1/articles/:id/reviews' do
     subject { get url, headers: headers, params: params.to_json }
 
@@ -9,7 +10,8 @@ RSpec.describe V1::Articles::ReviewsController, type: :request do
         'Content-Type': 'application/json',
         'Uid': @uid,
         'Access-Token': @token,
-        'Client': @client
+        'Client': @client,
+        'X-Application-Token': APPLICATION_TOKEN
       }
     end
     let(:url) { "/v1/articles/#{article.id}/reviews" }
