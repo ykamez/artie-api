@@ -109,6 +109,8 @@ RSpec.describe V1::ArticlesController, type: :request do
       @client = @auth_headers['client']
       allow(MetaInspector).to receive(:new).and_return(meta_inspector_double)
       allow(meta_inspector_double).to receive(:meta).and_return(page_meta_info)
+      # wantfix: 挙動が不明。
+      allow_any_instance_of(ArticleImageUploader).to receive(:download!)
     end
 
     context 'with valid request' do
