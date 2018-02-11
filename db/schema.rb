@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_180_201_003_059) do
+ActiveRecord::Schema.define(version: 20_180_211_110_058) do
   create_table 'article_hash_tags', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.bigint 'article_id', null: false
     t.bigint 'hash_tag_id', null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20_180_201_003_059) do
 
   create_table 'articles', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.string 'url', null: false
-    t.string 'image_url', null: false
+    t.string 'image_url'
     t.string 'title', null: false
     t.integer 'reviews_count', default: 0, null: false
     t.decimal 'evaluation_point', precision: 3, scale: 1, default: '0.0', null: false

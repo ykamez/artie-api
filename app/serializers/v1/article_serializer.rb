@@ -3,7 +3,9 @@ class V1::ArticleSerializer < ActiveModel::Serializer
 
   # TODO: パフォーマンス悪そうなのでwantfix
   def image_url
-    if object.image_url.file.nil?
+    if object.image_url.blank?
+      ''
+    elsif object.image_url.file.nil?
       object.image_url
     else
       object.image_url.url

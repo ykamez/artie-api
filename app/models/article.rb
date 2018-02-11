@@ -4,7 +4,7 @@
 #
 #  id               :integer          not null, primary key
 #  url              :string(255)      not null
-#  image_url        :string(255)      not null
+#  image_url        :string(255)
 #  title            :string(255)      not null
 #  reviews_count    :integer          default(0), not null
 #  evaluation_point :decimal(3, 1)    default(0.0), not null
@@ -46,7 +46,8 @@ class Article < ApplicationRecord
       article.remote_image_url_url = image
       article.title = title
       article.url = url
-      a.save!
+      article.save!
+      article
     end
   end
 end
