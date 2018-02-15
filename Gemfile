@@ -96,3 +96,10 @@ gem 'dotenv-rails'
 gem 'erb2haml', '~> 0.1'
 gem 'haml-rails', '~> 1.0'
 gem 'sass-rails', '~> 5.0'
+
+# Use google cloud storage for image
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog-google'
+gem "google-api-client", "> 0.8.5", "< 0.9"
+gem "mime-types"

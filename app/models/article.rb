@@ -4,7 +4,7 @@
 #
 #  id               :integer          not null, primary key
 #  url              :string(255)      not null
-#  image_url        :string(255)      not null
+#  image_url        :string(255)
 #  title            :string(255)      not null
 #  reviews_count    :integer          default(0), not null
 #  evaluation_point :decimal(3, 1)    default(0.0), not null
@@ -17,6 +17,7 @@
 #
 
 class Article < ApplicationRecord
+  mount_uploader :image_url, ArticleImageUploader
   has_many :article_hash_tags, dependent: :destroy
   has_many :hash_tags, dependent: :destroy, through: :article_hash_tags
   has_many :reviews, dependent: :destroy
@@ -35,9 +36,18 @@ class Article < ApplicationRecord
       original_url = page.meta['og:url'] || url
       title = page.meta['og:title']
       image_url = page.meta['og:image'] || ''
-      find_by(url: original_url) || create!(title: title, image_url: image_url, url: original_url)
+      find_by(url: original_url) || create_article(original_url, title, image_url)
     rescue MetaInspector::RequestError, MetaInspector::ParserError
       raise ActionController::BadRequest, '正しいURLを入力してください。'
+    end
+
+    def create_article(url, title, image)
+      article = Article.new
+      article.remote_image_url_url = image
+      article.title = title
+      article.url = url
+      article.save!
+      article
     end
   end
 end

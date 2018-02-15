@@ -18,7 +18,6 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
       @data = {
         id: @resource.id,
         full_name: @resource.fullname,
-        image_url: @resource.image_data,
         total_likes_count: @resource.likes_count,
         followings_count: @resource.following_count,
         followers_count: @resource.followers_count,
@@ -27,6 +26,11 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
         client: headers['client'],
         uid: headers['uid']
       }
+      @data[:image_url] = if @resource.image_data.file.nil?
+                            @resource.image_data
+                          else
+                            @resource.image_data.url
+                          end
       html = File.open('app/views/devise_token_auth/omniauth_external_window.html.erb').read
       template = ERB.new(html).result(binding)
       render html: template.html_safe
@@ -60,10 +64,10 @@ class Users::OmniauthCallbacksController < DeviseTokenAuth::OmniauthCallbacksCon
       uid = auth[:uid]
       name = auth[:info][:name]
       image_url = auth[:info][:image].to_s.sub('normal', 'bigger')
+      user.remote_image_data_url = image_url
       user.assign_attributes({
         uid:      uid,
         fullname: name,
-        image_data: image_url,
         provider: provider,
         email:    User.dummy_email(auth),
         password: Devise.friendly_token[0, 20]

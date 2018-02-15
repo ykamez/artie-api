@@ -39,6 +39,8 @@
 
 class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
+  mount_uploader :image_data, UserIconUploader
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :omniauthable, omniauth_providers: %i[twitter]
