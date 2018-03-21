@@ -70,8 +70,6 @@ gem 'active_model_serializers', '~> 0.10.0'
 
 gem 'faraday'
 gem 'faraday_middleware'
-gem 'redis', '~> 3'
-gem 'redis-namespace'
 
 # devise
 gem 'devise'
