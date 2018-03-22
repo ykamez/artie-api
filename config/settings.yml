@@ -1,4 +1,1 @@
 # You should copy this file settings.local.yml and override this file.
-twitter:
-  twitter_api_key: 'YOUR TWITTER API KEY'
-  twitter_api_secret: 'YOUR TWITTER API SECRET KEY'
